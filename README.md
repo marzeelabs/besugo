@@ -1,4 +1,4 @@
-# DRiP
+# MZ Netlify
 
 ## Deploy on Netlify
 1. Push your Hugo project to Github
