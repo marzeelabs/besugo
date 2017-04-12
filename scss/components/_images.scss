@@ -1,0 +1,137 @@
+
+.image__grid {
+  flex-wrap: wrap;
+
+  @include mq($from: break-medium) {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
+
+.image__wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  display: flex;
+  flex: 0 0 100%;
+
+  .image__grid & {
+    flex: 1 1 33%;
+
+    @include mq($from: break-medium) {
+      height: 250px;
+      padding: 0;
+    }
+  }
+}
+
+.image__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  color: palette(white);
+  text-align: center;
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.image__text-content {
+  flex: 0 0 100%;
+  margin: 0 auto ritmo(2) auto;
+}
+
+.image__element {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  max-width: none;
+  height: 100%;
+  z-index: 1;
+  filter: grayscale(.35) brightness(.75);
+
+  .image__grid & {
+
+    @include mq($from: break-medium) {
+      max-height: 250px;
+    }
+  }
+}
+
+.image-text-side__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include mq($from: break-medium) {
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  &:nth-child(2n+1) {
+
+    .image-text-side__text__wrapper {
+
+      @include mq($from: break-medium) {
+        order: 1;
+      }
+    }
+
+    .image-text-side__image__wrapper {
+
+      @include mq($from: break-medium) {
+        order: 2;
+      }
+    }
+  }
+}
+
+.image-text-side__image__wrapper {
+  flex: 0 0 100%;
+  position: relative;
+  padding-top: 56.25%;
+  overflow: hidden;
+  margin: 0;
+
+  @include mq($from: break-medium) {
+    flex: 1 1 60%;
+    height: 300px;
+    padding: 0;
+  }
+}
+
+.image-text-side__image {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  max-width: none;
+  height: 100%;
+  z-index: 1;
+}
+
+.image-text-side__text__wrapper {
+  flex: 0 0 100%;
+  display: flex;
+  align-content: center;
+  text-align: center;
+  border: 1px solid palette(grey, light);
+  flex-wrap: wrap;
+  padding: ritmo(5) 10px;
+
+  @include mq($from: break-medium) {
+    flex: 1 1 40%;
+  }
+}
+
+.image-text-side__text,
+.image-text-side__text__link {
+  flex: 0 0 100%;
+}

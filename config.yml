@@ -1,0 +1,14 @@
+title: "MZ Hugo Boilerplate"
+baseurl: "http://example.org/"
+languageCode: "en-GB"
+contentdir: "content"
+MetaDataFormat: "yaml"
+googleAnalytics: "#"
+taxonomies:
+  tag: "tags"
+blackfriday:
+  hrefTargetBlank: true
+params:
+  full_name: "#"
+  description: >-
+    #

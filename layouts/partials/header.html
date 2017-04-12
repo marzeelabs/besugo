@@ -1,0 +1,40 @@
+<header>
+
+
+  <div class="navigation">
+
+    <div class="navigation__mobile-menu__toggle">
+      <span class="navigation__mobile-menu__icon"></span>
+    </div>
+
+    <div class="navigation-logo">
+      <a href="/" class="navigation-logo__svg">
+        <svg class="navigation-logo__svg-minified">
+          <use xlink:href="#logo-main"></use>
+        </svg>
+      </a>
+    </div>
+
+    <ul class="navigation__menu">
+
+      <li class="navigation__menu-item{{ if (eq .URL "/") }} is-active{{ end }}">
+        <a class="navigation__menu-link" href="/">Home</a>
+      </li>
+
+      <li class="navigation__menu-item{{ if (eq .URL "/about/") }} is-active{{ end }}">
+        <a class="navigation__menu-link" href="/about">About</a>
+      </li>
+
+      <li class="navigation__menu-item{{ if (eq .Section "events") }} is-active{{ end }}">
+        <a class="navigation__menu-link" href="/events">Events</a>
+      </li>
+
+      <li class="navigation__menu-item{{ if (eq .URL "/people/") }} is-active{{ end }}">
+        <a class="navigation__menu-link" href="/people">People</a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</header>

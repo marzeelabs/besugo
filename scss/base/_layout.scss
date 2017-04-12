@@ -1,0 +1,19 @@
+/**
+ * Center the page.
+ *
+ * Define a min-width for smaller devices.
+ *
+ * For screen sizes larger than 1200px, prevent excessively long lines of text
+ * by setting a max-width.
+ */
+header,
+main,
+footer {
+  min-width: 320px;
+}
+
+.layout-container {
+  max-width: $canvas-width;
+  margin: 0 auto;
+  @include pie-clearfix();
+}

@@ -1,0 +1,122 @@
+.contact-form {
+  @include container(600px);
+}
+
+.contact-form__input {
+  padding: 10px;
+  border: none;
+  border: 1px solid palette(grey, light);
+  margin-bottom: ritmo(4);
+  height: 40px;
+  width: 100%;
+
+  &.contact-form__input--textarea {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+.contact-form__submit {
+  border: none;
+  @extend .link__button-black-secondary;
+  border: 1px solid palette(black);
+  margin-top: 0;
+}
+
+
+/*
+**.contact-form__input_roundedbox
+*/
+.contact-form__input_roundedbox {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+  background: palette(white);
+  border-radius: 50px;
+  border: 1px solid palette(grey, light);
+  display: inline-block;
+
+  label {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    border-radius: 50px;
+    background: palette(white);
+
+    &:after {
+      content: '';
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      background: palette(black);
+      opacity: 0;
+      border-radius: 50px;
+    }
+  }
+
+  input[type=checkbox] {
+    visibility: hidden;
+
+    &:checked + label:after {
+      opacity: 1;
+    }
+  }
+}
+
+/*
+**.contact-form__input_checkbox
+*/
+
+.contact-form__input_checkbox {
+  width: 24px;
+  position: relative;
+  margin: 20px auto;
+  display: inline-block;
+
+  label {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    border: 1px solid palette(grey, light);
+
+    &:after {
+      content: '';
+      width: 12px;
+      height: 5px;
+      position: absolute;
+      top: 5px;
+      left: 4px;
+      border: 3px solid palette(white);
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+    }
+  }
+
+  input[type=checkbox] {
+    visibility: hidden;
+
+
+    &:checked + label {
+      background: palette(black);
+    }
+
+    &:checked + label:after {
+      opacity: 1;
+    }
+  }
+}

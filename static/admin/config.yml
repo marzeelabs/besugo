@@ -1,0 +1,18 @@
+backend:
+  name: github
+  repo: porto-io/Saltywaves # Path to your Github repository
+  branch: develop # Branch to update (master by default)
+
+media_folder: "/static/images/uploads" # Folder where user uploaded files should go
+public_folder: "/images/uploads"
+
+collections: # A list of collections the CMS should be able to edit
+  - name: "events" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Events" # Used in the UI, ie.: "New Post"
+    folder: "content/events" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Publication date"
+        name: "date"
+        widget: "datetime"
+

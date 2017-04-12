@@ -1,0 +1,21 @@
+{
+  "name": "MZ_Boilerplate",
+  "version": "0.1.0",
+  "main": "gulpfile.js",
+  "author": "Marzee Labs <info@marzeelabs.org>",
+  "license": "GPLv3",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cli": "^1.2.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.1",
+    "gulp-jimp": "^1.2.3",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^1.5.3",
+    "ritmo": "^0.2.0",
+    "run-sequence": "^1.2.1",
+    "sass-mq": "^3.2.9",
+    "susy": "^2.2.12"
+  }
+}

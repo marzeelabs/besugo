@@ -1,0 +1,371 @@
+<div class="styleguide__wrapper">
+
+  <h1 class="section-component__title">Styleguide</h1>
+
+  <h2 class="section-component__subtitle">Typography</h2>
+
+  <!-- HEADERS -->
+  <section class="styleguide__section-component">
+
+    <h1 class="styleguide__section-component__title">Headers</h1>
+
+    <h2 class="styleguide__header__faux-h1"> Header 1 <span class="styleguide__header-span">32 px</span></h2>
+
+    <h2> Header 2 <span class="styleguide__header-span">28 px</span></h2>
+
+    <h3> Header 3 <span class="styleguide__header-span">25 px</span></h3>
+
+    <h4> Header 4 <span class="styleguide__header-span">21 px</span></h4>
+
+    <h5> Header 5 <span class="styleguide__header-span">18 px</span></h5>
+
+    <h6> Header 6 <span class="styleguide__header-span">14 px</span></h6>
+
+  </section>
+
+  <!-- Content text -->
+  <section class="styleguide__section-component">
+
+    <h1 class="styleguide__section-component__title">Content Text</h1>
+
+      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris plarat leifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean    fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna.</p>
+
+  </section>
+
+  <h2 class="section-component__subtitle">Colours</h2>
+
+  <!-- Colours -->
+  <section class="styleguide__section-component">
+
+    <h1 class="styleguide__section-component__title">Main</h1>
+
+    <span class="styleguide__colour-block styleguide__colour-block--black">#000000</span>
+    <span class="styleguide__colour-block styleguide__colour-block--white">#FFFFFF</span>
+
+  </section>
+
+  <h2 class="section-component__subtitle">Header</h2>
+
+  <!-- Header -->
+  <section class="styleguide__section-component">
+
+    {{ partial "header.html" . }}
+
+  </section>
+
+  <!-- Links -->
+  <h2 class="section-component__subtitle">Links</h2>
+
+  <section class="styleguide__section-component">
+
+    <a href="#" class="link__button-black">Link</a>
+
+    <a href="#" class="link__button-black-secondary">Link</a>
+
+  </section>
+
+  <!-- Images -->
+  <h2 class="section-component__subtitle">Images</h2>
+
+  <section class="styleguide__section-component">
+    <h1 class="styleguide__section-component__title">Image with text-overlay</h1>
+
+    <div class="image__wrapper">
+
+      <div class="image__text">
+        <p class="image__text-content">Some text over the image</p>
+        <p class="image__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
+      </div>
+
+      <img class="image__element" src="/images/example.jpg">
+
+    </div>
+
+  </section>
+
+  <section class="styleguide__section-component">
+    <h1 class="styleguide__section-component__title">Images in grid</h1>
+
+    <div class="image__grid">
+
+      <div class="image__wrapper">
+
+        <div class="image__text">
+          <p class="image__text-content">Some text over the image</p>
+          <p class="image__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
+        </div>
+
+        <img class="image__element" src="/images/example.jpg">
+
+      </div> <!-- image__wrapper -->
+
+      <div class="image__wrapper">
+
+        <div class="image__text">
+          <p class="image__text-content">Some text over the image</p>
+          <p class="image__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
+        </div>
+
+        <img class="image__element" src="/images/example.jpg">
+
+      </div> <!-- image__wrapper -->
+
+      <div class="image__wrapper">
+
+        <div class="image__text">
+          <p class="image__text-content">Some text over the image</p>
+          <p class="image__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
+        </div>
+
+        <img class="image__element" src="/images/example.jpg">
+
+      </div> <!-- image__wrapper -->
+
+    </div> <!-- image__grid -->
+
+  </section>
+
+  <section class="styleguide__section-component">
+    <h1 class="styleguide__section-component__title">Image with text side-by-side</h1>
+
+    <div class="image-text-side__wrapper">
+
+      <div class="image-text-side__image__wrapper">
+        <img class="image-text-side__image" src="/images/example.jpg">
+      </div>
+
+      <div class="image-text-side__text__wrapper">
+        <p class="image-text-side__text">Some text next to the image</p>
+
+        <span class="image-text-side__text__link">
+          <a href="#" class="link__button-black-secondary">Link</a>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="image-text-side__wrapper">
+
+      <div class="image-text-side__image__wrapper">
+        <img class="image-text-side__image" src="/images/example.jpg">
+      </div>
+
+      <div class="image-text-side__text__wrapper">
+        <p class="image-text-side__text">Some text next to the image</p>
+
+        <span class="image-text-side__text__link">
+          <a href="#" class="link__button-black-secondary">Link</a>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="image-text-side__wrapper">
+
+      <div class="image-text-side__image__wrapper">
+        <img class="image-text-side__image" src="/images/example.jpg">
+      </div>
+
+      <div class="image-text-side__text__wrapper">
+        <p class="image-text-side__text">Some text next to the image</p>
+
+        <span class="image-text-side__text__link">
+          <a href="#" class="link__button-black-secondary">Link</a>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="image-text-side__wrapper">
+
+      <div class="image-text-side__image__wrapper">
+        <img class="image-text-side__image" src="/images/example.jpg">
+      </div>
+
+      <div class="image-text-side__text__wrapper">
+        <p class="image-text-side__text">Some text next to the image</p>
+
+        <span class="image-text-side__text__link">
+          <a href="#" class="link__button-black-secondary">Link</a>
+        </span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Profiles -->
+  <h2 class="section-component__subtitle">Profile</h2>
+
+  <section class="styleguide__section-component">
+
+    <div class="profile">
+
+      <div class="profile__image__wrapper">
+        <img class="profile__image" src="/images/example_profile.jpg">
+      </div>
+
+
+      <div class="profile__text__wrapper">
+        <h3 class="profile__text">Name of the person</h3>
+        <p class="profile__text">Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et.</p>
+        <span class="profile__text">
+
+          <ul class="profile__social-icons">
+            <li class="profile__social-icons__item">
+              <a href="#" target="_blank">
+                <svg>
+                  <use xlink:href="#facebook-icon"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="profile__social-icons__item">
+              <a href="#" target="_blank">
+                <svg>
+                  <use xlink:href="#instagram-icon"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="profile__social-icons__item">
+              <a href="#" target="_blank">
+                <svg>
+                  <use xlink:href="#twitter-icon"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+
+        </span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Form -->
+  <h2 class="section-component__subtitle">Form</h2>
+
+  <section class="styleguide__section-component">
+
+     <form class="contact-form" action="#">
+
+      <input class="contact-form__input" type="text" name="name" value="Your name">
+
+      <input class="contact-form__input" type="text" name="email" value="Your Email">
+
+
+      <div class="contact-form__input_roundedbox">
+        <input type="checkbox" value="None" id="roundbox1" name="check" />
+        <label for="roundbox1"></label>
+      </div>
+
+
+      <div class="contact-form__input_checkbox">
+        <input type="checkbox" value="None" id="checkbox1" name="check" />
+        <label for="checkbox1"></label>
+      </div>
+
+      <div class="contact-form__submit-wrapper">
+        <input class="contact-form__submit"  type="submit" value="Submit">
+      </div>
+    </form>
+  </section>
+
+  <!-- Table -->
+  <h2 class="section-component__subtitle">Table</h2>
+
+  <section class="styleguide__section-component">
+
+    <div class="table">
+
+      <div class="table__row">
+        <h2 class="table__row-title">Table title</h2>
+      </div>
+
+      <div class="table__row">
+
+        <div class="table__column">
+          <p class="table__column-value">Value 1</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 2 <br> Value 2.2<br> Value 2.3</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 3</p>
+        </div> <!-- table__column -->
+
+      </div> <!-- table__row -->
+
+      <div class="table__row">
+
+        <div class="table__column">
+          <p class="table__column-value">Value 1<br> Value 1.2</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 2</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 3</p>
+        </div> <!-- table__column -->
+
+      </div> <!-- table__row -->
+
+      <div class="table__row">
+
+        <div class="table__column">
+          <p class="table__column-value">Value 1</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 2</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 3 <br> Value 3.2<br> Value 3.3  <br> Value 3.4<br> Value 3.5</p>
+        </div> <!-- table__column -->
+
+      </div> <!-- table__row -->
+
+
+      <div class="table__row">
+
+        <div class="table__column">
+          <p class="table__column-value">Value 1</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 2</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 3</p>
+        </div> <!-- table__column -->
+
+      </div> <!-- table__row -->
+
+
+      <div class="table__row">
+
+        <div class="table__column">
+          <p class="table__column-value">Value 1</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 2</p>
+        </div> <!-- table__column -->
+
+        <div class="table__column">
+          <p class="table__column-value">Value 3</p>
+        </div> <!-- table__column -->
+
+      </div> <!-- table__row -->
+
+
+    </div> <!-- table -->
+
+  </section>
+
+</div>

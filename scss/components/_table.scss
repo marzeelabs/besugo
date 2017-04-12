@@ -1,0 +1,42 @@
+.table {
+  border: 1px solid palette(grey, light);
+  text-align: center;
+  padding: 0;
+}
+
+.table__row {
+  display: flex;
+  align-items: stretch;
+  align-content: center;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0;
+}
+
+.table__row-title {
+  @include ritmo-font-size($h6-font-size);
+  flex: 1 1 100%;
+  margin: ritmo(3) 0;
+}
+
+.table__column {
+  border-color: palette(grey, light);
+  border-style: solid;
+  border-width: 1px 0 0 1px;
+  flex: 1 1 33.33%;
+  display: flex;
+  padding: 0;
+
+  &:first-child {
+    border-left: none;
+  }
+}
+
+.table__column-value {
+  display: flex;
+  align-items: center;
+  flex: 0 0 100%;
+  justify-content: center;
+  margin: 0;
+  padding: ritmo(2) 10px;
+}
