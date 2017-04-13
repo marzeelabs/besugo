@@ -1,5 +1,5 @@
 
-.image__grid {
+.teaser__grid {
   flex-wrap: wrap;
 
   @include mq($from: break-medium) {
@@ -8,7 +8,7 @@
   }
 }
 
-.image__wrapper {
+.teaser__wrapper {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
@@ -16,7 +16,7 @@
   display: flex;
   flex: 0 0 100%;
 
-  .image__grid & {
+  .teaser__grid & {
     flex: 1 1 33%;
 
     @include mq($from: break-medium) {
@@ -24,9 +24,18 @@
       padding: 0;
     }
   }
+
+  .slider__wrapper & {
+    padding-bottom: 33%;
+
+    @include mq($from: break-medium) {
+      height: 500px;
+      padding: 0;
+    }
+  }
 }
 
-.image__text {
+.teaser__text {
   position: absolute;
   top: 0;
   left: 0;
@@ -41,12 +50,12 @@
   padding: 0;
 }
 
-.image__text-content {
+.teaser__text-content {
   flex: 0 0 100%;
   margin: 0 auto ritmo(2) auto;
 }
 
-.image__element {
+.teaser__element {
   position: absolute;
   display: block;
   top: 50%;
@@ -57,7 +66,7 @@
   z-index: 1;
   filter: grayscale(.35) brightness(.75);
 
-  .image__grid & {
+  .teaser__grid & {
 
     @include mq($from: break-medium) {
       max-height: 250px;
@@ -65,7 +74,7 @@
   }
 }
 
-.image-text-side__wrapper {
+.teaser-text-side__wrapper {
   display: flex;
   flex-wrap: wrap;
 
@@ -76,14 +85,14 @@
 
   &:nth-child(2n+1) {
 
-    .image-text-side__text__wrapper {
+    .teaser-text-side__text__wrapper {
 
       @include mq($from: break-medium) {
         order: 1;
       }
     }
 
-    .image-text-side__image__wrapper {
+    .teaser-text-side__teaser__wrapper {
 
       @include mq($from: break-medium) {
         order: 2;
@@ -92,7 +101,7 @@
   }
 }
 
-.image-text-side__image__wrapper {
+.teaser-text-side__teaser__wrapper {
   flex: 0 0 100%;
   position: relative;
   padding-top: 56.25%;
@@ -106,7 +115,7 @@
   }
 }
 
-.image-text-side__image {
+.teaser-text-side__image {
   position: absolute;
   display: block;
   top: 50%;
@@ -117,7 +126,7 @@
   z-index: 1;
 }
 
-.image-text-side__text__wrapper {
+.teaser-text-side__text__wrapper {
   flex: 0 0 100%;
   display: flex;
   align-content: center;
@@ -131,7 +140,7 @@
   }
 }
 
-.image-text-side__text,
-.image-text-side__text__link {
+.teaser-text-side__text,
+.teaser-text-side__text__link {
   flex: 0 0 100%;
 }

@@ -1,6 +1,9 @@
 {{ define "main" }}
-<h1>Hello</h1>
+
+  <section class="layout-container">
+  {{ range .Data.Pages }}
+    {{ .Render "li"}}
+  {{ end }}
+  </section>
 
 {{ end }}
-
-

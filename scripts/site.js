@@ -38,6 +38,15 @@ $(function() {
     }
   });
 
+  $('.slider__wrapper').slick({
+    autoplay: true,
+    autoplaySpeed: 5000,
+    fade: true,
+    speed: 1200,
+    prevArrow: '<a href="#" class="slick-prev"><span class="slick-arrow-mz slick-arrow-mz--left"><svg><use xlink:href="#slider_arrow_left"></use></svg></span></a>',
+    nextArrow: '<a href="#" class="slick-next"><span class="slick-arrow-mz slick-arrow-mz--right"><svg><use xlink:href="#slider_arrow_right"></use></svg></span></a>'
+  });
+
   //- function for g maps
   /*
   function gmaps() {
@@ -81,3 +90,5 @@ function filtro() {
     }
   });
 }
+
+
