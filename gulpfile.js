@@ -138,17 +138,6 @@ gulp.task('compile', function(callback){
   }).stdout.pipe(process.stdout);
 });
 
-gulp.task('compile-netlify', function(callback){
-  exec('rm -Rf ./public && hugo', function (err) {
-    if (err) {
-      console.log("Hugo exited with error: ", err);
-    }
-    else {
-      callback();
-    }
-  }).stdout.pipe(process.stdout);
-});
-
 /**
  * Aggregator Tasks
  */
