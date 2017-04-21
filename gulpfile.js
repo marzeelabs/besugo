@@ -139,7 +139,7 @@ gulp.task('compile', function(callback){
 });
 
 gulp.task('compile-netlify', function(callback){
-  exec('rm -Rf ./public && hugo_0.19', function (err) {
+  exec('rm -Rf ./public && hugo', function (err) {
     if (err) {
       console.log("Hugo exited with error: ", err);
     }

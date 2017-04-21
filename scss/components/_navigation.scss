@@ -79,7 +79,7 @@
 
 .navigation__submenu {
   transition: all ease 0.35s;
-  width: 100%;
+  min-width: 100%;
   text-align: center;
   padding: 0;
 
@@ -87,21 +87,18 @@
     display: none;
     background: palette(black);
     position: absolute;
-    width: 200px;
+    white-space: nowrap;
     left: 50%;
     transform: translate3d(-50%, 0, 0);
+
+    .navigation__menu-item:hover & {
+      display:block;
+    }
   }
 
   .navigation__menu-item {
     display: block;
     margin: 0 auto;
-  }
-}
-
-.navigation .navigation__menu li:hover > .navigation__submenu
-{
-  @include mq($from: break-medium) {
-    display:block;
   }
 }
 
