@@ -1,0 +1,15 @@
+{{ define "main" }}
+
+<div class="page__header" style="background-image:url({{ .Params.Image }})">
+
+  <div class="page__header-title__wrapper">
+    <h1 class="page__header-title">{{ .Title }}</h1>
+    <h2 class="page__header-subtitle">{{ .Description }}</h2>
+  </div>
+
+</div>
+
+<section class="layout-container--inner">
+  {{ .Content }}
+</section>
+{{ end }}

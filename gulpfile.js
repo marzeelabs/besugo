@@ -138,41 +138,39 @@ gulp.task('compile', function(callback){
   }).stdout.pipe(process.stdout);
 });
 
-gulp.task('compile-netlify', function(callback){
-  exec('rm -Rf ./public && hugo_0.19', function (err) {
-    if (err) {
-      console.log("Hugo exited with error: ", err);
-    }
-    else {
-      callback();
-    }
-  }).stdout.pipe(process.stdout);
-});
-
 /**
  * Aggregator Tasks
  */
 
-gulp.task('netlify', function(callback) {
-  runSequence(
-    ['sass', 'scripts'],
-    'compile-netlify',
-    'jimp',
-    callback
-  );
-});
 gulp.task('build', function(callback) {
   runSequence(
     ['sass', 'scripts'],
     'compile',
     'jimp',
-    callback
+    function(err) {
+      if (err) {
+        console.log('[ERROR] gulp build task failed', err);
+        return process.exit(2);
+      }
+      else {
+        return callback();
+      }
+    }
   );
 });
+
 gulp.task('default', function(callback){
   runSequence(
     ['sass', 'scripts'],
     ['serve','watch', 'jimp'],
-    callback
+    function(err) {
+      if (err) {
+        console.log('[ERROR] gulp task failed', err);
+        return process.exit(2);
+      }
+      else {
+        return callback();
+      }
+    }
   );
 });

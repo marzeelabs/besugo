@@ -16,10 +16,18 @@
   "components/navigation",
   "components/links",
   "components/profiles",
+  "components/blog",
+  "components/blog-post",
+  "components/page",
   "components/contact-form",
-  "components/images",
+  "components/teaser",
   "components/table",
+  "components/slider",
   "components/footer",
   "components/styleguide";
 
 
+// Vendor styles
+
+// Slick Carousel Slider
+@import "vendors/slick";

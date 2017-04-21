@@ -1,0 +1,18 @@
+.page__header{
+  @extend .blog-post__header;
+}
+
+
+.page__header-title__wrapper {
+  @extend .blog-post__header-title__wrapper;
+}
+
+.page__header-title,
+.page__header-subtitle {
+  @extend .blog-post__header-title;
+}
+
+.page__header-subtitle {
+  @include ritmo-font-size($h4-font-size);
+}
+

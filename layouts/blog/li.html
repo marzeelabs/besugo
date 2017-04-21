@@ -1,0 +1,17 @@
+
+<li class="teaser-text-side__wrapper">
+
+  <div class="teaser-text-side__image__wrapper">
+    <a href="{{ .URL }}">
+      <img class="teaser-text-side__image" src="{{ .Params.Image }}">
+    </a>
+  </div>
+
+  <div class="teaser-text-side__text__wrapper">
+    <p class="teaser-text-side__text">{{ .Title }}</p>
+
+    <span class="teaser-text-side__text__link">
+      <a href="{{ .URL }}" class="link__button-black-secondary">Read More</a>
+    </span>
+  </div>
+</li>
