@@ -1,5 +1,5 @@
 ---
-title: Blog post title 2
+title: Blog post title 3
 image: /images/example.jpg
 
 ---

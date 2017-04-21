@@ -92,7 +92,7 @@
       }
     }
 
-    .teaser-text-side__teaser__wrapper {
+    .teaser-text-side__image__wrapper {
 
       @include mq($from: break-medium) {
         order: 2;
@@ -101,7 +101,7 @@
   }
 }
 
-.teaser-text-side__teaser__wrapper {
+.teaser-text-side__image__wrapper {
   flex: 0 0 100%;
   position: relative;
   padding-top: 56.25%;
@@ -109,7 +109,7 @@
   margin: 0;
 
   @include mq($from: break-medium) {
-    flex: 1 1 60%;
+    flex: 0 0 60%;
     height: 300px;
     padding: 0;
   }
@@ -121,6 +121,7 @@
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
+  width: auto;
   max-width: none;
   height: 100%;
   z-index: 1;

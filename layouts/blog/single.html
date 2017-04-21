@@ -1,5 +1,14 @@
 {{ define "main" }}
-<section class="layout-container">
- <h1>{{ .Title }}</h1>
+
+<div class="blog-post__header" style="background-image:url({{ .Params.Image }})">
+
+  <div class="blog-post__header-title__wrapper">
+    <h1 class="blog-post__header-title">{{ .Title }}</h1>
+  </div>
+
+</div>
+
+<section class="layout-container--inner">
+  {{ .Content }}
 </section>
 {{ end }}
