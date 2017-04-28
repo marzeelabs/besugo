@@ -16,5 +16,5 @@ collections: # A list of collections the CMS should be able to edit
         name: "title"
         widget: "string"
       - label: "Post Cover"
-        name: "post_cover"
+        name: "image"
         widget: "image"
