@@ -1,6 +1,6 @@
 ---
 title: Blog post title 3
-image: /images/example.jpg
+image: /images/uploads/example.jpg
 
 ---
 
