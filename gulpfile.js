@@ -25,6 +25,20 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('./static/css'));
 });
 
+
+gulp.task('sass-cms', function() {
+  return gulp.src("./scss_cms/**/*.scss") // Gets all files ending with .scss
+    .pipe(sass().on('error', sass.logError))
+    .pipe(concat('cms-override.css'))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions','last 4 ios_saf versions'],
+      cascade: false
+    }))
+    .pipe(nano())
+    .pipe(gulp.dest('./static/css'));
+});
+
+
 gulp.task('scripts', function() {
   return gulp.src("./scripts/**/*.js") // Gets all files ending with .scss
     .pipe(concat('site.min.js'))
@@ -112,6 +126,7 @@ gulp.task('jimp', function (callback) {
 
 gulp.task('watch', function(){
   gulp.watch('./scss/**/*.scss', ['sass']);
+  gulp.watch('./scss_cms/**/*.scss', ['sass-cms']);
   gulp.watch('./scripts/**/*.js', ['scripts']);
   gulp.watch('./static/images/*', ['jimp']);
 });
@@ -144,7 +159,7 @@ gulp.task('compile', function(callback){
 
 gulp.task('build', function(callback) {
   runSequence(
-    ['sass', 'scripts'],
+    ['sass', 'sass-cms', 'scripts'],
     'compile',
     'jimp',
     function(err) {
@@ -161,7 +176,7 @@ gulp.task('build', function(callback) {
 
 gulp.task('default', function(callback){
   runSequence(
-    ['sass', 'scripts'],
+    ['sass', 'sass-cms', 'scripts'],
     ['serve','watch', 'jimp'],
     function(err) {
       if (err) {

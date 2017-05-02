@@ -1,0 +1,44 @@
+// Init file to import sass vendors
+@import "../scss/init/init";
+
+//Normalize
+@import "../scss/base/normalize";
+
+// Layout styles
+@import "../scss/base/layout";
+
+
+
+.cms__EntryEditor__controlPane {
+  background: palette(grey, light);
+  font-family: $base-font-family;
+}
+
+.cms__ControlPane__control input {
+  font-family: $base-font-family;
+}
+
+
+.cms__ControlPane__control > div > span {
+  font-size: 16px !important;
+}
+
+.cms__Sidebar__heading {
+  color: palette(black);
+  border-bottom: 1px solid palette(black);
+}
+
+.cms__App__entriesPanel {
+  background: palette(grey, light);
+
+  h1 {
+    color: palette(black);
+    border-bottom: 1px solid palette(black);
+  }
+}
+
+.cms__Card__card {
+  h1 {
+    border-bottom: none;
+  }
+}
