@@ -1,58 +1,44 @@
 
-<li class="teaser-text-side__wrapper">
+<li class="profile">
 
-  <div class="teaser-text-side__image__wrapper">
-    <a href="{{ .URL }}">
-      <img class="teaser-text-side__image" src="{{ .Params.Image }}">
+  <div class="profile__image__wrapper">
+    <a href="{{ .URL }}" target="_self">
+      <img class="profile__image" src="{{ .Params.Image }}">
     </a>
   </div>
 
-  <div class="teaser-text-side__text__wrapper">
-    <p class="teaser-text-side__text">{{ .Title }}</p>
+  <div class="profile__text__wrapper">
+    <h3 class="profile__text">{{ .Title }}</h3>
+    <p class="profile__text">Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et.</p>
+    <span class="profile__text">
 
-    <span class="teaser-text-side__text__link">
-      <a href="{{ .URL }}" class="link__button-black-secondary">Read More</a>
+      <ul class="profile__social-icons">
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#facebook-icon"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#instagram-icon"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#twitter-icon"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+
     </span>
   </div>
+
 </li>
 
-    <div class="profile">
 
-      <div class="profile__image__wrapper">
-        <img class="profile__image" src="/images/example_profile.jpg">
-      </div>
-
-
-      <div class="profile__text__wrapper">
-        <h3 class="profile__text">Name of the person</h3>
-        <p class="profile__text">Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et.</p>
-        <span class="profile__text">
-
-          <ul class="profile__social-icons">
-            <li class="profile__social-icons__item">
-              <a href="#" target="_blank">
-                <svg>
-                  <use xlink:href="#facebook-icon"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="profile__social-icons__item">
-              <a href="#" target="_blank">
-                <svg>
-                  <use xlink:href="#instagram-icon"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="profile__social-icons__item">
-              <a href="#" target="_blank">
-                <svg>
-                  <use xlink:href="#twitter-icon"></use>
-                </svg>
-              </a>
-            </li>
-          </ul>
-
-        </span>
-      </div>
-
-    </div>

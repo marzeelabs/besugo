@@ -1,6 +1,6 @@
 ---
-title: Blog post title 1
-image: /images/uploads/example.jpg
+title: Name of the person 2
+image: /images/example_profile.jpg
 
 ---
 

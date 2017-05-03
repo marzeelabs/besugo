@@ -1,14 +1,47 @@
 {{ define "main" }}
 
-<div class="blog-post__header" style="background-image:url({{ .Params.Image }})">
+<div class="profile__header">
+  <img class="profile__header__image-bg" src="{{ .Params.Image }}">
+</div>
 
-  <div class="blog-post__header-title__wrapper">
-    <h1 class="blog-post__header-title">{{ .Title }}</h1>
+<div class="profile__header-info">
+  <div class="profile__header-info__image__wrapper">
+     <img class="profile__header-info__image" src="{{ .Params.Image }}">
   </div>
+
+  <h1 class="profile__header-info__title">{{ .Title }}</h1>
+
+  <ul class="profile__social-icons">
+    <li class="profile__social-icons__item">
+      <a href="#" target="_blank">
+        <svg>
+          <use xlink:href="#facebook-icon"></use>
+        </svg>
+      </a>
+    </li>
+    <li class="profile__social-icons__item">
+      <a href="#" target="_blank">
+        <svg>
+          <use xlink:href="#instagram-icon"></use>
+        </svg>
+      </a>
+    </li>
+    <li class="profile__social-icons__item">
+      <a href="#" target="_blank">
+        <svg>
+          <use xlink:href="#twitter-icon"></use>
+        </svg>
+      </a>
+    </li>
+  </ul>
 
 </div>
 
 <section class="layout-container--inner">
-  {{ .Content }}
+
+  <div class="profile__bio-content">
+    {{ .Content }}
+  </div>
+
 </section>
 {{ end }}
