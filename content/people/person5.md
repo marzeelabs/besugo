@@ -1,6 +1,6 @@
 ---
 title: Name of the person 5
-image: /images/example_profile.jpg
+image: /images/uploads/example_profile.jpg
 
 ---
 
