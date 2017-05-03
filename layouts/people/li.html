@@ -8,7 +8,11 @@
   </div>
 
   <div class="profile__text__wrapper">
-    <h3 class="profile__text">{{ .Title }}</h3>
+
+    <a href="{{ .URL }}" target="_self" class="profile__text-link">
+      <h3 class="profile__text">{{ .Title }}</h3>
+    </a>
+
     <p class="profile__text">Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et.</p>
     <span class="profile__text">
 
@@ -35,10 +39,8 @@
           </a>
         </li>
       </ul>
-
     </span>
   </div>
-
 </li>
 
 

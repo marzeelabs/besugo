@@ -69,6 +69,18 @@
   text-align: center;
   margin: ritmo() auto;
   display: block;
+  text-align: center;
+}
+
+.profile__text-link {
+  color: palette(black);
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  &:hover,
+  &:focus {
+    color: palette(grey, mid-light);
+  }
 }
 
 .profile__social-icons {

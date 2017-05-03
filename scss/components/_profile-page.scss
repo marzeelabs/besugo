@@ -4,7 +4,7 @@
   z-index: 1;
   display: none;
 
-  @include mq($from: break-medium-small) {
+  @include mq($from:break-medium-small) {
     display: block;
   }
 }
@@ -21,7 +21,7 @@
   z-index: 1;
   filter: blur(5px) grayscale(0.3) brightness(0.5);
 
-  @include mq($from: break-small) {
+  @include mq($from:break-small) {
     display: block;
   }
 }
@@ -31,7 +31,7 @@
   position: relative;
   text-align: center;
 
-  @include mq($from: break-medium-small) {
+  @include mq($from:break-medium-small) {
     margin: 0 auto;
     @include container(500px);
   }
@@ -43,8 +43,8 @@
   padding-bottom: 100%;
   overflow: hidden;
 
-  @include mq($from: break-medium-small) {
-    margin-top: -80%;
+  @include mq($from:break-medium-small) {
+    margin-top: -75%;
     z-index: 5;
   }
 }
