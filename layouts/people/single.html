@@ -47,5 +47,15 @@
     {{ .Content }}
   </div>
 
+    <h1 class="profiles__title">Author</h1>
+
+    <ul class="profiles__list">
+      {{ range .Params.people }}
+        {{ range where (where $.Site.RegularPages "Section" "people") "Title" .person }}
+          {{ .Render "li" }}
+        {{ end }}
+      {{ end}}
+    </ul>
+
 </section>
 {{ end }}
