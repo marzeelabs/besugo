@@ -1,4 +1,5 @@
 ---
+i18nlanguage: en
 title: Blog post title 1
 image: /images/uploads/example.jpg
 
