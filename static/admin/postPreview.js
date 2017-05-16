@@ -340,12 +340,6 @@ var PostPreview = createClass({
 });
 
 CMS.registerPreviewTemplate("blog_post", PostPreview);
+CMS.registerPreviewTemplate("blog_post-pt", PostPreview);
 CMS.registerPreviewStyle("/css/app.css");
 CMS.registerPreviewStyle("https://fonts.googleapis.com/css?family=Muli:300,400,700");
-
-
-
-
-
-
-
