@@ -1,14 +1,14 @@
 backend:
   name: github
   repo: marzeelabs/besugo # Path to your Github repository
-  branch: develop # Branch to update (master by default)
+  branch: feature/#3_cms_preview # Branch to update (master by default)
 
 media_folder: "/static/images/uploads" # Folder where user uploaded files should go
 public_folder: "/images/uploads"
 
 collections: # A list of collections the CMS should be able to edit
   - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "New Blog Post" # Used in the UI, ie.: "New Post"
+    label: "Blog Post" # Used in the UI, ie.: "New Post"
     folder: "content/blog" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
@@ -16,5 +16,33 @@ collections: # A list of collections the CMS should be able to edit
         name: "title"
         widget: "string"
       - label: "Post Cover"
-        name: "post_cover"
+        name: "image"
         widget: "image"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+      - label: "People"
+        name: "people"
+        widget: "list"
+        fields:
+          - label: "Person"
+            name: "person"
+            widget: "relation"
+            collection: "people"
+            searchFields:
+              - "title"
+            valueField: "title"
+  - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "People" # Used in the UI, ie.: "New Post"
+    folder: "content/people" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Person Name"
+        name: "Name"
+        widget: "string"
+      - label: "Person Picture"
+        name: "image"
+        widget: "image"
+      - label: "Bio"
+        name: "body"
+        widget: "markdown"

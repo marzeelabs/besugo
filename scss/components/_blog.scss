@@ -1,19 +1,9 @@
 .blog__title {
-  text-transform: uppercase;
-  text-align: center;
-  @include ritmo-font-size($h5-font-size);
-  margin-top: ritmo(4);
-
-  @include mq($from: break-medium) {
-    margin-top: ritmo(6);
-  }
+  @extend .page__title;
 }
 
 .blog__text-intro {
-  @include container(1000px);
-  display: block;
-  margin: 0 auto ritmo(6) auto;
-  text-align: center;
+  @extend .page__text-intro;
 }
 
 .blog__list {

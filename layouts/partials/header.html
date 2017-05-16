@@ -25,7 +25,12 @@
         <a class="navigation__menu-link is-hidden" href="#"> Pages</a>
 
         <ul class="navigation__submenu">
-          <li class="navigation__menu-item{{ if (eq .URL "/pages/about") }} is-active{{ end }}"><a class="navigation__menu-link" href="/pages/about">About</a></li>
+          <li class="navigation__menu-item{{ if (eq .URL "/pages/about") }} is-active{{ end }}">
+            <a class="navigation__menu-link" href="/pages/about">About</a>
+          </li>
+          <li class="navigation__menu-item{{ if (eq .URL "/people") }} is-active{{ end }}">
+            <a class="navigation__menu-link" href="/people">People</a>
+          </li>
         </ul>
       </li>
 

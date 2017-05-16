@@ -1,0 +1,46 @@
+
+<li class="profile">
+
+  <div class="profile__image__wrapper">
+    <a href="{{ .URL }}" target="_self">
+      <img class="profile__image" src="{{ .Params.Image }}">
+    </a>
+  </div>
+
+  <div class="profile__text__wrapper">
+
+    <a href="{{ .URL }}" target="_self" class="profile__text-link">
+      <h3 class="profile__text">{{ .Title }}</h3>
+    </a>
+
+    <p class="profile__text">Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et.</p>
+    <span class="profile__text">
+
+      <ul class="profile__social-icons">
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#facebook-icon"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#instagram-icon"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#twitter-icon"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </span>
+  </div>
+</li>
+
+
