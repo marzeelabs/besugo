@@ -7,6 +7,7 @@ var gulp = require('gulp'),
   exec = require('child_process').exec,
   uglify = require('gulp-uglify'),
   jimp = require('gulp-jimp');
+  replace = require('gulp-replace');
 
 
 /**
@@ -44,6 +45,19 @@ gulp.task('scripts', function() {
     .pipe(concat('site.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./static/js'));
+});
+
+gulp.task('cms', function() {
+  return exec('git symbolic-ref --short -q HEAD', function (err, stdout) {
+    var gitBranch = "develop";
+    if (!err) {
+      gitBranch = stdout;
+    }
+
+    return gulp.src("./static/admin/config.yml")
+      .pipe(replace("<% CURRENT_BRANCH %>", gitBranch))
+      .pipe(gulp.dest("./public/admin"));
+  });
 });
 
 // Jimp variables
@@ -161,6 +175,7 @@ gulp.task('build', function(callback) {
   runSequence(
     ['sass', 'sass-cms', 'scripts'],
     'compile',
+    'cms',
     'jimp',
     function(err) {
       if (err) {
@@ -177,7 +192,7 @@ gulp.task('build', function(callback) {
 gulp.task('default', function(callback){
   runSequence(
     ['sass', 'sass-cms', 'scripts'],
-    ['serve','watch', 'jimp'],
+    ['serve','watch', 'cms', 'jimp'],
     function(err) {
       if (err) {
         console.log('[ERROR] gulp task failed', err);

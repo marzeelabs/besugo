@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: marzeelabs/besugo # Path to your Github repository
-  branch: develop # Branch to update (master by default)
+  branch: <% CURRENT_BRANCH %> # Branch to update (current branch dynamically set by Gulp)
 
 media_folder: "/static/images/uploads" # Folder where user uploaded files should go
 public_folder: "/images/uploads"
