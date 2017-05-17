@@ -7,6 +7,8 @@ media_folder: "/static/images/uploads" # Folder where user uploaded files should
 public_folder: "/images/uploads"
 
 collections: # A list of collections the CMS should be able to edit
+
+# EN collections
   - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "EN Blog Post" # Used in the UI, ie.: "New Post"
     folder: "content/blog" # The path to the folder where the documents are stored
@@ -20,39 +22,6 @@ collections: # A list of collections the CMS should be able to edit
         name: "i18nlanguage"
         widget: "hidden"
         default: "en"
-      - label: "Post title"
-        name: "title"
-        widget: "string"
-      - label: "Post Cover"
-        name: "image"
-        widget: "image"
-      - label: "Content"
-        name: "body"
-        widget: "markdown"
-      - label: "People"
-        name: "people"
-        widget: "list"
-        fields:
-          - label: "Person"
-            name: "person"
-            widget: "relation"
-            collection: "people"
-            searchFields:
-              - "title"
-            valueField: "title"
-  - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "PT Blog Post" # Used in the UI, ie.: "New Post"
-    folder: "content/blog" # The path to the folder where the documents are stored
-    filter:
-      field: "i18nlanguage"
-      value: "pt"
-    slug: "{{title}}.{{i18nlanguage}}"
-    create: true # Allow users to create new documents in this collection
-    fields: # The fields each document in this collection have
-      - label: "Content language"
-        name: "i18nlanguage"
-        widget: "hidden"
-        default: "pt"
       - label: "Post title"
         name: "title"
         widget: "string"
@@ -95,6 +64,41 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Bio"
         name: "body"
         widget: "markdown"
+
+# PT collections
+  - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "PT Blog Post" # Used in the UI, ie.: "New Post"
+    folder: "content/blog" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
+    slug: "{{title}}.{{i18nlanguage}}"
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt"
+      - label: "Post title"
+        name: "title"
+        widget: "string"
+      - label: "Post Cover"
+        name: "image"
+        widget: "image"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+      - label: "People"
+        name: "people"
+        widget: "list"
+        fields:
+          - label: "Person"
+            name: "person"
+            widget: "relation"
+            collection: "people"
+            searchFields:
+              - "title"
+            valueField: "title"
   - name: "people-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "PT People" # Used in the UI, ie.: "New Post"
     folder: "content/people" # The path to the folder where the documents are stored
