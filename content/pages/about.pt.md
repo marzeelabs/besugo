@@ -1,7 +1,8 @@
 ---
-title: Name of the person 2
-image: /images/uploads/example_profile.jpg
-i18nlanguage: en
+title: Sobre nós
+image: /images/example.jpg
+description: Integer iaculis tortor ut magna suscipit, in suscipit risus pharetra.
+
 ---
 
 

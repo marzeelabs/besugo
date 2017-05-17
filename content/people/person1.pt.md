@@ -1,7 +1,7 @@
 ---
-title: Name of the person 2
+title: Name of the person 1
 image: /images/uploads/example_profile.jpg
-i18nlanguage: en
+i18nlanguage: pt
 ---
 
 
