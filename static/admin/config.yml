@@ -76,6 +76,9 @@ collections: # A list of collections the CMS should be able to edit
   - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "EN People" # Used in the UI, ie.: "New Post"
     folder: "content/people" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "en"
     slug: "{{title}}.{{i18nlanguage}}"
     create: true # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
@@ -96,6 +99,9 @@ collections: # A list of collections the CMS should be able to edit
     label: "PT People" # Used in the UI, ie.: "New Post"
     folder: "content/people" # The path to the folder where the documents are stored
     slug: "{{title}}.{{i18nlanguage}}"
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
     create: true # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
       - label: "Content language"
