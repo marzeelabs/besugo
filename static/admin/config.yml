@@ -92,7 +92,7 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Bio"
         name: "body"
         widget: "markdown"
-  - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
+  - name: "people-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "PT People" # Used in the UI, ie.: "New Post"
     folder: "content/people" # The path to the folder where the documents are stored
     slug: "{{title}}.{{i18nlanguage}}"
