@@ -1,5 +1,5 @@
 # Defaults for all languages
-baseurl: "https://besugo.marzeelabs.org/"
+baseurl: "/"
 MetaDataFormat: "yaml"
 blackfriday:
   hrefTargetBlank: true
