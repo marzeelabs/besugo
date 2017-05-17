@@ -7,12 +7,12 @@
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production.environment]
-  HUGO_VERSION = "0.20.2"
+  HUGO_VERSION = "0.20.7"
 
 # Deploy Preview context: All Deploy Previews
 # will inherit these settings.
 [context.deploy-preview.environment]
-  HUGO_VERSION = "0.20.2"
+  HUGO_VERSION = "0.20.7"
 
 # Branch Deploy context: All deploys that are not in
 # an active Deploy Preview will inherit these settings.
