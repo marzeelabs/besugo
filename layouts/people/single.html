@@ -11,33 +11,7 @@
 
   <h1 class="profile__header-info__title">{{ .Title }}</h1>
 
-  <ul class="profile__social-icons">
-
-    <li class="profile__social-icons__item">
-      <a href="#" target="_blank">
-        <svg>
-          <use xlink:href="#facebook-icon"></use>
-        </svg>
-      </a>
-    </li>
-
-    <li class="profile__social-icons__item">
-      <a href="#" target="_blank">
-        <svg>
-          <use xlink:href="#instagram-icon"></use>
-        </svg>
-      </a>
-    </li>
-
-    <li class="profile__social-icons__item">
-      <a href="#" target="_blank">
-        <svg>
-          <use xlink:href="#twitter-icon"></use>
-        </svg>
-      </a>
-    </li>
-
-  </ul>
+  {{ partial "profile__social-icons" . }}
 
 </div>
 

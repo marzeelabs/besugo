@@ -11,7 +11,7 @@
     <p class="teaser-text-side__text">{{ .Title }}</p>
 
     <span class="teaser-text-side__text__link">
-      <a href="{{ .URL }}" class="link__button-black-secondary">Read More</a>
+      <a href="{{ .URL }}" class="link__button-black-secondary">{{ i18n "ReadMore" | default "Read More" }}</a>
     </span>
   </div>
 </li>
