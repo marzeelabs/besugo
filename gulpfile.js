@@ -149,6 +149,7 @@ gulp.task('serve', function(callback){
   exec('rm -Rf ./public && hugo serve --renderToDisk', function (err) {
     if (err) {
       console.log("Hugo exited with error: ", err);
+      return process.exit(2);
     }
     else {
       callback();
@@ -160,6 +161,7 @@ gulp.task('compile', function(callback){
   exec('rm -Rf ./public && hugo', function (err) {
     if (err) {
       console.log("Hugo exited with error: ", err);
+      return process.exit(2);
     }
     else {
       callback();
