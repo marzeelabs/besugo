@@ -17,25 +17,25 @@
 
     <ul class="navigation__menu">
 
-      <li class="navigation__menu-item{{ if (eq .URL "/") }} is-active{{ end }}">
-        <a class="navigation__menu-link" href="/">Home</a>
+      <li class="navigation__menu-item{{ if .IsHome }} is-active{{ end }}">
+        <a class="navigation__menu-link" href="{{ "/" | relLangURL }}">{{ i18n "Home" | default "Home" }}</a>
       </li>
 
       <li class="navigation__menu-item">
-        <a class="navigation__menu-link is-hidden" href="#"> Pages</a>
+        <a class="navigation__menu-link is-hidden">{{ i18n "Pages" | default "Pages" }}</a>
 
         <ul class="navigation__submenu">
-          <li class="navigation__menu-item{{ if (eq .URL "/pages/about") }} is-active{{ end }}">
-            <a class="navigation__menu-link" href="/pages/about">About</a>
+          <li class="navigation__menu-item{{ if (eq (.URL | relLangURL) ("/pages/about/" | relLangURL)) }} is-active{{ end }}">
+            <a class="navigation__menu-link" href="{{ "/pages/about" | relLangURL }}">{{ i18n "About" | default "About" }}</a>
           </li>
-          <li class="navigation__menu-item{{ if (eq .URL "/people") }} is-active{{ end }}">
-            <a class="navigation__menu-link" href="/people">People</a>
+          <li class="navigation__menu-item{{ if (eq .Section "people") }} is-active{{ end }}">
+            <a class="navigation__menu-link" href="{{ "/people" | relLangURL }}">{{ i18n "People" | default "People" }}</a>
           </li>
         </ul>
       </li>
 
       <li class="navigation__menu-item{{ if (eq .Section "blog") }} is-active{{ end }}">
-        <a class="navigation__menu-link" href="/blog">Blog</a>
+        <a class="navigation__menu-link" href="{{ "/blog" | relLangURL }}">{{ i18n "Blog" | default "Blog" }}</a>
       </li>
 
     </ul>
