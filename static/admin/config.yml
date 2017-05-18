@@ -95,7 +95,7 @@ collections: # A list of collections the CMS should be able to edit
           - label: "Person"
             name: "person"
             widget: "relation"
-            collection: "people"
+            collection: "people-pt"
             searchFields:
               - "title"
             valueField: "title"
