@@ -277,8 +277,9 @@ var PostPreview = createClass({
                   h(
                     "p",
                     { "className": "profile__text" },
-                    "Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et."
+                    personData.get('body')
                   ),
+                  //
 
           h(
             "ul",

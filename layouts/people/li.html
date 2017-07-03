@@ -14,9 +14,35 @@
     </a>
 
     <p class="profile__text">
-   {{ .Body | markdownify }}</p>
+   {{ .Content }}</p>
     <span class="profile__text">
-      {{ partial "profile__social-icons" . }}
+
+      {{/* partial "profile__social-icons" . */}}
+
+      <ul class="profile__social-icons">
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#facebook-icon"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#instagram-icon"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#twitter-icon"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+
     </span>
   </div>
 </li>
