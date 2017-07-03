@@ -16,10 +16,11 @@
 
   <ul class="profiles__list">
     {{ range .Params.people }}
-      {{ range where $.Site.RegularPages "Section" "people" }}
-        {{ .Render "li" }}
+      {{ range where (where $.Site.RegularPages "Section" "people") ".Params.title" .title }}
+        {{ .Render "li"}}
       {{ end }}
     {{ end}}
+
   </ul>
 
 </section>

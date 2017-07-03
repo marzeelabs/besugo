@@ -5,6 +5,7 @@ var PostPreview = createClass({
     var entryTitle = entry.getIn(['data', 'title']);
     var entryImage = entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg';
     var entryBody = this.props.widgetFor('body');
+    var entryPeople = entry.getIn(['data', 'people']) || [];
 
     return h(
       "div",
@@ -237,8 +238,57 @@ var PostPreview = createClass({
       h(
         "section",
         { className: "layout-container--inner" },
-        entryBody
+        entryBody,
+        // People listing
+        h(
+          "ul",
+          {className: "profiles__list"},
+            entryPeople.map(function(person) {
+              const personData = fieldsMetaData.getIn(['people', person.get('title')]);
+              if (personData) {
+                return h(
+                  "li",
+                  { "class": "profile" },
+                  h(
+                    "div",
+                    { "class": "profile__image__wrapper" },
+                    h(
+                      "a",
+                      { href: "#", target: "_self" },
+                      h("img", { "class": "profile__image", src: personData.get('image') })
+                    )
+                  ),
+                  h(
+                    "div",
+                    { "class": "profile__text__wrapper" },
+                    h(
+                      "a",
+                      { href: "#", target: "_self", "class": "profile__text-link" },
+                      h(
+                        "h3",
+                        { "class": "profile__text" },
+                        personData.get('title')
+                      )
+                    ),
+                    h(
+                      "p",
+                      { "class": "profile__text" },
+                      "Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et."
+                    ),
+                    h(
+                      "span",
+                      { "class": "profile__text" },
+                      personData.get('image')
+                    )
+                  )
+                ),
+              }
+            })
+          ),
+        // end people listing
       ),
+
+
       h(
         "footer",
         { className: "footer" },

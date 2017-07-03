@@ -36,7 +36,7 @@ collections: # A list of collections the CMS should be able to edit
         widget: "list"
         fields:
           - label: "Person"
-            name: "person"
+            name: "people"
             widget: "relation"
             collection: "people"
             searchFields:
@@ -56,7 +56,7 @@ collections: # A list of collections the CMS should be able to edit
         widget: "hidden"
         default: "en"
       - label: "Person Name"
-        name: "Name"
+        name: "title"
         widget: "string"
       - label: "Person Picture"
         name: "image"
@@ -113,7 +113,7 @@ collections: # A list of collections the CMS should be able to edit
         widget: "hidden"
         default: "pt"
       - label: "Person Name"
-        name: "Name"
+        name: "title"
         widget: "string"
       - label: "Person Picture"
         name: "image"

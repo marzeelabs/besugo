@@ -3,7 +3,7 @@ i18nlanguage: en
 title: Blog post title 3
 image: /images/uploads/example.jpg
 people:
-  - person: Name of the person 1
+  - title: Name of the person 1
 ---
 
 
