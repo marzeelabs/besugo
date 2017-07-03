@@ -1,6 +1,7 @@
 var PostPreview = createClass({
   render: function() {
     var entry = this.props.entry;
+    var fieldsMetaData = this.props.fieldsMetaData;
 
     var entryTitle = entry.getIn(['data', 'title']);
     var entryImage = entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg';
@@ -243,48 +244,46 @@ var PostPreview = createClass({
         h(
           "ul",
           {className: "profiles__list"},
-            entryPeople.map(function(person) {
-              const personData = fieldsMetaData.getIn(['people', person.get('title')]);
-              if (personData) {
-                return h(
-                  "li",
-                  { "class": "profile" },
+          entryPeople.map(function(person) {
+            const personData = fieldsMetaData.getIn(['people', person.get('people')]);
+            if (personData) {
+              return h(
+                "li",
+                { "className": "profile" },
+
+                h(
+                  "div",
+                  { "className": "profile__image__wrapper" },
                   h(
-                    "div",
-                    { "class": "profile__image__wrapper" },
-                    h(
-                      "a",
-                      { href: "#", target: "_self" },
-                      h("img", { "class": "profile__image", src: personData.get('image') })
-                    )
-                  ),
-                  h(
-                    "div",
-                    { "class": "profile__text__wrapper" },
-                    h(
-                      "a",
-                      { href: "#", target: "_self", "class": "profile__text-link" },
-                      h(
-                        "h3",
-                        { "class": "profile__text" },
-                        personData.get('title')
-                      )
-                    ),
-                    h(
-                      "p",
-                      { "class": "profile__text" },
-                      "Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et."
-                    ),
-                    h(
-                      "span",
-                      { "class": "profile__text" },
-                      personData.get('image')
-                    )
+                    "a",
+                    { href: "#", target: "_self" },
+                    h("img", { "className": "profile__image", src: personData.get('image') })
                   )
                 ),
-              }
-            })
-          ),
+
+                h(
+                  "div",
+                  { "className": "profile__text__wrapper" },
+                  h(
+                    "a",
+                    { href: "#", target: "_self", "className": "profile__text-link" },
+                    h(
+                      "h3",
+                      { "className": "profile__text" },
+                      personData.get('title')
+                    )
+                  ),
+
+                  h(
+                    "p",
+                    { "className": "profile__text" },
+                    personData.get('body')
+                  ),
+                ),
+              );
+            }
+          })
+        )
         // end people listing
       ),
 
