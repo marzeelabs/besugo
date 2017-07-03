@@ -279,6 +279,57 @@ var PostPreview = createClass({
                     { "className": "profile__text" },
                     personData.get('body')
                   ),
+
+                  h(
+                    "p",
+                    { "className": "profile__text" },
+                    personData.get('body')
+                  ),
+                  // social icons
+                  h(
+                    "ul",
+                    { className: "profile__social-icons" },
+                    h(
+                      "li",
+                      { className: "profile__social-icons__item" },
+                      h(
+                        "a",
+                        { href: "#", target: "_blank" },
+                        h(
+                          "svg",
+                          null,
+                          h("use", { href: "#facebook-icon" })
+                        )
+                      )
+                    ),
+                    h(
+                      "li",
+                      { className: "profile__social-icons__item" },
+                      h(
+                        "a",
+                        { href: "#", target: "_blank" },
+                        h(
+                          "svg",
+                          null,
+                          h("use", { href: "#instagram-icon" })
+                        )
+                      )
+                    ),
+                    h(
+                      "li",
+                      { className: "profile__social-icons__item" },
+                      h(
+                        "a",
+                        { href: "#", target: "_blank" },
+                        h(
+                          "svg",
+                          null,
+                          h("use", { href: "#twitter-icon" })
+                        )
+                      )
+                    )
+                  ),
+
                 ),
               );
             }
