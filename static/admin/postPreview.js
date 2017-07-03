@@ -279,12 +279,6 @@ var PostPreview = createClass({
                     { "className": "profile__text" },
                     personData.get('body')
                   ),
-
-                  h(
-                    "p",
-                    { "className": "profile__text" },
-                    personData.get('body')
-                  ),
                   // social icons
                   h(
                     "ul",
