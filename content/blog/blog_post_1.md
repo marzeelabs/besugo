@@ -2,8 +2,6 @@
 i18nlanguage: en
 title: Blog Post Title
 image: /images/uploads/example.jpg
-people:
-  - people: Name of the person 5
 ---
 
  **Phasellus** et tincidunt odio, ut semper dolor. Etiat massa vitae enim tempus luctus in hendrerit eros. Vivamus ornare, nulla a vestibulum lacinia, nisl velit pharetra nunc, sed malesuada erat nibh eu purus.
