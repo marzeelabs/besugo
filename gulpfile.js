@@ -48,15 +48,27 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('cms', function() {
-  return exec('git symbolic-ref --short -q HEAD', function (err, stdout) {
-    var gitBranch = "develop";
-    if (!err) {
-      gitBranch = stdout;
-    }
-
+  var replaceBranch = function(gitBranch) {
+    // console.log("CMS BRANCH: " + gitBranch);
     return gulp.src("./static/admin/config.yml")
       .pipe(replace("<% CURRENT_BRANCH %>", gitBranch))
       .pipe(gulp.dest("./public/admin"));
+  };
+
+  return exec('printf $(git symbolic-ref --short -q HEAD)', function (err, stdout) {
+    if (!err && stdout) {
+      return replaceBranch(stdout);
+    } else {
+      // If we're deploying on Netlify, use $HEAD env var
+      // Fallback to develop
+      exec('printf $HEAD', function(err, stdout) {
+        if (!err && stdout) {
+          return replaceBranch(stdout);
+        } else {
+          return replaceBranch("develop");
+        }
+      });
+    }
   });
 });
 
@@ -154,7 +166,11 @@ gulp.task('serve', function(callback){
     else {
       callback();
     }
-  }).stdout.pipe(process.stdout);
+  })
+  .stdout.on('data', function(data) {
+    runSequence('cms');
+  })
+  .pipe(process.stdout);
 });
 
 gulp.task('compile', function(callback){
