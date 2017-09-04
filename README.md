@@ -1,5 +1,12 @@
 # MZ Netlify
 
+## Install and Run
+0. Requires [hugo](https://gohugo.io/), install using [homebrew](https://brew.sh/) if you don't have it already: ```brew install hugo```
+1. Install gulp-cli globally: ```npm install -g gulp-cli```
+2. Clone project locally
+3. Grab dependencies normally: ```npm install```
+4. Default ```gulp``` task serves and starts listening for changes
+
 ## Deploy on Netlify
 1. Push your Hugo project to Github
 2. [Get a Netlify account](https://app.netlify.com/signup)
