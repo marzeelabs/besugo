@@ -5,8 +5,12 @@
   "author": "Marzee Labs <info@marzeelabs.org>",
   "license": "GPLv3",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-minify": "^0.2.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
+    "gulp-babel": "^7.0.0",
     "gulp-cli": "^1.2.2",
     "gulp-concat": "^2.6.0",
     "gulp-cssnano": "^2.1.1",
