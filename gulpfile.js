@@ -51,6 +51,17 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('./static/js'));
 });
 
+gulp.task('scripts-admin', function() {
+  return gulp.src("./scripts/admin/**/*.js") // Gets all files ending with .js
+    .pipe(webpack({
+      output: {
+        filename: "admin.min.js"
+      }
+    }))
+    .pipe(babel())
+    .pipe(gulp.dest('./static/admin'));
+});
+
 gulp.task('cms', function() {
   var replaceBranch = function(gitBranch) {
     // console.log("CMS BRANCH: " + gitBranch);
@@ -158,6 +169,7 @@ gulp.task('watch', function(){
   gulp.watch('./scss/**/*.scss', ['sass']);
   gulp.watch('./scss_cms/**/*.scss', ['sass-cms']);
   gulp.watch('./scripts/site/**/*.js', ['scripts']);
+  gulp.watch('./scripts/admin/**/*.js', ['scripts-admin']);
   gulp.watch('./static/images/*', ['jimp']);
 });
 
@@ -195,7 +207,7 @@ gulp.task('compile', function(callback){
 
 gulp.task('build', function(callback) {
   runSequence(
-    ['sass', 'sass-cms', 'scripts'],
+    ['sass', 'sass-cms', 'scripts', 'scripts-admin'],
     'compile',
     'cms',
     'jimp',
@@ -213,7 +225,7 @@ gulp.task('build', function(callback) {
 
 gulp.task('default', function(callback){
   runSequence(
-    ['sass', 'sass-cms', 'scripts'],
+    ['sass', 'sass-cms', 'scripts', 'scripts-admin'],
     ['serve','watch', 'cms', 'jimp'],
     function(err) {
       if (err) {

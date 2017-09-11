@@ -7,3 +7,4 @@ Thumbs.db
 !.gitkeep
 static/css/app.css
 static/js/site.min.js
+static/admin/admin.min.js

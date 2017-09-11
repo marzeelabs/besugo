@@ -1,9 +1,12 @@
+import $ from 'jquery';
+import jsyaml from 'js-yaml';
+
 // The CMS script likes to add trailing 's's to labels, even to those that don't
 // allow creating content in those collections.
 // We get rid of those, it's weird to see something like "Homes" or "Footers"
 // when there are only one of each.
 function clearPlurals() {
-  jQuery.get('./config.yml', (data) => {
+  $.get('./config.yml', (data) => {
     jsyaml.safeLoad(data)
       .collections
       .forEach((collection) => {

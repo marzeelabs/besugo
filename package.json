@@ -18,6 +18,7 @@
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
     "jquery": "^3.2.1",
+    "js-yaml": "^3.10.0",
     "ritmo": "^0.2.0",
     "run-sequence": "^1.2.1",
     "sass-mq": "^3.2.9",
