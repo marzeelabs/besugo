@@ -40,9 +40,8 @@ gulp.task('sass-cms', function() {
     .pipe(gulp.dest('./static/css'));
 });
 
-
 gulp.task('scripts', function() {
-  return gulp.src("./scripts/**/*.js") // Gets all files ending with .js
+  return gulp.src("./scripts/site/**/*.js") // Gets all files ending with .js
     .pipe(webpack({
       output: {
         filename: "site.min.js"
@@ -158,7 +157,7 @@ gulp.task('jimp', function (callback) {
 gulp.task('watch', function(){
   gulp.watch('./scss/**/*.scss', ['sass']);
   gulp.watch('./scss_cms/**/*.scss', ['sass-cms']);
-  gulp.watch('./scripts/**/*.js', ['scripts']);
+  gulp.watch('./scripts/site/**/*.js', ['scripts']);
   gulp.watch('./static/images/*', ['jimp']);
 });
 
