@@ -1,3 +1,6 @@
+import $ from 'jquery';
+import 'slick-carousel';
+
 $(function() {
 
   var breakMobile = 730; // viewport px breakpoint

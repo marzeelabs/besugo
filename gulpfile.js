@@ -6,6 +6,7 @@ var gulp = require('gulp'),
   runSequence = require('run-sequence'),
   exec = require('child_process').exec,
   babel = require("gulp-babel"),
+  webpack = require("webpack-stream"),
   jimp = require('gulp-jimp'),
   replace = require('gulp-replace');
 
@@ -41,8 +42,12 @@ gulp.task('sass-cms', function() {
 
 
 gulp.task('scripts', function() {
-  return gulp.src("./scripts/**/*.js") // Gets all files ending with .scss
-    .pipe(concat('site.min.js'))
+  return gulp.src("./scripts/**/*.js") // Gets all files ending with .js
+    .pipe(webpack({
+      output: {
+        filename: "site.min.js"
+      }
+    }))
     .pipe(babel())
     .pipe(gulp.dest('./static/js'));
 });

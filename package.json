@@ -17,10 +17,12 @@
     "gulp-jimp": "^1.2.3",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
+    "jquery": "^3.2.1",
     "ritmo": "^0.2.0",
     "run-sequence": "^1.2.1",
     "sass-mq": "^3.2.9",
-    "slick-carousel": "^1.6.0",
-    "susy": "^2.2.12"
+    "slick-carousel": "^1.7.1",
+    "susy": "^2.2.12",
+    "webpack-stream": "^4.0.0"
   }
 }
