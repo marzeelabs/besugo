@@ -64,6 +64,31 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Bio"
         name: "body"
         widget: "markdown"
+  - name: "footer" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "EN Footer" # Used in the UI, ie.: "New Post"
+    folder: "content/footer" # The path to the folder where the documents are stored
+    create: false # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "Copyright"
+        name: "copyright"
+        widget: "text"
+      - label: "Social Media"
+        name: "social_media"
+        widget: "object"
+        fields:
+        - label: "Link Facebook"
+          name: "facebook"
+          widget: "string"
+        - label: "Link Twitter"
+          name: "twitter"
+          widget: "string"
+        - label: "Link Instagram"
+          name: "instagram"
+          widget: "string"
 
 # PT collections
   - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
@@ -121,13 +146,28 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Bio"
         name: "body"
         widget: "markdown"
-
-# Footer
-  - name: "footer" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "Footer" # Used in the UI, ie.: "New Post"
+  - name: "footer-pt" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "PT Footer" # Used in the UI, ie.: "New Post"
     folder: "content/footer" # The path to the folder where the documents are stored
     create: false # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt"
       - label: "Copyright"
         name: "copyright"
         widget: "text"
+      - label: "Social Media"
+        name: "social_media"
+        widget: "object"
+        fields:
+        - label: "Link Facebook"
+          name: "facebook"
+          widget: "string"
+        - label: "Link Twitter"
+          name: "twitter"
+          widget: "string"
+        - label: "Link Instagram"
+          name: "instagram"
+          widget: "string"
