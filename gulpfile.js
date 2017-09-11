@@ -5,8 +5,8 @@ var gulp = require('gulp'),
   nano = require('gulp-cssnano'),
   runSequence = require('run-sequence'),
   exec = require('child_process').exec,
-  uglify = require('gulp-uglify'),
-  jimp = require('gulp-jimp');
+  babel = require("gulp-babel"),
+  jimp = require('gulp-jimp'),
   replace = require('gulp-replace');
 
 
@@ -43,7 +43,7 @@ gulp.task('sass-cms', function() {
 gulp.task('scripts', function() {
   return gulp.src("./scripts/**/*.js") // Gets all files ending with .scss
     .pipe(concat('site.min.js'))
-    .pipe(uglify())
+    .pipe(babel())
     .pipe(gulp.dest('./static/js'));
 });
 

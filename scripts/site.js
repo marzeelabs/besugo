@@ -2,7 +2,7 @@ $(function() {
 
   var breakMobile = 730; // viewport px breakpoint
 
-  fixedHeader = function() {
+  const fixedHeader = function() {
     var viewportWidth = $( window ).width(),
         fixedClass = 'navigation--fixed-top',
         $navElement = $(".navigation");
@@ -14,7 +14,7 @@ $(function() {
     }
   };
 
-  showLogo = function() {
+  const showLogo = function() {
     var viewportWidth = $( window ).width(),
         logovisibleClass = 'visible-logo',
         $logoElement = $(".navigation-logo");
@@ -90,5 +90,3 @@ function filtro() {
     }
   });
 }
-
-
