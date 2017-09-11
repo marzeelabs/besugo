@@ -261,5 +261,6 @@ var footerPreview = createClass({
 });
 
 CMS.registerPreviewTemplate("footer", footerPreview);
+CMS.registerPreviewTemplate("footer-pt", footerPreview);
 CMS.registerPreviewStyle("/css/app.css");
 CMS.registerPreviewStyle("https://fonts.googleapis.com/css?family=Roboto:500,700");

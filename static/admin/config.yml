@@ -67,6 +67,9 @@ collections: # A list of collections the CMS should be able to edit
   - name: "footer" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "EN Footer" # Used in the UI, ie.: "New Post"
     folder: "content/footer" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "en"
     create: false # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
       - label: "Content language"
@@ -77,7 +80,7 @@ collections: # A list of collections the CMS should be able to edit
         name: "copyright"
         widget: "text"
       - label: "Social Media"
-        name: "social_media"
+        name: "social"
         widget: "object"
         fields:
         - label: "Link Facebook"
@@ -149,6 +152,9 @@ collections: # A list of collections the CMS should be able to edit
   - name: "footer-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "PT Footer" # Used in the UI, ie.: "New Post"
     folder: "content/footer" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
     create: false # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
       - label: "Content language"
@@ -159,7 +165,7 @@ collections: # A list of collections the CMS should be able to edit
         name: "copyright"
         widget: "text"
       - label: "Social Media"
-        name: "social_media"
+        name: "social"
         widget: "object"
         fields:
         - label: "Link Facebook"
