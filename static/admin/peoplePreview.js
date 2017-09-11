@@ -393,12 +393,6 @@ var PeoplePreview = createClass({
 });
 
 CMS.registerPreviewTemplate("people", PeoplePreview);
+CMS.registerPreviewTemplate("people-pt", PeoplePreview);
 CMS.registerPreviewStyle("/css/app.css");
 CMS.registerPreviewStyle("https://fonts.googleapis.com/css?family=Muli:300,400,700");
-
-
-
-
-
-
-
