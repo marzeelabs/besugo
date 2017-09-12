@@ -1,3 +1,5 @@
+{{ range where $.Site.RegularPages "Section" "footer" }}
+
 <footer class="footer">
   <ul class="footer__menu">
     <li class="footer__menu-item"><a href="{{ "/" | relLangURL }}">home</a></li>
@@ -5,7 +7,7 @@
     <li class="footer__menu-item"><a href="{{ "/blog" | relLangURL }}">Blog</a></li>
   </ul>
   <ul class="footer__social-icons">
-    {{ range $icon, $link := .Site.Params.social }}
+    {{ range $icon, $link := .Params.social }}
     <li class="footer__social-icons__item">
       <a href="{{ $link }}" target="_blank">
         <svg>
@@ -24,7 +26,9 @@
       </svg>
     </a>
 
-    <p>&copy; 2017 {{ .Site.Title }}</p>
+    <p>{{ .Params.copyright }}</p>
   </div>
 
 </footer>
+
+{{ end }}

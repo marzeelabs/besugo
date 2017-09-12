@@ -1,10 +1,11 @@
-var PeoplePreview = createClass({
+var footerPreview = createClass({
   render: function() {
     var entry = this.props.entry;
 
-    var entryTitle = entry.getIn(['data', 'title']);
-    var entryImage = entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg';
-    var entryBody = this.props.widgetFor('body');
+    var entryCopyright = entry.getIn(['data', 'copyright']);
+    var entryFacebook = entry.getIn(['data', 'social', 'facebook']);
+    var entryInstagram = entry.getIn(['data', 'social', 'instagram']);
+    var entryTwitter = entry.getIn(['data', 'social', 'twitter']);
 
     return h(
       "div",
@@ -151,150 +152,13 @@ var PeoplePreview = createClass({
         )
       ),
       // end svg elements
-      h(
-        "header",
-        null,
-        h(
-          "div",
-          { "className": "navigation" },
-          h(
-            "div",
-            { "className": "navigation__mobile-menu__toggle" },
-            h("span", { "className": "navigation__mobile-menu__icon" })
-          ),
-          h(
-            "div",
-            { "className": "navigation-logo" },
-            h(
-              "a",
-              { href: "/", "className": "navigation-logo__svg" },
-              h(
-                "svg",
-                { "className": "navigation-logo__svg-minified" },
-                h("use", { href: "#logo-main" })
-              )
-            )
-          ),
-          h(
-            "ul",
-            { "className": "navigation__menu" },
-            h(
-              "li",
-              { "className": "navigation__menu-item" },
-              h(
-                "a",
-                { "className": "navigation__menu-link", href: "/" },
-                "Home"
-              )
-            ),
-            h(
-              "li",
-              { "className": "navigation__menu-item" },
-              h(
-                "a",
-                { "className": "navigation__menu-link is-hidden", href: "#" },
-                " Pages"
-              ),
-              h(
-                "ul",
-                { "className": "navigation__submenu" },
-                h(
-                  "li",
-                  { "className": "navigation__menu-item" },
-                  h(
-                    "a",
-                    { "className": "navigation__menu-link", href: "/pages/about" },
-                    "About"
-                  )
-                )
-              )
-            ),
-            h(
-              "li",
-              { "className": "navigation__menu-item is-active" },
-              h(
-                "a",
-                { "className": "navigation__menu-link", href: "/blog" },
-                "Blog"
-              )
-            )
-          )
-        )
-      ),
-      //people
-     h(
-        "div",
-        null,
-        h(
-          "div",
-          { className: "profile__header" },
-          h("img", { className: "profile__header__image-bg", src: entryImage })
-        ),
-        h(
-          "div",
-          { className: "profile__header-info" },
-          h(
-            "div",
-            { className: "profile__header-info__image__wrapper" },
-            h("img", { className: "profile__header-info__image", src: entryImage })
-          ),
-          h("h1", { className: "profile__header-info__title" },entryTitle),
-          h(
-            "ul",
-            { className: "profile__social-icons" },
-            h(
-              "li",
-              { className: "profile__social-icons__item" },
-              h(
-                "a",
-                { href: "#", target: "_blank" },
-                h(
-                  "svg",
-                  null,
-                  h("use", { href: "#facebook-icon" })
-                )
-              )
-            ),
-            h(
-              "li",
-              { className: "profile__social-icons__item" },
-              h(
-                "a",
-                { href: "#", target: "_blank" },
-                h(
-                  "svg",
-                  null,
-                  h("use", { href: "#instagram-icon" })
-                )
-              )
-            ),
-            h(
-              "li",
-              { className: "profile__social-icons__item" },
-              h(
-                "a",
-                { href: "#", target: "_blank" },
-                h(
-                  "svg",
-                  null,
-                  h("use", { href: "#twitter-icon" })
-                )
-              )
-            )
-          )
-        ),
-        h(
-          "section",
-          { className: "layout-container--inner" },
-          h("div", { className: "profile__bio-content" },
-            entryBody
-          )
-        )
-      ),
-      //people
+
+      //Footer
       h(
         "footer",
         { className: "footer" },
+
+        // Main links
         h(
           "ul",
           { className: "footer__menu" },
@@ -326,6 +190,8 @@ var PeoplePreview = createClass({
             )
           )
         ),
+
+        // Social Icons
         h(
           "ul",
           { className: "footer__social-icons" },
@@ -334,7 +200,7 @@ var PeoplePreview = createClass({
             { className: "footer__social-icons__item" },
             h(
               "a",
-              { href: "#", target: "_blank" },
+              { href: entryFacebook, target: "_blank" },
               h(
                 "svg",
                 null,
@@ -347,7 +213,7 @@ var PeoplePreview = createClass({
             { className: "footer__social-icons__item" },
             h(
               "a",
-              { href: "#", target: "_blank" },
+              { href: entryInstagram, target: "_blank" },
               h(
                 "svg",
                 null,
@@ -360,7 +226,7 @@ var PeoplePreview = createClass({
             { className: "footer__social-icons__item" },
             h(
               "a",
-              { href: "#", target: "_blank" },
+              { href: entryTwitter, target: "_blank" },
               h(
                 "svg",
                 null,
@@ -369,6 +235,8 @@ var PeoplePreview = createClass({
             )
           )
         ),
+
+        // Copyright
         h(
           "div",
           { className: "footer__copyright" },
@@ -384,15 +252,15 @@ var PeoplePreview = createClass({
           h(
             "p",
             null,
-            "\xA9 2017 Besugo"
+            entryCopyright
           )
         )
       )
-    );
+    )
   }
 });
 
-CMS.registerPreviewTemplate("people", PeoplePreview);
-CMS.registerPreviewTemplate("people-pt", PeoplePreview);
+CMS.registerPreviewTemplate("footer", footerPreview);
+CMS.registerPreviewTemplate("footer-pt", footerPreview);
 CMS.registerPreviewStyle("/css/app.css");
-CMS.registerPreviewStyle("https://fonts.googleapis.com/css?family=Muli:300,400,700");
+CMS.registerPreviewStyle("https://fonts.googleapis.com/css?family=Roboto:500,700");
