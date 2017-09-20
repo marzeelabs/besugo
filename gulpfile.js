@@ -7,7 +7,7 @@ var gulp = require('gulp'),
   exec = require('child_process').exec,
   babel = require("gulp-babel"),
   webpack = require("webpack-stream"),
-  jimp = require('gulp-jimp'),
+  responsive = require('gulp-responsive'),
   replace = require('gulp-replace');
 
 // Option objects for the tools used below
@@ -91,76 +91,78 @@ gulp.task('cms', function() {
   });
 });
 
-// Jimp variables
+// Image manipulation variables
+// gulp-responsive docs:
+//    https://github.com/mahnunchik/gulp-responsive/tree/master/examples
 var imgSrc          = './static/images/**/*.jpg',
     imgDest         = './public/images/',
     imgQuality      = 80,
     largeWidth      = 1400,
     regularWidth    = 820,
     mediumWidth     = 680,
-    smallWidth      = 460;
+    smallWidth      = 460,
+    // Do not enlarge the output image if the input image is already smaller than the desired dimensions.
+    withoutEnlargement = true;
 
 // Clean the image folder
-gulp.task('jimp-clean', function() {
+gulp.task('images-clean', function() {
   return exec('rm ' + imgDest + '*', {stdio: 'inherit'});
 });
 
 // Copy original image
-gulp.task('jimp-original', function() {
+gulp.task('images-original', function() {
   return gulp.src(imgSrc).pipe(gulp.dest(imgDest));
 });
 
-// Create large image
-gulp.task('jimp-large', function() {
-  return gulp.src(imgSrc).pipe(jimp({
-    '-large': {
-      resize: { width: largeWidth, height: jimp.AUTO },
-      quality: imgQuality
+gulp.task('images-responsive', function() {
+  return gulp.src(imgSrc).pipe(responsive(
+    {
+      '**/*.jpg': [
+        {
+          // Create small image
+          width: smallWidth,
+          rename: { suffix: '-small' },
+          withoutEnlargement
+        },
+        {
+          // Create medium image
+          width: mediumWidth,
+          rename: { suffix: '-medium' },
+          withoutEnlargement
+        },
+        {
+          // Create regular image
+          width: regularWidth,
+          rename: { suffix: '-regular' },
+          withoutEnlargement
+        },
+        {
+          // Create large image
+          width: largeWidth,
+          rename: { suffix: '-large' },
+          withoutEnlargement
+        }
+      ]
+    },
+    {
+      // Options for all images
+      silent: true,
+      quality: imgQuality,
+      errorOnEnlargement: false
     }
-  })).pipe(gulp.dest(imgDest));
-});
-
-// Create Regular image
-gulp.task('jimp-regular', function() {
-  // Regular image
-  return gulp.src(imgSrc).pipe(jimp({
-    '-regular': {
-      resize: { width: regularWidth, height: jimp.AUTO },
-      quality: imgQuality
-    }
-  })).pipe(gulp.dest(imgDest));
-});
-
-// Create Medium image
-gulp.task('jimp-medium', function() {
-  return gulp.src(imgSrc).pipe(jimp({
-    '-medium': {
-      resize: { width: mediumWidth, height: jimp.AUTO },
-      quality: imgQuality
-    }
-  })).pipe(gulp.dest(imgDest));
-});
-
-// Create Small image
-gulp.task('jimp-small', function() {
-  return gulp.src(imgSrc).pipe(jimp({
-    '-small': {
-      resize: { width: smallWidth, height: jimp.AUTO },
-      quality: imgQuality
-    }
-  })).pipe(gulp.dest(imgDest));
+  )).pipe(gulp.dest(imgDest));
 });
 
 /**
- * Create responsive images with JIMP
+ * Create responsive images with gulp-responsive
  *
  * We divide this into several tasks so we can have a callback
  * and make sure 'build' runs after it's finished.
  */
-gulp.task('jimp', function (callback) {
+gulp.task('images', function (callback) {
   runSequence(
-    'jimp-clean',
-    ['jimp-original','jimp-large', 'jimp-regular', 'jimp-medium', 'jimp-small'],
+    'images-clean',
+    ['images-original', 'images-responsive'],
     callback
   );
 });
@@ -174,7 +176,7 @@ gulp.task('watch', function(){
   gulp.watch('./scss_cms/**/*.scss', ['sass-cms']);
   gulp.watch('./scripts/site/**/*.js', ['scripts']);
   gulp.watch('./scripts/admin/**/*.js', ['scripts-admin']);
-  gulp.watch('./static/images/*', ['jimp']);
+  gulp.watch('./static/images/*', ['images']);
 });
 
 gulp.task('serve', function(callback){
@@ -214,7 +216,7 @@ gulp.task('build', function(callback) {
     ['sass', 'sass-cms', 'scripts', 'scripts-admin'],
     'compile',
     'cms',
-    'jimp',
+    'images',
     function(err) {
       if (err) {
         console.log('[ERROR] gulp build task failed', err);
@@ -230,7 +232,7 @@ gulp.task('build', function(callback) {
 gulp.task('default', function(callback){
   runSequence(
     ['sass', 'sass-cms', 'scripts', 'scripts-admin'],
-    ['serve','watch', 'cms', 'jimp'],
+    ['serve', 'watch', 'cms', 'images'],
     function(err) {
       if (err) {
         console.log('[ERROR] gulp task failed', err);
