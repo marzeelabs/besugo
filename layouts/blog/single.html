@@ -11,15 +11,16 @@
 <section class="layout-container--inner">
   {{ .Content }}
 
-
+   {{ range .Params.people }}
+      {{ range where (where $.Site.RegularPages "Section" "people") ".Title" .people }}
   <h1 class="profiles__title">{{ i18n "Author" | default "Author" }}</h1>
 
   <ul class="profiles__list">
-    {{ range .Params.people }}
-      {{ range where $.Site.RegularPages "Section" "people" }}
-        {{ .Render "li" }}
+
+        {{ .Render "li"}}
       {{ end }}
     {{ end}}
+
   </ul>
 
 </section>

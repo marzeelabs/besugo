@@ -238,7 +238,9 @@ var PeoplePreview = createClass({
             { className: "profile__header-info__image__wrapper" },
             h("img", { className: "profile__header-info__image", src: entryImage })
           ),
-          h("h1", { className: "profile__header-info__title" },entryTitle),
+          h("h1", { className: "profile__header-info__title" },
+            entryTitle
+          ),
           h(
             "ul",
             { className: "profile__social-icons" },

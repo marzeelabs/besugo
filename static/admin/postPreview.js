@@ -1,10 +1,12 @@
 var PostPreview = createClass({
   render: function() {
     var entry = this.props.entry;
+    var fieldsMetaData = this.props.fieldsMetaData;
 
     var entryTitle = entry.getIn(['data', 'title']);
     var entryImage = entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg';
     var entryBody = this.props.widgetFor('body');
+    var entryPeople = entry.getIn(['data', 'people']) || [];
 
     return h(
       "div",
@@ -237,8 +239,100 @@ var PostPreview = createClass({
       h(
         "section",
         { className: "layout-container--inner" },
-        entryBody
+        entryBody,
+        // People listing
+        h(
+          "ul",
+          {className: "profiles__list"},
+          entryPeople.map(function(person) {
+            const personData = fieldsMetaData.getIn(['people', person.get('people')]);
+            if (personData) {
+              return h(
+                "li",
+                { "className": "profile" },
+
+                h(
+                  "div",
+                  { "className": "profile__image__wrapper" },
+                  h(
+                    "a",
+                    { href: "#", target: "_self" },
+                    h("img", { "className": "profile__image", src: personData.get('image') })
+                  )
+                ),
+
+                h(
+                  "div",
+                  { "className": "profile__text__wrapper" },
+                  h(
+                    "a",
+                    { href: "#", target: "_self", "className": "profile__text-link" },
+                    h(
+                      "h3",
+                      { "className": "profile__text" },
+                      personData.get('title')
+                    )
+                  ),
+
+                  h(
+                    "p",
+                    { "className": "profile__text" },
+                    personData.get('body')
+                  ),
+                  //
+
+          h(
+            "ul",
+            { className: "profile__social-icons" },
+            h(
+              "li",
+              { className: "profile__social-icons__item" },
+              h(
+                "a",
+                { href: "#", target: "_blank" },
+                h(
+                  "svg",
+                  null,
+                  h("use", { href: "#facebook-icon" })
+                )
+              )
+            ),
+            h(
+              "li",
+              { className: "profile__social-icons__item" },
+              h(
+                "a",
+                { href: "#", target: "_blank" },
+                h(
+                  "svg",
+                  null,
+                  h("use", { href: "#instagram-icon" })
+                )
+              )
+            ),
+            h(
+              "li",
+              { className: "profile__social-icons__item" },
+              h(
+                "a",
+                { href: "#", target: "_blank" },
+                h(
+                  "svg",
+                  null,
+                  h("use", { href: "#twitter-icon" })
+                )
+              )
+            )
+          )
+                ),
+              );
+            }
+          })
+        )
+        // end people listing
       ),
+
+
       h(
         "footer",
         { className: "footer" },

@@ -13,9 +13,36 @@
       <h3 class="profile__text">{{ .Title }}</h3>
     </a>
 
-    <p class="profile__text">Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et.</p>
+    <p class="profile__text">
+   {{ .Content }}</p>
     <span class="profile__text">
-      {{ partial "profile__social-icons" . }}
+
+      {{/* partial "profile__social-icons" . */}}
+
+      <ul class="profile__social-icons">
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#facebook-icon"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#instagram-icon"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="profile__social-icons__item">
+          <a href="#" target="_blank">
+            <svg>
+              <use xlink:href="#twitter-icon"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+
     </span>
   </div>
 </li>
