@@ -14,6 +14,6 @@
 
 ## Activate Netlify CMS
 1. Set the correct repo and branch on the provided *static/admin/config.yml*
-2. Create a new Github application following [Netlify's instructions](https://www.netlify.com/docs/authentication-providers/#using-an-authentication-provider) - don't forget the `https://api.netlify.com/auth/done` callback URL.
+2. Create a new Github application following [Netlify's instructions](https://github.com/netlify/netlify-cms/blob/master/docs/quick-start.md) - don't forget the `https://api.netlify.com/auth/done` callback URL.
 3. Go to your Netlify dashboard, select your site, navigate to Access > Authentication Providers > Install Provider > Github and use the Client ID and Secret generated in step 2.
 4. Start using the CMS on **http://[your-website-url]/admin**
