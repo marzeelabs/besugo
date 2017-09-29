@@ -46,7 +46,7 @@
     "watch:cms": "chokidar 'public/admin/config.yml' -c 'yarn build:cms'",
     "hugo:build": "hugo && yarn build:cms",
     "hugo:serve": "hugo serve --renderToDisk -p $(node -p \"require('./package.json').config.port\")",
-    "asdf": "echo $HEAD",
+    "asdf": "echo \"$HEAD\"",
     "build": "npm-run-all -p asdf erase:* && npm-run-all -p build:* && yarn hugo:build",
     "start": "export SERVE=true && npm-run-all -p erase:* && npm-run-all -p build:* watch:* hugo:serve"
   },
