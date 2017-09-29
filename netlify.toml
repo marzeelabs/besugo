@@ -8,16 +8,19 @@
 # repository branch will inherit these settings.
 [context.production.environment]
   HUGO_VERSION = "0.27.1"
+  YARN_VERSION = "0.27.5_1"
 
 # Deploy Preview context: All Deploy Previews
 # will inherit these settings.
 [context.deploy-preview.environment]
   HUGO_VERSION = "0.27.1"
+  YARN_VERSION = "0.27.5_1"
 
 # Branch Deploy context: All Branch Deploys
 # will inherit these settings.
 [context.branch-deploy.environment]
   HUGO_VERSION = "0.27.1"
+  YARN_VERSION = "0.27.5_1"
 
 # Branch Deploy context: All deploys that are not in
 # an active Deploy Preview will inherit these settings.
