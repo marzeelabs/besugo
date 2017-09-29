@@ -2,7 +2,7 @@
 [build]
   base    = ""
   publish = "public"
-  command = "gulp build"
+  command = "yarn build"
 
 # Production context: All deploys to the main
 # repository branch will inherit these settings.

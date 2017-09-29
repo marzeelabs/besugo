@@ -1,29 +1,76 @@
 {
   "name": "MZ_Boilerplate",
   "version": "0.1.0",
-  "main": "gulpfile.js",
   "author": "Marzee Labs <info@marzeelabs.org>",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
+  "config": {
+    "port": 1313
+  },
+  "browserslist": [
+    "last 2 versions",
+    "last 4 ios_saf versions"
+  ],
+  "sass-config": {
+    "src": "static/images",
+    "dest": "public/images",
+    "quality": 80,
+    "sizes": [
+      {
+        "suffix": "-large",
+        "width": 1400
+      },
+      {
+        "suffix": "-regular",
+        "width": 820
+      },
+      {
+        "suffix": "-medium",
+        "width": 680
+      },
+      {
+        "suffix": "-small",
+        "width": 460
+      }
+    ]
+  },
+  "scripts": {
+    "erase:public": "rm -Rf ./public && mkdir ./public",
+    "erase:temp": "rm -Rf ./temp && mkdir ./temp",
+    "sass:scss-compile": "node-sass scss/ -o temp/css --include-path ./node_modules",
+    "sass:postcss": "postcss temp/css/*.css -d static/css --use autoprefixer --use cssnano",
+    "build:sass": "npm-run-all -p sass:*",
+    "build:cms": "CMS_BRANCH=$(git symbolic-ref --short -q HEAD) ; if [ \"$CMS_BRANCH\" == \"\" ] ; then CMS_BRANCH=$HEAD ; fi ; if [ \"$CMS_BRANCH\" == \"\" ] ; then CMS_BRANCH=\"develop\" ; fi ; replace-in-file \"<% CURRENT_BRANCH %>\" \"$CMS_BRANCH\" public/admin/config.yml",
+    "build:webpack": "webpack",
+    "build:sharp": "node scripts/sharp.js",
+    "watch:sass": "chokidar 'scss/**/*.scss' -c 'yarn build:sass'",
+    "watch:cms": "chokidar 'public/admin/config.yml' -c 'yarn build:cms'",
+    "hugo:build": "hugo && yarn build:cms",
+    "hugo:serve": "hugo serve --renderToDisk -p $(node -p \"require('./package.json').config.port\")",
+    "build": "npm-run-all -p erase:* && npm-run-all -p build:* && yarn hugo:build",
+    "start": "export SERVE=true && npm-run-all -p erase:* && npm-run-all -p build:* watch:* hugo:serve"
+  },
   "dependencies": {
-    "babel-cli": "^6.26.0",
+    "autoprefixer": "^7.1.4",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-minify": "^0.2.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-babel": "^7.0.0",
-    "gulp-cli": "^1.2.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-cssnano": "^2.1.1",
-    "gulp-replace": "^0.5.4",
-    "gulp-responsive": "^2.8.0",
-    "gulp-sass": "^2.3.2",
+    "chalk": "^2.1.0",
+    "chokidar": "^1.7.0",
+    "chokidar-cli": "^1.2.0",
+    "cssnano": "^3.10.0",
+    "glob": "^7.1.2",
     "jquery": "^3.2.1",
     "js-yaml": "^3.10.0",
+    "node-sass": "^4.5.3",
+    "npm-run-all": "^4.1.1",
+    "path": "^0.12.7",
+    "postcss-cli": "^4.1.1",
+    "replace-in-file": "^3.0.0-beta.2",
     "ritmo": "^0.2.0",
-    "run-sequence": "^1.2.1",
     "sass-mq": "^3.2.9",
+    "sharp": "^0.18.4",
     "slick-carousel": "^1.7.1",
     "susy": "^2.2.12",
-    "webpack-stream": "^4.0.0"
+    "webpack": "^3.6.0"
   }
 }
