@@ -39,15 +39,14 @@
     "sass:scss-compile": "node-sass scss/ -o temp/css --include-path ./node_modules",
     "sass:postcss": "postcss temp/css/*.css -d static/css --use autoprefixer --use cssnano",
     "build:sass": "npm-run-all -p sass:*",
-    "build:cms": "CMS_BRANCH=$(git symbolic-ref --short -q HEAD) ; if [ \"$CMS_BRANCH\" == \"\" ] ; then CMS_BRANCH=$HEAD ; fi ; if [ \"$CMS_BRANCH\" == \"\" ] ; then CMS_BRANCH=\"develop\" ; fi ; replace-in-file \"<% CURRENT_BRANCH %>\" \"$CMS_BRANCH\" public/admin/config.yml",
+    "build:cms": "CMS_BRANCH=$(git symbolic-ref --short -q HEAD) ; if [ \"$CMS_BRANCH\" == \"\" ] ; then CMS_BRANCH=\"$HEAD\" ; fi ; if [ \"$CMS_BRANCH\" == \"\" ] ; then CMS_BRANCH=\"develop\" ; fi ; replace-in-file \"<% CURRENT_BRANCH %>\" \"$CMS_BRANCH\" public/admin/config.yml",
     "build:webpack": "webpack",
     "build:sharp": "node scripts/sharp.js",
     "watch:sass": "chokidar 'scss/**/*.scss' -c 'yarn build:sass'",
     "watch:cms": "chokidar 'public/admin/config.yml' -c 'yarn build:cms'",
     "hugo:build": "hugo && yarn build:cms",
     "hugo:serve": "hugo serve --renderToDisk -p $(node -p \"require('./package.json').config.port\")",
-    "asdf": "echo \"$HEAD\"",
-    "build": "npm-run-all -p asdf erase:* && npm-run-all -p build:* && yarn hugo:build",
+    "build": "npm-run-all -p erase:* && npm-run-all -p build:* && yarn hugo:build",
     "start": "export SERVE=true && npm-run-all -p erase:* && npm-run-all -p build:* watch:* hugo:serve"
   },
   "dependencies": {
