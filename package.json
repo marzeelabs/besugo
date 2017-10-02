@@ -68,7 +68,6 @@
     "npm-run-all": "^4.1.1",
     "path": "^0.12.7",
     "postcss-cli": "^4.1.1",
-    "replace-in-file": "^3.0.0-beta.2",
     "ritmo": "^0.2.0",
     "sass-mq": "^3.2.9",
     "sharp": "^0.18.4",
