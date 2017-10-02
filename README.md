@@ -6,7 +6,7 @@
 
 ## Install and Run
 1. Clone project locally
-2. If upgrading an existing project from npm, or whenever you need to rebuild dependencies, run ```yarn upgrade```; otherwise grab dependencies normally with ```yarn install```;
+2. If upgrading an existing project from npm, or whenever you need to rebuild dependencies, run ```yarn rebuild``` (shortcut to ```rm -rf node_modules & yarn install``` that I wrote to myself and left in); otherwise grab dependencies normally with ```yarn install```;
 3. It's recommended to change the default port in ```package.json```, to avoid having to worry about other Besugo projects being served on the same port.
 4. ```yarn start``` task serves the site locally and starts listening for changes
 
