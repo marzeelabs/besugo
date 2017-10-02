@@ -34,8 +34,12 @@ const jsWebpacks = {
     new webpack.optimize.UglifyJsPlugin()
   ]
 };
-console.log("git:"+exec("$(git symbolic-ref --short -q HEAD)"));
-console.log("head:"+process.env.$HEAD);
+try {
+  console.log("git:"+exec("git symbolic-ref --short -q HEAD"));
+} catch(ex) { console.log('caught:'); console.log(ex); }
+try {
+  console.log("head:"+process.env.$HEAD);
+} catch(ex) { console.log('caught:'); console.log(ex); }
 module.exports = [
   Object.assign({
     // Here the application starts executing and webpack starts bundling
