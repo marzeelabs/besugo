@@ -1577,6 +1577,10 @@ fill-range@^2.1.0:
     repeat-element "^1.1.2"
     repeat-string "^1.5.2"
 
+find-and-replace@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/find-and-replace/-/find-and-replace-1.0.2.tgz#d5bf2090f292f54906a83c4925de381773fe171f"
+
 find-cache-dir@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-1.0.0.tgz#9288e3e9e3cc3748717d39eade17cf71fc30ee6f"
