@@ -47,7 +47,8 @@
     "hugo:build": "hugo",
     "hugo:serve": "hugo serve --renderToDisk -p $(node -p \"require('./package.json').config.port\")",
     "build": "npm-run-all -p erase:* && npm-run-all -p build:* && yarn hugo:build",
-    "start": "export SERVE=true && npm-run-all -p erase:* && npm-run-all -p build:* watch:* hugo:serve"
+    "start": "export SERVE=true && npm-run-all -p erase:* && npm-run-all -p build:* watch:* hugo:serve",
+    "rebuild": "rm -rf node_modules & yarn install"
   },
   "dependencies": {
     "autoprefixer": "^7.1.4",
