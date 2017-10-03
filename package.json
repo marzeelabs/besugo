@@ -10,7 +10,7 @@
     "last 2 versions",
     "last 4 ios_saf versions"
   ],
-  "sass-config": {
+  "sharp-config": {
     "src": "static/images",
     "dest": "public/images",
     "quality": 80,

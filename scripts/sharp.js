@@ -6,7 +6,7 @@ const glob = require('glob');
 const chalk = require('chalk');
 const chokidar = require('chokidar');
 
-if(!packageJson["sass-config"]) {
+if(!packageJson["sharp-config"]) {
   throw new Error(chalk.red('No configuration found for sass loader'));
 }
 
@@ -14,7 +14,7 @@ function handleError(err) {
   console.log(chalk.red(err));
 }
 
-const config = packageJson["sass-config"];
+const config = packageJson["sharp-config"];
 
 const src = config.src;
 const dest = config.dest;
