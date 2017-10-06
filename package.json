@@ -64,7 +64,6 @@
     "find-and-replace": "^1.0.2",
     "glob": "^7.1.2",
     "jquery": "^3.2.1",
-    "js-yaml": "^3.10.0",
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.1",
     "path": "^0.12.7",

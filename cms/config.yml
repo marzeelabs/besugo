@@ -10,7 +10,7 @@ collections: # A list of collections the CMS should be able to edit
 
 # EN collections
   - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "EN Blog Post" # Used in the UI, ie.: "New Post"
+    label: "EN Blog Posts" # Used in the UI, ie.: "New Post"
     folder: "content/blog" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
@@ -95,7 +95,7 @@ collections: # A list of collections the CMS should be able to edit
 
 # PT collections
   - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "PT Blog Post" # Used in the UI, ie.: "New Post"
+    label: "PT Blog Posts" # Used in the UI, ie.: "New Post"
     folder: "content/blog" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"

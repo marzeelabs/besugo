@@ -22,8 +22,8 @@ module.exports = [
   Object.assign({
     // Here the application starts executing and webpack starts bundling
     entry: {
-      js: glob.sync("./js/site/**/*.js"),
-      admin: glob.sync("./js/admin/**/*.js")
+      js: glob.sync("./js/site/**/*.js")
+      //admin: glob.sync("./js/admin/**/*.js")
     },
 
     // options related to how webpack emits results
