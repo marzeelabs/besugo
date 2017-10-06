@@ -1,28 +1,21 @@
 {{ define "main" }}
 
-<div class="blog-post__header" style="background-image:url({{ .Params.Image }})">
-
-  <div class="blog-post__header-title__wrapper">
-    <h1 class="blog-post__header-title">{{ .Title }}</h1>
-  </div>
-
-</div>
-
-<section class="layout-container--inner">
-  {{ .Content }}
-
-
-  <h1 class="profiles__title">{{ i18n "Author" | default "Author" }}</h1>
-
-  <ul class="profiles__list">
-    {{ range .Params.people }}
-      {{ range where $.Site.RegularPages "Section" "people" }}
-        {{ .Render "li" }}
-      {{ end }}
-    {{ end}}
-  </ul>
-
-</section>
-
+<BlogPost
+  author="{{ i18n "Author" | default "Author" }}"
+  image="{{ .Params.Image }}"
+  title="{{ .Title }}"
+  content="{{ htmlEscape .Content }}"
+>
+{{ range .Params.people }}
+  {{ range where (where $.Site.RegularPages "Section" "people") ".Params.title" .person }}
+    <BlogPostAuthor
+      link="{{ .URL }}"
+      image="{{ .Params.Image }}"
+      title="{{ .Title }}"
+      summary="{{ .Summary }}"
+    ></BlogPostAuthor>
+  {{ end }}
+{{ end }}
+</BlogPost>
 
 {{ end }}

@@ -1,34 +1,15 @@
 {{ range where $.Site.RegularPages "Section" "footer" }}
 
-<footer class="footer">
-  <ul class="footer__menu">
-    <li class="footer__menu-item"><a href="{{ "/" | relLangURL }}">home</a></li>
-    <li class="footer__menu-item"><a href="{{ "/pages/about" | relLangURL }}">About</a></li>
-    <li class="footer__menu-item"><a href="{{ "/blog" | relLangURL }}">Blog</a></li>
-  </ul>
-  <ul class="footer__social-icons">
-    {{ range $icon, $link := .Params.social }}
-    <li class="footer__social-icons__item">
-      <a href="{{ $link }}" target="_blank">
-        <svg>
-          <use xlink:href="#{{ $icon }}-icon"></use>
-        </svg>
-      </a>
-    </li>
-    {{ end }}
-  </ul>
-
-  <div class="footer__copyright">
-
-    <a href="/" class="footer__copyright-logo">
-      <svg>
-        <use xlink:href="#logo-main"></use>
-      </svg>
-    </a>
-
-    <p>{{ .Params.copyright }}</p>
-  </div>
-
-</footer>
+<EndFooter hidden="true"
+  home-url="{{ "/" | relLangURL }}"
+  about-url="{{ "/pages/about" | relLangURL }}"
+  blog-url="{{ "/blog" | relLangURL }}"
+  copyright={{ .Params.copyright }}
+>
+{{ range $icon, $link := .Params.social }}
+  <Param name="{{ $icon }}" value="{{ $link }}"></Param>
+{{ end }}
+ola
+</EndFooter>
 
 {{ end }}

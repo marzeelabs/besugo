@@ -10,4 +10,5 @@ Thumbs.db
 static/css/app.css
 static/css/cms-override.css
 static/js/main.min.js
+static/js/app.min.js
 static/admin/main.min.js
