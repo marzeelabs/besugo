@@ -23,8 +23,11 @@ class PersonCard extends BesugoComponent {
     }
 
     // Trim the summary to fit in a smaller card.
-    if(data.Summary.length > 144) {
-      data.Summary = data.Summary.substring(0, 144) + '...';
+    if(data.Summary) {
+      data.Summary = data.Summary.trim();
+      if(data.Summary.length > 144) {
+        data.Summary = data.Summary.substring(0, 144) + '...';
+      }
     }
 
     return data;

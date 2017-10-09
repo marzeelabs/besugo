@@ -23,13 +23,22 @@ class BlogPost extends BesugoComponent {
     if(this.isPreview()) {
       const entry = this.props.entry;
 
-      // TODO preview authors with actual person cards in place
-
       return {
         author: "Author",
         title: entry.getIn(['data', 'title']),
         content: this.props.widgetFor('body'),
-        image: entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg'
+        image: entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg',
+        people: entry.getIn(['data', 'people']).map((person) => {
+          const personData = this.props.fieldsMetaData.getIn(['people', person.getIn(['person'])]);
+          return personData && {
+            link: '#',
+            Title: personData.getIn(['title']),
+            Summary: personData.getIn(['body']),
+            Params: {
+              image: personData.getIn(['image'])
+            }
+          }
+        })
       };
     }
 
@@ -65,10 +74,9 @@ class BlogPost extends BesugoComponent {
   buildPeople(data) {
     let p = 0;
     return data.people && data.people.map(function(person) {
-      return (
+      return person && (
         <PersonCard
           key={ "author-" + (++p) }
-          link={ person.URL }
           { ...person }
         />
       );
