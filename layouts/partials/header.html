@@ -1,45 +1,15 @@
-<header>
-
-
-  <div class="navigation">
-
-    <div class="navigation__mobile-menu__toggle">
-      <span class="navigation__mobile-menu__icon"></span>
-    </div>
-
-    <div class="navigation-logo">
-      <a href="/" class="navigation-logo__svg">
-        <svg class="navigation-logo__svg-minified">
-          <use xlink:href="#logo-main"></use>
-        </svg>
-      </a>
-    </div>
-
-    <ul class="navigation__menu">
-
-      <li class="navigation__menu-item{{ if .IsHome }} is-active{{ end }}">
-        <a class="navigation__menu-link" href="{{ "/" | relLangURL }}">{{ i18n "Home" | default "Home" }}</a>
-      </li>
-
-      <li class="navigation__menu-item">
-        <a class="navigation__menu-link is-hidden">{{ i18n "Pages" | default "Pages" }}</a>
-
-        <ul class="navigation__submenu">
-          <li class="navigation__menu-item{{ if (eq (.URL | relLangURL) ("/pages/about/" | relLangURL)) }} is-active{{ end }}">
-            <a class="navigation__menu-link" href="{{ "/pages/about" | relLangURL }}">{{ i18n "About" | default "About" }}</a>
-          </li>
-          <li class="navigation__menu-item{{ if (eq .Section "people") }} is-active{{ end }}">
-            <a class="navigation__menu-link" href="{{ "/people" | relLangURL }}">{{ i18n "People" | default "People" }}</a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="navigation__menu-item{{ if (eq .Section "blog") }} is-active{{ end }}">
-        <a class="navigation__menu-link" href="{{ "/blog" | relLangURL }}">{{ i18n "Blog" | default "Blog" }}</a>
-      </li>
-
-    </ul>
-
-  </div>
-
-</header>
+<TopHeader
+  home-active="{{ .IsHome }}"
+  home-url="{{ "/" | relLangURL }}"
+  home-label="{{ i18n "Home" | default "Home" }}"
+  pages-label="{{ i18n "Pages" | default "Pages" }}"
+  about-active="{{ eq (.URL | relLangURL) ("/pages/about/" | relLangURL) }}"
+  about-url="{{ "/pages/about" | relLangURL }}"
+  about-label="{{ i18n "About" | default "About" }}"
+  people-active="{{ eq .Section "people" }}"
+  people-url="{{ "/people" | relLangURL }}"
+  people-label="{{ i18n "People" | default "People" }}"
+  blog-active="{{ eq .Section "blog" }}"
+  blog-url="{{ "/blog" | relLangURL }}"
+  blog-label="{{ i18n "Blog" | default "Blog" }}"
+></TopHeader>

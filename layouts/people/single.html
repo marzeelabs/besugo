@@ -1,25 +1,7 @@
 {{ define "main" }}
 
-<div class="profile__header">
-  <img class="profile__header__image-bg" src="{{ .Params.Image }}">
-</div>
+<Person>
+  {{ jsonify . }}
+</Person>
 
-<div class="profile__header-info">
-  <div class="profile__header-info__image__wrapper">
-     <img class="profile__header-info__image" src="{{ .Params.Image }}">
-  </div>
-
-  <h1 class="profile__header-info__title">{{ .Title }}</h1>
-
-  {{ partial "profile__social-icons" . }}
-
-</div>
-
-<section class="layout-container--inner">
-
-  <div class="profile__bio-content">
-    {{ .Content }}
-  </div>
-
-</section>
 {{ end }}
