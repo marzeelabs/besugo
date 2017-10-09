@@ -7,6 +7,7 @@
   text-transform: uppercase;
   position: relative;
   background-color: palette(grey);
+  transition: background ease 0.3s;
 
   @include mq($until: break-medium) {
     position: fixed;
@@ -25,10 +26,11 @@
     max-height: ritmo(16);
     padding-bottom: ritmo(15);
     text-align: center;
-  }
 
-  &.navigation--fixed-top {
-    transition: background ease 0.3s;
+    &.navigation--fixed-top {
+      // Uncomment and customize as necessary
+      background-color: palette(black);
+    }
   }
 }
 
@@ -203,6 +205,10 @@
     opacity: 0;
     top: 20px;
     left: 10px;
+
+    &.visible-logo {
+      opacity: 1;
+    }
   }
 
   .navigation-logo__svg {
@@ -264,8 +270,4 @@
     width: 80px;
     line-height: 14px;
   }
-}
-
-.visible-logo {
-  opacity: 1;
 }

@@ -88,42 +88,26 @@
 
   <section class="styleguide__section-component">
 
-    <div class="slider__wrapper">
-
-
-      <div class="teaser__wrapper">
-
-        <div class="teaser__text">
-          <p class="teaser__text-content">First Slide</p>
-          <p class="teaser__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
-        </div>
-
-        <img class="teaser__element" src="/images/example.jpg">
-
-      </div> <!-- teaser__wrapper -->
-
-      <div class="teaser__wrapper">
-
-        <div class="teaser__text">
-          <p class="teaser__text-content">Second Slide </p>
-          <p class="teaser__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
-        </div>
-
-        <img class="teaser__element" src="/images/example.jpg">
-
-      </div> <!-- teaser__wrapper -->
-
-      <div class="teaser__wrapper">
-
-        <div class="teaser__text">
-          <p class="teaser__text-content">Third Slide</p>
-          <p class="teaser__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
-        </div>
-
-        <img class="teaser__element" src="/images/example.jpg">
-
-      </div> <!-- teaser__wrapper -->
-    </div>
+    <SlideShow>
+      <SlideShowSlide
+        title="First Slide"
+        image="/images/example.jpg"
+        link-label="Link"
+        link-url="#"
+      ></SlideShowSlide>
+      <SlideShowSlide
+        title="Second Slide"
+        image="/images/example.jpg"
+        link-label="Link"
+        link-url="#"
+      ></SlideShowSlide>
+      <SlideShowSlide
+        title="Third Slide"
+        image="/images/example.jpg"
+        link-label="Link"
+        link-url="#"
+      ></SlideShowSlide>
+    </SlideShow>
 
   </section>
 

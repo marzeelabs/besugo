@@ -1,5 +1,6 @@
 import React from 'react';
-import BesugoComponent from 'Besugo';
+import BesugoComponent, { frameView } from 'Besugo';
+import $ from 'jquery';
 
 class TopHeader extends BesugoComponent {
   constructor(props) {
@@ -46,13 +47,13 @@ class TopHeader extends BesugoComponent {
 
     return (
       <header>
-        <div className="navigation">
+        <div className="navigation" ref={(div) => { this.domNavigation = div; }}>
 
-          <div className="navigation__mobile-menu__toggle">
+          <div className="navigation__mobile-menu__toggle" ref={(div) => { this.domMenuToggle = div; }}>
             <span className="navigation__mobile-menu__icon"></span>
           </div>
 
-          <div className="navigation-logo">
+          <div className="navigation-logo" ref={(div) => { this.domLogo = div; }}>
             <a href="/" className="navigation-logo__svg">
               <svg className="navigation-logo__svg-minified">
                 <use href="#logo-main"></use>
@@ -88,6 +89,76 @@ class TopHeader extends BesugoComponent {
         </div>
       </header>
     );
+  }
+
+  componentWillUnmount() {
+    // We need to remove the listeners on unmount because while the components' DOM tree is rebuilt,
+    // the document itself stays, otherwise we'd end up with multiple listeners, which would be useless
+    // (and eventually resource-consuming).
+    this.setListeners(false);
+  }
+
+  componentDidMount() {
+    this.setListeners(true);
+  }
+
+  setListeners(mounted) {
+    const method = (mounted) ? 'addEventListener' : 'removeEventListener';
+    const win = frameView();
+
+    win[method]("resize", this);
+
+    // We can only catch these in the capture phase in the iframe from the CMS preview.
+    win[method]("scroll", this, (typeof(CMS) !== 'undefined'));
+
+    // Toggle mobile navigation
+    if(this.domMenuToggle) {
+      this.domMenuToggle[method]('click', this);
+    }
+
+    // Force close mobile navigation when clicking anywhere (except the toggle button itself)
+    win.document[method]('mousedown', this);
+    win.document[method]('touchstart', this);
+  }
+
+  handleEvent(e) {
+    switch(e.type) {
+      case 'scroll':
+      case 'resize': {
+        const scrollTop = $(frameView()).scrollTop();
+
+        // fixed header color change
+        this.toggleClass(this.domNavigation, 'navigation--fixed-top', scrollTop > 1);
+
+        // show logo
+        this.toggleClass(this.domLogo, 'visible-logo', scrollTop > 150);
+
+        break;
+      }
+
+      case 'click':
+        $(this.domNavigation).toggleClass('is-open');
+        break;
+
+      case 'mousedown':
+      case 'touchstart':
+        if(!$(e.target).closest(".navigation").length) {
+          $(this.domNavigation).removeClass('is-open');
+        }
+        break;
+
+      default: break;
+    }
+  }
+
+  toggleClass(node, name, toggle) {
+    if(node) {
+      if(toggle) {
+        $(node).addClass(name);
+      } else {
+        $(node).removeClass(name);
+      }
+    }
   }
 };
 
