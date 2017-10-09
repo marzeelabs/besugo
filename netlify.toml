@@ -2,22 +2,25 @@
 [build]
   base    = ""
   publish = "public"
-  command = "gulp build"
+  command = "yarn build"
 
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production.environment]
   HUGO_VERSION = "0.27.1"
+  YARN_VERSION = "0.27.5"
 
 # Deploy Preview context: All Deploy Previews
 # will inherit these settings.
 [context.deploy-preview.environment]
   HUGO_VERSION = "0.27.1"
+  YARN_VERSION = "0.27.5"
 
 # Branch Deploy context: All Branch Deploys
 # will inherit these settings.
 [context.branch-deploy.environment]
   HUGO_VERSION = "0.27.1"
+  YARN_VERSION = "0.27.5"
 
 # Branch Deploy context: All deploys that are not in
 # an active Deploy Preview will inherit these settings.

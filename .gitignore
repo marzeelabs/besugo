@@ -1,10 +1,13 @@
 public
 node_modules
+temp/
 npm-debug.log
+yarn-error.log
 .sass-cache
 Thumbs.db
 .DS_Store
 !.gitkeep
 static/css/app.css
-static/js/site.min.js
-static/admin/admin.min.js
+static/css/cms-override.css
+static/js/main.min.js
+static/admin/main.min.js
