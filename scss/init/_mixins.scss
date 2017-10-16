@@ -10,17 +10,6 @@
   }
 }
 
-// Transparency
-@mixin transparent($color, $alpha) {
-  $rgba: rgba($color, $alpha);
-  $ie-hex-str: ie-hex-str($rgba);
-  background-color: transparent;
-  background-color: $rgba;
-  zoom: 1;
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$ie-hex-str}',endColorstr='#{$ie-hex-str}');
-}
-
-
 // Makes an element visually hidden, but accessible.
 // @see http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
 @mixin element-invisible {
@@ -50,15 +39,6 @@
   }
 }
 
-// This basic method is preferred for the usual case, when positioned
-// content will not show outside the bounds of the container.
-//
-// Recommendations include using this in conjunction with a width.
-// Credit: [quirksmode.org](http://www.quirksmode.org/blog/archives/2005/03/clearing_floats.html)
-@mixin clearfix {
-  overflow: hidden;
-}
-
 // This is an updated version of the PIE clearfix method that reduces the amount of CSS output.
 // If you need to support Firefox before 3.5 you need to use `legacy-pie-clearfix` instead.
 //
@@ -68,18 +48,5 @@
     content: "";
     display: table;
     clear: both;
-  }
-}
-
-// Set `$inline-block-alignment` to `none` or `false` to disable the output
-// of a vertical-align property in the inline-block mixin.
-// Or set it to a legal value for `vertical-align` to change the default.
-$inline-block-alignment: middle !default;
-
-// Provides a cross-browser method to implement `display: inline-block;`
-@mixin inline-block($alignment: $inline-block-alignment) {
-  display: inline-block;
-  @if $alignment and $alignment != none {
-    vertical-align: $alignment;
   }
 }

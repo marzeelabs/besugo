@@ -1,11 +1,11 @@
-.blog-post__header{
-  @extend .page__header;
+.blog-post__header {
+  @extend %page__header;
 }
 
 .blog-post__header-title__wrapper {
-  @extend .page__header-title__wrapper;
+  @extend %page__header-title__wrapper;
 }
 
 .blog-post__header-title {
-  @extend .page__header-title;
+  @extend %page__header-title;
 }

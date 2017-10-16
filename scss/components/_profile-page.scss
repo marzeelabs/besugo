@@ -1,5 +1,5 @@
 .profile__header{
-  @extend .page__header;
+  @extend %page__header;
   background-color: palette(black);
   z-index: 1;
   display: none;
@@ -60,7 +60,7 @@
 }
 
 .profile__header-info__title {
-  @extend .page__title;
+  @extend %page__title;
 }
 
 .profile__bio-content {
