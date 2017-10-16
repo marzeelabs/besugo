@@ -1,9 +1,9 @@
 .profiles__title {
-  @extend .page__title;
+  @extend %page__title;
 }
 
 .profiles__text-intro {
-  @extend .page__text-intro;
+  @extend %page__text-intro;
 }
 
 .profiles__list {

@@ -132,7 +132,6 @@
   }
 }
 
-
 .navigation__mobile-menu__icon {
   display: block;
   position: absolute;
@@ -143,7 +142,8 @@
   transition: rotate ease 1s;
   background-color: palette(white);
 
-  &:before, &:after {
+  &:before,
+  &:after {
     content: "";
     display: block;
     position: absolute;
@@ -192,7 +192,7 @@
 
 .navigation-logo {
   position: absolute;
-  width: 300px; /* value to acommodate text*/
+  max-width: 300px;
   height: 43px;
   top: 8px;
   left: 0;
@@ -241,29 +241,6 @@
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.navigation-logo__svg-text {
-  display: block;
-  color: palette(white);
-  text-align: left;
-  text-transform: none;
-  @include ritmo-font-size(11px);
-  position: absolute;
-  top: 50%;
-  left: 60px;
-  -webkit-transform: translate3d(0, -50%, 0);
-  transform: translate3d(0, -50%, 0);
-  font-weight: 700;
-
-  @include mq($from: break-extra-small) {
-    @include ritmo-font-size(13px);
-  }
-
-  @include mq($from: break-medium) {
-    width: 80px;
-    line-height: 14px;
-  }
 }
 
 .visible-logo {
