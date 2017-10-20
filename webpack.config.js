@@ -7,7 +7,7 @@ const webpack = require("webpack");
 
 const allWebpacks = {
   // Watch for changes and rebuild output files as necessary
-  watch: process.env.SERVE === 'true',
+  watch: process.env.NODE_ENV === 'development',
 
   // additional plugins
   plugins: [
