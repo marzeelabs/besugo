@@ -1,11 +1,10 @@
 ---
 i18nlanguage: en
-title: Blog post title 3 (updated)
+title: Blog post title 3
 image: /images/uploads/example.jpg
 people:
   - person: Name of the person 1
   - person: Name of the person 4
-  - person: Name of the person 5
 ---
 # Header 1
 
@@ -13,7 +12,7 @@ people:
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasauris dignissim, nisl non tempor tincidunt, tortor tellus porta dui, quis pellentesque ligula arcu id ex. Proin dictum risus vel tristique dignissim. Integer iaculis tortor ut magna suscipit, in suscipit risus pharetra. Aenean neque ante, varius dictum laoreet ut, suscipit a ante.
 
-**Bold** - _Italic_ - _**Both**_ - [Link](http://github.com)
+**Bold** - _Italic_ - **_Both_** - [Link](http://github.com)
 
 * bullet a
 * bullet b
@@ -29,4 +28,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasauris dignissim, ni
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus et tincidunt odio, ut semper dolor. Etiam at massa vitae enim tempus luctus in hendrerit eros. Vivamus ornare, nulla a vestibulum lacinia, nisl velit pharetra nunc, sed malesuada erat nibh eu purus.
 ```
 
-> Maurissss dignissim, nisl non tempor tincidunt, tortor tellus porta dui, quis pellentesque ligula arcu id ex. Proin dictum risus vel tristique dignissim. Integer iaculis tortor ut magna suscipit, in suscipit risus pharetra. Aenean neque ante, varius dictum laoreet ut, suscipit a ante.
+> Mauris dignissim, nisl non tempor tincidunt, tortor tellus porta dui, quis pellentesque ligula arcu id ex. Proin dictum risus vel tristique dignissim. Integer iaculis tortor ut magna suscipit, in suscipit risus pharetra. Aenean neque ante, varius dictum laoreet ut, suscipit a ante.
