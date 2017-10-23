@@ -1,8 +1,11 @@
 const exec = require('child_process').execSync;
+const path = require("path");
 const fs = require('fs');
 const far = require('find-and-replace');
 
-const configDir = "./public/admin";
+require('toml-require').install();
+const netlifyToml = require("../netlify.toml");
+const configDir = path.resolve(__dirname, "../" + netlifyToml.build.publish + "/admin");
 
 let branch;
 try {
