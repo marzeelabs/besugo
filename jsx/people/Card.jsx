@@ -19,6 +19,12 @@ export default class PersonCard extends BesugoComponent {
     Object.assign(props, jsondata);
   }
 
+  static buildContainer(parserUtils) {
+    const container = parserUtils.createNode('li');
+    parserUtils.setAttribute(container, 'class', 'profile');
+    return container;
+  }
+
   getData() {
     const data = Object.assign({}, this.props);
 
@@ -37,7 +43,7 @@ export default class PersonCard extends BesugoComponent {
     const data = this.getData();
 
     return (
-      <li className="profile">
+      <div className="profile__wrapper">
         <div className="profile__image__wrapper">
           <a href={ data.link } target="_self">
             <img className="profile__image" src={ data.Params.image } />
@@ -55,7 +61,7 @@ export default class PersonCard extends BesugoComponent {
             <SocialIcons section="profile" { ...data } />
           </span>
         </div>
-      </li>
+      </div>
     );
   }
 };

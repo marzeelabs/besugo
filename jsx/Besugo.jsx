@@ -49,7 +49,7 @@ export default class BesugoComponent extends React.Component {
 
     // Otherwise we're in the main site, so we should build all the necessary components as individual parts of the page
     else if(config.tag) {
-      const nodes = document.querySelectorAll('div[besugo-component="'+config.tag+'"]');
+      const nodes = document.querySelectorAll('[besugo-component="'+config.tag+'"]');
       nodes.forEach(function(node) {
         // Send the node data into the component so that it knows what to build
         const props = Comp.getPropsFromPlaceholder(node);
@@ -94,7 +94,7 @@ export default class BesugoComponent extends React.Component {
                     // Replace the placeholder node with a normal div container for our component;
                     // we need one so that later during hydrate React knows what it's doing, but we don't use
                     // our original placeholders form now on because they're not exactly standard.
-                    const container = parserUtils.createNode('div');
+                    const container = Comp.buildContainer(parserUtils);
                     parserUtils.setAttribute(container, 'besugo-component', config.tag);
                     parserUtils.setAttribute(container, 'besugo-props', JSON.stringify(props));
                     parserUtils.replace(node, container);
@@ -214,5 +214,8 @@ export default class BesugoComponent extends React.Component {
   // for example any info contained within the placeholder's children and/or their contents as stringified JSON.
   static extraProps() {}
 
+  // What form should the component's container take; by default this returns a simple div.
+  static buildContainer(parserUtils) {
+    return parserUtils.createNode('div');
   }
 }
