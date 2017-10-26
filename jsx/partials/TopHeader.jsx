@@ -1,5 +1,5 @@
 import React from 'react';
-import BesugoComponent, { frameView } from 'Besugo';
+import BesugoComponent from 'Besugo';
 import $ from 'jquery';
 
 export default class TopHeader extends BesugoComponent {
@@ -104,7 +104,7 @@ export default class TopHeader extends BesugoComponent {
 
   setListeners(mounted) {
     const method = (mounted) ? 'addEventListener' : 'removeEventListener';
-    const win = frameView();
+    const win = this.view();
 
     win[method]("resize", this);
 
@@ -125,7 +125,7 @@ export default class TopHeader extends BesugoComponent {
     switch(e.type) {
       case 'scroll':
       case 'resize': {
-        const scrollTop = $(frameView()).scrollTop();
+        const scrollTop = $(this.view()).scrollTop();
 
         // fixed header color change
         this.toggleClass(this.domNavigation, 'navigation--fixed-top', scrollTop > 1);

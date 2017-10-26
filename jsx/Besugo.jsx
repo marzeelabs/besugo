@@ -8,6 +8,8 @@ export default class BesugoComponent extends React.Component {
     super(props);
   }
 
+  // Static methods, for internal use only. Likely irrelevant to building individual components.
+
   static initialize() {
     const Comp = this;
     const config = this.config;
@@ -127,28 +129,6 @@ export default class BesugoComponent extends React.Component {
     }
   }
 
-  static get config() { return {}; }
-
-  isPreview() {
-    const config = this.constructor.config;
-    try {
-      return  config
-              && config.categories
-              && this.props.collection
-              && config.categories.indexOf(this.props.collection.getIn(['name'])) !== -1;
-    }
-    catch(ex) {
-      return false;
-    }
-  }
-
-  render() {
-    if(this.isPreview()) {
-      return this.renderPreview();
-    }
-    return this.renderBlock();
-  }
-
   // We filter all the node objects in the tree into a flat array,
   // just like a document.querySelectorAll(nodeName) or $(document).find(nodeName) would do.
   // Except these objects don't have attribute methods, so instead of having a separate routine,
@@ -188,16 +168,51 @@ export default class BesugoComponent extends React.Component {
     return props;
   }
 
-  // Placeholder methods that no-op unless specific components override them
-  static extraProps() {}
-}
+  // Non-static methods
 
-// When in CMS preview, we're running in the parent window context, while for most cases we will need
-// the preview iframe's environment.
-export function frameView() {
-  if(typeof(CMS) !== 'undefined') {
-    const $ = require('jquery');
-    return $('iframe.cms__PreviewPane__frame')[0].contentWindow;
+  // Helper function to let the component know if it's being used in the CMS or in a frontend page.
+  isPreview() {
+    const config = this.constructor.config;
+    try {
+      return  config
+              && config.categories
+              && this.props.collection
+              && config.categories.indexOf(this.props.collection.getIn(['name'])) !== -1;
+    }
+    catch(ex) {
+      return false;
+    }
   }
-  return window;
+
+  // When in CMS preview, we're running in the parent window context, while for most cases we will need
+  // the preview iframe's environment.
+  view() {
+    if(typeof(CMS) !== 'undefined') {
+      const $ = require('jquery');
+      return $('iframe.cms__PreviewPane__frame')[0].contentWindow;
+    }
+    return window;
+  }
+
+  // Expected React render method.
+  render() {
+    if(this.isPreview()) {
+      return this.renderPreview();
+    }
+    return this.renderBlock();
+  }
+
+  // Placeholder methods that no-op or append default basic behavior unless specific components override them
+
+  // The components configuration directives; expects the following optional properties:
+  //  .tag - (string) representing the nodeName of the placeholder nodes where the component should be built
+  //  .categories - (arr [str]) array of categories that this component will render in the CMS page
+  //  .styles - (arr [str]) array of stylesheets, both internal and external, to be loaded into the CMS page
+  static get config() { return {}; }
+
+  // Any props required by the component that are not attributes in the placholder should be fetched here,
+  // for example any info contained within the placeholder's children and/or their contents as stringified JSON.
+  static extraProps() {}
+
+  }
 }
