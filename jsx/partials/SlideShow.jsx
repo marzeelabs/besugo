@@ -1,7 +1,5 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
-import $ from 'jquery';
-import 'slick-carousel';
 
 const config = {
   autoplay: true,
@@ -12,33 +10,29 @@ const config = {
   nextArrow: '<a href="#" class="slick-next"><span class="slick-arrow-mz slick-arrow-mz--right"><svg><use xlink:href="#slider_arrow_right"></use></svg></span></a>'
 };
 
-class SlideShow extends BesugoComponent {
+export default class SlideShow extends BesugoComponent {
   static get config() {
     return {
       tag: 'SlideShow'
     };
   }
 
+  static extraProps(props, xplaceholder) {
+    const slides = xplaceholder.getChildren('SlideShowSlide');
+    props.slides = slides.map((slide) => {
+      return {
+        title: slide.getAttribute('title'),
+        image: slide.getAttribute('image'),
+        link: {
+          label: slide.getAttribute('link-label'),
+          url: slide.getAttribute('link-url')
+        }
+      };
+    });
+  }
+
   getData() {
-    const data = Object.assign({
-      slides: []
-    }, this.props);
-
-    if(this.props.xplaceholder) {
-      const slides = this.props.xplaceholder.querySelectorAll('SlideShowSlide');
-      slides.forEach(function(slide) {
-        data.slides.push({
-          title: slide.getAttribute('title'),
-          image: slide.getAttribute('image'),
-          link: {
-            label: slide.getAttribute('link-label'),
-            url: slide.getAttribute('link-url')
-          }
-        });
-      });
-    }
-
-    return data;
+    return this.props;
   }
 
   componentDidMount() {
@@ -48,6 +42,8 @@ class SlideShow extends BesugoComponent {
     // And simply injecting the main.min.js file won't work because the component keeps rebuilding, so we have
     // to constantly reinitialize it. Hence this "hybrid" approach.
     // PS. Couldn't find other react-based carousel modules that supported a fade animation like slick does.
+    const $ = require('jquery');
+    const slick = require('slick-carousel');
     $(this.wrapper).slick(config);
   }
 
@@ -81,6 +77,3 @@ class SlideShow extends BesugoComponent {
     );
   }
 };
-
-SlideShow.initialize();
-export default SlideShow;

@@ -1,7 +1,7 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
-class Previews extends BesugoComponent {
+export default class Previews extends BesugoComponent {
   static get config() {
     return {
       styles: [
@@ -11,6 +11,3 @@ class Previews extends BesugoComponent {
     };
   }
 };
-
-Previews.initialize();
-export default Previews;

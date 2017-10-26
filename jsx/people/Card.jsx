@@ -2,7 +2,7 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 import SocialIcons from 'partials/SocialIcons';
 
-class PersonCard extends BesugoComponent {
+export default class PersonCard extends BesugoComponent {
   constructor(props) {
     super(props);
   }
@@ -13,14 +13,14 @@ class PersonCard extends BesugoComponent {
     };
   }
 
+  static extraProps(props, xplaceholder) {
+    const textContent = xplaceholder.text();
+    const jsondata = JSON.parse(textContent);
+    Object.assign(props, jsondata);
+  }
+
   getData() {
     const data = Object.assign({}, this.props);
-
-    if(this.props.xplaceholder) {
-      const textContent = this.props.xplaceholder.textContent.trim();
-      const jsondata = JSON.parse(textContent);
-      Object.assign(data, jsondata);
-    }
 
     // Trim the summary to fit in a smaller card.
     if(data.Summary) {
@@ -59,6 +59,3 @@ class PersonCard extends BesugoComponent {
     );
   }
 };
-
-PersonCard.initialize();
-export default PersonCard;

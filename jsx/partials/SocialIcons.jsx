@@ -1,7 +1,7 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
-class SocialIcons extends BesugoComponent {
+export default class SocialIcons extends BesugoComponent {
   constructor(props) {
     super(props);
   }
@@ -55,6 +55,3 @@ class SocialIcons extends BesugoComponent {
     );
   }
 };
-
-SocialIcons.initialize();
-export default SocialIcons;

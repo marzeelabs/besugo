@@ -2,7 +2,7 @@ import React from 'react';
 import BesugoComponent, { frameView } from 'Besugo';
 import $ from 'jquery';
 
-class TopHeader extends BesugoComponent {
+export default class TopHeader extends BesugoComponent {
   constructor(props) {
     super(props);
   }
@@ -161,6 +161,3 @@ class TopHeader extends BesugoComponent {
     }
   }
 };
-
-TopHeader.initialize();
-export default TopHeader;
