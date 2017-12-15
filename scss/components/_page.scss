@@ -3,7 +3,8 @@
 ** page titles hover image
 */
 
-.page__header{
+.page__header,
+%page__header {
   width: 100%;
   height: 400px;
   overflow: hidden;
@@ -19,7 +20,8 @@
   }
 }
 
-.page__header-title__wrapper {
+.page__header-title__wrapper,
+%page__header-title__wrapper {
   flex: 0 0 100%;
   align-content: center;
   text-align: center;
@@ -27,7 +29,8 @@
 }
 
 .page__header-title,
-.page__header-subtitle {
+.page__header-subtitle,
+%page__header-title {
   font-weight: 400;
   color: palette(white);
 }
@@ -40,7 +43,8 @@
 ** page titles
 */
 
-.page__title {
+.page__title,
+%page__title {
   text-transform: uppercase;
   text-align: center;
   @include ritmo-font-size($h5-font-size);
@@ -51,7 +55,8 @@
   }
 }
 
-.page__text-intro {
+.page__text-intro,
+%page__text-intro {
   @include container(1000px);
   display: block;
   margin: 0 auto ritmo(6) auto;

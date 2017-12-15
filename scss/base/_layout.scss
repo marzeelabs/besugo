@@ -12,7 +12,8 @@ footer {
   min-width: 320px;
 }
 
-.layout-container {
+.layout-container,
+%layout-container {
   max-width: $canvas-width;
   margin: ritmo(12) auto 0 auto;
   padding: ritmo(3) 10px;
@@ -24,6 +25,6 @@ footer {
 }
 
 .layout-container--inner {
-  @extend .layout-container;
+  @extend %layout-container;
   margin-top: ritmo(4);
 }
