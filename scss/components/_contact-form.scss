@@ -18,7 +18,7 @@
 
 .contact-form__submit {
   border: none;
-  @extend .link__button-black-secondary;
+  @extend %link__button-black-secondary;
   border: 1px solid palette(black);
   margin-top: 0;
 }
@@ -109,7 +109,6 @@
 
   input[type=checkbox] {
     visibility: hidden;
-
 
     &:checked + label {
       background: palette(black);

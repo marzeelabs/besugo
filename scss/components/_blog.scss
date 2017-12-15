@@ -1,9 +1,9 @@
 .blog__title {
-  @extend .page__title;
+  @extend %page__title;
 }
 
 .blog__text-intro {
-  @extend .page__text-intro;
+  @extend %page__text-intro;
 }
 
 .blog__list {
