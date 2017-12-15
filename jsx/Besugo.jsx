@@ -90,3 +90,13 @@ export default class BesugoComponent extends React.Component {
 // BesugoComponent.propTypes = {
 //   xplaceholder: PropTypes.instanceOf(Element)
 // };
+
+// When in CMS preview, we're running in the parent window context, while for most cases we will need
+// the preview iframe's environment.
+export function frameView() {
+  if(typeof(CMS) !== 'undefined') {
+    const $ = require('jquery');
+    return $('iframe.cms__PreviewPane__frame')[0].contentWindow;
+  }
+  return window;
+}
