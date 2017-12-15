@@ -78,7 +78,7 @@ module.exports = [
   },
 
   {
-    entry: "./jsx/App.jsx",
+    entry: "./components/App.jsx",
 
     output: {
       path: path.resolve(__dirname, netlifyToml.build.publish),
@@ -105,7 +105,7 @@ module.exports = [
     },
 
     resolve: {
-      modules: [ "node_modules", path.resolve(__dirname, "jsx") ],
+      modules: [ "node_modules", path.resolve(__dirname, "components") ],
       extensions: [ ".js", ".json", ".jsx" ]
     },
 
