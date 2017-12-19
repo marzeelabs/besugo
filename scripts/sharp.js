@@ -153,7 +153,7 @@ function deleteProcessedImages(imagePath) {
 
 // Watch for changes to pictures and reprocess them as necessary.
 // This also builds every image when first run, so there's no need to call processImages from the glob below.
-if(process.env.SERVE === 'true') {
+if(process.env.NODE_ENV === 'development') {
   chokidar.watch(src)
     .on('add', processImages)
     .on('change', processImages)

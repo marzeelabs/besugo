@@ -1,8 +1,8 @@
 import React from 'react';
-import BesugoComponent, { frameView } from 'Besugo';
+import BesugoComponent from 'Besugo';
 import $ from 'jquery';
 
-class TopHeader extends BesugoComponent {
+export default class TopHeader extends BesugoComponent {
   constructor(props) {
     super(props);
   }
@@ -104,7 +104,7 @@ class TopHeader extends BesugoComponent {
 
   setListeners(mounted) {
     const method = (mounted) ? 'addEventListener' : 'removeEventListener';
-    const win = frameView().then((win) => {
+    const win = this.view().then((win) => {
       win[method]("resize", this);
 
       // We can only catch these in the capture phase in the iframe from the CMS preview.
@@ -125,7 +125,7 @@ class TopHeader extends BesugoComponent {
     switch(e.type) {
       case 'scroll':
       case 'resize': {
-        frameView().then((win) => {
+        this.view().then((win) => {
           const scrollTop = $(win).scrollTop();
 
           // fixed header color change
@@ -162,6 +162,3 @@ class TopHeader extends BesugoComponent {
     }
   }
 };
-
-TopHeader.initialize();
-export default TopHeader;

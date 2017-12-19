@@ -2,7 +2,7 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 import SocialIcons from 'partials/SocialIcons';
 
-class PersonCard extends BesugoComponent {
+export default class PersonCard extends BesugoComponent {
   constructor(props) {
     super(props);
   }
@@ -13,14 +13,20 @@ class PersonCard extends BesugoComponent {
     };
   }
 
+  static extraProps(props, xplaceholder) {
+    const textContent = xplaceholder.text();
+    const jsondata = JSON.parse(textContent);
+    Object.assign(props, jsondata);
+  }
+
+  static buildContainer(parserUtils) {
+    const container = parserUtils.createNode('li');
+    parserUtils.setAttribute(container, 'class', 'profile');
+    return container;
+  }
+
   getData() {
     const data = Object.assign({}, this.props);
-
-    if(this.props.xplaceholder) {
-      const textContent = this.props.xplaceholder.textContent.trim();
-      const jsondata = JSON.parse(textContent);
-      Object.assign(data, jsondata);
-    }
 
     // Trim the summary to fit in a smaller card.
     if(data.Summary) {
@@ -37,7 +43,7 @@ class PersonCard extends BesugoComponent {
     const data = this.getData();
 
     return (
-      <li className="profile">
+      <div className="profile__wrapper">
         <div className="profile__image__wrapper">
           <a href={ data.link } target="_self">
             <img className="profile__image" src={ data.Params.image } />
@@ -55,10 +61,7 @@ class PersonCard extends BesugoComponent {
             <SocialIcons section="profile" { ...data } />
           </span>
         </div>
-      </li>
+      </div>
     );
   }
 };
-
-PersonCard.initialize();
-export default PersonCard;

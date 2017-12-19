@@ -1,7 +1,7 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
-class SVGElements extends BesugoComponent {
+export default class SVGElements extends BesugoComponent {
   static get config() {
     return {
       tag: 'SVGElements'
@@ -244,6 +244,3 @@ class SVGElements extends BesugoComponent {
     );
   }
 };
-
-SVGElements.initialize();
-export default SVGElements;

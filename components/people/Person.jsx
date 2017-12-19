@@ -6,7 +6,7 @@ import SocialIcons from 'partials/SocialIcons';
 import TopHeader from 'partials/TopHeader';
 import EndFooter from 'partials/EndFooter';
 
-class Person extends BesugoComponent {
+export default class Person extends BesugoComponent {
   constructor(props) {
     super(props);
   }
@@ -16,6 +16,12 @@ class Person extends BesugoComponent {
       tag: "Person",
       categories: [ "people", "people-pt" ]
     };
+  }
+
+  static extraProps(props, xplaceholder) {
+    const textContent = xplaceholder.text();
+    const jsondata = JSON.parse(textContent);
+    Object.assign(props, jsondata);
   }
 
   getData() {
@@ -32,9 +38,6 @@ class Person extends BesugoComponent {
     }
 
     const data = Object.assign({}, this.props);
-    const textContent = this.props.xplaceholder.textContent.trim();
-    const jsondata = JSON.parse(textContent);
-    Object.assign(data, jsondata);
 
     // "Content" comes pre-built with HTML markup already. We need to parse it so that it doesn't show up as simple text.
     data.Content = ReactHtmlParser(data.Content);
@@ -81,6 +84,3 @@ class Person extends BesugoComponent {
     );
   }
 };
-
-Person.initialize();
-export default Person;

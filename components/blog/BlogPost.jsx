@@ -7,7 +7,7 @@ import TopHeader from 'partials/TopHeader';
 import EndFooter from 'partials/EndFooter';
 import PersonCard from 'people/Card';
 
-class BlogPost extends BesugoComponent {
+export default class BlogPost extends BesugoComponent {
   constructor(props) {
     super(props);
   }
@@ -19,6 +19,23 @@ class BlogPost extends BesugoComponent {
     };
   }
 
+  static extraProps(props, xplaceholder) {
+    const content = xplaceholder.getChildren('BlogPostContent');
+    props.Content = JSON.parse(content[0].text());
+
+    const authors = xplaceholder.getChildren('BlogPostAuthor');
+    props.people = authors.map((author) => {
+      return {
+        link: author.getAttribute('link'),
+        Title: author.getAttribute('title'),
+        Summary: author.getAttribute('summary'),
+        Params: {
+          image: author.getAttribute('image')
+        }
+      };
+    });
+  }
+
   getData() {
     if(this.isPreview()) {
       const entry = this.props.entry;
@@ -26,7 +43,7 @@ class BlogPost extends BesugoComponent {
       return {
         author: "Author",
         title: entry.getIn(['data', 'title']),
-        content: this.props.widgetFor('body'),
+        Content: this.props.widgetFor('body'),
         image: entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg',
         people: (entry.getIn(['data', 'people']) || []).map((person) => {
           const personData = this.props.fieldsMetaData.getIn(['people', person.getIn(['person'])]);
@@ -42,31 +59,10 @@ class BlogPost extends BesugoComponent {
       };
     }
 
-    const data = Object.assign({
-      people: []
-    }, this.props);
-
-    if(this.props.xplaceholder) {
-      const authors = this.props.xplaceholder.querySelectorAll('BlogPostAuthor');
-      for(let i = 0; i < authors.length; i++) {
-        let author = authors[i];
-
-        let person = {
-          link: author.getAttribute('link'),
-          Title: author.getAttribute('title'),
-          Summary: author.getAttribute('summary'),
-          Params: {
-            image: author.getAttribute('image')
-          }
-        };
-
-        data.people.push(person);
-      }
-    }
+    const data = Object.assign({}, this.props);
 
     // "Content" comes pre-built with HTML markup already. We need to parse it so that it doesn't show up as simple text
-    const parsed = new DOMParser().parseFromString(data.content, "text/html");
-    data.content = ReactHtmlParser(parsed.documentElement.textContent);
+    data.Content = ReactHtmlParser(data.Content);
 
     return data;
   }
@@ -96,7 +92,7 @@ class BlogPost extends BesugoComponent {
 
         <section className="layout-container--inner">
           <div className="is-markdown">
-            { data.content }
+            { data.Content }
           </div>
 
           <h1 className="profiles__title">{ data.author }</h1>
@@ -119,6 +115,3 @@ class BlogPost extends BesugoComponent {
     );
   }
 };
-
-BlogPost.initialize();
-export default BlogPost;

@@ -3,7 +3,7 @@ import BesugoComponent from 'Besugo';
 import SocialIcons from 'partials/SocialIcons';
 import SVGElements from 'partials/SVGElements';
 
-class EndFooter extends BesugoComponent {
+export default class EndFooter extends BesugoComponent {
   constructor(props) {
     super(props);
   }
@@ -13,6 +13,18 @@ class EndFooter extends BesugoComponent {
       tag: 'EndFooter',
       categories: ['footer', 'footer-pt']
     };
+  }
+
+  static extraProps(props, xplaceholder) {
+    const params = xplaceholder.getChildren('param');
+    if(params.length > 0) {
+      props.social = {};
+      params.forEach((child) => {
+        const name = child.getAttribute('name');
+        const value = child.getAttribute('value');
+        props.social[name] = value;
+      });
+    }
   }
 
   getData() {
@@ -49,23 +61,10 @@ class EndFooter extends BesugoComponent {
       blog: {
         url: ('blog-url' in this.props) ? this.props['blog-url'] : "/blog"
       },
-      copyright: ('copyright' in this.props) ? this.props.copyright : '\xA9 2017 Besugo'
+      copyright: '\xA9 2017 Besugo'
     };
 
-    if(this.props.xplaceholder) {
-      const params = this.props.xplaceholder.querySelectorAll('param');
-      if(params.length > 0) {
-        data.social = {};
-        for(let i = 0; i < params.length; i++) {
-          let child = params[i];
-          let name = child.getAttribute('name');
-          let value = child.getAttribute('value');
-          data.social[name] = value;
-        }
-      }
-    }
-
-    return data;
+    return Object.assign(data, this.props);
   }
 
   renderBlock() {
@@ -103,6 +102,3 @@ class EndFooter extends BesugoComponent {
     );
   }
 };
-
-EndFooter.initialize();
-export default EndFooter;
