@@ -45,7 +45,7 @@ export default class BlogPost extends BesugoComponent {
         title: entry.getIn(['data', 'title']),
         Content: this.props.widgetFor('body'),
         image: entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg',
-        people: entry.getIn(['data', 'people']).map((person) => {
+        people: (entry.getIn(['data', 'people']) || []).map((person) => {
           const personData = this.props.fieldsMetaData.getIn(['people', person.getIn(['person'])]);
           return personData && {
             link: '#',
@@ -91,7 +91,9 @@ export default class BlogPost extends BesugoComponent {
         </div>
 
         <section className="layout-container--inner">
-          { data.Content }
+          <div className="is-markdown">
+            { data.Content }
+          </div>
 
           <h1 className="profiles__title">{ data.author }</h1>
           <ul className="profiles__list">

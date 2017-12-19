@@ -71,7 +71,16 @@ module.exports = [
     devServer: {
       contentBase: netlifyToml.build.publish,
       compress: true,
-      historyApiFallback: true,
+      historyApiFallback: {
+        rewrites: [
+          {
+            // Without this rule, if we typed "/admin" we would end up in "/admin#/" instead of "/admin/#/",
+            // making it impossible to use the CMS interface in localhost.
+            from: /\/admin$/,
+            to: '/admin/'
+          }
+        ]
+      },
       port: packageJson.config.port,
       watchContentBase: true
     }
