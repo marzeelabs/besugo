@@ -64,7 +64,6 @@
     "cssnano": "^3.10.0",
     "find-and-replace": "^1.0.2",
     "glob": "^7.1.2",
-    "install-peers": "^1.0.2",
     "jquery": "^3.2.1",
     "jsdom": "^11.5.1",
     "node-sass": "^4.7.2",
