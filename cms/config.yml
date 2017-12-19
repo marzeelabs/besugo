@@ -9,9 +9,9 @@ publish_mode: "editorial_workflow"
 
 collections: # A list of collections the CMS should be able to edit
 
-# EN collections
+# 🇬🇧 collections
   - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "EN Blog Posts" # Used in the UI, ie.: "New Post"
+    label: "Blog Posts 🇬🇧" # Used in the UI, ie.: "New Post"
     folder: "content/blog" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
@@ -44,7 +44,7 @@ collections: # A list of collections the CMS should be able to edit
               - "title"
             valueField: "title"
   - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "EN People" # Used in the UI, ie.: "New Post"
+    label: "People 🇬🇧" # Used in the UI, ie.: "New Post"
     folder: "content/people" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
@@ -66,7 +66,7 @@ collections: # A list of collections the CMS should be able to edit
         name: "body"
         widget: "markdown"
   - name: "footer" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "EN Footer" # Used in the UI, ie.: "New Post"
+    label: "Footer 🇬🇧" # Used in the UI, ie.: "New Post"
     folder: "content/footer" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
@@ -94,9 +94,9 @@ collections: # A list of collections the CMS should be able to edit
           name: "instagram"
           widget: "string"
 
-# PT collections
+# 🇵🇹 collections
   - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "PT Blog Posts" # Used in the UI, ie.: "New Post"
+    label: "Blog Posts 🇵🇹" # Used in the UI, ie.: "New Post"
     folder: "content/blog" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
@@ -129,7 +129,7 @@ collections: # A list of collections the CMS should be able to edit
               - "title"
             valueField: "title"
   - name: "people-pt" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "PT People" # Used in the UI, ie.: "New Post"
+    label: "People 🇵🇹" # Used in the UI, ie.: "New Post"
     folder: "content/people" # The path to the folder where the documents are stored
     slug: "{{title}}.{{i18nlanguage}}"
     filter:
@@ -151,7 +151,7 @@ collections: # A list of collections the CMS should be able to edit
         name: "body"
         widget: "markdown"
   - name: "footer-pt" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "PT Footer" # Used in the UI, ie.: "New Post"
+    label: "Footer 🇵🇹" # Used in the UI, ie.: "New Post"
     folder: "content/footer" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
