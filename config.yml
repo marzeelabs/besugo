@@ -10,7 +10,10 @@ taxonomies:
 
 # i18n
 DefaultContentLanguage: "en"
-DefaultContentLanguageInSubdir: true
+# We can't enable this if we want to use Netlify's Identity Service,
+# on login it redrects to the homepage and from there we have to re-redirect to /admin;
+# this would break that flow and redirect to /en instead.
+DefaultContentLanguageInSubdir: false
 
 # Params per language
 Languages:
