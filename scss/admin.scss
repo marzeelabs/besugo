@@ -1,0 +1,47 @@
+.nc-collectionPage {
+  &-localeSelector {
+    font-size: 16px;
+    height: 1.75em;
+    position: absolute;
+    right: -3px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3em;
+  }
+
+  &-sidebarHeading {
+    position: relative;
+  }
+
+  &-sidebarLink {
+    &.locale-hidden {
+      display: none;
+    }
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  &-sidebarSearch {
+    margin-bottom: 16px;
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

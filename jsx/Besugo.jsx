@@ -94,9 +94,42 @@ export default class BesugoComponent extends React.Component {
 // When in CMS preview, we're running in the parent window context, while for most cases we will need
 // the preview iframe's environment.
 export function frameView() {
+  // Fakes a synchronous response in the form of a promise chain,
+  // to avoid async issues when unmounting components for instance.
+  const fakePromise = function(win) {
+    return {
+      then: function(cb) {
+        cb(win);
+      }
+    };
+  };
+
   if(typeof(CMS) !== 'undefined') {
-    const $ = require('jquery');
-    return $('iframe.cms__PreviewPane__frame')[0].contentWindow;
+    let selector = 'iframe.nc-previewPane-frame';
+
+    let iframe = document.querySelectorAll(selector)[0];
+    if(iframe) {
+      return fakePromise(iframe.contentWindow);
+    }
+
+    return new Promise(function(resolve, reject) {
+      try {
+        // Because it's a React app, its nodes are constantly re-rendered, so we need to keep reapplying our listener.
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(m) {
+            let iframe = m.target.querySelectorAll(selector)[0];
+            if(iframe) {
+              resolve(iframe.contentWindow);
+            }
+          });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+      catch(ex) {
+        reject(ex);
+      }
+    });
   }
-  return window;
+
+  return fakePromise(window);
 }

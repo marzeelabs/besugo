@@ -62,7 +62,7 @@ class Person extends BesugoComponent {
         </div>
 
         <section className="layout-container--inner">
-          <div className="profile__bio-content">
+          <div className="profile__bio-content is-markdown">
             { data.Content }
           </div>
         </section>

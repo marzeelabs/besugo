@@ -104,35 +104,36 @@ class TopHeader extends BesugoComponent {
 
   setListeners(mounted) {
     const method = (mounted) ? 'addEventListener' : 'removeEventListener';
-    const win = frameView();
+    const win = frameView().then((win) => {
+      win[method]("resize", this);
 
-    win[method]("resize", this);
+      // We can only catch these in the capture phase in the iframe from the CMS preview.
+      win[method]("scroll", this, (typeof(CMS) !== 'undefined'));
 
-    // We can only catch these in the capture phase in the iframe from the CMS preview.
-    win[method]("scroll", this, (typeof(CMS) !== 'undefined'));
+      // Toggle mobile navigation
+      if(this.domMenuToggle) {
+        this.domMenuToggle[method]('click', this);
+      }
 
-    // Toggle mobile navigation
-    if(this.domMenuToggle) {
-      this.domMenuToggle[method]('click', this);
-    }
-
-    // Force close mobile navigation when clicking anywhere (except the toggle button itself)
-    win.document[method]('mousedown', this);
-    win.document[method]('touchstart', this);
+      // Force close mobile navigation when clicking anywhere (except the toggle button itself)
+      win.document[method]('mousedown', this);
+      win.document[method]('touchstart', this);
+    });
   }
 
   handleEvent(e) {
     switch(e.type) {
       case 'scroll':
       case 'resize': {
-        const scrollTop = $(frameView()).scrollTop();
+        frameView().then((win) => {
+          const scrollTop = $(win).scrollTop();
 
-        // fixed header color change
-        this.toggleClass(this.domNavigation, 'navigation--fixed-top', scrollTop > 1);
+          // fixed header color change
+          this.toggleClass(this.domNavigation, 'navigation--fixed-top', scrollTop > 1);
 
-        // show logo
-        this.toggleClass(this.domLogo, 'visible-logo', scrollTop > 150);
-
+          // show logo
+          this.toggleClass(this.domLogo, 'visible-logo', scrollTop > 150);
+        });
         break;
       }
 
