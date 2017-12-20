@@ -10,33 +10,35 @@ import { ucs2 } from 'punycode';
       let items = document.querySelectorAll('.nc-collectionPage-sidebarLink');
       items.forEach(function(item) {
         let chunks = item.textContent.split(' ');
-        let ucs = chunks.length > 1 && ucs2.decode(chunks[chunks.length -1]);
+        for (let chunk of chunks) {
+          let ucs = ucs2.decode(chunk);
 
-        // There must be two Regional Indicator Symbol codes for this to be a flag symbol
-        if (ucs.length === 2 && ucs.every((code) => code >= 127462 && code <= 127487)) {
-          let locale = ucs2.encode(ucs);
-          if (locales.indexOf(locale) === -1) {
-            locales.push(locale);
-          }
+          // There must be two Regional Indicator Symbol codes for this to be a flag symbol
+          if (ucs.length === 2 && ucs.every((code) => code >= 127462 && code <= 127487)) {
+            let locale = ucs2.encode(ucs);
+            if (locales.indexOf(locale) === -1) {
+              locales.push(locale);
+            }
 
-          const applyLocaleAttr = function(hidden) {
-            if (!item.classList.contains('locale')) {
-              item.classList.add('locale');
-              item.classList.add('locale-' + locale);
-              if (hidden && select) {
-                select._onChange(false);
+            const applyLocaleAttr = function(hidden) {
+              if (!item.classList.contains('locale')) {
+                item.classList.add('locale');
+                item.classList.add('locale-' + locale);
+                if (hidden && select) {
+                  select._onChange(false);
+                }
               }
             }
-          }
-          applyLocaleAttr();
+            applyLocaleAttr();
 
-          // The CMS react app likes to reset the item's attributes when you switch between collections.
-          const attrObserver = new MutationObserver(function(mutations) {
-            mutations.forEach(function(m) {
-              applyLocaleAttr(true);
+            // The CMS react app likes to reset the item's attributes when you switch between collections.
+            const attrObserver = new MutationObserver(function(mutations) {
+              mutations.forEach(function(m) {
+                applyLocaleAttr(true);
+              });
             });
-          });
-          attrObserver.observe(item, { attributes: true });
+            attrObserver.observe(item, { attributes: true });
+          }
         }
       });
 
