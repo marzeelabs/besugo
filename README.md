@@ -1,4 +1,4 @@
-# MZ Netlify
+# MZ Netlify 
 
 ## Requirements
 1. [hugo](https://gohugo.io/), install using [homebrew](https://brew.sh/) if you don't have it already: ```brew install hugo```
