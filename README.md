@@ -80,11 +80,11 @@ Below are listed the versions used in Netlify to create the live, preview and br
 
 ## Upgrade projects (gulp, pre-yarn/webpack)
 
-1. Rebuild all dependencies:
+1. Rebuild all dependencies; also for any time you need to rebuild *node_modules* from scratch, such as when upgrading **node** or **yarn**:
     ```sh
     yarn rebuild
     ```
-    (shortcut to ```rm -rf node_modules & yarn install```; can be used any time you need to rebuild *node_modules* from scratch, such as when upgrading **node** or **yarn**);
+    (shortcut to ```rm -rf node_modules & yarn install```);
 
 2. Remove leftover js files in static folder:
     - *static/css/cms-override.css*
