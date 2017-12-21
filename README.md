@@ -66,16 +66,10 @@ Below are listed the versions used in Netlify to create the live, preview and br
 
 1. Clone project locally
 
-2. Upgrade an existing project from a previous Besugo stack (gulp, pre-yarn/webpack), or whenever you need to rebuild dependencies, run
+2. Install dependencies:
     ```sh
-    yarn rebuild
+    yarn install
     ```
-    (shortcut to ```rm -rf node_modules & yarn install``` that I wrote for myself and left in);
-
-    2.1. otherwise grab dependencies normally:
-      ```sh
-      yarn install
-      ```
 
 3. (Optional, recommended) change the port in *package.json*, to avoid having other Besugo projects being served on the same port, for easier window/tab management during development.
 
