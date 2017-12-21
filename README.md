@@ -43,7 +43,7 @@ Below are listed the versions used in Netlify to create the live, preview and br
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
     ```
 
-4. [Node.js](https://nodejs.org/en/) v8.9.3 LTS (Carbon) - our JavaScript runtime, we need it, for everything.
+4. [Node.js](https://nodejs.org/en/) v8.9.3 LTS (lts/carbon) - our JavaScript runtime, we need it, for everything. Any Node v8.x.x or even v6.x.x (lts/boron) should still work though.
 
     - Install or update:
       ```sh
