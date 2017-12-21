@@ -240,4 +240,4 @@ All files to be copied as-is into the website go in the *static* folder.
 
 - Use [emoji country flags](https://emojipedia.org/flags/) in content type names to display a locale selector, to filter content types only for that locale (requires 2+ different locales).
 
-- Avoid using special characters like `/` and `#` in branch names. Even though basic usage of Netlify CMS should still work, it has a few kinks; e.g. #51.
+- Avoid using special characters like `/` and `#` in branch names. Even though basic usage of Netlify CMS should still work, it has a few kinks; e.g. https://github.com/marzeelabs/besugo/issues/51/.
