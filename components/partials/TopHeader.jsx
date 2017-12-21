@@ -104,7 +104,7 @@ export default class TopHeader extends BesugoComponent {
 
   setListeners(mounted) {
     const method = (mounted) ? 'addEventListener' : 'removeEventListener';
-    const win = this.view().then((win) => {
+    this.view().then((win) => {
       win[method]("resize", this);
 
       // We can only catch these in the capture phase in the iframe from the CMS preview.
