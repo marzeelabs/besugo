@@ -126,7 +126,7 @@ The folder *layouts* contains `.html` files defining, you guessed it, the layout
       description: "Boilerplate da MarzeeLabs para o gerador de sites estáticos Hugo, integrando o NetlifyCMS para uso da plataform GitHub como backend."
   ```
 
-- Add localised strings to be used in the website to *i18n/[LOCALE].toml* files.
+- Add localized strings to be used in the website to *i18n/[LOCALE].toml* files.
   ```toml
   [Home]
   other = "Início"
@@ -144,7 +144,7 @@ The folder *layouts* contains `.html` files defining, you guessed it, the layout
   <h1 class="home__title">{{ i18n "Home" | default "Home"}}</h1>
   ```
 
-- Content entries need to be input already in the desired locale of course. Just define separate content types for each localisation that is needed; see **Using Netlify CMS** below on where and how to do this:
+- Content entries need to be input already in the desired locale of course. Just define separate content types for each localization that is needed; see **Using Netlify CMS** below on where and how to do this:
 
   - Set the content type's `name` with a "-[LOCALE]" suffix:
     ```yml
