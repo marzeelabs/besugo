@@ -39,9 +39,14 @@ Below are listed the versions used in Netlify to create the live, preview and br
 3. [nvm](https://github.com/creationix/nvm) v0.33.8 - (not used by Netlify), very useful to manage your locale Node.js versions.
 
     - Install or update:
-    ```sh
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-    ```
+      ```sh
+      curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+      ```
+
+    - After installing you may need to re-open the terminal or run this for it to recognize the `nvm` command (repeat for every terminal you currently have open in which you want to use it):
+      ```sh
+      source ~/.bash_profile
+      ```
 
 4. [Node.js](https://nodejs.org/en/) v8.9.3 LTS (lts/carbon) - our JavaScript runtime, we need it, for everything. Any Node v8.x.x or even v6.x.x (lts/boron) should still work though.
 
@@ -77,6 +82,8 @@ Below are listed the versions used in Netlify to create the live, preview and br
     ```sh
     yarn start
     ```
+
+5. In your browser navigate to `http://localhost:1313`; don't forget to change the port to whatever you set in bullet point 3.
 
 ## Upgrade projects (gulp, pre-yarn/webpack)
 
@@ -230,7 +237,9 @@ All files to be copied as-is into the website go in the *static* folder.
 
 3. Go to your Netlify dashboard, select your site, navigate to Access > Authentication Providers > Install Provider > Github and use the Client ID and Secret generated in step 2.
 
-4. Start using the CMS on **http://[your-website-url]/admin**
+4. Start using the CMS on **http://[your-website-url]/admin/**
+
+**A known issue** with some setups is if you type only */admin*, the Netlify script will garble up the url, sending you to */admin#/* and the CMS errors. This is an issue with webpack (no such problem with live Netlify builds), and to avoid it, always include the trailing slash in the `/admin/` path.
 
 ## Using Netlify CMS
 
