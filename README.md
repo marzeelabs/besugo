@@ -10,11 +10,24 @@ An awesome light-weight boilerplate to build an awesome static site, integrating
 
 Below are listed the versions used in Netlify to create the live, preview and branch builds. Ideally you'd be using the exact same versions locally, although there's some wiggle room of course.
 
+0. [homebrew](https://brew.sh/) - a package manager for macOS, to manage applications such as `hugo` and `yarn` listed below.
+
+    - Install:
+      ```sh
+      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      ```
+    - If after running the above command it complains that *xcode alone is not sufficient on sierra*, try running `xcode-select --install`. Note that **macOS Sierra 10.12.6 or higher and XCode 9.2 are required.**
+
+
 1. [hugo](https://gohugo.io/) v0.31.1 - builds the structure of the website based on the content setup, although we're phasing it out in favor of a fully JS/React solution. Any version over 0.27.1 should still work though.
 
-    - Install or update: [homebrew](https://brew.sh/):
+    - Install:
       ```sh
       brew install hugo
+      ```
+    - Update:
+      ```sh
+      brew update && brew upgrade hugo
       ```
 
 2. [yarn](https://yarnpkg.com/) v1.3.2 - package/dependency manager. Any version of yarn above 0.27.5 should still work though.
