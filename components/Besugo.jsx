@@ -93,7 +93,7 @@ export default class BesugoComponent extends React.Component {
 
                     // Replace the placeholder node with a normal div container for our component;
                     // we need one so that later during hydrate React knows what it's doing, but we don't use
-                    // our original placeholders form now on because they're not exactly standard.
+                    // our original placeholders from now on because they're not exactly standard.
                     const container = Comp.buildContainer(parserUtils);
                     parserUtils.setAttribute(container, 'besugo-component', config.tag);
                     parserUtils.setAttribute(container, 'besugo-props', JSON.stringify(props));

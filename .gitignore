@@ -1,6 +1,6 @@
 public
 node_modules
-temp/
+temp
 npm-debug.log
 yarn-error.log
 .sass-cache

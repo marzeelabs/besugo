@@ -182,7 +182,7 @@ collections: # A list of collections the CMS should be able to edit
         default: "pt"
       - label: "Copyright"
         name: "copyright"
-        widget: "text"
+        widget: "string"
       - label: "Social Media"
         name: "social"
         widget: "object"
