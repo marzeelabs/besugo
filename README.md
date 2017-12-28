@@ -113,6 +113,9 @@ Below are listed the versions used in Netlify to create the live, preview and br
     - *static/js/app.min.js*
     - *static/admin/main.min.js*
 
+
+3. (Resume from bullet point 3 in the *Install and Run* section above)
+
 ## From the Boilerplate to an Actual Project
 
 ### Content
