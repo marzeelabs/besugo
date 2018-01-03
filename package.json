@@ -44,9 +44,9 @@
     "watch:sass": "chokidar 'scss/**/*.scss' -c 'yarn build:sass'",
     "watch:cms": "chokidar 'cms/config.yml' -c 'yarn build:cms'",
     "watch:hugo": "hugo -w",
-    "watch:webpack": "webpack --watch & webpack-dev-server --color --progress",
-    "webpack": "webpack --progress",
-    "build": "export NODE_ENV=production && npm-run-all -p erase:* && npm-run-all -p build:* && hugo && webpack --progress",
+    "watch:webpack": "webpack --watch --display none & webpack-dev-server --color --progress",
+    "webpack": "webpack",
+    "build": "export NODE_ENV=production && npm-run-all -p erase:* && npm-run-all -p build:* && hugo && webpack",
     "start": "export NODE_ENV=development && npm-run-all -p erase:* && npm-run-all -p build:* watch:*",
     "rebuild": "rm -rf node_modules & yarn install"
   },

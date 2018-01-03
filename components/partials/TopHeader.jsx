@@ -1,6 +1,5 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
-import $ from 'jquery';
 
 export default class TopHeader extends BesugoComponent {
   constructor(props) {
@@ -122,6 +121,8 @@ export default class TopHeader extends BesugoComponent {
   }
 
   handleEvent(e) {
+    const $ = require('jquery');
+
     switch(e.type) {
       case 'scroll':
       case 'resize': {
@@ -155,9 +156,9 @@ export default class TopHeader extends BesugoComponent {
   toggleClass(node, name, toggle) {
     if(node) {
       if(toggle) {
-        $(node).addClass(name);
+        node.classList.add(name);
       } else {
-        $(node).removeClass(name);
+        node.classList.remove(name);
       }
     }
   }
