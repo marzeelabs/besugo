@@ -1,6 +1,8 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
+
 import SocialIcons from 'partials/SocialIcons';
+import SrcSet from 'SrcSet';
 
 export default class PersonCard extends BesugoComponent {
   constructor(props) {
@@ -46,7 +48,12 @@ export default class PersonCard extends BesugoComponent {
       <div className="profile__wrapper">
         <div className="profile__image__wrapper">
           <a href={ data.link } target="_self">
-            <img className="profile__image" src={ data.Params.image } />
+            <SrcSet
+              className="profile__image"
+              src={ data.Params.image }
+              sizes="
+                (max-width: 730px) 100vw,
+                730px" />
           </a>
         </div>
 

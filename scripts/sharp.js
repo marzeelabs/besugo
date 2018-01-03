@@ -23,8 +23,16 @@ if(!src || !dest) {
 }
 
 const sizes = config.sizes || [];
+const types = new Set(config.types || [ "jpg", "jpeg", "png", "webp", "tiff" ]);
 const quality = parseInt(config.quality, 10) || 85;
 const withoutEnlargement = ('withoutEnlargment' in config) ? config.withoutEnlargement : true;
+
+// We don't need to expose the whole package.json to the browser, but we will need the sizes
+// and file types recognized by sass, in order to dynamically build srcset's.
+const exposeSass = { sizes, types: [...types] };
+fs.writeFile("temp/sassConfig.js", "module.exports = " + JSON.stringify(exposeSass), function(err) {
+  if(err) { return console.log(err); }
+});
 
 // Sharp ref:
 //  http://sharp.dimens.io/en/stable/api-resize/
@@ -38,11 +46,41 @@ function runSharp(inFile) {
 
   // Set up the output destination for created files, create the directory if it doesn't exist.
   inFile.dir = inFile.dir.replace(src, dest);
-  if(!fs.existsSync(inFile.dir)){
-    fs.mkdirSync(inFile.dir);
+  if(!fs.existsSync(inFile.dir)) {
+    // Zero-dependency solution to create full path found at
+    // https://stackoverflow.com/questions/31645738/how-to-create-full-path-with-nodes-fs-mkdirsync
+    const initDir = path.isAbsolute(inFile.dir) ? path.sep : '';
+    inFile.dir.split(path.sep).reduce((parentDir, childDir) => {
+      const curDir = path.resolve(parentDir, childDir);
+      try {
+        fs.mkdirSync(curDir);
+      } catch (err) {
+        if (err.code !== 'EEXIST') {
+          throw err;
+        }
+      }
+      return curDir;
+    }, initDir);
   }
 
   const img = sharp(imagePath);
+  const stats = fs.statSync(imagePath);
+
+  let fileExt = inFile.ext.replace('.', '').toLowerCase();
+  let method;
+  switch(fileExt) {
+    case 'png':
+    case 'webp':
+    case 'tiff':
+    case 'jpeg':
+      method = fileExt;
+      break;
+
+    case 'jpg':
+    default:
+      method = 'jpeg';
+      break;
+  }
 
   return img.metadata().then(function(metadata) {
     const tasks = [];
@@ -61,7 +99,7 @@ function runSharp(inFile) {
         img.clone()
           .resize(width, null)
           .withoutEnlargement(withoutEnlargement)
-          .jpeg({ quality })
+          [method]({ quality })
           .toFile(outFile, function(err, data) {
             if(err) {
               reject(err);
@@ -77,7 +115,7 @@ function runSharp(inFile) {
         // TODO: Switch to disable this pretty output?
         const logStrs = [
           "Sharp output:",
-          imagePath.replace(src, "") + " [" + metadata.width + "w " + metadata.height + "h]"
+          imagePath.replace(src, "") + " [" + metadata.width + "w " + metadata.height + "h] [" + Math.round(stats.size / 1024) + "kb]"
         ];
         infos.forEach(function(info) {
           const { outFile, data } = info;
@@ -103,8 +141,7 @@ function processImages(images) {
   images.forEach(function(imagePath) {
     const inFile = path.parse(imagePath);
 
-    // TODO: Support other file formats and extensions (jpeg, png)
-    if(inFile.ext === '.jpg') {
+    if(types.has(inFile.ext.replace('.', '').toLowerCase())) {
       promises.push(runSharp(inFile));
     }
   });
@@ -125,7 +162,7 @@ function processImages(images) {
 function deleteProcessedImages(imagePath) {
   const inFile = path.parse(imagePath);
 
-  if(inFile.ext === '.jpg') {
+  if(types.has(inFile.ext.replace('.', '').toLowerCase())) {
     // Delete the .base entry in the inFile path object so that when constructing the outFile path it buils with the correct suffix.
     const fileName = inFile.name;
     delete inFile.base;
@@ -141,7 +178,7 @@ function deleteProcessedImages(imagePath) {
       inFile.name = fileName + size.suffix;
       const outFile = path.format(inFile);
 
-      if(fs.existsSync(outFile)){
+      if(fs.existsSync(outFile)) {
         fs.unlinkSync(outFile);
         logStrs.push("  " + outFile.replace(dest, "") + chalk.magenta(" [unlinked]"));
       }
@@ -161,7 +198,7 @@ if(process.env.NODE_ENV === 'development') {
     .on('error', handleError);
 }
 else {
-  glob(src + "/**/*.jpg", {}, function(err, images) {
+  glob(src + "/**/*.+(" + [...types].join('|') + ")", {}, function(err, images) {
     if(err) {
       throw new Error(err);
     }

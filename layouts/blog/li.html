@@ -3,7 +3,13 @@
 
   <div class="teaser-text-side__image__wrapper">
     <a href="{{ .URL }}">
-      <img class="teaser-text-side__image" src="{{ .Params.Image }}">
+      <SrcSet
+        class="teaser-text-side__image"
+        src="{{ .Params.Image }}"
+        sizes="
+          (max-width: 729px) 100vw,
+          (max-width: 1024px) 60vw,
+          705px" ></SrcSet>
     </a>
   </div>
 

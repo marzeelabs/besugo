@@ -27,8 +27,6 @@
   }
 
   .slider__wrapper & {
-    padding-bottom: 33%;
-
     @include mq($from: break-medium) {
       height: 500px;
       padding: 0;

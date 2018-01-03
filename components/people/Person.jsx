@@ -1,10 +1,12 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 import ReactHtmlParser from 'react-html-parser';
-import SVGElements from 'partials/SVGElements';
-import SocialIcons from 'partials/SocialIcons';
-import TopHeader from 'partials/TopHeader';
+
 import EndFooter from 'partials/EndFooter';
+import SocialIcons from 'partials/SocialIcons';
+import SrcSet from 'SrcSet';
+import SVGElements from 'partials/SVGElements';
+import TopHeader from 'partials/TopHeader';
 
 export default class Person extends BesugoComponent {
   constructor(props) {
@@ -51,12 +53,20 @@ export default class Person extends BesugoComponent {
     return (
       <div>
         <div className="profile__header">
-          <img className="profile__header__image-bg" src={ data.Params.image } />
+          <SrcSet
+            className="profile__header__image-bg"
+            src={ data.Params.image }
+            sizes="120vw" />
         </div>
 
         <div className="profile__header-info">
           <div className="profile__header-info__image__wrapper">
-             <img className="profile__header-info__image" src={ data.Params.image } />
+             <SrcSet
+               className="profile__header-info__image"
+               src={ data.Params.image }
+               sizes="
+                (max-width: 500px) 100vw,
+                500px" />
           </div>
 
           <h1 className="profile__header-info__title">{ data.Title }</h1>

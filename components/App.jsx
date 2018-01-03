@@ -7,6 +7,7 @@ import TopHeader from 'partials/TopHeader';
 import EndFooter from 'partials/EndFooter';
 import SlideShow from 'partials/SlideShow';
 import SocialIcons from 'partials/SocialIcons';
+import SrcSet, { SrcSetBg } from 'SrcSet';
 import PersonCard from 'people/Card';
 import Person from 'people/Person';
 import BlogPost from 'blog/BlogPost';
@@ -18,6 +19,8 @@ const initialized = [
   EndFooter,
   SlideShow,
   SocialIcons,
+  SrcSet,
+  SrcSetBg,
   PersonCard,
   Person,
   BlogPost
