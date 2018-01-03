@@ -211,6 +211,56 @@ Check out some [code samples here and documentation](BesugoComponent.md).
 
 - Component scripts are built and processed through Babel, to allow the usage of ES6 syntax and other features in browsers that may not natively support them.
 
+### Responsive images
+
+During build, the script uses [sharp](https://github.com/lovell/sharp), a high performance Node.js image processing library, to create copies of several sizes of any images uploaded to the `media_folder` (see **Using Netlify CMS** below). These are an integral part of using a Responsive Design approach, to optimize traffic and page load times on different devices.
+
+We can use *jpg* (and the *jpeg* variant), *png*, *webp* and *tiff* file types.
+
+To take advantage of these, you must first define in *package.json* what sizes and suffixes (to be appended to the original filename) sharp should work with; e.g.:
+```json
+"sharp-config": {
+  "src": "static/images",
+  "dest": "public/images",
+  "quality": 80,
+  "sizes": [
+    {
+      "suffix": "-large",
+      "width": 1400
+    },
+    {
+      "suffix": "-regular",
+      "width": 820
+    },
+    {
+      "suffix": "-medium",
+      "width": 680
+    },
+    {
+      "suffix": "-small",
+      "width": 460
+    }
+  ]
+}
+```
+(Note: only change the *src*, *dest*, and *quality* if you also changed the *media_folder* value in Netlify CMS's configuration, or if you know what you're doing.)
+
+Then to use the processed images themselves, either reference them directly in the code, or:
+
+- import the `SrcSet` component into any other component, or use the `<SrcSet>` markup tag in the layout;
+
+- set a *src* attribute, just like you would in any other `<img>` element, to the original file name;
+
+- set a *sizes* attribute to tell it what sizes the image will take in the page.
+
+The component will then build the *srcset* attribute automatically, and the image node will load the file that best fits each device conditions. Browsers that don't support this feature will simply ignore the *srcset* attribute and use the original file set in *src*.
+
+Check out [MDN's article on Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images) for more information about these attributes and how to best use them.
+
+You can also **use responsive images in backgrounds** through the `SrcSetBg` component. Just insert it inside the element to have the background image, configure its attributes in the same way as above for `SrcSet`, and it will do its magic.
+
+You can optionally insert `SrcSetBg` anywhere in the document and set a *bg-active-element* attribute, with a query string pointing to the element that should have the background (id, class name, etc).
+
 ### JavaScript
 
 Most JavaScript dynamics should stay within the react components, since they're JavaScript already and know how to manage themselves.
