@@ -243,7 +243,7 @@ export default class BesugoComponent extends React.Component {
   //  .styles - (arr [str]) array of stylesheets, both internal and external, to be loaded into the CMS page
   static get config() { return {}; }
 
-  // Any props required by the component that are not attributes in the placholder should be fetched here,
+  // Any props required by the component that are not attributes in the placeholder should be fetched here,
   // for example any info contained within the placeholder's children and/or their contents as stringified JSON.
   static extraProps() {}
 
