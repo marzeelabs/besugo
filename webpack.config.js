@@ -22,6 +22,11 @@ require('toml-require').install();
 const netlifyToml = require("./netlify.toml");
 const packageJson = require("./package.json");
 
+const allPlugins = [];
+if (process.env.NODE_ENV !== 'development') {
+  allPlugins.push(new UglifyJSPlugin());
+}
+
 module.exports = [
   {
     // Here the application starts executing and webpack starts bundling
@@ -50,6 +55,7 @@ module.exports = [
           use: {
             loader: 'babel-loader',
             options: {
+              babelrc: false,
               presets: [ "env" ]
             }
           }
@@ -58,16 +64,13 @@ module.exports = [
     },
 
     // additional plugins
-    plugins: [
-      // babel-minify seems to have trouble with nested $'s, something in babel-plugin-minify-mangle-names
-      // for example the following jQuery would parse error when minifying with it:
-      // $a.b(function() { $('foo'); })
-      //new webpack.optimize.UglifyJsPlugin()
-      new UglifyJSPlugin()
-    ],
+    plugins: allPlugins.concat([]),
 
     // This is not specific to building the js files,
     // it's just that webpack-dev-server fetches these configs from the first exports entry.
+    // Note that currently (as specified in the package.json scripts) webpack is run twice when
+    // serving locally, once for webpack itself to build the files into the public directory,
+    // and again for webpack-server itself to serve the files from memory.
     devServer: {
       contentBase: netlifyToml.build.publish,
       compress: true,
@@ -106,6 +109,7 @@ module.exports = [
           use: {
             loader: 'babel-loader',
             options: {
+              babelrc: false,
               presets: [ "env", "react" ]
             }
           }
@@ -119,9 +123,7 @@ module.exports = [
     },
 
     // additional plugins
-    plugins: [
-      new UglifyJSPlugin(),
-
+    plugins: allPlugins.concat([
       // Serve all hugo-generated files, including static files, except for html files (see below).
       new CopyWebpackPlugin([
         {
@@ -154,6 +156,6 @@ module.exports = [
         // Ref: https://github.com/tmpvar/jsdom
         globals: new jsdom(`...`).window
       })
-    ]
+    ])
   }
 ];

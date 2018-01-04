@@ -1,6 +1,8 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
+import SrcSet from 'SrcSet';
+
 const config = {
   autoplay: true,
   autoplaySpeed: 5000,
@@ -58,7 +60,12 @@ export default class SlideShow extends BesugoComponent {
               <a href={ slide.link.url } className="link__button-white-secondary">{ slide.link.label }</a>
             </p>
           </div>
-          <img className="teaser__element" src={ slide.image }/>
+          <SrcSet
+            className="teaser__element"
+            src={ slide.image }
+            sizes="
+              (max-width: 1024px) 100vw,
+              1024px" />
         </div>
       )
     })
