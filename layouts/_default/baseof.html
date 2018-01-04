@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ .Site.Params.locale }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <title>
-      {{ .Site.Title }}
-    </title>
+    {{ range where $.Site.RegularPages "Section" "settings" }}
+      <title>{{ .Params.name }}</title>
+      {{ if .Params.ga }}
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Params.ga }}"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{ .Params.ga }}');
+        </script>
+      {{ end }}
+    {{ end }}
     <meta name="description" content="{{ .Description | default .Site.Params.description }}">
     <!-- <meta name="author" content="{{ .Site.Author }}"> -->
 
@@ -22,7 +33,7 @@
   </head>
 
   <body>
-    {{ partial "svg_elements.html" . }}
+    <SVGElements></SVGElements>
 
     {{ partial "header.html" . }}
 
@@ -30,7 +41,7 @@
 
     {{ partial "footer.html" . }}
 
-    <script src="/js/site.min.js"></script>
+    <script src="/js/app.min.js"></script>
+    <script src="/js/main.min.js"></script>
   </body>
 </html>
-

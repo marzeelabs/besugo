@@ -1,28 +1,11 @@
-.blog-post__header{
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  display: flex;
-  align-content: center;
-  align-items: center;
-  position: relative;
-  background-position: center;
-  margin-top: ritmo(12);
-
-  @include mq($from: break-medium) {
-    margin-top: ritmo(16);
-  }
+.blog-post__header {
+  @extend %page__header;
 }
 
-
 .blog-post__header-title__wrapper {
-  flex: 0 0 100%;
-  align-content: center;
-  text-align: center;
-  padding: ritmo(5) 10px;
+  @extend %page__header-title__wrapper;
 }
 
 .blog-post__header-title {
-  font-weight: 400;
-  color: palette(white);
+  @extend %page__header-title;
 }

@@ -16,6 +16,7 @@
 
   .profile {
     margin-left: 0;
+    @include container(450px);
   }
 }
 

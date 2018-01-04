@@ -1,0 +1,225 @@
+backend:
+  name: github
+  repo: marzeelabs/besugo # Path to your Github repository
+  branch: <% CURRENT_BRANCH %> # Branch to update (current branch dynamically set by Gulp)
+
+media_folder: "/static/images/uploads" # Folder where user uploaded files should go
+public_folder: "/images/uploads"
+publish_mode: "editorial_workflow"
+
+collections: # A list of collections the CMS should be able to edit
+
+  - name: "settings"
+    label: "Site settings"
+    folder: "content/settings"
+    create: false
+    editor:
+      preview: false
+    fields:
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Enter here to edit."
+      - label: "Site name"
+        name: "name"
+        widget: "string"
+      - label: "Google Analytics tracking code"
+        name: "ga"
+        widget: "string"
+        required: false
+
+# 🇬🇧 collections
+  - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Blog Posts 🇬🇧" # Used in the UI, ie.: "New Post"
+    description: >
+      The description is a great place for tone setting, high level information, and editing
+      guidelines that are specific to a collection.
+    folder: "content/blog" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "en"
+    slug: "{{title}}.{{i18nlanguage}}"
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "Post title"
+        name: "title"
+        widget: "string"
+      - label: "Post Cover"
+        name: "image"
+        widget: "image"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+      - label: "People"
+        name: "people"
+        widget: "list"
+        fields:
+          - label: "Person"
+            name: "person"
+            widget: "relation"
+            collection: "people"
+            searchFields:
+              - "title"
+            valueField: "title"
+  - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "People 🇬🇧" # Used in the UI, ie.: "New Post"
+    description: >
+      The description is a great place for tone setting, high level information, and editing
+      guidelines that are specific to a collection.
+    folder: "content/people" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "en"
+    slug: "{{title}}.{{i18nlanguage}}"
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "Person Name"
+        name: "title"
+        widget: "string"
+      - label: "Person Picture"
+        name: "image"
+        widget: "image"
+      - label: "Bio"
+        name: "body"
+        widget: "markdown"
+  - name: "footer" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Footer 🇬🇧" # Used in the UI, ie.: "New Post"
+    description: >
+      The description is a great place for tone setting, high level information, and editing
+      guidelines that are specific to a collection.
+    folder: "content/footer" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "en"
+    create: false # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Enter here to edit."
+      - label: "Copyright"
+        name: "copyright"
+        widget: "text"
+      - label: "Social Media"
+        name: "social"
+        widget: "object"
+        fields:
+        - label: "Link Facebook"
+          name: "facebook"
+          widget: "string"
+        - label: "Link Twitter"
+          name: "twitter"
+          widget: "string"
+        - label: "Link Instagram"
+          name: "instagram"
+          widget: "string"
+
+# 🇵🇹 collections
+  - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Blog Posts 🇵🇹" # Used in the UI, ie.: "New Post"
+    description: >
+      The description is a great place for tone setting, high level information, and editing
+      guidelines that are specific to a collection.
+    folder: "content/blog" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
+    slug: "{{title}}.{{i18nlanguage}}"
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt"
+      - label: "Post title"
+        name: "title"
+        widget: "string"
+      - label: "Post Cover"
+        name: "image"
+        widget: "image"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+      - label: "People"
+        name: "people"
+        widget: "list"
+        fields:
+          - label: "Person"
+            name: "person"
+            widget: "relation"
+            collection: "people-pt"
+            searchFields:
+              - "title"
+            valueField: "title"
+  - name: "people-pt" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "People 🇵🇹" # Used in the UI, ie.: "New Post"
+    description: >
+      The description is a great place for tone setting, high level information, and editing
+      guidelines that are specific to a collection.
+    folder: "content/people" # The path to the folder where the documents are stored
+    slug: "{{title}}.{{i18nlanguage}}"
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt"
+      - label: "Person Name"
+        name: "title"
+        widget: "string"
+      - label: "Person Picture"
+        name: "image"
+        widget: "image"
+      - label: "Bio"
+        name: "body"
+        widget: "markdown"
+  - name: "footer-pt" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Footer 🇵🇹" # Used in the UI, ie.: "New Post"
+    description: >
+      The description is a great place for tone setting, high level information, and editing
+      guidelines that are specific to a collection.
+    folder: "content/footer" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
+    create: false # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Enter here to edit."
+      - label: "Copyright"
+        name: "copyright"
+        widget: "string"
+      - label: "Social Media"
+        name: "social"
+        widget: "object"
+        fields:
+        - label: "Link Facebook"
+          name: "facebook"
+          widget: "string"
+        - label: "Link Twitter"
+          name: "twitter"
+          widget: "string"
+        - label: "Link Instagram"
+          name: "instagram"
+          widget: "string"

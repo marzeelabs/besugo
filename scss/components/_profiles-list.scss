@@ -1,8 +1,43 @@
-.profile {
+.profiles__title {
+  @extend %page__title;
+}
+
+.profiles__text-intro {
+  @extend %page__text-intro;
+}
+
+.profiles__list {
+  @include container(1000px);
+  padding: 0;
+  margin: 0 auto;
+  flex-flow: row wrap;
   display: flex;
+
+  @include mq($from: break-medium) {
+    justify-content: center;
+  }
+}
+
+.profile {
   flex-wrap: wrap;
-  @include container(450px);
   align-items: stretch;
+  position: relative;
+  flex: 1 1 100%;
+  margin-bottom: ritmo(6);
+
+  @include mq($from: break-medium) {
+    flex: 0 0 50%;
+    padding: ritmo(4) 10px;
+    margin-bottom: ritmo(4);
+  }
+
+  @include mq($from: break-large) {
+    flex: 0 0 33%;
+  }
+}
+
+.profile__wrapper {
+  max-width: 730px;
 }
 
 .profile__image__wrapper {
@@ -38,6 +73,18 @@
   text-align: center;
   margin: ritmo() auto;
   display: block;
+  text-align: center;
+}
+
+.profile__text-link {
+  color: palette(black);
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  &:hover,
+  &:focus {
+    color: palette(grey, mid-light);
+  }
 }
 
 .profile__social-icons {

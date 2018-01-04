@@ -9,7 +9,7 @@
   padding: 0;
   display: block;
   text-align: center;
-  }
+}
 
 .footer__menu-item {
   display: block;
@@ -18,7 +18,7 @@
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
-   @include ritmo-font-size(14px);
+  @include ritmo-font-size(14px);
 
   @include mq($from: break-small) {
     display: inline-block;
@@ -33,7 +33,7 @@
     padding: ritmo(3) 25px;
 
     &:hover {
-      background: palette(grey)
+      background: palette(grey);
     }
   }
 }
@@ -54,7 +54,7 @@
     transition: fill ease 0.5s;
 
     &:hover {
-      fill: palette(grey)
+      fill: palette(grey);
     }
   }
 }

@@ -15,19 +15,21 @@
 @import
   "components/navigation",
   "components/links",
-  "components/profiles",
+  "components/page",
+  "components/profiles-list",
+  "components/profile-page",
   "components/blog",
   "components/blog-post",
-  "components/page",
   "components/contact-form",
+  "components/markdown",
   "components/teaser",
   "components/table",
   "components/slider",
   "components/footer",
   "components/styleguide";
 
-
 // Vendor styles
 
 // Slick Carousel Slider
+@import "slick-carousel/slick/slick.scss";
 @import "vendors/slick";

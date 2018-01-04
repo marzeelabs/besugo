@@ -1,14 +1,26 @@
-title: "MZ Hugo Boilerplate"
-baseurl: "http://example.org/"
-languageCode: "en-GB"
-contentdir: "content"
+# Defaults for all languages
+baseurl: "/"
+publishDir: "temp/hugo"
 MetaDataFormat: "yaml"
-googleAnalytics: "#"
-taxonomies:
-  tag: "tags"
 blackfriday:
   hrefTargetBlank: true
-params:
-  full_name: "#"
-  description: >-
-    #
+title: "MarzeeLab's Besugo"
+googleAnalytics: ""
+taxonomies:
+  tag: "tags"
+
+# i18n
+DefaultContentLanguage: "en"
+# We can't enable this if we want to use Netlify's Identity Service,
+# on login it redrects to the homepage and from there we have to re-redirect to /admin;
+# this would break that flow and redirect to /en instead.
+DefaultContentLanguageInSubdir: false
+
+# Params per language
+Languages:
+  en:
+    locale: "en-GB"
+    description: "MarzeeLab's boilerplate for the Hugo static site generator, coupled with NetlifyCMS driving Github as a backend."
+  pt:
+    locale: "pt-PT"
+    description: "Boilerplate da MarzeeLabs para o gerador de sites estáticos Hugo, integrando o NetlifyCMS para uso da plataform GitHub como backend."

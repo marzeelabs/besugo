@@ -58,8 +58,6 @@ $palettes: (
   )
 );
 
-
-
 //
 // Breakpoints
 //
@@ -67,11 +65,14 @@ $palettes: (
 $mq-breakpoints: (
   break-extra-small: 400px,
   break-small: 480px,
+  break-small-large: 520px,
   break-medium-small: 600px,
   break-medium: 730px,
   break-medium-large:820px,
   break-large: 980px,
-  break-big: 1200px
+  break-big: 1200px,
+  break-bigger: 1440px,
+  break-huge: 2000px
 );
 
 //
