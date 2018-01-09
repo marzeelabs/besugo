@@ -48,7 +48,7 @@
     "webpack": "webpack",
     "build": "export NODE_ENV=production && npm-run-all -p erase:* && npm-run-all -p build:* && hugo && webpack",
     "start": "export NODE_ENV=development && npm-run-all -p erase:* && npm-run-all -p build:* watch:*",
-    "rebuild": "rm -rf node_modules & yarn install"
+    "rebuild": "rm -Rf node_modules && yarn install"
   },
   "dependencies": {
     "autoprefixer": "^7.2.3",
