@@ -62,6 +62,11 @@
   }
 }
 
+.styleguide-component__morearrow-wrapper {
+  padding-top: 80px;
+  position: relative;
+}
+
 .styleguide__header__faux-h1 {
   @include ritmo-font-size($h1-font-size);
 }
@@ -88,4 +93,3 @@
   color: palette(black);
   border: 1px solid palette(black);
 }
-
