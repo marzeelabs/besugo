@@ -1,0 +1,19 @@
+.link-more,
+%link-more {
+  position: absolute;
+  z-index: 2;
+  width: 30px;
+  height: 20px;
+  font-size: 0;
+  display: block;
+  background-image: url("/images/down_c2a.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  bottom: ritmo(4);
+  left: 50%;
+  transform: translate3D(-50%, 0, 0);
+
+  @include mq($from: break-medium) {
+     bottom: ritmo(6);
+  }
+}
