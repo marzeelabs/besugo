@@ -27,12 +27,28 @@ if (process.env.NODE_ENV !== 'development') {
   allPlugins.push(new UglifyJSPlugin());
 }
 
+// A small custom plugin to instruct webpack to (recursively) watch for changes within a directory.
+class WatchDirectoriesPlugin {
+  constructor(directories) {
+    this.directories = (Array.isArray(directories)) ? directories : [ directories ];
+  }
+
+  apply(compiler) {
+    compiler.plugin("after-compile", (compilation, callback) => {
+      this.directories.forEach((dir) => {
+        compilation.contextDependencies.push(path.resolve(__dirname, dir));
+      });
+      callback();
+    });
+  }
+}
+
 module.exports = [
   {
     // Here the application starts executing and webpack starts bundling
     entry: {
-      js: glob.sync("./js/site/**/*.js"),
-      admin: glob.sync("./js/admin/**/*.js")
+      js: "./js/site.js",
+      admin: "./js/admin.js"
     },
 
     // options related to how webpack emits results
@@ -64,7 +80,13 @@ module.exports = [
     },
 
     // additional plugins
-    plugins: allPlugins.concat([]),
+    plugins: allPlugins.concat([
+      // Make sure newly added files (even within subfolders) trigger a recompile.
+      new WatchDirectoriesPlugin([
+        "./js/site",
+        "./js/admin"
+      ])
+    ]),
 
     // This is not specific to building the js files,
     // it's just that webpack-dev-server fetches these configs from the first exports entry.
