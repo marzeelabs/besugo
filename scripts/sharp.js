@@ -7,7 +7,7 @@ const chalk = require('chalk');
 const chokidar = require('chokidar');
 
 if(!packageJson["sharp-config"]) {
-  throw new Error(chalk.red('No configuration found for sass loader'));
+  throw new Error(chalk.red('No configuration found for sharp loader'));
 }
 
 function handleError(err) {
@@ -28,9 +28,9 @@ const quality = parseInt(config.quality, 10) || 85;
 const withoutEnlargement = ('withoutEnlargment' in config) ? config.withoutEnlargement : true;
 
 // We don't need to expose the whole package.json to the browser, but we will need the sizes
-// and file types recognized by sass, in order to dynamically build srcset's.
-const exposeSass = { sizes, types: [...types] };
-fs.writeFile("temp/sassConfig.js", "module.exports = " + JSON.stringify(exposeSass), function(err) {
+// and file types recognized by sharp, in order to dynamically build srcset's.
+const exposeSharp = { sizes, types: [...types] };
+fs.writeFile("temp/sharpConfig.js", "module.exports = " + JSON.stringify(exposeSharp), function(err) {
   if(err) { return console.log(err); }
 });
 
