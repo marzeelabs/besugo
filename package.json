@@ -41,7 +41,7 @@
     "build:sass": "npm-run-all -s sass:scss-compile sass:postcss",
     "build:cms": "node scripts/cms.js",
     "build:sharp": "node scripts/sharp.js",
-    "compile:webpack": "webpack --watch --display none & webpack-dev-server --color --progress",
+    "compile:webpack": "webpack --watch --display none & webpack-dev-server --color",
     "watch:sass": "chokidar 'package.json' 'scss/**/*.scss' -c 'yarn build:sass' --initial --silent",
     "watch:cms": "chokidar 'scripts/cms.js' 'cms/config.yml' -c 'yarn build:cms' --initial --silent",
     "watch:sharp": "nodemon -q -w scripts/sharp.js -x 'yarn build:sharp'",
