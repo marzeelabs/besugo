@@ -47,8 +47,8 @@ module.exports = [
   {
     // Here the application starts executing and webpack starts bundling
     entry: {
-      js: "./js/site.js",
-      admin: "./js/admin.js"
+      js: "./scripts/webpack/site.js",
+      admin: "./scripts/webpack/admin.js"
     },
 
     // options related to how webpack emits results

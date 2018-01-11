@@ -1,5 +1,5 @@
 (function() {
-  const req = require.context("./site", true, /\.js$/);
+  const req = require.context("../../js/admin", true, /\.js$/);
   req.keys().forEach(function(key) {
     req(key);
   });
