@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const chokidar = require('chokidar');
+const exec = require('child_process').exec;
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
@@ -175,9 +176,14 @@ function processImages(images) {
 }
 
 function deleteProcessedImages(imagePath) {
-  const inFile = path.parse(imagePath);
+  return new Promise((resolve, reject) => {
+    const inFile = path.parse(imagePath);
 
-  if(types.has(inFile.ext.replace('.', '').toLowerCase())) {
+    if(!types.has(inFile.ext.replace('.', '').toLowerCase())) {
+      resolve();
+      return;
+    }
+
     // Delete the .base entry in the inFile path object so that when constructing the outFile path it buils with the correct suffix.
     const fileName = inFile.name;
     delete inFile.base;
@@ -189,27 +195,42 @@ function deleteProcessedImages(imagePath) {
       imagePath.replace(src, "") + " has been unlinked"
     ];
 
-    config.sizes.forEach(function(size) {
-      inFile.name = fileName + size.suffix;
-      const outFile = path.format(inFile);
+    const promises = config.sizes.map((size) => {
+      return new Promise((res, rej) => {
+        inFile.name = fileName + size.suffix;
+        const outFile = path.format(inFile);
 
-      if(fs.existsSync(outFile)) {
-        fs.unlinkSync(outFile);
-        logStrs.push("  " + outFile.replace(dest, "") + chalk.magenta(" [unlinked]"));
-      }
+        if(!fs.existsSync(outFile)) {
+          console.log(logStrs.join("\n"));
+          res();
+          return;
+        }
+
+        fs.unlink(outFile, (err) => {
+          logStrs.push("  " + outFile.replace(dest, "") + chalk.magenta(" [unlinked]"));
+          res();
+        });
+      });
     });
 
-    console.log(logStrs.join("\n"));
-  }
+    resolve(Promise.all(promises).then(() => {
+      console.log(logStrs.join("\n"));
+    }));
+  });
 }
 
 function processAllImages() {
-  glob(src + "/**/*.+(" + [...types].join('|') + ")", {}, function(err, images) {
-    if(err) {
-      throw new Error(err);
-    }
+  return new Promise((resolve, reject) => {
+    glob(src + "/**/*.+(" + [...types].join('|') + ")", {}, function(err, images) {
+      if(err) {
+        reject(err);
+        return;
+      }
 
-    processImages(images);
+      processImages(images).then(() => {
+        resolve();
+      });
+    });
   });
 }
 
@@ -219,10 +240,20 @@ verifySharpConfig();
 // Watch for changes to pictures and reprocess them as necessary.
 // This also builds every image when first run, so there's no need to call processImages from the glob below.
 if(process.env.NODE_ENV === 'development') {
+  const chokidarWatcher = (method) => {
+    return (arg) => {
+      method(arg)
+        .then(() => {
+          exec("yarn dummy:refresh");
+        })
+        .catch(handleError);
+    };
+  }
+
   chokidar.watch(src)
-    .on('add', processImages)
-    .on('change', processImages)
-    .on('unlink', deleteProcessedImages)
+    .on('add', chokidarWatcher(processImages))
+    .on('change', chokidarWatcher(processImages))
+    .on('unlink', chokidarWatcher(deleteProcessedImages))
     .on('error', handleError);
 
   // A change in the package.json could mean a change in our configuration.
@@ -232,16 +263,10 @@ if(process.env.NODE_ENV === 'development') {
       delete require.cache[require.resolve('../package.json')];
 
       if (verifySharpConfig()) {
-        processAllImages();
+        chokidarWatcher(processAllImages)();
       }
     });
 }
 else {
-  glob(src + "/**/*.+(" + [...types].join('|') + ")", {}, function(err, images) {
-    if(err) {
-      throw new Error(err);
-    }
-
-    processImages(images);
-  });
+  processAllImages().catch(handleError);
 }
