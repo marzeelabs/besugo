@@ -168,17 +168,17 @@ export class SrcSetBg extends BesugoComponent {
 };
 
 const buildSrcSet = function(src) {
-  const sassConfig = require('../temp/sassConfig');
+  const sharpConfig = require('../temp/sharpConfig');
   const chunks = src.split('.');
   const ext = chunks.pop();
 
   // We don't build a srcset if we won't have any responsive images built for this src image.
-  if (sassConfig.types.indexOf(ext) === -1) {
+  if (sharpConfig.types.indexOf(ext) === -1) {
     return null;
   }
 
   const path = chunks.join('.');
-  return sassConfig.sizes.map((size) => {
+  return sharpConfig.sizes.map((size) => {
     return path + size.suffix + '.' + ext + ' ' + size.width + 'w';
   }).join(', ');
 };

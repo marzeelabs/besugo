@@ -1,38 +1,54 @@
-const packageJson = require('../package.json');
-const sharp = require('sharp');
-const path = require('path');
-const fs = require('fs');
-const glob = require('glob');
 const chalk = require('chalk');
 const chokidar = require('chokidar');
-
-if(!packageJson["sharp-config"]) {
-  throw new Error(chalk.red('No configuration found for sass loader'));
-}
+const exec = require('child_process').exec;
+const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
+const sharp = require('sharp');
 
 function handleError(err) {
   console.log(chalk.red(err));
 }
 
-const config = packageJson["sharp-config"];
+let config;
+let src;
+let dest;
+let sizes;
+let types;
+let quality;
+let withoutEnlargement;
 
-const src = config.src;
-const dest = config.dest;
-if(!src || !dest) {
-  throw new Error(chalk.red('Please specify both source and destination directories'));
+function verifySharpConfig() {
+  const nextConfig = require('../package.json')["sharp-config"];
+  if (!nextConfig) {
+    throw new Error(chalk.red('No configuration found for sharp loader'));
+  }
+  if (!nextConfig.src || !nextConfig.dest) {
+    throw new Error(chalk.red('Please specify both source and destination directories'));
+  }
+
+  // We only process all the images if:
+  //  - this is the first time the script is run; or
+  //  - if the configuration has changed.
+  if (JSON.stringify(config) === JSON.stringify(nextConfig)) {
+    return false;
+  }
+
+  config = nextConfig;
+  src = config.src;
+  dest = config.dest;
+  sizes = config.sizes || [];
+  types = new Set(config.types || [ "jpg", "jpeg", "png", "webp", "tiff" ]);
+  quality = parseInt(config.quality, 10) || 85;
+  withoutEnlargement = ('withoutEnlargement' in config) ? config.withoutEnlargement : true;
+
+  // We don't need to expose the whole package.json to the browser, but we will need the sizes
+  // and file types recognized by sharp, in order to dynamically build srcset's.
+  const exposeSharp = { sizes, types: [...types] };
+  fs.writeFileSync("temp/sharpConfig.js", "module.exports = " + JSON.stringify(exposeSharp));
+
+  return true;
 }
-
-const sizes = config.sizes || [];
-const types = new Set(config.types || [ "jpg", "jpeg", "png", "webp", "tiff" ]);
-const quality = parseInt(config.quality, 10) || 85;
-const withoutEnlargement = ('withoutEnlargment' in config) ? config.withoutEnlargement : true;
-
-// We don't need to expose the whole package.json to the browser, but we will need the sizes
-// and file types recognized by sass, in order to dynamically build srcset's.
-const exposeSass = { sizes, types: [...types] };
-fs.writeFile("temp/sassConfig.js", "module.exports = " + JSON.stringify(exposeSass), function(err) {
-  if(err) { return console.log(err); }
-});
 
 // Sharp ref:
 //  http://sharp.dimens.io/en/stable/api-resize/
@@ -160,9 +176,14 @@ function processImages(images) {
 }
 
 function deleteProcessedImages(imagePath) {
-  const inFile = path.parse(imagePath);
+  return new Promise((resolve, reject) => {
+    const inFile = path.parse(imagePath);
 
-  if(types.has(inFile.ext.replace('.', '').toLowerCase())) {
+    if(!types.has(inFile.ext.replace('.', '').toLowerCase())) {
+      resolve();
+      return;
+    }
+
     // Delete the .base entry in the inFile path object so that when constructing the outFile path it buils with the correct suffix.
     const fileName = inFile.name;
     delete inFile.base;
@@ -174,35 +195,78 @@ function deleteProcessedImages(imagePath) {
       imagePath.replace(src, "") + " has been unlinked"
     ];
 
-    config.sizes.forEach(function(size) {
-      inFile.name = fileName + size.suffix;
-      const outFile = path.format(inFile);
+    const promises = config.sizes.map((size) => {
+      return new Promise((res, rej) => {
+        inFile.name = fileName + size.suffix;
+        const outFile = path.format(inFile);
 
-      if(fs.existsSync(outFile)) {
-        fs.unlinkSync(outFile);
-        logStrs.push("  " + outFile.replace(dest, "") + chalk.magenta(" [unlinked]"));
-      }
+        if(!fs.existsSync(outFile)) {
+          console.log(logStrs.join("\n"));
+          res();
+          return;
+        }
+
+        fs.unlink(outFile, (err) => {
+          logStrs.push("  " + outFile.replace(dest, "") + chalk.magenta(" [unlinked]"));
+          res();
+        });
+      });
     });
 
-    console.log(logStrs.join("\n"));
-  }
+    resolve(Promise.all(promises).then(() => {
+      console.log(logStrs.join("\n"));
+    }));
+  });
 }
+
+function processAllImages() {
+  return new Promise((resolve, reject) => {
+    glob(src + "/**/*.+(" + [...types].join('|') + ")", {}, function(err, images) {
+      if(err) {
+        reject(err);
+        return;
+      }
+
+      processImages(images).then(() => {
+        resolve();
+      });
+    });
+  });
+}
+
+// Get our initial configuration.
+verifySharpConfig();
 
 // Watch for changes to pictures and reprocess them as necessary.
 // This also builds every image when first run, so there's no need to call processImages from the glob below.
 if(process.env.NODE_ENV === 'development') {
+  const chokidarWatcher = (method) => {
+    return (arg) => {
+      method(arg)
+        .then(() => {
+          exec("yarn dummy:refresh");
+        })
+        .catch(handleError);
+    };
+  }
+
   chokidar.watch(src)
-    .on('add', processImages)
-    .on('change', processImages)
-    .on('unlink', deleteProcessedImages)
+    .on('add', chokidarWatcher(processImages))
+    .on('change', chokidarWatcher(processImages))
+    .on('unlink', chokidarWatcher(deleteProcessedImages))
     .on('error', handleError);
+
+  // A change in the package.json could mean a change in our configuration.
+  // Only reprocess the images if that's the case.
+  chokidar.watch('./package.json')
+    .on('change', () => {
+      delete require.cache[require.resolve('../package.json')];
+
+      if (verifySharpConfig()) {
+        chokidarWatcher(processAllImages)();
+      }
+    });
 }
 else {
-  glob(src + "/**/*.+(" + [...types].join('|') + ")", {}, function(err, images) {
-    if(err) {
-      throw new Error(err);
-    }
-
-    processImages(images);
-  });
+  processAllImages().catch(handleError);
 }

@@ -1,7 +1,8 @@
+const chalk = require('chalk');
 const exec = require('child_process').execSync;
-const path = require("path");
-const fs = require('fs');
 const far = require('find-and-replace');
+const fs = require('fs');
+const path = require("path");
 
 require('toml-require').install();
 const netlifyToml = require("../netlify.toml");
@@ -34,7 +35,7 @@ far
     '<% CURRENT_BRANCH %>': branch
   })
   .complete(function() {
-    console.log("Updated CMS configuration file.");
+    console.log(chalk.green("Updated CMS configuration file."));
   })
   .error(function(err) {
     console.log(err);
