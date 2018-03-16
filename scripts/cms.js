@@ -38,5 +38,5 @@ far
     console.log(chalk.green("Updated CMS configuration file."));
   })
   .error(function(err) {
-    console.log(err);
+    throw err;
   });

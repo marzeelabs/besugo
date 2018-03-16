@@ -112,7 +112,7 @@ module.exports = [
   },
 
   {
-    entry: "./components/App.jsx",
+    entry: ["./components/App.jsx"],
 
     output: {
       path: path.resolve(__dirname, netlifyToml.build.publish),
@@ -176,7 +176,14 @@ module.exports = [
         // many different dependencies can expect different global properties,
         // even webpack itself, in particular its hot reload module, requires a minimally "real" environment.
         // Ref: https://github.com/tmpvar/jsdom
-        globals: new jsdom(`...`).window
+        globals: {
+          ...(new jsdom(`...`).window),
+          console: {
+            log: function() {},
+            warning: function() {},
+            error: function() {}
+          }
+        }
       })
     ])
   }
