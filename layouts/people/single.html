@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<Person>
+<Person image="{{ .Params.image }}">
   {{ jsonify . }}
 </Person>
 

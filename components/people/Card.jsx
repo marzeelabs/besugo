@@ -50,7 +50,7 @@ export default class PersonCard extends BesugoComponent {
           <a href={ data.link } target="_self">
             <SrcSet
               className="profile__image"
-              src={ data.Params.image }
+              src={ data.image }
               sizes="
                 (max-width: 730px) 100vw,
                 730px" />

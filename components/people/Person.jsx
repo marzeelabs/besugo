@@ -33,9 +33,7 @@ export default class Person extends BesugoComponent {
       return {
         Title: entry.getIn(['data', 'title']),
         Content: this.props.widgetFor('body'),
-        Params: {
-          image: entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg'
-        }
+        image: entry.getIn(['data', 'image']) ? this.props.getAsset(entry.getIn(['data', 'image'])).toString() : '/admin/default.jpg'
       };
     }
 
@@ -55,7 +53,7 @@ export default class Person extends BesugoComponent {
         <div className="profile__header">
           <SrcSet
             className="profile__header__image-bg"
-            src={ data.Params.image }
+            src={ data.image }
             sizes="120vw" />
         </div>
 
@@ -63,7 +61,7 @@ export default class Person extends BesugoComponent {
           <div className="profile__header-info__image__wrapper">
              <SrcSet
                className="profile__header-info__image"
-               src={ data.Params.image }
+               src={ data.image }
                sizes="
                 (max-width: 500px) 100vw,
                 500px" />
