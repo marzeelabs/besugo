@@ -51,9 +51,7 @@ export default class BlogPost extends BesugoComponent {
             link: '#',
             Title: personData.getIn(['title']),
             Summary: personData.getIn(['body']),
-            Params: {
-              image: personData.getIn(['image'])
-            }
+            image: personData.getIn(['image'])
           }
         })
       };
