@@ -7,5 +7,3 @@ yarn-error.log
 Thumbs.db
 .DS_Store
 !.gitkeep
-static/css/app.css
-static/css/admin.css

@@ -1,43 +1,68 @@
-const packageJson = require('../package.json');
-const sharp = require('sharp');
-const path = require('path');
-const fs = require('fs');
-const glob = require('glob');
 const chalk = require('chalk');
 const chokidar = require('chokidar');
+const exec = require('child_process').exec;
+const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
+const sharp = require('sharp');
 
-if(!packageJson["sharp-config"]) {
-  throw new Error(chalk.red('No configuration found for sass loader'));
-}
+const Logger = require('./libs/Logger');
+const Spinner = require('./libs/Spinner');
 
-function handleError(err) {
-  console.log(chalk.red(err));
-}
+const log = (msg) => {
+  if (!Spinner.initialized()) {
+    Logger.log(msg);
+  }
+};
 
-const config = packageJson["sharp-config"];
+const error = (err) => {
+  return Spinner.initialized() ? Spinner.error('sharp', err) : Logger.error(err);
+};
 
-const src = config.src;
-const dest = config.dest;
-if(!src || !dest) {
-  throw new Error(chalk.red('Please specify both source and destination directories'));
-}
+let config;
+let src;
+let dest;
+let sizes;
+let types;
+let quality;
+let withoutEnlargement;
 
-const sizes = config.sizes || [];
-const types = new Set(config.types || [ "jpg", "jpeg", "png", "webp", "tiff" ]);
-const quality = parseInt(config.quality, 10) || 85;
-const withoutEnlargement = ('withoutEnlargment' in config) ? config.withoutEnlargement : true;
+const verifySharpConfig = () => {
+  const nextConfig = require('../package.json')["sharp-config"];
+  if (!nextConfig) {
+    throw new Error(chalk.red('No configuration found for sharp loader'));
+  }
+  if (!nextConfig.src || !nextConfig.dest) {
+    throw new Error(chalk.red('Please specify both source and destination directories'));
+  }
 
-// We don't need to expose the whole package.json to the browser, but we will need the sizes
-// and file types recognized by sass, in order to dynamically build srcset's.
-const exposeSass = { sizes, types: [...types] };
-fs.writeFile("temp/sassConfig.js", "module.exports = " + JSON.stringify(exposeSass), function(err) {
-  if(err) { return console.log(err); }
-});
+  // We only process all the images if:
+  //  - this is the first time the script is run; or
+  //  - if the configuration has changed.
+  if (JSON.stringify(config) === JSON.stringify(nextConfig)) {
+    return false;
+  }
+
+  config = nextConfig;
+  src = config.src;
+  dest = config.dest;
+  sizes = config.sizes || [];
+  types = new Set(config.types || [ "jpg", "jpeg", "png", "webp", "tiff" ]);
+  quality = parseInt(config.quality, 10) || 85;
+  withoutEnlargement = ('withoutEnlargement' in config) ? config.withoutEnlargement : true;
+
+  // We don't need to expose the whole package.json to the browser, but we will need the sizes
+  // and file types recognized by sharp, in order to dynamically build srcset's.
+  const exposeSharp = { sizes, types: [...types] };
+  fs.writeFileSync("temp/sharpConfig.js", "module.exports = " + JSON.stringify(exposeSharp));
+
+  return true;
+};
 
 // Sharp ref:
 //  http://sharp.dimens.io/en/stable/api-resize/
 
-function runSharp(inFile) {
+const runSharp = (inFile) => {
   const imagePath = path.format(inFile);
 
   // Delete the .base entry in the inFile path object so that when constructing the outFile path it buils with the correct suffix.
@@ -54,7 +79,8 @@ function runSharp(inFile) {
       const curDir = path.resolve(parentDir, childDir);
       try {
         fs.mkdirSync(curDir);
-      } catch (err) {
+      }
+      catch (err) {
         if (err.code !== 'EEXIST') {
           throw err;
         }
@@ -107,12 +133,11 @@ function runSharp(inFile) {
               resolve({ outFile, data });
             }
           });
-      }));
+      }).catch(error));
     });
 
     return Promise.all(tasks)
       .then(function(infos) {
-        // TODO: Switch to disable this pretty output?
         const logStrs = [
           "Sharp output:",
           imagePath.replace(src, "") + " [" + metadata.width + "w " + metadata.height + "h] [" + Math.round(stats.size / 1024) + "kb]"
@@ -124,14 +149,14 @@ function runSharp(inFile) {
           const logNotResized = (data.width === metadata.width) ? chalk.cyan(" [upscaling disabled, used original]") : "";
           logStrs.push(logName + logData + logNotResized);
         });
-        console.log(logStrs.join("\n"));
-      });
-  })
-    .catch(handleError);
-}
+        log(logStrs.join("\n"));
+      })
+      .catch(error);
+  });
+};
 
-function processImages(images) {
-  if(!Array.isArray(images)) {
+const processImages = (images) => {
+  if (!Array.isArray(images)) {
     images = [ images ];
   }
 
@@ -148,21 +173,26 @@ function processImages(images) {
 
   return Promise.all(promises)
     .then(function() {
-      if(!promises.length) {
+      // If nothing was processed, this output is useless.
+      if (!promises.length) {
         return;
       }
 
       const endTime = new Date().getTime();
       const doneStr = "Sharp: " + images.length + " images processed in " + (Math.round((endTime - startTime) /10) /100) + "s.";
-      console.log(doneStr);
-    })
-    .catch(handleError);
-}
+      log(doneStr);
+    });
+};
 
-function deleteProcessedImages(imagePath) {
-  const inFile = path.parse(imagePath);
+const deleteProcessedImages = (imagePath) => {
+  return new Promise((resolve, reject) => {
+    const inFile = path.parse(imagePath);
 
-  if(types.has(inFile.ext.replace('.', '').toLowerCase())) {
+    if (!types.has(inFile.ext.replace('.', '').toLowerCase())) {
+      resolve();
+      return;
+    }
+
     // Delete the .base entry in the inFile path object so that when constructing the outFile path it buils with the correct suffix.
     const fileName = inFile.name;
     delete inFile.base;
@@ -174,35 +204,126 @@ function deleteProcessedImages(imagePath) {
       imagePath.replace(src, "") + " has been unlinked"
     ];
 
-    config.sizes.forEach(function(size) {
-      inFile.name = fileName + size.suffix;
-      const outFile = path.format(inFile);
+    const promises = config.sizes.map((size) => {
+      return new Promise((res, rej) => {
+        inFile.name = fileName + size.suffix;
+        const outFile = path.format(inFile);
 
-      if(fs.existsSync(outFile)) {
-        fs.unlinkSync(outFile);
-        logStrs.push("  " + outFile.replace(dest, "") + chalk.magenta(" [unlinked]"));
-      }
+        if(!fs.existsSync(outFile)) {
+          log(logStrs.join("\n"));
+          res();
+          return;
+        }
+
+        fs.unlink(outFile, (err) => {
+          logStrs.push("  " + outFile.replace(dest, "") + chalk.magenta(" [unlinked]"));
+          res();
+        });
+      });
     });
 
-    console.log(logStrs.join("\n"));
-  }
-}
+    resolve(Promise.all(promises).then(() => {
+      log(logStrs.join("\n"));
+    }));
+  });
+};
+
+const processAllImages = () => {
+  return new Promise((resolve, reject) => {
+    glob(src + "/**/*.+(" + [...types].join('|') + ")", {}, function(err, images) {
+      if(err) {
+        reject(err);
+        return;
+      }
+
+      processImages(images).then(() => {
+        resolve();
+      });
+    });
+  });
+};
+
+// Get our initial configuration.
+verifySharpConfig();
+
+let watcher;
+let callback;
 
 // Watch for changes to pictures and reprocess them as necessary.
 // This also builds every image when first run, so there's no need to call processImages from the glob below.
 if(process.env.NODE_ENV === 'development') {
-  chokidar.watch(src)
-    .on('add', processImages)
-    .on('change', processImages)
-    .on('unlink', deleteProcessedImages)
-    .on('error', handleError);
+  watcher = chokidar.watch([ src, './package.json' ], {
+    ignoreInitial: true
+  });
+
+  const currentTasks = new Set();
+
+  const chokidarWatcher = (method, action, text) => {
+    return (arg) => {
+      if (Spinner.initialized()) {
+        if (!currentTasks.size) {
+          Spinner.restart('sharp');
+        }
+
+        // Make sure our spinner knows we're sharp'ing something.
+        currentTasks.add(action + ':' + arg);
+
+        Spinner.text('sharp', text);
+      }
+
+      method(arg)
+        .then(() => {
+          exec("yarn dummy:refresh");
+
+          if (Spinner.initialized()) {
+            // This sharp task has finished.
+            currentTasks.delete(action + ':' + arg);
+
+            // If there are no sharp tasks active, we can stop the spinner.
+            if (!currentTasks.size) {
+              Spinner.success('sharp');
+            }
+
+            callback();
+          }
+        })
+        .catch(error);
+    };
+  };
+
+  setTimeout(() => {
+    watcher
+      .on('add', chokidarWatcher(processImages, 'add', 'processing changed responsive images...'))
+      .on('change', (arg) => {
+        // A change in package.json could mean a change in our configuration.
+        if (arg === 'package.json') {
+          delete require.cache[require.resolve('../package.json')];
+
+          if (verifySharpConfig()) {
+            chokidarWatcher(processAllImages, 'change', 'processing all responsive images...')();
+          }
+
+          return;
+        }
+
+        chokidarWatcher(processImages)(arg, 'change', 'processing changed responsive images...');
+      })
+      .on('unlink', chokidarWatcher(deleteProcessedImages, 'unlink', 'processing changed responsive images...'))
+      .on('ready', chokidarWatcher(processAllImages, 'ready', 'processing all responsive images...'))
+      .on('error', error);
+  });
+
+  module.exports = {
+    setCallback(cb) {
+      callback = cb;
+    },
+
+    close() {
+      watcher.close();
+    }
+  };
 }
 else {
-  glob(src + "/**/*.+(" + [...types].join('|') + ")", {}, function(err, images) {
-    if(err) {
-      throw new Error(err);
-    }
-
-    processImages(images);
-  });
+  processAllImages()
+    .catch(error);
 }

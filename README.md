@@ -19,7 +19,7 @@ Below are listed the versions used in Netlify to create the live, preview and br
     - If after running the above command it complains that *xcode alone is not sufficient on sierra*, try running `xcode-select --install`. Note that **macOS Sierra 10.12.6 or higher and XCode 9.2 are required.**
 
 
-1. [hugo](https://gohugo.io/) v0.31.1 - builds the structure of the website based on the content setup, although we're phasing it out in favor of a fully JS/React solution. Any version over 0.27.1 should still work though.
+1. [hugo](https://gohugo.io/) v0.37.1 - builds the structure of the website based on the content setup, although we're phasing it out in favor of a fully JS/React solution. Any version over 0.27.1 should still work though.
 
     - Install:
       ```sh
@@ -30,7 +30,7 @@ Below are listed the versions used in Netlify to create the live, preview and br
       brew update && brew upgrade hugo
       ```
 
-2. [yarn](https://yarnpkg.com/) v1.3.2 - package/dependency manager. Any version of yarn above 0.27.5 should still work though.
+2. [yarn](https://yarnpkg.com/) v1.5.1 - package/dependency manager. Any version of yarn above 0.27.5 should still work though.
 
     - Install:
       ```sh
@@ -46,7 +46,7 @@ Below are listed the versions used in Netlify to create the live, preview and br
       ```
     - Switch between yarn versions (global change):
       ```sh
-      brew switch yarn 1.3.2
+      brew switch yarn 1.5.1
       ```
 
 3. [nvm](https://github.com/creationix/nvm) v0.33.8 - (not used by Netlify), very useful to manage your locale Node.js versions.
