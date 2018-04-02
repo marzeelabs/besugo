@@ -2,7 +2,6 @@ const Spinner = require('./Spinner');
 
 // Borrowed heavily from https://github.com/michaelgilley/webpack-logger-plugin/
 
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
 const ProgressPlugin = require('webpack').ProgressPlugin;
 
 const internal = {
@@ -127,14 +126,15 @@ module.exports = class WebpackLoggerPlugin {
 
     // Webpack has finished bundling and processing the files.
     compiler.plugin('done', (stats) => {
-      let messages = formatWebpackMessages(stats.toJson());
-
-      if (!messages.errors.length && !messages.warnings.length) {
+      if (!stats.hasErrors() && !stats.hasWarnings()) {
         internal.success(this);
+        return;
       }
 
-      let toShow = (messages.errors.length) ? messages.errors : messages.warnings;
-      for(let err of toShow) {
+      // We don't need to show 50 times the same error if the script just happens
+      // to run on 50 different pages.
+      let messages = new Set(stats.toJson()[stats.hasErrors() ? 'errors' : 'warnings']);
+      for(let err of messages) {
         internal.error(this, err);
       }
     });
