@@ -1,9 +1,10 @@
 const cp = require('child_process');
 
+const Spawn = require('../libs/Spawn');
 const Spinner = require('../libs/Spinner');
 const Shutdown = require('../libs/Shutdown');
 
-module.exports = new Promise((resolve, reject) => {
+const getServer = (resolve) => {
   let hugoErrored = false;
 
   // Set the initial state when starting the build process.
@@ -17,6 +18,7 @@ module.exports = new Promise((resolve, reject) => {
     let str = data.toString();
     let lines = str.split('\n');
     for(let line of lines) {
+      // This first check may not be needed anymore in recent versions of hugo.
       if (line.indexOf('Started building sites') === 0) {
         // Errors during first build are shown before this message.
         if (!hugoErrored) {
@@ -34,7 +36,11 @@ module.exports = new Promise((resolve, reject) => {
         Spinner.error('hugo', line);
         resolve();
       }
-      else if (line.indexOf('total in ') === 0) {
+      else if (line.indexOf('Watching for changes in ') === 0) {
+        Spinner.success('hugo');
+        resolve();
+      }
+      else if (line.toLowerCase().indexOf('total in ') === 0) {
         Spinner.success('hugo');
         resolve();
       }
@@ -49,4 +55,17 @@ module.exports = new Promise((resolve, reject) => {
   Shutdown.set('hugo', () => {
     hugo.kill('SIGINT');
   });
+
+  hugo.close = function() {
+    hugo.kill();
+  };
+
+  return hugo;
+};
+
+module.exports = Spawn({
+  spinner: 'hugo',
+  restartText: 'building site...',
+  watchFile: 'config.yml',
+  getServer
 });
