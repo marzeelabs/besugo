@@ -4,7 +4,7 @@ const Logger = require('./Logger');
 const Spinner = require('./Spinner');
 
 // configurations
-const hugoConfig = require('node-yaml').readSync("../../config.yml");
+const hugoConfig = require('node-yaml').readSync("../../configs/hugo.yml");
 
 const internal = {
   tasks: new Map(),

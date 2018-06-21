@@ -144,7 +144,7 @@ export default class TopHeader extends BesugoComponent {
 
       case 'mousedown':
       case 'touchstart':
-        if(!$(e.target).closest(".navigation").length) {
+        if (!$(e.target).closest(".navigation").length) {
           $(this.domNavigation).removeClass('is-open');
         }
         break;

@@ -7,3 +7,4 @@ yarn-error.log
 Thumbs.db
 .DS_Store
 !.gitkeep
+/config.yml

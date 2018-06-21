@@ -22,7 +22,7 @@ const Watch = require('./libs/Watch');
 
 const tasks = [
   [ 'serve', '' ],
-  [ 'cms', 'netlify-cms' ],
+  [ 'configs', 'configurations' ],
   [ 'sass', 'sass/post-css' ],
   [ 'sharp', 'sharp' ],
   [ 'hugo', 'hugo' ],
@@ -34,26 +34,26 @@ Spinner.initialize(tasks);
 Shutdown.initialize();
 
 // First step is always to clean up the public and temp directories, to make sure
-// we're on a clean build.
-const clean = require('./tasks/clean');
-
-// Only start the spinners after emptying the public and temp directories.
-clean.then(() => {
+// we're on a clean build. Only start the spinners after emptying the public and
+// temp directories.
+require('./tasks/clean').then(() => {
   Spinner.start();
 
-  const ready = [
-    require('./tasks/cms'),
-    require('./tasks/sass'),
-    require('./tasks/sharp'),
-    require('./tasks/hugo'),
-  ];
+  tasks.forEach((task) => {
+    Spinner.text(task[0], 'waiting...');
+  });
 
-  // During first init, webpack only runs after everything else, even if those tasks
-  // fail with errors, as it's the most CPU intensive process and it can slow down
-  // the rest of the processes, as well as the console output itself.
-  Spinner.text('webpack', 'waiting...');
-
-  Promise.all(ready).then(() => {
-    require('./tasks/webpack');
+  // Before anything we need to ensure the configuration files are finished.
+  require('./tasks/configs').then(() => {
+    // During first init, webpack only runs after everything else, even if those tasks
+    // fail with errors, as it's the most CPU intensive process and it can slow down
+    // the rest of the processes, as well as the console output itself.
+    Promise.all([
+      require('./tasks/sass'),
+      require('./tasks/sharp'),
+      require('./tasks/hugo'),
+    ]).then(() => {
+      require('./tasks/webpack');
+    });
   });
 });

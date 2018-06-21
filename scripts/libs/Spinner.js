@@ -7,7 +7,7 @@ const Logger = require('./Logger');
 let internal = null;
 
 // configurations
-const hugoConfig = require('node-yaml').readSync("../../config.yml");
+const hugoConfig = require('node-yaml').readSync("../../configs/hugo.yml");
 const packageJson = require("../../package.json");
 
 class constantSpinner extends Multispinner {
