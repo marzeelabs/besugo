@@ -14,7 +14,17 @@ export default class SrcSet extends BesugoComponent {
 
   static buildContainer(parserUtils, props) {
     const div = parserUtils.createNode('div');
-    parserUtils.setAttribute(div, 'class', (props.className || props.classname) + '-wrapper');
+    const classes = [];
+
+    if (props.className || props.classname) {
+      classes.push((props.className || props.classname) + '-wrapper');
+    }
+
+    if (props.wrapperclass) {
+      classes.push(props.wrapperclass);
+    }
+
+    parserUtils.setAttribute(div, 'class', classes.join(' '));
     return div;
   }
 
