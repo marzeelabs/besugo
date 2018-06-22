@@ -27,11 +27,9 @@ export default class BlogPost extends BesugoComponent {
     props.people = authors.map((author) => {
       return {
         link: author.getAttribute('link'),
-        Title: author.getAttribute('title'),
-        Summary: author.getAttribute('summary'),
-        Params: {
-          image: author.getAttribute('image')
-        }
+        title: author.getAttribute('title'),
+        summary: author.getAttribute('summary'),
+        image: author.getAttribute('image'),
       };
     });
   }
@@ -49,8 +47,8 @@ export default class BlogPost extends BesugoComponent {
           const personData = this.props.fieldsMetaData.getIn(['people', person.getIn(['person'])]);
           return personData && {
             link: '#',
-            Title: personData.getIn(['title']),
-            Summary: personData.getIn(['body']),
+            title: personData.getIn(['title']),
+            summary: personData.getIn(['body']),
             image: personData.getIn(['image'])
           }
         })
