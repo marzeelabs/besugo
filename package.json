@@ -14,6 +14,7 @@
     "src": "static/images",
     "dest": "public/images",
     "quality": 80,
+    "types": [ "jpg", "jpeg", "png", "webp", "tiff" ],
     "sizes": [
       {
         "suffix": "-large",
@@ -43,7 +44,7 @@
     "build:sass": "npm-run-all -s sass:scss-compile sass:postcssnano",
     "build:configs": "node scripts/configs.js",
     "build:sharp": "node scripts/sharp.js",
-    "compile:webpack": "webpack --watch --display none & webpack-dev-server --color",
+    "compile:webpack": "webpack --watch --display none --mode development & webpack-dev-server --color",
     "watch:configs": "chokidar 'scripts/configs.js' 'configs/*.yml' -c 'yarn build:configs && yarn dummy:refresh' --silent",
     "watch:sass": "chokidar 'package.json' 'scss/**/*.scss' -c 'npm-run-all -s sass:scss-compile sass:postcss dummy:refresh' --initial --silent",
     "watch:sharp": "nodemon -q -w scripts/sharp.js -x 'yarn build:sharp && yarn dummy:refresh'",
@@ -51,7 +52,7 @@
     "watch:webpack": "nodemon -q -w webpack.config.js -x 'yarn compile:webpack'",
     "dummy:refresh": "node scripts/dummy-refresh.js",
     "webpack": "webpack",
-    "build": "export NODE_ENV=production && npm-run-all -p erase:* && npm-run-all -p build:* && hugo && webpack",
+    "build": "export NODE_ENV=production && npm-run-all -p erase:* && npm-run-all -p build:* && hugo && webpack --mode production",
     "start:verbose": "export NODE_ENV=development && npm-run-all -p erase:* && yarn build:configs && npm-run-all -p watch:*",
     "start": "nodemon -q -w package.json -w scripts/serve.js -w scripts/libs -w scripts/tasks -x 'node scripts/serve.js'",
     "rebuild": "rm -Rf node_modules && yarn install"
@@ -92,7 +93,8 @@
     "static-site-generator-webpack-plugin": "^3.4.1",
     "susy": "^2.2.12",
     "toml-require": "^1.1.0",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.2"
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
   }
 }

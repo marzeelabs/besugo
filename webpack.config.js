@@ -22,6 +22,21 @@ require('toml-require').install();
 const netlifyToml = require("./netlify.toml");
 const packageJson = require("./package.json");
 
+const allExports = {
+  mode: process.env.NODE_ENV,
+
+  performance: {
+    // maxEntrypointSize: 1048576,
+    // maxAssetSize: 1048576,
+    hints: false,
+
+    assetFilter: (assetFilename) => {
+      const check = new RegExp('.(' + packageJson['sharp-config'].types.join("|") + ')$', 'gi');
+      return !check.test(assetFilename);
+    },
+  },
+};
+
 const allPlugins = [];
 if (process.env.NODE_ENV !== 'development') {
   allPlugins.push(new UglifyJSPlugin());
@@ -36,7 +51,7 @@ class WatchDirectoriesPlugin {
   apply(compiler) {
     compiler.plugin("after-compile", (compilation, callback) => {
       this.directories.forEach((dir) => {
-        compilation.contextDependencies.push(path.resolve(__dirname, dir));
+        compilation.contextDependencies.add(path.resolve(__dirname, dir));
       });
       callback();
     });
@@ -65,6 +80,8 @@ const buildGlobals = () => {
 
 module.exports = [
   {
+    ...allExports,
+
     // Here the application starts executing and webpack starts bundling
     entry: {
       js: "./scripts/webpack/site.js",
@@ -132,6 +149,8 @@ module.exports = [
   },
 
   {
+    ...allExports,
+
     entry: ["./components/App.jsx"],
 
     output: {
