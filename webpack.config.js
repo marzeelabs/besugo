@@ -43,6 +43,26 @@ class WatchDirectoriesPlugin {
   }
 };
 
+// Returns a simulated window for use in Node during SSR.
+const buildGlobals = () => {
+  const globals = { ...(new jsdom(`...`).window) };
+
+  // We don't want any console output at this stage.
+  globals.console = {
+    log: function() {},
+    warning: function() {},
+    error: function() {},
+  };
+
+  // Some package somewhere tries calling window.location.reload, which
+  // triggers a notice in the console by jsdom that we don't care about.
+  // (Haven't figured out what causes this, started after doing some
+  // updates to dependencies, maybe React?)
+  globals.location.reload = function() {};
+
+  return globals;
+};
+
 module.exports = [
   {
     // Here the application starts executing and webpack starts bundling
@@ -176,14 +196,7 @@ module.exports = [
         // many different dependencies can expect different global properties,
         // even webpack itself, in particular its hot reload module, requires a minimally "real" environment.
         // Ref: https://github.com/tmpvar/jsdom
-        globals: {
-          ...(new jsdom(`...`).window),
-          console: {
-            log: function() {},
-            warning: function() {},
-            error: function() {}
-          }
-        }
+        globals: buildGlobals(),
       })
     ])
   }
