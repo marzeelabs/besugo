@@ -45,7 +45,7 @@
     "build:sharp": "node scripts/sharp.js",
     "compile:webpack": "webpack --watch --display none & webpack-dev-server --color",
     "watch:sass": "chokidar 'package.json' 'scss/**/*.scss' -c 'npm-run-all -s sass:scss-compile sass:postcss dummy:refresh' --initial --silent",
-    "watch:configs": "chokidar 'scripts/configs.js' 'configs/config.yml' -c 'yarn build:configs && yarn dummy:refresh' --initial --silent",
+    "watch:configs": "chokidar 'scripts/configs.js' 'configs/*.yml' -c 'yarn build:configs && yarn dummy:refresh' --initial --silent",
     "watch:sharp": "nodemon -q -w scripts/sharp.js -x 'yarn build:sharp && yarn dummy:refresh'",
     "watch:hugo": "hugo -w",
     "watch:webpack": "nodemon -q -w webpack.config.js -x 'yarn compile:webpack'",
