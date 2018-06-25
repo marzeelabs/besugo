@@ -1,6 +1,6 @@
 {
   "name": "MZ_Boilerplate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Marzee Labs <info@marzeelabs.org>",
   "license": "GPL-3.0",
   "config": {
@@ -14,7 +14,13 @@
     "src": "static/images",
     "dest": "public/images",
     "quality": 80,
-    "types": [ "jpg", "jpeg", "png", "webp", "tiff" ],
+    "types": [
+      "jpg",
+      "jpeg",
+      "png",
+      "webp",
+      "tiff"
+    ],
     "sizes": [
       {
         "suffix": "-large",
@@ -70,6 +76,11 @@
     "cli-spinners": "^1.1.0",
     "copy-webpack-plugin": "^4.5.1",
     "cssnano": "^3.10.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
     "find-and-replace": "^1.0.2",
     "glob": "^7.1.2",
     "jquery": "^3.3.1",

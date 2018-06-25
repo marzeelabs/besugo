@@ -5,13 +5,13 @@ module.exports = Watch({
 
   files: [
     'scripts/configs.js',
-    'configs/config.yml'
+    'configs/config.yml',
   ],
 
   tasks: [
     {
       command: 'yarn build:configs',
-      text: 'generating configs...'
-    }
-  ]
+      text: 'generating configs...',
+    },
+  ],
 });

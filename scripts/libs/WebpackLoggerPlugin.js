@@ -1,35 +1,35 @@
-const Spinner = require('./Spinner');
-
 // Borrowed heavily from https://github.com/michaelgilley/webpack-logger-plugin/
 
-const ProgressPlugin = require('webpack').ProgressPlugin;
+const { ProgressPlugin } = require('webpack');
+const Spinner = require('./Spinner');
 
 const internal = {
   plugins: new Map(),
 
-  set: function(plugin) {
+  set(plugin) {
     this.plugins.set(plugin, {
       status: 'running',
-      text: ''
+      text: '',
     });
   },
 
-  delete: function(plugin) {
+  delete(plugin) {
     this.plugins.delete(plugin);
   },
 
-  restart: function(active) {
-    let activePlugin = this.plugins.get(active);
+  restart(active) {
+    const activePlugin = this.plugins.get(active);
     activePlugin.status = 'running';
 
-    for(let p of this.plugins.keys()) {
+    // eslint-disable-next-line
+    for (let p of this.plugins.keys()) {
       // The current plugin has been restarted, we have no need to check its current status.
       if (active === p) {
         continue;
       }
 
       // If another task is still running, so is the spinner.
-      let plugin = this.plugins.get(p);
+      const plugin = this.plugins.get(p);
       if (plugin.status === 'running') {
         return;
       }
@@ -39,21 +39,22 @@ const internal = {
     Spinner.restart('webpack');
   },
 
-  text: function(active, text) {
-    let activePlugin = this.plugins.get(active);
+  text(active, text) {
+    const activePlugin = this.plugins.get(active);
     activePlugin.text = text;
     Spinner.text('webpack', text);
   },
 
-  success: function(active) {
-    let activePlugin = this.plugins.get(active);
+  success(active) {
+    const activePlugin = this.plugins.get(active);
     if (activePlugin.status !== 'error') {
       activePlugin.status = 'success';
     }
 
     // The spinner only stops if all webpack tasks have ended.
-    for(let plugin of this.plugins.values()) {
-      if (plugin.status === 'error') {
+    // eslint-disable-next-line
+    for (let plugin of this.plugins.values()) {
+      if (plugin.status === 'error') {
         Spinner.error('webpack', true);
         return;
       }
@@ -66,12 +67,12 @@ const internal = {
     Spinner.success('webpack');
   },
 
-  error: function(active, err) {
+  error(active, err) {
     if (Spinner.error('webpack', err)) {
-      let activePlugin = this.plugins.get(active);
+      const activePlugin = this.plugins.get(active);
       activePlugin.status = 'error';
     }
-  }
+  },
 };
 
 module.exports = class WebpackLoggerPlugin {

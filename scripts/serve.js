@@ -4,21 +4,12 @@ process.env.SERVER_MODE = 'simple';
 
 const chalk = require('chalk');
 
-const MOVE_UP = new Buffer('1b5b3141', 'hex').toString();
+const MOVE_UP = Buffer.from('1b5b3141', 'hex').toString();
 console.log(MOVE_UP + chalk.grey('\n Initializing development server...'));
-
-const chokidar = require('chokidar');
-const cp = require('child_process');
-const fs = require('fs');
-const glob = require('glob');
-const nodemon = require('nodemon');
-const path = require('path');
-const sharp = require('sharp');
 
 const Logger = require('./libs/Logger');
 const Shutdown = require('./libs/Shutdown');
 const Spinner = require('./libs/Spinner');
-const Watch = require('./libs/Watch');
 
 const tasks = [
   [ 'serve', '' ],
@@ -26,7 +17,7 @@ const tasks = [
   [ 'sass', 'sass/post-css' ],
   [ 'sharp', 'sharp' ],
   [ 'hugo', 'hugo' ],
-  [ 'webpack', 'webpack' ]
+  [ 'webpack', 'webpack' ],
 ];
 
 Logger.initialize(tasks);

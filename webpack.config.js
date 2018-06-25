@@ -1,26 +1,26 @@
-const glob = require("glob");
-const path = require("path");
+const glob = require('glob');
+const path = require('path');
 
 // webpack config reference:
 //  https://webpack.js.org/configuration/
-const webpack = require("webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
-// Utils needed for building the static webpages, instead of requiring them in each individual script,
-// and thus bundling them in the final app.min.js, we're much better off just passing them through
-// webpack's server if they are only needed for the markup rendering.
-const fs = require("fs");
-const jsdom = require("jsdom").JSDOM;
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin'); // eslint-disable-line
 const StaticSiteGeneratorPlugin = require('./scripts/libs/StaticSiteGeneratorWebpack4Plugin.js'); // eslint-disable-line
+
+// Utils needed for building the static webpages, instead of requiring them in each
+// individual script, and thus bundling them in the final app.min.js, we're much better
+// off just passing them through webpack's server if they are only needed for the
+// markup rendering.
+const fs = require('fs');
+const { JSDOM } = require('jsdom');
 const parser = require('parse5');
 const parserUtils = require('parse5-utils');
 const { renderToString } = require('react-dom/server');
 
 // configurations
 require('toml-require').install();
-const netlifyToml = require("./netlify.toml");
-const packageJson = require("./package.json");
+const netlifyToml = require('./netlify.toml');
+const packageJson = require('./package.json');
 
 const allExports = {
   mode: process.env.NODE_ENV,
@@ -30,8 +30,8 @@ const allExports = {
     // maxAssetSize: 1048576,
     hints: false,
 
-    assetFilter: (assetFilename) => {
-      const check = new RegExp('.(' + packageJson['sharp-config'].types.join("|") + ')$', 'gi');
+    assetFilter: (assetFilename) => {
+      const check = new RegExp(`.(${packageJson['sharp-config'].types.join('|')})$`, 'gi');
       return !check.test(assetFilename);
     },
   },
@@ -58,24 +58,24 @@ class WatchDirectoriesPlugin {
       callback();
     });
   }
-};
+}
 
 // Returns a simulated window for use in Node during SSR.
 const buildGlobals = () => {
-  const globals = { ...(new jsdom(`...`).window) };
+  const globals = { ...(new JSDOM('...').window) };
 
   // We don't want any console output at this stage.
   globals.console = {
-    log: function() {},
-    warning: function() {},
-    error: function() {},
+    log() {},
+    warning() {},
+    error() {},
   };
 
   // Some package somewhere tries calling window.location.reload, which
   // triggers a notice in the console by jsdom that we don't care about.
   // (Haven't figured out what causes this, started after doing some
   // updates to dependencies, maybe React?)
-  globals.location.reload = function() {};
+  globals.location.reload = () => {};
 
   return globals;
 };
@@ -86,8 +86,8 @@ module.exports = [
 
     // Here the application starts executing and webpack starts bundling
     entry: {
-      js: "./scripts/webpack/site.js",
-      admin: "./scripts/webpack/admin.js"
+      js: './scripts/webpack/site.js',
+      admin: './scripts/webpack/admin.js',
     },
 
     // options related to how webpack emits results
@@ -97,7 +97,7 @@ module.exports = [
       path: path.resolve(__dirname, netlifyToml.build.publish),
 
       // the filename template for entry chunks
-      filename: "[name]/main.min.js"
+      filename: '[name]/main.min.js',
     },
 
     // configuration regarding modules
@@ -111,20 +111,20 @@ module.exports = [
             loader: 'babel-loader',
             options: {
               babelrc: false,
-              presets: [ "env" ]
-            }
-          }
-        }
-      ]
+              presets: [ 'env' ],
+            },
+          },
+        },
+      ],
     },
 
     // additional plugins
     plugins: allPlugins.concat([
       // Make sure newly added files (even within subfolders) trigger a recompile.
       new WatchDirectoriesPlugin([
-        "./js/site",
-        "./js/admin"
-      ])
+        './js/site',
+        './js/admin',
+      ]),
     ]),
 
     // This is not specific to building the js files,
@@ -138,28 +138,29 @@ module.exports = [
       historyApiFallback: {
         rewrites: [
           {
-            // Without this rule, if we typed "/admin" we would end up in "/admin#/" instead of "/admin/#/",
-            // making it impossible to use the CMS interface in localhost.
+            // Without this rule, if we typed "/admin" we would end up in "/admin#/"
+            // instead of "/admin/#/", making it impossible to use the CMS interface
+            // in localhost.
             from: /\/admin$/,
-            to: '/admin/'
-          }
-        ]
+            to: '/admin/',
+          },
+        ],
       },
       port: packageJson.config.port,
-      watchContentBase: true
-    }
+      watchContentBase: true,
+    },
   },
 
   {
     ...allExports,
 
-    entry: ["./components/App.jsx"],
+    entry: [ './components/App.jsx' ],
 
     output: {
       path: path.resolve(__dirname, netlifyToml.build.publish),
-      filename: "js/app.min.js",
+      filename: 'js/app.min.js',
       // Required for static-site-generator-webpack-plugin,
-      libraryTarget: 'umd'
+      libraryTarget: 'umd',
     },
 
     // configuration regarding modules
@@ -173,16 +174,16 @@ module.exports = [
             loader: 'babel-loader',
             options: {
               babelrc: false,
-              presets: [ "env", "react" ]
-            }
-          }
-        }
-      ]
+              presets: [ 'env', 'react' ],
+            },
+          },
+        },
+      ],
     },
 
     resolve: {
-      modules: [ "node_modules", path.resolve(__dirname, "components") ],
-      extensions: [ ".js", ".json", ".jsx" ]
+      modules: [ 'node_modules', path.resolve(__dirname, 'components') ],
+      extensions: [ '.js', '.json', '.jsx' ],
     },
 
     // additional plugins
@@ -192,8 +193,8 @@ module.exports = [
         {
           from: 'temp/hugo',
           to: path.resolve(__dirname, netlifyToml.build.publish),
-          ignore: [ '*.html' ]
-        }
+          ignore: [ '*.html' ],
+        },
       ]),
 
       // Hugo-generated html files go through a react server-side rendering process,
@@ -209,16 +210,17 @@ module.exports = [
           parserUtils,
           renderToString,
           pathsReplace: [
-            { from: 'temp/hugo/', to: '' }
-          ]
+            { from: 'temp/hugo/', to: '' },
+          ],
         },
 
         // Simulate a window object inside our generator environment;
         // many different dependencies can expect different global properties,
-        // even webpack itself, in particular its hot reload module, requires a minimally "real" environment.
+        // even webpack itself, in particular its hot reload module, requires a
+        // minimally "real" environment.
         // Ref: https://github.com/tmpvar/jsdom
         globals: buildGlobals(),
-      })
-    ])
-  }
+      }),
+    ]),
+  },
 ];
