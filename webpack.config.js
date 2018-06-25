@@ -6,13 +6,13 @@ const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 
 // Utils needed for building the static webpages, instead of requiring them in each individual script,
 // and thus bundling them in the final app.min.js, we're much better off just passing them through
 // webpack's server if they are only needed for the markup rendering.
 const fs = require("fs");
 const jsdom = require("jsdom").JSDOM;
+const StaticSiteGeneratorPlugin = require('./scripts/libs/StaticSiteGeneratorWebpack4Plugin.js'); // eslint-disable-line
 const parser = require('parse5');
 const parserUtils = require('parse5-utils');
 const { renderToString } = require('react-dom/server');
@@ -49,7 +49,9 @@ class WatchDirectoriesPlugin {
   }
 
   apply(compiler) {
-    compiler.plugin("after-compile", (compilation, callback) => {
+    const plugin = { name: 'WatchDirectoriesPlugin' };
+
+    compiler.hooks.afterCompile.tapAsync(plugin, (compilation, callback) => {
       this.directories.forEach((dir) => {
         compilation.contextDependencies.add(path.resolve(__dirname, dir));
       });

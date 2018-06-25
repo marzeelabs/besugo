@@ -118,14 +118,16 @@ module.exports = class WebpackLoggerPlugin {
     const progress = new ProgressPlugin(onProgress);
     progress.apply(compiler);
 
+    const plugin = { name: 'WebpackLoggerPlugin' };
+
     // Changes were made to source or static files.
-    compiler.plugin('invalid', () => {
+    compiler.hooks.invalid.tap(plugin, () => {
       internal.restart(this);
       internal.text(this, 'compiling...');
     });
 
     // Webpack has finished bundling and processing the files.
-    compiler.plugin('done', (stats) => {
+    compiler.hooks.done.tap(plugin, (stats) => {
       if (!stats.hasErrors() && !stats.hasWarnings()) {
         internal.success(this);
         return;
@@ -133,19 +135,21 @@ module.exports = class WebpackLoggerPlugin {
 
       // We don't need to show 50 times the same error if the script just happens
       // to run on 50 different pages.
-      let messages = new Set(stats.toJson()[stats.hasErrors() ? 'errors' : 'warnings']);
-      for(let err of messages) {
+      const messages = new Set(stats.toJson()[stats.hasErrors() ? 'errors' : 'warnings']);
+
+      // eslint-disable-next-line
+      for (let err of messages) {
         internal.error(this, err);
       }
     });
 
     // This webpack task is no longer active, don't hold the spinner for it.
-    compiler.plugin('watch-close', () => {
+    compiler.hooks.watchClose.tap(plugin, () => {
       internal.delete(this);
     });
 
     // An oops has happened.
-    compiler.plugin('failed', (err) => {
+    compiler.hooks.failed.tap(plugin, (err) => {
       internal.error(this, err);
     });
   }
