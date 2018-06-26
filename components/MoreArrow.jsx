@@ -6,20 +6,20 @@ export default class MoreArrow extends BesugoComponent {
     super(props);
   }
 
-  static get config() {
+  static get config() {
     return {
-      tag: 'MoreArrow'
+      tag: 'MoreArrow',
     };
   }
 
   getData() {
     return Object.assign({
-      className: "link-more",
-      href: "#",
-      target: "_self",
-      label: "More",
-      selNext: "#next",
-      selNavigation: ".navigation"
+      className: 'link-more',
+      href: '#',
+      target: '_self',
+      label: 'More',
+      selNext: '#next',
+      selNavigation: '.navigation',
     }, this.props);
   }
 
@@ -27,14 +27,14 @@ export default class MoreArrow extends BesugoComponent {
     const data = this.getData();
 
     return (
-        <a
-          className={ data.className }
-          href={ data.href }
-          target={ data.target }
-          ref={(a) => { this.domMore = a; }}>
-
-          { data.label }
-        </a>
+      <a
+        className={ data.className }
+        href={ data.href }
+        target={ data.target }
+        ref={(a) => { this.domMore = a; }}
+      >
+        { data.label }
+      </a>
     );
   }
 
@@ -44,14 +44,14 @@ export default class MoreArrow extends BesugoComponent {
 
     $(this.domMore).click(() => {
       this.view().then((win) => {
-        let nav = win.document.querySelector(data.selNavigation);
-        let offset = nav ? $(nav).innerHeight() : 0;
+        const nav = win.document.querySelector(data.selNavigation);
+        const offset = nav ? $(nav).innerHeight() : 0;
 
         // Smooth scrolling
         $([ win.document.body, win.document.documentElement ]).animate({
-          scrollTop: $(win.document.querySelector(data.selNext)).offset().top - offset
+          scrollTop: $(win.document.querySelector(data.selNext)).offset().top - offset,
         }, 600);
       });
     });
   }
-};
+}

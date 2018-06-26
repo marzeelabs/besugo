@@ -5,18 +5,18 @@ module.exports = Watch({
 
   files: [
     'package.json',
-    'scss/**/*.scss'
+    'scss/**/*.scss',
   ],
 
   tasks: [
     {
       command: 'yarn sass:scss-compile',
-      text: 'compiling scss...'
+      text: 'compiling scss...',
     },
     {
       command: 'yarn sass:postcss',
-      text: 'post-processing css...'
-    }
+      text: 'post-processing css...',
+    },
   ],
 
   // Sass outputs the error inbetween the rest of the output.
@@ -28,26 +28,26 @@ module.exports = Watch({
           err = err.message;
         }
 
-        let lines = err.split('\n');
+        const lines = err.split('\n');
         while (lines.length > 0 && lines[0] !== '{') {
           lines.shift();
         }
-        while (lines.length > 0 && lines[lines.length -1] !== '}') {
+        while (lines.length > 0 && lines[lines.length - 1] !== '}') {
           lines.pop();
         }
         if (lines) {
-          let parsed = JSON.parse(lines.join(''));
+          const parsed = JSON.parse(lines.join(''));
           if (parsed && 'formatted' in parsed) {
             return parsed.formatted;
           }
         }
       }
-      catch(ex) {
+      catch (ex) {
         // Don't care.
       }
     }
 
     // Couldn't find the actual error lines, return the original string.
     return err;
-  }
+  },
 });

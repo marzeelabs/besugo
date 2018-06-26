@@ -10,14 +10,16 @@ const getServer = (resolve) => {
   // Set the initial state when starting the build process.
   Spinner.text('hugo', 'building site...');
 
-  const hugo = cp.spawn('hugo', ['-w']);
+  const hugo = cp.spawn('hugo', [ '-w' ]);
 
   hugo.stdout.on('data', (data) => {
     // We need to go through hugo's output to find out what it's doing
     // (if it's rebuilding, finished, or an error occurred).
-    let str = data.toString();
-    let lines = str.split('\n');
-    for(let line of lines) {
+    const str = data.toString();
+    const lines = str.split('\n');
+
+    // eslint-disable-next-line
+    for (let line of lines) {
       // This first check may not be needed anymore in recent versions of hugo.
       if (line.indexOf('Started building sites') === 0) {
         // Errors during first build are shown before this message.
@@ -56,7 +58,7 @@ const getServer = (resolve) => {
     hugo.kill('SIGINT');
   });
 
-  hugo.close = function() {
+  hugo.close = () => {
     hugo.kill();
   };
 
@@ -67,5 +69,5 @@ module.exports = Spawn({
   spinner: 'hugo',
   restartText: 'building site...',
   watchFile: 'config.yml',
-  getServer
+  getServer,
 });

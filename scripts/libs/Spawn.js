@@ -4,13 +4,18 @@ const Spinner = require('./Spinner');
 const Shutdown = require('./Shutdown');
 
 module.exports = (options) => {
-  const { spinner, restartText, watchFile, getServer } = options;
+  const {
+    spinner,
+    restartText,
+    watchFile,
+    getServer,
+  } = options;
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     let server;
     let task;
 
-    const start = function() {
+    const start = () => {
       if (server) {
         server.close();
         server = null;
@@ -20,7 +25,7 @@ module.exports = (options) => {
       try {
         server = getServer(resolve);
       }
-      catch(ex) {
+      catch (ex) {
         resolve();
         Spinner.error(spinner, ex);
       }

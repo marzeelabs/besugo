@@ -1,6 +1,22 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
+const buildSrcSet = (src) => {
+  const sharpConfig = require('../temp/sharpConfig');
+  const chunks = src.split('.');
+  const ext = chunks.pop();
+
+  // We don't build a srcset if we won't have any responsive images built for this src image.
+  if (sharpConfig.types.indexOf(ext) === -1) {
+    return null;
+  }
+
+  const path = chunks.join('.');
+  return sharpConfig.sizes
+    .map(size => `${path}${size.suffix}.${ext} ${size.width}w`)
+    .join(', ');
+};
+
 export default class SrcSet extends BesugoComponent {
   constructor(props) {
     super(props);
@@ -8,13 +24,24 @@ export default class SrcSet extends BesugoComponent {
 
   static get config() {
     return {
-      tag: 'SrcSet'
+      tag: 'SrcSet',
     };
   }
 
   static buildContainer(parserUtils, props) {
+    const { className, classname, wrapperclass } = props;
     const div = parserUtils.createNode('div');
-    parserUtils.setAttribute(div, 'class', (props.className || props.classname) + '-wrapper');
+    const classes = [];
+
+    if (className || classname) {
+      classes.push(`${className || classname}-wrapper`);
+    }
+
+    if (wrapperclass) {
+      classes.push(wrapperclass);
+    }
+
+    parserUtils.setAttribute(div, 'class', classes.join(' '));
     return div;
   }
 
@@ -40,7 +67,7 @@ export default class SrcSet extends BesugoComponent {
   renderBlock() {
     // We always show the original image in the CMS pages, so that we're not dependent
     // on the build process as we edit the content.
-    if(typeof(CMS) !== 'undefined') {
+    if (typeof CMS !== 'undefined') {
       return this.renderDefault();
     }
 
@@ -61,7 +88,7 @@ export default class SrcSet extends BesugoComponent {
       <img { ...data } srcSet={srcset} />
     );
   }
-};
+}
 
 export class SrcSetBg extends BesugoComponent {
   constructor(props) {
@@ -74,7 +101,7 @@ export class SrcSetBg extends BesugoComponent {
 
   static get config() {
     return {
-      tag: 'SrcSetBg'
+      tag: 'SrcSetBg',
     };
   }
 
@@ -85,14 +112,15 @@ export class SrcSetBg extends BesugoComponent {
       <img
         { ...data }
         ref={ (img) => { this.domImg = img; } }
-        style={ { display: 'none' }} />
+        style={ { display: 'none' }}
+      />
     );
   }
 
   renderBlock() {
     // We always show the original image in the CMS pages, so that we're not dependent
     // on the build process as we edit the content.
-    if(typeof(CMS) !== 'undefined') {
+    if (typeof CMS !== 'undefined') {
       return this.renderDefault();
     }
 
@@ -114,7 +142,8 @@ export class SrcSetBg extends BesugoComponent {
         { ...data }
         srcSet={srcset}
         ref={ (img) => { this.domImg = img; } }
-        style={ { display: 'none' }} />
+        style={ { display: 'none' }}
+      />
     );
   }
 
@@ -124,17 +153,17 @@ export class SrcSetBg extends BesugoComponent {
     this.view().then((win) => {
       // We're applying the background to the parent element where this is appended by default,
       // unless the "bg-active-element" attribute is specified.
-      const node = ("bg-active-element" in data) ? win.document.querySelector(data['bg-active-element']) : this.domImg.parentNode;
+      const node = ('bg-active-element' in data) ? win.document.querySelector(data['bg-active-element']) : this.domImg.parentNode;
       if (!node) {
         return;
       }
 
       let activeSrc = null;
       this._onLoad = () => {
-        let src = this.domImg.currentSrc || this.domImg.src;
+        const src = this.domImg.currentSrc || this.domImg.src;
         if (activeSrc !== src) {
           activeSrc = src;
-          node.style.backgroundImage = 'url("' + src + '")';
+          node.style.backgroundImage = `url("${src}")`;
         }
       };
 
@@ -154,7 +183,7 @@ export class SrcSetBg extends BesugoComponent {
         this._resizeTimer = win.setTimeout(() => {
           this._onLoad();
         }, 50);
-      }
+      };
       win.addEventListener('resize', this._onResize);
     });
   }
@@ -165,20 +194,4 @@ export class SrcSetBg extends BesugoComponent {
       win.removeEventListener('resize', this._onResize);
     });
   }
-};
-
-const buildSrcSet = function(src) {
-  const sharpConfig = require('../temp/sharpConfig');
-  const chunks = src.split('.');
-  const ext = chunks.pop();
-
-  // We don't build a srcset if we won't have any responsive images built for this src image.
-  if (sharpConfig.types.indexOf(ext) === -1) {
-    return null;
-  }
-
-  const path = chunks.join('.');
-  return sharpConfig.sizes.map((size) => {
-    return path + size.suffix + '.' + ext + ' ' + size.width + 'w';
-  }).join(', ');
-};
+}

@@ -11,57 +11,59 @@ export default class EndFooter extends BesugoComponent {
   static get config() {
     return {
       tag: 'EndFooter',
-      categories: ['footer', 'footer-pt']
+      categories: [ 'footer', 'footer-pt' ],
     };
   }
 
   static extraProps(props, xplaceholder) {
     const params = xplaceholder.getChildren('param');
-    if(params.length > 0) {
+    if (params.length > 0) {
       props.social = {};
       params.forEach((child) => {
         const name = child.getAttribute('name');
         const value = child.getAttribute('value');
+
+        // eslint-disable-next-line
         props.social[name] = value;
       });
     }
   }
 
   getData() {
-    if(this.isPreview()) {
-      const entry = this.props.entry;
+    if (this.isPreview()) {
+      const { entry } = this.props;
 
       return {
         home: {
-          url: "/"
+          url: '/',
         },
         about: {
-          url: "/pages/about"
+          url: '/pages/about',
         },
         blog: {
-          url: "/blog"
+          url: '/blog',
         },
-        copyright: entry.getIn(['data', 'copyright']),
+        copyright: entry.getIn([ 'data', 'copyright' ]),
         social: {
-          facebook: entry.getIn(['data', 'social', 'facebook']),
-          instagram: entry.getIn(['data', 'social', 'instagram']),
-          twitter: entry.getIn(['data', 'social', 'twitter']),
-        }
+          facebook: entry.getIn([ 'data', 'social', 'facebook' ]),
+          instagram: entry.getIn([ 'data', 'social', 'instagram' ]),
+          twitter: entry.getIn([ 'data', 'social', 'twitter' ]),
+        },
       };
     }
 
     // Set some default props
     const data = {
       home: {
-        url: ('home-url' in this.props) ? this.props['home-url'] : "/"
+        url: ('home-url' in this.props) ? this.props['home-url'] : '/',
       },
       about: {
-        url: ('about-url' in this.props) ? this.props['about-url'] : "/pages/about"
+        url: ('about-url' in this.props) ? this.props['about-url'] : '/pages/about',
       },
       blog: {
-        url: ('blog-url' in this.props) ? this.props['blog-url'] : "/blog"
+        url: ('blog-url' in this.props) ? this.props['blog-url'] : '/blog',
       },
-      copyright: '\xA9 2017 Besugo'
+      copyright: '\xA9 2017 Besugo',
     };
 
     return Object.assign(data, this.props);
@@ -73,9 +75,21 @@ export default class EndFooter extends BesugoComponent {
     return (
       <footer className="footer">
         <ul className="footer__menu">
-          <li className="footer__menu-item"><a href={ data.home.url }>home</a></li>
-          <li className="footer__menu-item"><a href={ data.about.url }>About</a></li>
-          <li className="footer__menu-item"><a href={ data.blog.url }>Blog</a></li>
+          <li className="footer__menu-item">
+            <a href={ data.home.url }>
+              home
+            </a>
+          </li>
+          <li className="footer__menu-item">
+            <a href={ data.about.url }>
+              About
+            </a>
+          </li>
+          <li className="footer__menu-item">
+            <a href={ data.blog.url }>
+              Blog
+            </a>
+          </li>
         </ul>
 
         <SocialIcons section="footer" { ...data } />
@@ -83,10 +97,12 @@ export default class EndFooter extends BesugoComponent {
         <div className="footer__copyright">
           <a href="/" className="footer__copyright-logo">
             <svg>
-              <use href="#logo-main"></use>
+              <use href="#logo-main" />
             </svg>
           </a>
-          <p>{ data.copyright }</p>
+          <p>
+            { data.copyright }
+          </p>
         </div>
 
       </footer>
@@ -96,9 +112,9 @@ export default class EndFooter extends BesugoComponent {
   renderPreview() {
     return (
       <div id="cmsPreview">
-        <SVGElements/>
+        <SVGElements />
         { this.renderBlock() }
       </div>
     );
   }
-};
+}

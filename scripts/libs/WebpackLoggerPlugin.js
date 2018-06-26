@@ -1,35 +1,35 @@
-const Spinner = require('./Spinner');
-
 // Borrowed heavily from https://github.com/michaelgilley/webpack-logger-plugin/
 
-const ProgressPlugin = require('webpack').ProgressPlugin;
+const { ProgressPlugin } = require('webpack');
+const Spinner = require('./Spinner');
 
 const internal = {
   plugins: new Map(),
 
-  set: function(plugin) {
+  set(plugin) {
     this.plugins.set(plugin, {
       status: 'running',
-      text: ''
+      text: '',
     });
   },
 
-  delete: function(plugin) {
+  delete(plugin) {
     this.plugins.delete(plugin);
   },
 
-  restart: function(active) {
-    let activePlugin = this.plugins.get(active);
+  restart(active) {
+    const activePlugin = this.plugins.get(active);
     activePlugin.status = 'running';
 
-    for(let p of this.plugins.keys()) {
+    // eslint-disable-next-line
+    for (let p of this.plugins.keys()) {
       // The current plugin has been restarted, we have no need to check its current status.
       if (active === p) {
         continue;
       }
 
       // If another task is still running, so is the spinner.
-      let plugin = this.plugins.get(p);
+      const plugin = this.plugins.get(p);
       if (plugin.status === 'running') {
         return;
       }
@@ -39,21 +39,22 @@ const internal = {
     Spinner.restart('webpack');
   },
 
-  text: function(active, text) {
-    let activePlugin = this.plugins.get(active);
+  text(active, text) {
+    const activePlugin = this.plugins.get(active);
     activePlugin.text = text;
     Spinner.text('webpack', text);
   },
 
-  success: function(active) {
-    let activePlugin = this.plugins.get(active);
+  success(active) {
+    const activePlugin = this.plugins.get(active);
     if (activePlugin.status !== 'error') {
       activePlugin.status = 'success';
     }
 
     // The spinner only stops if all webpack tasks have ended.
-    for(let plugin of this.plugins.values()) {
-      if (plugin.status === 'error') {
+    // eslint-disable-next-line
+    for (let plugin of this.plugins.values()) {
+      if (plugin.status === 'error') {
         Spinner.error('webpack', true);
         return;
       }
@@ -66,12 +67,12 @@ const internal = {
     Spinner.success('webpack');
   },
 
-  error: function(active, err) {
+  error(active, err) {
     if (Spinner.error('webpack', err)) {
-      let activePlugin = this.plugins.get(active);
+      const activePlugin = this.plugins.get(active);
       activePlugin.status = 'error';
     }
-  }
+  },
 };
 
 module.exports = class WebpackLoggerPlugin {
@@ -118,14 +119,16 @@ module.exports = class WebpackLoggerPlugin {
     const progress = new ProgressPlugin(onProgress);
     progress.apply(compiler);
 
+    const plugin = { name: 'WebpackLoggerPlugin' };
+
     // Changes were made to source or static files.
-    compiler.plugin('invalid', () => {
+    compiler.hooks.invalid.tap(plugin, () => {
       internal.restart(this);
       internal.text(this, 'compiling...');
     });
 
     // Webpack has finished bundling and processing the files.
-    compiler.plugin('done', (stats) => {
+    compiler.hooks.done.tap(plugin, (stats) => {
       if (!stats.hasErrors() && !stats.hasWarnings()) {
         internal.success(this);
         return;
@@ -133,19 +136,21 @@ module.exports = class WebpackLoggerPlugin {
 
       // We don't need to show 50 times the same error if the script just happens
       // to run on 50 different pages.
-      let messages = new Set(stats.toJson()[stats.hasErrors() ? 'errors' : 'warnings']);
-      for(let err of messages) {
+      const messages = new Set(stats.toJson()[stats.hasErrors() ? 'errors' : 'warnings']);
+
+      // eslint-disable-next-line
+      for (let err of messages) {
         internal.error(this, err);
       }
     });
 
     // This webpack task is no longer active, don't hold the spinner for it.
-    compiler.plugin('watch-close', () => {
+    compiler.hooks.watchClose.tap(plugin, () => {
       internal.delete(this);
     });
 
     // An oops has happened.
-    compiler.plugin('failed', (err) => {
+    compiler.hooks.failed.tap(plugin, (err) => {
       internal.error(this, err);
     });
   }
