@@ -61,6 +61,8 @@
     "build": "export NODE_ENV=production && npm-run-all -p erase:* && npm-run-all -p build:* && hugo && webpack --mode production",
     "start:verbose": "export NODE_ENV=development && npm-run-all -p erase:* && yarn build:configs && npm-run-all -p watch:*",
     "start": "nodemon -q -w package.json -w scripts/serve.js -w scripts/libs -w scripts/tasks -x 'node scripts/serve.js'",
+    "linter:eslint": "eslint --ext .jsx,.js . --fix",
+    "lint": "npm-run-all -s linter:*",
     "rebuild": "rm -Rf node_modules && yarn install"
   },
   "dependencies": {
