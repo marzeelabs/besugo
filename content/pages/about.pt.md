@@ -1,6 +1,6 @@
 ---
 title: Sobre nós
-image: /images/uploads/example.jpg
+image: /media/uploads/example.jpg
 description: Integer iaculis tortor ut magna suscipit, in suscipit risus pharetra.
 
 ---

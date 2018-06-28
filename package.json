@@ -11,8 +11,8 @@
     "last 4 ios_saf versions"
   ],
   "sharp-config": {
-    "src": "static/images",
-    "dest": "public/images",
+    "src": "static/media",
+    "dest": "public/media",
     "quality": 80,
     "types": [
       "jpg",

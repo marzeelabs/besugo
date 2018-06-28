@@ -1,6 +1,6 @@
 ---
 title: Name of the person 1
-image: /images/uploads/example_profile.jpg
+image: /media/uploads/example_profile.jpg
 i18nlanguage: pt
 ---
 

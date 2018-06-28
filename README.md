@@ -220,8 +220,8 @@ We can use *jpg* (and the *jpeg* variant), *png*, *webp* and *tiff* file types.
 To take advantage of these, you must first define in *package.json* what sizes and suffixes (to be appended to the original filename) sharp should work with; e.g.:
 ```json
 "sharp-config": {
-  "src": "static/images",
-  "dest": "public/images",
+  "src": "static/media",
+  "dest": "public/media",
   "quality": 80,
   "sizes": [
     {

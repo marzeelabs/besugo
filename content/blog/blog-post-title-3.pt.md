@@ -1,7 +1,7 @@
 ---
 i18nlanguage: pt
 title: Blog post title 3
-image: /images/uploads/example.jpg
+image: /media/uploads/example.jpg
 people:
   - person: Name of the person 2
 ---
