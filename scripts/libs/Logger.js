@@ -1,8 +1,11 @@
 const chalk = require('chalk');
+const { format } = require('util');
 
 const MOVE_LEFT = Buffer.from('1b5b3130303044', 'hex').toString();
 const MOVE_UP = Buffer.from('1b5b3141', 'hex').toString();
 const CLEAR_LINE = Buffer.from('1b5b304b', 'hex').toString();
+
+const cError = console.error;
 
 const internal = {
   tasks: [],
@@ -43,12 +46,20 @@ const internal = {
       const time = (new Date()).toLocaleString();
       console.log(`${chalk.white.bold.bgRed(`ERROR in the ${spinner} runner`)} | ${time}`);
     }
-    console.error(err);
+    cError(err);
     console.log('');
 
     this.logged = true;
     return true;
   },
+};
+
+// We need to capture any calls to console.error from outside of the available
+// hooks and events.
+console.error = (...args) => {
+  // Unfortunately we can't know exactly what called this (stack traces are too broad)
+  // so we can't assign this to a particular spinner.
+  internal.error(format(...args), 'global process');
 };
 
 module.exports = {
