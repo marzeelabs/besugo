@@ -3,8 +3,10 @@
 <Person
   link="{{ .URL }}"
   image="{{ .Params.image }}"
-  title="{{ .Title }}"
-  content="{{ .Content }}">
+  title="{{ .Title }}">
+  <Content>
+    {{ jsonify .Content }}
+  </Content>
 </Person>
 
 {{ end }}
