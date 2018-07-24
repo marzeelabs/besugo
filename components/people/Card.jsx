@@ -5,14 +5,8 @@ import SocialIcons from 'partials/SocialIcons';
 import SrcSet from 'SrcSet';
 
 export default class PersonCard extends BesugoComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  static get config() {
-    return {
-      tag: 'PersonCard',
-    };
+  static config = {
+    tag: 'PersonCard',
   }
 
   static buildContainer(parserUtils) {

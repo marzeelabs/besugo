@@ -7,15 +7,9 @@ import EndFooter from 'partials/EndFooter';
 import PersonCard from 'people/Card';
 
 export default class BlogPost extends BesugoComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  static get config() {
-    return {
-      tag: 'BlogPost',
-      categories: [ 'blog_post', 'blog_post-pt' ],
-    };
+  static config = {
+    tag: 'BlogPost',
+    categories: [ 'blog_post', 'blog_post-pt' ],
   }
 
   static extraProps(props, xplaceholder) {

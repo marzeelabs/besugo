@@ -2,14 +2,8 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 
 export default class MoreArrow extends BesugoComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  static get config() {
-    return {
-      tag: 'MoreArrow',
-    };
+  static config = {
+    tag: 'MoreArrow',
   }
 
   getData() {

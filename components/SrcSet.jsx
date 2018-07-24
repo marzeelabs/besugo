@@ -18,14 +18,8 @@ const buildSrcSet = (src) => {
 };
 
 export default class SrcSet extends BesugoComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  static get config() {
-    return {
-      tag: 'SrcSet',
-    };
+  static config = {
+    tag: 'SrcSet',
   }
 
   static buildContainer(parserUtils, props) {
@@ -91,18 +85,16 @@ export default class SrcSet extends BesugoComponent {
 }
 
 export class SrcSetBg extends BesugoComponent {
+  static config = {
+    tag: 'SrcSetBg',
+  }
+
   constructor(props) {
     super(props);
 
     this._onLoad = null;
     this._onResize = null;
     this._resizeTimer = null;
-  }
-
-  static get config() {
-    return {
-      tag: 'SrcSetBg',
-    };
   }
 
   renderDefault() {

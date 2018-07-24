@@ -29,14 +29,19 @@ export default class BesugoComponent extends React.Component {
     //   Object.assign(Comp.propTypes, config.propTypes);
     // }
 
-    // If we're in the CMS admin pages, load the necessary components as preview components
-    // of those content types
     if (typeof CMS !== 'undefined') {
-      const cats = Array.isArray(config.categories) ? config.categories : [ config.categories ];
+      // Load the necessary components as preview components of those content types.
+      if (config.categories) {
+        const cats = Array.isArray(config.categories) ? config.categories : [ config.categories ];
+        cats.forEach((cat) => {
+          CMS.registerPreviewTemplate(cat, Comp);
+        });
+      }
 
-      cats.forEach((cat) => {
-        CMS.registerPreviewTemplate(cat, Comp);
-      });
+      // Custom widgets need to be registered by the appropriate methods as well.
+      if (config.widget) {
+        CMS.registerWidget(config.widget.name, Comp, config.widget.preview);
+      }
 
       // This is only needed for CMS Previews currently; on website pages these will ideally
       // go in the baseof.html file directly.
@@ -94,6 +99,7 @@ export default class BesugoComponent extends React.Component {
 
             Components.forEach((Comp) => {
               const { config } = Comp;
+
               if (config.tag) {
                 const nodes = Comp.getChildrenInPlaceholder(domtree, config.tag, parserUtils);
                 nodes.forEach((node) => {
@@ -101,9 +107,9 @@ export default class BesugoComponent extends React.Component {
                   const props = Comp.getPropsFromPlaceholder(node);
 
                   // Replace the placeholder node with a normal div container for our component;
-                  // we need one so that later during hydrate React knows what it's doing, but we
-                  // don't use our original placeholders from now on because they're not exactly
-                  // standard.
+                  // we need one so that later during hydrate React knows what it's doing,
+                  // but we don't use our original placeholders from now on because they're
+                  // not exactly standard.
                   const container = Comp.buildContainer(parserUtils, props);
                   parserUtils.setAttribute(container, 'besugo-component', config.tag);
                   parserUtils.setAttribute(container, 'besugo-props', JSON.stringify(props));
@@ -162,8 +168,8 @@ export default class BesugoComponent extends React.Component {
         text() {
           return parserUtils.textOf(child);
         },
-        getChildren(parentNode) {
-          return BesugoComponent.getChildrenInPlaceholder(child, parentNode, parserUtils);
+        getChildren(childName) {
+          return BesugoComponent.getChildrenInPlaceholder(child, childName, parserUtils);
         },
       }));
   }
@@ -198,7 +204,9 @@ export default class BesugoComponent extends React.Component {
   //  .categories - (arr [str]) array of categories that this component will render in the CMS page
   //  .styles - (arr [str]) array of stylesheets, both internal and external, to be
   //            loaded into the CMS page
-  static get config() { return {}; }
+  //  .widget - (obj { name [str], (opt) preview [Comp] }) if this is a custom controller widget
+  //            to be used in content types with special fields
+  static config = {}
 
   // Non-static methods
 

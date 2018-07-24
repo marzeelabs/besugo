@@ -14,6 +14,7 @@ const Spinner = require('./libs/Spinner');
 const tasks = [
   [ 'serve', '' ],
   [ 'configs', 'configurations' ],
+  [ 'buildData', 'data' ],
   [ 'sass', 'sass/post-css' ],
   [ 'sharp', 'sharp' ],
   [ 'hugo', 'hugo' ],
@@ -35,16 +36,20 @@ require('./tasks/clean').then(() => {
   });
 
   // Before anything we need to ensure the configuration files are finished.
-  require('./tasks/configs').then(() => {
-    // During first init, webpack only runs after everything else, even if those tasks
-    // fail with errors, as it's the most CPU intensive process and it can slow down
-    // the rest of the processes, as well as the console output itself.
-    Promise.all([
-      require('./tasks/sass'),
-      require('./tasks/sharp'),
-      require('./tasks/hugo'),
-    ]).then(() => {
-      require('./tasks/webpack');
+  Promise.all([
+    require('./tasks/configs'),
+    require('./tasks/buildData'),
+  ])
+    .then(() => {
+      // During first init, webpack only runs after everything else, even if those tasks
+      // fail with errors, as it's the most CPU intensive process and it can slow down
+      // the rest of the processes, as well as the console output itself.
+      Promise.all([
+        require('./tasks/sass'),
+        require('./tasks/sharp'),
+        require('./tasks/hugo'),
+      ]).then(() => {
+        require('./tasks/webpack');
+      });
     });
-  });
 });

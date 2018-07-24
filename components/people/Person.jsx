@@ -8,15 +8,9 @@ import SVGElements from 'partials/SVGElements';
 import TopHeader from 'partials/TopHeader';
 
 export default class Person extends BesugoComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  static get config() {
-    return {
-      tag: 'Person',
-      categories: [ 'people', 'people-pt' ],
-    };
+  static config = {
+    tag: 'Person',
+    categories: [ 'people', 'people-pt' ],
   }
 
   getData() {

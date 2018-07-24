@@ -2,10 +2,8 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 
 export default class SVGElements extends BesugoComponent {
-  static get config() {
-    return {
-      tag: 'SVGElements',
-    };
+  static config = {
+    tag: 'SVGElements',
   }
 
   render() {

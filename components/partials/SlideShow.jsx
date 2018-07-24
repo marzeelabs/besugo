@@ -13,10 +13,8 @@ const config = {
 };
 
 export default class SlideShow extends BesugoComponent {
-  static get config() {
-    return {
-      tag: 'SlideShow',
-    };
+  static config = {
+    tag: 'SlideShow',
   }
 
   static extraProps(props, xplaceholder) {

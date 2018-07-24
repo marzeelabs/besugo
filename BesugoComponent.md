@@ -30,11 +30,9 @@ A static object that defines this component within our website. All properties a
 - `styles`: (arr [str]) array of stylesheets, both internal and external, to be loaded into the CMS page.
 
 ```js
-static get config() {
-  return {
-    tag: "Person",
-    categories: [ "people", "people-pt" ]
-  };
+static config = {
+  tag: "Person",
+  categories: [ "people", "people-pt" ],
 }
 ```
 
@@ -42,6 +40,7 @@ static get config() {
 ```js
 constructor(props) {
   super(props);
+  ...
 }
 ```
 Only mandatory if the component expects to be passed any props (i.e. data from attributes in html). Should always have the `super(props)` call as above.

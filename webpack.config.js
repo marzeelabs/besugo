@@ -86,8 +86,14 @@ module.exports = [
 
     // Here the application starts executing and webpack starts bundling
     entry: {
-      js: './scripts/webpack/site.js',
-      admin: './scripts/webpack/admin.js',
+      js: [
+        // './scripts/webpack/polyfills.js',
+        './scripts/webpack/site.js',
+      ],
+      admin: [
+        // './scripts/webpack/polyfills.js',
+        './scripts/webpack/admin.js',
+      ],
     },
 
     // options related to how webpack emits results
@@ -154,7 +160,10 @@ module.exports = [
   {
     ...allExports,
 
-    entry: [ './components/App.jsx' ],
+    entry: [
+      // './scripts/webpack/polyfills.js',
+      './components/App.jsx',
+    ],
 
     output: {
       path: path.resolve(__dirname, netlifyToml.build.publish),
@@ -174,7 +183,7 @@ module.exports = [
             loader: 'babel-loader',
             options: {
               babelrc: false,
-              presets: [ 'env', 'react' ],
+              presets: [ 'env', 'stage-2', 'react' ],
             },
           },
         },

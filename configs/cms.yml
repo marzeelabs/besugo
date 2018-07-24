@@ -31,6 +31,7 @@ collections: # A list of collections the CMS should be able to edit
 # 🇬🇧 collections
   - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "Blog Posts 🇬🇧" # Used in the UI, ie.: "New Post"
+    label_singular: "Blog Post 🇬🇧"
     description: >
       The description is a great place for tone setting, high level information, and editing
       guidelines that are specific to a collection.
@@ -69,6 +70,7 @@ collections: # A list of collections the CMS should be able to edit
             valueField: "title"
   - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "People 🇬🇧" # Used in the UI, ie.: "New Post"
+    label_singular: "Person 🇬🇧" # Used in the UI, ie.: "New Post"
     description: >
       The description is a great place for tone setting, high level information, and editing
       guidelines that are specific to a collection.
@@ -133,6 +135,7 @@ collections: # A list of collections the CMS should be able to edit
 # 🇵🇹 collections
   - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "Blog Posts 🇵🇹" # Used in the UI, ie.: "New Post"
+    label_singular: "Blog Post 🇵🇹" # Used in the UI, ie.: "New Post"
     description: >
       The description is a great place for tone setting, high level information, and editing
       guidelines that are specific to a collection.
@@ -171,6 +174,7 @@ collections: # A list of collections the CMS should be able to edit
             valueField: "title"
   - name: "people-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "People 🇵🇹" # Used in the UI, ie.: "New Post"
+    label_singular: "Person 🇵🇹" # Used in the UI, ie.: "New Post"
     description: >
       The description is a great place for tone setting, high level information, and editing
       guidelines that are specific to a collection.
