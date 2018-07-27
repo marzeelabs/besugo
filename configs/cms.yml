@@ -12,6 +12,7 @@ collections: # A list of collections the CMS should be able to edit
   - name: "settings"
     label: "Site settings"
     folder: "data"
+    format: "yml"
     create: false
     editor:
       preview: false
