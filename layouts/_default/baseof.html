@@ -6,17 +6,9 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <title>{{ $.Site.Data.settings.name }}</title>
-    {{ if $.Site.Data.settings.ga }}
-      <!-- Global Site Tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id={{ $.Site.Data.settings.ga }}"></script>
-      <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', '{{ $.Site.Data.settings.ga }}');
-      </script>
-    {{ end }}
+    {{ partial "analytics.html" . }}
+
     <meta name="description" content="{{ .Description | default .Site.Params.description }}">
     <!-- <meta name="author" content="{{ .Site.Author }}"> -->
 
