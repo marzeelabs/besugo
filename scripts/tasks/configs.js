@@ -5,7 +5,7 @@ module.exports = Watch({
 
   files: [
     'scripts/configs.js',
-    'configs/config.yml',
+    'configs/*.yml',
   ],
 
   tasks: [

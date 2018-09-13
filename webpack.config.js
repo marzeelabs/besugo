@@ -67,7 +67,7 @@ const buildGlobals = () => {
   // We don't want any console output at this stage.
   globals.console = {
     log() {},
-    warning() {},
+    warn() {},
     error() {},
   };
 
