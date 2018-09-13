@@ -17,7 +17,7 @@ export default class BesugoComponent extends React.Component {
     // We don't initialize the components here when building server-side,
     // that happens in .build() below.
     // eslint-disable-next-line
-    if (typeof name !== 'undefined' && name === 'nodejs') {
+    if (typeof navigator !== 'undefined' && navigator.userAgent.includes('jsdom')) {
       return Comp;
     }
 
@@ -76,7 +76,7 @@ export default class BesugoComponent extends React.Component {
     // StaticSiteGeneratorPlugin expects a function that returns a string
     // or in our case an object with that string
     // eslint-disable-next-line
-    if (typeof name !== 'undefined' && name === 'nodejs') {
+    if (typeof navigator !== 'undefined' && navigator.userAgent.includes('jsdom')) {
       return locals => new Promise((resolve, reject) => {
         // parse5 builds only a bare tree of object representing nodes and not a full DOM document.
         // parser5-utils is a collection of functions to manipulate those objects, very lightweight,

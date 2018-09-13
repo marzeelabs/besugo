@@ -62,22 +62,52 @@ class WatchDirectoriesPlugin {
 
 // Returns a simulated window for use in Node during SSR.
 const buildGlobals = () => {
-  const globals = { ...(new JSDOM('...').window) };
+  const globals = new JSDOM('...', {
+    beforeParse(window) {
+      // Some package somewhere tries calling window.location.reload, which
+      // triggers a notice in the console by jsdom that we don't care about.
+      // (Haven't figured out what causes this, started after doing some
+      // updates to dependencies, maybe React?)
+      Object.defineProperty(window, 'location', {
+        enumerable: true,
+        configurable: true,
 
-  // We don't want any console output at this stage.
-  globals.console = {
-    log() {},
-    warn() {},
-    error() {},
-  };
+        value: Object.getOwnPropertyNames(window.location)
+          .reduce((res, key) => {
+            switch (key) {
+              case 'reload':
+                res[key] = () => {};
+                break;
 
-  // Some package somewhere tries calling window.location.reload, which
-  // triggers a notice in the console by jsdom that we don't care about.
-  // (Haven't figured out what causes this, started after doing some
-  // updates to dependencies, maybe React?)
-  globals.location.reload = () => {};
+              default: {
+                // Defining properties from descriptors triggers illegal invocations at
+                // /node_modules/jsdom/lib/jsdom/living/generated/Location.js:242
+                // For our use-case, we can live without the rest of the functionality
+                // from the location object.
+                res[key] = window.location[key];
+                break;
+              }
+            }
 
-  return globals;
+            return res;
+          }, {}),
+      });
+
+      // We don't want any console output at this stage.
+      window.console = {
+        log() {},
+        warn() {},
+        error() {},
+      };
+
+      // Avoid throwing compile errors because these are not available in
+      // this context.
+      delete window.localStorage;
+      delete window.sessionStorage;
+    },
+  });
+
+  return { ...(globals.window) };
 };
 
 module.exports = [
@@ -117,7 +147,9 @@ module.exports = [
             loader: 'babel-loader',
             options: {
               babelrc: false,
-              presets: [ 'env' ],
+              presets: [
+                '@babel/preset-env',
+              ],
             },
           },
         },
@@ -183,7 +215,13 @@ module.exports = [
             loader: 'babel-loader',
             options: {
               babelrc: false,
-              presets: [ 'env', 'stage-2', 'react' ],
+              presets: [
+                '@babel/preset-env',
+                '@babel/preset-react',
+              ],
+              plugins: [
+                '@babel/plugin-proposal-class-properties',
+              ],
             },
           },
         },
