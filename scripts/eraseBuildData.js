@@ -16,10 +16,14 @@ glob('scripts/buildData/**/*.js', {}, (err, files) => {
 
   files.forEach((file) => {
     const inFile = path.parse(file);
-    fs.unlink(path.resolve('data', `${inFile.name}.json`), (errr) => {
-      if (errr) {
-        error(chalk.red(errr));
-      }
-    });
+    const jsonFile = path.resolve('data', `${inFile.name}.json`);
+
+    if (fs.existsSync(jsonFile)) {
+      fs.unlink(jsonFile, (errr) => {
+        if (errr) {
+          error(chalk.red(errr));
+        }
+      });
+    }
   });
 });

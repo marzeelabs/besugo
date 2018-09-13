@@ -1,3 +1,6 @@
+// This file is unused for now, but is kept commented out to keep a reference
+// to this list of specific polyfills that we can use in the future.
+
 // if (typeof Promise === 'undefined') {
 //   // Rejection tracking prevents a common issue where React gets into an
 //   // inconsistent state due to an error, but it gets swallowed by a Promise,
