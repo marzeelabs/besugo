@@ -2,14 +2,8 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 
 export default class TopHeader extends BesugoComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  static get config() {
-    return {
-      tag: 'TopHeader',
-    };
+  static config = {
+    tag: 'TopHeader',
   }
 
   getData() {

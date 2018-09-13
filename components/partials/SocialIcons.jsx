@@ -2,10 +2,6 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 
 export default class SocialIcons extends BesugoComponent {
-  constructor(props) {
-    super(props);
-  }
-
   getData() {
     // Set some default props
     return {

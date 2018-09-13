@@ -25,7 +25,10 @@
     "wrap-iife": 0
   },
 
+  "parser": "babel-eslint",
+
   "settings": {
+    "import/parser": "babel-eslint",
     "import/resolver": {
       "node": {
         "paths": ["components"]

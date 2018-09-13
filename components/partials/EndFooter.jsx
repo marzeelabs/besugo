@@ -4,15 +4,9 @@ import SocialIcons from 'partials/SocialIcons';
 import SVGElements from 'partials/SVGElements';
 
 export default class EndFooter extends BesugoComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  static get config() {
-    return {
-      tag: 'EndFooter',
-      categories: [ 'footer', 'footer-pt' ],
-    };
+  static config = {
+    tag: 'EndFooter',
+    categories: [ 'footer', 'footer-pt' ],
   }
 
   static extraProps(props, xplaceholder) {
