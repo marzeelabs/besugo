@@ -1,7 +1,7 @@
 ---
 i18nlanguage: en
 title: Blog post title 3
-image: /images/uploads/example.jpg
+image: /media/uploads/example.jpg
 people:
   - person: Name of the person 1
   - person: Name of the person 4
@@ -22,7 +22,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasauris dignissim, ni
 2. bullet 2
 3. bullet 3
 
-![Image Alt Text](/images/uploads/example.jpg)
+![Image Alt Text](/media/uploads/example.jpg)
 
 ```
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus et tincidunt odio, ut semper dolor. Etiam at massa vitae enim tempus luctus in hendrerit eros. Vivamus ornare, nulla a vestibulum lacinia, nisl velit pharetra nunc, sed malesuada erat nibh eu purus.

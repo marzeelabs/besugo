@@ -11,8 +11,8 @@
     "last 4 ios_saf versions"
   ],
   "sharp-config": {
-    "src": "static/images",
-    "dest": "public/images",
+    "src": "static/media",
+    "dest": "public/media",
     "quality": 80,
     "types": [
       "jpg",
@@ -58,7 +58,7 @@
     "watch:webpack": "nodemon -q -w webpack.config.js -x 'yarn compile:webpack'",
     "dummy:refresh": "node scripts/dummy-refresh.js",
     "webpack": "webpack",
-    "build": "export NODE_ENV=production && npm-run-all -p erase:* && npm-run-all -p build:* && hugo && webpack --mode production",
+    "build": "export NODE_ENV=production && npm-run-all -p erase:* && npm-run-all -p build:* && hugo --minify && webpack --mode production",
     "start:verbose": "export NODE_ENV=development && npm-run-all -p erase:* && yarn build:configs && npm-run-all -p watch:*",
     "start": "nodemon -q -w package.json -w scripts/serve.js -w scripts/libs -w scripts/tasks -x 'node scripts/serve.js'",
     "linter:eslint": "eslint --ext .jsx,.js . --fix",
