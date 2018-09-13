@@ -228,7 +228,12 @@ const deleteProcessedImages = imagePath => new Promise((resolve) => {
 });
 
 const processAllImages = () => new Promise((resolve, reject) => {
-  glob(`${src}/**/*.+(${[ ...types ].join('|')})`, {}, (err, images) => {
+  const pattern = `${src}/**/*.+(${[ ...types ].join('|')})`;
+  const options = {
+    nocase: true,
+  };
+
+  glob(pattern, options, (err, images) => {
     if (err) {
       reject(err);
       return;

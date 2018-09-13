@@ -7,7 +7,7 @@ const buildSrcSet = (src) => {
   const ext = chunks.pop();
 
   // We don't build a srcset if we won't have any responsive images built for this src image.
-  if (sharpConfig.types.indexOf(ext) === -1) {
+  if (sharpConfig.types.indexOf(ext.toLowerCase()) === -1) {
     return null;
   }
 
