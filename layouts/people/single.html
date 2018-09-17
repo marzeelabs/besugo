@@ -1,7 +1,12 @@
 {{ define "main" }}
 
-<Person image="{{ .Params.image }}">
-  {{ jsonify . }}
+<Person
+  link="{{ .URL }}"
+  image="{{ .Params.image }}"
+  title="{{ .Title }}">
+  <Content>
+    {{ jsonify .Content }}
+  </Content>
 </Person>
 
 {{ end }}

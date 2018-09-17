@@ -1,45 +1,46 @@
 import { ucs2 } from 'punycode';
 
-(function() {
-  const findH1 = function(target) {
+(() => {
+  const findH1 = (target) => {
     const h1 = target && target.querySelectorAll('h1.nc-collectionPage-sidebarHeading')[0];
     if (h1) {
-      let locales = [];
+      const locales = [];
       let select = null;
 
-      let items = document.querySelectorAll('.nc-collectionPage-sidebarLink');
-      items.forEach(function(item) {
-        let chunks = item.textContent.split(' ');
-        for (let chunk of chunks) {
-          let ucs = ucs2.decode(chunk);
+      const items = document.querySelectorAll('.nc-collectionPage-sidebarLink');
+      items.forEach((item) => {
+        const chunks = item.textContent.split(' ');
+        chunks.forEach((chunk) => {
+          const ucs = ucs2.decode(chunk);
 
           // There must be two Regional Indicator Symbol codes for this to be a flag symbol
-          if (ucs.length === 2 && ucs.every((code) => code >= 127462 && code <= 127487)) {
-            let locale = ucs2.encode(ucs);
+          if (ucs.length === 2 && ucs.every(code => code >= 127462 && code <= 127487)) {
+            const locale = ucs2.encode(ucs);
             if (locales.indexOf(locale) === -1) {
               locales.push(locale);
             }
 
-            const applyLocaleAttr = function(hidden) {
+            const applyLocaleAttr = (hidden) => {
               if (!item.classList.contains('locale')) {
                 item.classList.add('locale');
-                item.classList.add('locale-' + locale);
+                item.classList.add(`locale-${locale}`);
                 if (hidden && select) {
                   select._onChange(false);
                 }
               }
-            }
+            };
             applyLocaleAttr();
 
-            // The CMS react app likes to reset the item's attributes when you switch between collections.
-            const attrObserver = new MutationObserver(function(mutations) {
-              mutations.forEach(function(m) {
+            // The CMS react app likes to reset the item's attributes when you switch
+            // between collections.
+            const attrObserver = new MutationObserver((mutations) => {
+              mutations.forEach(() => {
                 applyLocaleAttr(true);
               });
             });
             attrObserver.observe(item, { attributes: true });
           }
-        }
+        });
       });
 
       // Show the locale selector only when there are enough locales for it to be useful.
@@ -47,7 +48,7 @@ import { ucs2 } from 'punycode';
         select = document.createElement('select');
         select.classList.add('nc-collectionPage-localeSelector');
 
-        locales.forEach(function(locale) {
+        locales.forEach((locale) => {
           const option = document.createElement('option');
           option.setAttribute('value', locale);
           option.textContent = locale;
@@ -57,14 +58,15 @@ import { ucs2 } from 'punycode';
         h1.appendChild(select);
 
         // Changing the selector should update the shown content types according to the selection.
-        select._onChange = function(e) {
-          let locale = this.value;
-          let items = document.querySelectorAll('.nc-collectionPage-sidebarLink');
-          items.forEach(function(item) {
-            if (item.classList.contains('locale-' + locale)) {
-              item.classList.remove('locale-hidden');
-            } else if(item.classList.contains('locale')) {
-              item.classList.add('locale-hidden');
+        select._onChange = () => {
+          const locale = select.value;
+          const links = document.querySelectorAll('.nc-collectionPage-sidebarLink');
+          links.forEach((link) => {
+            if (link.classList.contains(`locale-${locale}`)) {
+              link.classList.remove('locale-hidden');
+            }
+            else if (link.classList.contains('locale')) {
+              link.classList.add('locale-hidden');
             }
           });
         };
@@ -74,9 +76,10 @@ import { ucs2 } from 'punycode';
     }
   };
 
-  // Because it's a React app, its nodes are constantly re-rendered, so we need to keep reapplying our listener.
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
+  // Because it's a React app, its nodes are constantly re-rendered,
+  // so we need to keep reapplying our listener.
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((m) => {
       findH1(m.target);
     });
   });

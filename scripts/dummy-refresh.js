@@ -8,9 +8,9 @@ const fs = require('fs');
 const path = require('path');
 
 require('toml-require').install();
-const netlifyToml = require("../netlify.toml");
+const netlifyToml = require('../netlify.toml');
 
-fs.writeFile(path.resolve(netlifyToml.build.publish, 'dummy'), 'contents', function(err) {
+fs.writeFile(path.resolve(netlifyToml.build.publish, 'dummy'), 'contents', (err) => {
   if (err) {
     console.log(chalk.red(err));
   }

@@ -1,8 +1,11 @@
 const chalk = require('chalk');
+const { format } = require('util');
 
-const MOVE_LEFT = new Buffer('1b5b3130303044', 'hex').toString();
-const MOVE_UP = new Buffer('1b5b3141', 'hex').toString();
-const CLEAR_LINE = new Buffer('1b5b304b', 'hex').toString();
+const MOVE_LEFT = Buffer.from('1b5b3130303044', 'hex').toString();
+const MOVE_UP = Buffer.from('1b5b3141', 'hex').toString();
+const CLEAR_LINE = Buffer.from('1b5b304b', 'hex').toString();
+
+const cError = console.error;
 
 const internal = {
   tasks: [],
@@ -11,10 +14,10 @@ const internal = {
 
   checkMs() {
     if (this.spinned) {
-      let clearMsLines = [];
+      const clearMsLines = [];
 
       // Tasks lines, plus space lines in between
-      for(let i = 0; i < this.tasks.length +1; i++) {
+      for (let i = 0; i < this.tasks.length + 1; i++) {
         clearMsLines.push(MOVE_LEFT + CLEAR_LINE);
       }
       console.log(clearMsLines.join(MOVE_UP) + MOVE_UP);
@@ -31,7 +34,7 @@ const internal = {
     this.logged = true;
   },
 
-  error(err, spinner) {
+  error(err, spinner) {
     if (!err) {
       return false;
     }
@@ -40,15 +43,23 @@ const internal = {
 
     console.log('');
     if (this.spinners && spinner) {
-      let time = (new Date()).toLocaleString();
-      console.log(chalk.white.bold.bgRed('ERROR in the ' + spinner + ' runner') + ' | ' + time);
+      const time = (new Date()).toLocaleString();
+      console.log(`${chalk.white.bold.bgRed(`ERROR in the ${spinner} runner`)} | ${time}`);
     }
-    console.error(err);
+    cError(err);
     console.log('');
 
     this.logged = true;
     return true;
-  }
+  },
+};
+
+// We need to capture any calls to console.error from outside of the available
+// hooks and events.
+console.error = (...args) => {
+  // Unfortunately we can't know exactly what called this (stack traces are too broad)
+  // so we can't assign this to a particular spinner.
+  internal.error(format(...args), 'global process');
 };
 
 module.exports = {
@@ -61,7 +72,7 @@ module.exports = {
     internal.log(msg);
   },
 
-  error(err, spinner) {
+  error(err, spinner) {
     return internal.error(err, spinner);
   },
 
@@ -79,5 +90,5 @@ module.exports = {
     }
 
     return internal && internal.spinned;
-  }
+  },
 };

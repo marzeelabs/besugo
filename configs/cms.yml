@@ -3,15 +3,16 @@ backend:
   repo: marzeelabs/besugo # Path to your Github repository
   branch: <% CURRENT_BRANCH %> # Branch to update (current branch dynamically set by Gulp)
 
-media_folder: "/static/images/uploads" # Folder where user uploaded files should go
-public_folder: "/images/uploads"
+media_folder: "/static/media/uploads" # Folder where user uploaded files should go
+public_folder: "/media/uploads"
 publish_mode: "editorial_workflow"
 
 collections: # A list of collections the CMS should be able to edit
 
   - name: "settings"
     label: "Site settings"
-    folder: "content/settings"
+    folder: "data"
+    format: "yml"
     create: false
     editor:
       preview: false
@@ -27,10 +28,23 @@ collections: # A list of collections the CMS should be able to edit
         name: "ga"
         widget: "string"
         required: false
+      - label: "Facebook Pixel ID"
+        name: "fp"
+        widget: "string"
+        required: false
+      - label: "Facebook Pixel Events"
+        name: "fpe"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Event"
+            name: "event"
+            widget: "string"
 
 # 🇬🇧 collections
   - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "Blog Posts 🇬🇧" # Used in the UI, ie.: "New Post"
+    label_singular: "Blog Post 🇬🇧"
     description: >
       The description is a great place for tone setting, high level information, and editing
       guidelines that are specific to a collection.
@@ -38,7 +52,9 @@ collections: # A list of collections the CMS should be able to edit
     filter:
       field: "i18nlanguage"
       value: "en"
-    slug: "{{title}}.{{i18nlanguage}}"
+    slug: "{{title}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
     create: true # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
       - label: "Content language"
@@ -67,6 +83,7 @@ collections: # A list of collections the CMS should be able to edit
             valueField: "title"
   - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "People 🇬🇧" # Used in the UI, ie.: "New Post"
+    label_singular: "Person 🇬🇧" # Used in the UI, ie.: "New Post"
     description: >
       The description is a great place for tone setting, high level information, and editing
       guidelines that are specific to a collection.
@@ -74,7 +91,9 @@ collections: # A list of collections the CMS should be able to edit
     filter:
       field: "i18nlanguage"
       value: "en"
-    slug: "{{title}}.{{i18nlanguage}}"
+    slug: "{{title}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
     create: true # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
       - label: "Content language"
@@ -129,6 +148,7 @@ collections: # A list of collections the CMS should be able to edit
 # 🇵🇹 collections
   - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "Blog Posts 🇵🇹" # Used in the UI, ie.: "New Post"
+    label_singular: "Blog Post 🇵🇹" # Used in the UI, ie.: "New Post"
     description: >
       The description is a great place for tone setting, high level information, and editing
       guidelines that are specific to a collection.
@@ -136,7 +156,9 @@ collections: # A list of collections the CMS should be able to edit
     filter:
       field: "i18nlanguage"
       value: "pt"
-    slug: "{{title}}.{{i18nlanguage}}"
+    slug: "{{title}}"
+    extension: "pt.md"
+    format: "yaml-frontmatter"
     create: true # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
       - label: "Content language"
@@ -165,11 +187,14 @@ collections: # A list of collections the CMS should be able to edit
             valueField: "title"
   - name: "people-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "People 🇵🇹" # Used in the UI, ie.: "New Post"
+    label_singular: "Person 🇵🇹" # Used in the UI, ie.: "New Post"
     description: >
       The description is a great place for tone setting, high level information, and editing
       guidelines that are specific to a collection.
     folder: "content/people" # The path to the folder where the documents are stored
-    slug: "{{title}}.{{i18nlanguage}}"
+    slug: "{{title}}"
+    extension: "pt.md"
+    format: "yaml-frontmatter"
     filter:
       field: "i18nlanguage"
       value: "pt"

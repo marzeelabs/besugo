@@ -1,7 +1,7 @@
 ---
-title: About page
-image: /images/uploads/example.jpg
-description: Integer iaculis tortor ut magna suscipit, in suscipit risus pharetra.
+i18nlanguage: en
+title: Blog post title 2
+image: /media/uploads/example.jpg
 
 ---
 

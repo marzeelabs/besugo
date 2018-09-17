@@ -1,4 +1,3 @@
-import React from 'react';
 import BesugoComponent from 'Besugo';
 
 import Previews from 'Previews';
@@ -13,7 +12,7 @@ import PersonCard from 'people/Card';
 import Person from 'people/Person';
 import BlogPost from 'blog/BlogPost';
 
-const initialized = [
+[
   Previews,
   SVGElements,
   TopHeader,
@@ -25,9 +24,9 @@ const initialized = [
   SrcSetBg,
   PersonCard,
   Person,
-  BlogPost
-].map((Comp) => {
-  return Comp.initialize();
+  BlogPost,
+].forEach((Comp) => {
+  Comp.initialize();
 });
 
 export default BesugoComponent.build();

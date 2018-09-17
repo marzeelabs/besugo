@@ -1,7 +1,7 @@
 ---
 i18nlanguage: en
-title: Name of the person 2
-image: /images/uploads/example_profile.jpg
+title: Name of the person 1
+image: /media/uploads/example_profile.jpg
 ---
 
 

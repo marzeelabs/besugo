@@ -4,16 +4,19 @@ const Spinners = require('multispinner/lib/spinners');
 const spinners = require('cli-spinners');
 
 const Logger = require('./Logger');
-let internal = null;
 
 // configurations
-const hugoConfig = require('node-yaml').readSync("../../config.yml");
-const packageJson = require("../../package.json");
+// eslint-disable-next-line
+const hugoConfig = require('node-yaml').readSync('../../configs/hugo.yml');
+const packageJson = require('../../package.json');
 
-class constantSpinner extends Multispinner {
+let internal = null;
+
+class ConstantSpinner extends Multispinner {
   constructor(tasks) {
     // Initialize a Multispinner instance.
-    super(tasks.reduce(function(acc, cur, i) {
+    super(tasks.reduce((acc, cur) => {
+      // eslint-disable-next-line
       acc[cur[0]] = cur[1];
       return acc;
     }, {}), {
@@ -21,18 +24,18 @@ class constantSpinner extends Multispinner {
       color: {
         incomplete: 'yellow',
         success: 'green',
-        error: 'red'
+        error: 'red',
       },
       frames: spinners.dots.frames,
       indent: 1,
-      interval: spinners.dots.interval
+      interval: spinners.dots.interval,
     });
 
     this.symbol.success = chalk.bold(this.symbol.success);
     this.symbol.error = chalk.bold(this.symbol.error);
 
     this._loop = this.loop;
-    this.loop = function() {
+    this.loop = function loop() {
       // No need to do anything in any remaining tasks if we're terminating the process.
       if (this.terminated) {
         return;
@@ -62,7 +65,7 @@ class constantSpinner extends Multispinner {
 
     // Keep an error state if a later task tries to change the spinner status without restarting it.
     this._success = this.success;
-    this.success = function(spinner) {
+    this.success = function success(spinner) {
       if (this.spinners[spinner].state === 'error') {
         return;
       }
@@ -73,7 +76,7 @@ class constantSpinner extends Multispinner {
 
     // Show a custom message when an error occurs on a spinner.
     this._error = this.error;
-    this.error = function(spinner, err) {
+    this.error = function error(spinner, err) {
       if (err === true || Logger.error(err, spinner)) {
         this.text(spinner, chalk.bold('an error occurred, look for more details in the console above!'));
         this._error(spinner);
@@ -83,13 +86,20 @@ class constantSpinner extends Multispinner {
       return false;
     };
 
-    // First Multispinner is not actually a spinner, it's just a message for from where the project is served.
-    delete this.spinners.serve.current;
-    this.spinners.serve.__defineGetter__('current', function() {
-      return ' ' + chalk.bold(hugoConfig.title + ' served from ' + chalk.cyan('http://localhost:' + packageJson.config.port + '/'));
-    });
-    this.spinners.serve.__defineSetter__('current', function() {
-      return this.current;
+    // First Multispinner is not actually a spinner, it's just a message
+    // for from where the project is served.
+    Object.defineProperty(this.spinners.serve, 'current', {
+      configurable: true,
+      enumerable: true,
+
+      get() {
+        const str = chalk.bold(`${hugoConfig.title} served from ${chalk.cyan(`http://localhost:${packageJson.config.port}/`)}`);
+        return ` ${str}`;
+      },
+
+      set() {
+        return this.current;
+      },
     });
     this.success('serve');
   }
@@ -115,7 +125,7 @@ class constantSpinner extends Multispinner {
   restart(spinner) {
     // We only need to restart looping if it's currently stopped, otherwise
     // we'll have multiple looping tasks and it will speed up and cause "lost frame" effects.
-    let allCompleted = this.allCompleted();
+    const allCompleted = this.allCompleted();
 
     this.complete(spinner, 'incomplete');
 
@@ -123,11 +133,11 @@ class constantSpinner extends Multispinner {
       this.start();
     }
   }
-};
+}
 
 module.exports = {
   initialize(tasks) {
-    internal = new constantSpinner(tasks);
+    internal = new ConstantSpinner(tasks);
   },
 
   initialized() {
@@ -138,7 +148,7 @@ module.exports = {
     internal.start();
   },
 
-  success(spinner) {
+  success(spinner) {
     internal.success(spinner);
   },
 
@@ -156,5 +166,5 @@ module.exports = {
 
   terminate() {
     internal.terminated = true;
-  }
+  },
 };

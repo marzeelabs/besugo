@@ -4,7 +4,8 @@ const Logger = require('./Logger');
 const Spinner = require('./Spinner');
 
 // configurations
-const hugoConfig = require('node-yaml').readSync("../../config.yml");
+// eslint-disable-next-line
+const hugoConfig = require('node-yaml').readSync('../../configs/hugo.yml');
 
 const internal = {
   tasks: new Map(),
@@ -16,7 +17,7 @@ const internal = {
       Logger.log(chalk.gray(` No longer serving ${hugoConfig.title}. See you soon! 🙃`));
     });
 
-    process.once('SIGUSR2', () => {
+    process.once('SIGUSR2', () => {
       this.shutdown();
 
       // Erase existing Multispinner lines and show a friendly goodbye.
@@ -34,15 +35,16 @@ const internal = {
     // But remaining hanging tasks can still print to the console, so we need
     // to prevent the Multispinner from reprinting useless spinners.
     // Yes, this is weird, something is wrong here, but this works well enough.
-    for(let run of this.tasks.values()) {
+    // eslint-disable-next-line
+    for (let run of this.tasks.values()) {
       try {
         run();
       }
-      catch(ex) {
+      catch (ex) {
         Logger.error(ex);
       }
     }
-  }
+  },
 };
 
 module.exports = {
@@ -56,5 +58,5 @@ module.exports = {
 
   delete(name) {
     internal.tasks.delete(name);
-  }
+  },
 };
