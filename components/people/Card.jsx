@@ -2,7 +2,7 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 
 import SocialIcons from 'partials/SocialIcons';
-import SrcSet from 'SrcSet';
+import SrcSet from 'partials/SrcSet';
 
 export default class PersonCard extends BesugoComponent {
   static config = {

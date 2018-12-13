@@ -1,0 +1,42 @@
+.reservation__info-container {
+  padding: 10px 20px;
+}
+
+.reservation__info-name__container {
+  margin-bottom: 20px;
+}
+
+.reservation__info-name__label {
+  margin-bottom: 10px;
+}
+
+%reservation__info__input {
+  padding: 5px;
+  width: 100%;
+  border: 0;
+  border: 1px solid palette(grey, mid-light);
+  border-radius: 10px;
+}
+
+.reservation__info-name__input {
+  @extend %reservation__info__input;
+}
+
+.reservation__info-email__container {
+  margin-bottom: 20px;
+}
+
+.reservation__info-email__input {
+  @extend %reservation__info__input;
+}
+
+.reservation__info-notes__container {
+  margin-bottom: 20px;
+}
+
+.reservation__info-notes__input {
+  @extend %reservation__info__input;
+  resize: none;
+}
+
+

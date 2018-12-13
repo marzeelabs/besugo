@@ -1,18 +1,18 @@
 backend:
-  name: github
+  name: git-gateway
   repo: marzeelabs/besugo # Path to your Github repository
   branch: <% CURRENT_BRANCH %> # Branch to update (current branch dynamically set by Gulp)
 
 media_folder: "/static/media/uploads" # Folder where user uploaded files should go
 public_folder: "/media/uploads"
-publish_mode: "editorial_workflow"
+publish_mode: "editorial_workflow" # Remove this line to enable simple publishing mode
 
 collections: # A list of collections the CMS should be able to edit
 
   - name: "settings"
     label: "Site settings"
     folder: "data"
-    format: "yml"
+    format: "yaml"
     create: false
     editor:
       preview: false
@@ -24,6 +24,25 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Site name"
         name: "name"
         widget: "string"
+      - label: "Email"
+        name: "email"
+        widget: "string"
+      - label: "Footer note 🇬🇧"
+        name: "footer_en"
+        widget: "markdown"
+      - label: "Footer note 🇵🇹"
+        name: "footer_pt"
+        widget: "markdown"
+      - label: "Social platforms"
+        name: "social"
+        widget: "list"
+        fields:
+          - label: "Platform"
+            name: "name"
+            widget: "string"
+          - label: "Link"
+            name: "link"
+            widget: "string"
       - label: "Google Analytics tracking code"
         name: "ga"
         widget: "string"
@@ -41,13 +60,13 @@ collections: # A list of collections the CMS should be able to edit
             name: "event"
             widget: "string"
 
-# 🇬🇧 collections
   - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "Blog Posts 🇬🇧" # Used in the UI, ie.: "New Post"
     label_singular: "Blog Post 🇬🇧"
+    # The description is a great place for tone setting, high level information, and editing
+    # guidelines that are specific to a collection.
     description: >
-      The description is a great place for tone setting, high level information, and editing
-      guidelines that are specific to a collection.
+      Individual blog entries. More recent posts will be shown at the top of the lists.
     folder: "content/blog" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
@@ -81,77 +100,14 @@ collections: # A list of collections the CMS should be able to edit
             searchFields:
               - "title"
             valueField: "title"
-  - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "People 🇬🇧" # Used in the UI, ie.: "New Post"
-    label_singular: "Person 🇬🇧" # Used in the UI, ie.: "New Post"
-    description: >
-      The description is a great place for tone setting, high level information, and editing
-      guidelines that are specific to a collection.
-    folder: "content/people" # The path to the folder where the documents are stored
-    filter:
-      field: "i18nlanguage"
-      value: "en"
-    slug: "{{title}}"
-    extension: "en.md"
-    format: "yaml-frontmatter"
-    create: true # Allow users to create new documents in this collection
-    fields: # The fields each document in this collection have
-      - label: "Content language"
-        name: "i18nlanguage"
-        widget: "hidden"
-        default: "en"
-      - label: "Person Name"
-        name: "title"
-        widget: "string"
-      - label: "Person Picture"
-        name: "image"
-        widget: "image"
-      - label: "Bio"
-        name: "body"
-        widget: "markdown"
-  - name: "footer" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "Footer 🇬🇧" # Used in the UI, ie.: "New Post"
-    description: >
-      The description is a great place for tone setting, high level information, and editing
-      guidelines that are specific to a collection.
-    folder: "content/footer" # The path to the folder where the documents are stored
-    filter:
-      field: "i18nlanguage"
-      value: "en"
-    create: false # Allow users to create new documents in this collection
-    fields: # The fields each document in this collection have
-      - label: "Content language"
-        name: "i18nlanguage"
-        widget: "hidden"
-        default: "en"
-      - label: "[hidden]"
-        name: "title"
-        widget: "string"
-        default: "Enter here to edit."
-      - label: "Copyright"
-        name: "copyright"
-        widget: "text"
-      - label: "Social Media"
-        name: "social"
-        widget: "object"
-        fields:
-        - label: "Link Facebook"
-          name: "facebook"
-          widget: "string"
-        - label: "Link Twitter"
-          name: "twitter"
-          widget: "string"
-        - label: "Link Instagram"
-          name: "instagram"
-          widget: "string"
 
-# 🇵🇹 collections
   - name: "blog_post-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "Blog Posts 🇵🇹" # Used in the UI, ie.: "New Post"
     label_singular: "Blog Post 🇵🇹" # Used in the UI, ie.: "New Post"
+    # The description is a great place for tone setting, high level information, and editing
+    # guidelines that are specific to a collection.
     description: >
-      The description is a great place for tone setting, high level information, and editing
-      guidelines that are specific to a collection.
+      Individual blog entries. More recent posts will be shown at the top of the lists.
     folder: "content/blog" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
@@ -185,12 +141,44 @@ collections: # A list of collections the CMS should be able to edit
             searchFields:
               - "title"
             valueField: "title"
+
+  - name: "people" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "People 🇬🇧" # Used in the UI, ie.: "New Post"
+    label_singular: "Person 🇬🇧" # Used in the UI, ie.: "New Post"
+    # The description is a great place for tone setting, high level information, and editing
+    # guidelines that are specific to a collection.
+    description: >
+      Profiles for staff members or contributors.
+    folder: "content/people" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "en"
+    slug: "{{title}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "Person Name"
+        name: "title"
+        widget: "string"
+      - label: "Person Picture"
+        name: "image"
+        widget: "image"
+      - label: "Bio"
+        name: "body"
+        widget: "markdown"
+
   - name: "people-pt" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "People 🇵🇹" # Used in the UI, ie.: "New Post"
     label_singular: "Person 🇵🇹" # Used in the UI, ie.: "New Post"
+    # The description is a great place for tone setting, high level information, and editing
+    # guidelines that are specific to a collection.
     description: >
-      The description is a great place for tone setting, high level information, and editing
-      guidelines that are specific to a collection.
+      Profiles for staff members or contributors.
     folder: "content/people" # The path to the folder where the documents are stored
     slug: "{{title}}"
     extension: "pt.md"
@@ -213,38 +201,562 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Bio"
         name: "body"
         widget: "markdown"
-  - name: "footer-pt" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "Footer 🇵🇹" # Used in the UI, ie.: "New Post"
-    description: >
-      The description is a great place for tone setting, high level information, and editing
-      guidelines that are specific to a collection.
-    folder: "content/footer" # The path to the folder where the documents are stored
+
+  - name: "location" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Locations 🇬🇧" # Used in the UI
+    label_singular: "Location 🇬🇧" # Used in the UI, ie: "New Post"
+    description: The various coworking locations.
+    folder: "content/location" # The path to the folder where the documents are stored
+    filter:
+      field: "i18nlanguage"
+      value: "en"
+    slug: "{{title}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "Name"
+        name: "title"
+        widget: "string"
+      - label: "Header image"
+        name: "header"
+        widget: "image"
+      - label: "Teaser"
+        name: "teaser"
+        widget: "text"
+      - label: "Description"
+        name: "body"
+        widget: "markdown"
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        fields:
+          - label: "Feature"
+            name: "title"
+            widget: "string"
+          - label: "Icon"
+            name: "icon"
+            widget: "select"
+            default: "connection"
+            options:
+              - connection
+              - printer
+              - mug
+              - shower
+              - month_calendar
+              - headphones
+              - kitchen
+              - locker
+              - books
+              - cleaning
+              - community_manager
+              - 2_users
+              - announce
+              - clock
+              - view
+      - label: "Photo gallery"
+        name: "images"
+        widget: "list"
+        fields:
+          - label: "Caption"
+            name: "caption"
+            widget: "string"
+          - label: "Photo"
+            name: "image"
+            widget: "image"
+      - label: "Catchphrase"
+        name: "catchphrase"
+        widget: ""
+      - label: "Map Embed Code"
+        name: "map"
+        widget: "string"
+
+  - name: "location-pt" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Locations 🇵🇹" # Used in the UI
+    label_singular: "Location 🇵🇹" # Used in the UI, ie: "New Post"
+    description: The various coworking locations.
+    folder: "content/location" # The path to the folder where the documents are stored
     filter:
       field: "i18nlanguage"
       value: "pt"
-    create: false # Allow users to create new documents in this collection
+    slug: "{{title}}"
+    extension: "pt.md"
+    format: "yaml-frontmatter"
+    create: true # Allow users to create new documents in this collection
     fields: # The fields each document in this collection have
       - label: "Content language"
         name: "i18nlanguage"
         widget: "hidden"
         default: "pt"
+      - label: "Name"
+        name: "title"
+        widget: "string"
+      - label: "Header image"
+        name: "header"
+        widget: "image"
+      - label: "Teaser"
+        name: "teaser"
+        widget: "text"
+      - label: "Description"
+        name: "body"
+        widget: "markdown"
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        fields:
+          - label: "Feature"
+            name: "title"
+            widget: "string"
+          - label: "Description (optional)"
+            name: "shortdesc"
+            widget: "text"
+          - label: "Classname (optional)"
+            name: "classname"
+            widget: "string"
+          - label: "Icon (optional)"
+            name: "icon"
+            widget: "image"
+      - label: "Photo gallery"
+        name: "images"
+        widget: "list"
+        fields:
+          - label: "Caption"
+            name: "caption"
+            widget: "string"
+          - label: "Photo"
+            name: "image"
+            widget: "image"
+      - label: "Catchphrase"
+        name: "catchphrase"
+        widget: ""
+      - label: "Map Embed Code"
+        name: "map"
+        widget: "string"
+
+  - name: "plan"
+    label: "Plans 🇬🇧"
+    label_singular: "Plan 🇬🇧"
+    folder: "content/pricing"
+    filter:
+      field: "i18nlanguage"
+      value: "en"
+    slug: "{{name}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
+    create: true
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "Name"
+        name: "name"
+        widget: "string"
+      - label: "Type"
+        name: "kind"
+        widget: "select"
+        options:
+          - label: "Main Plan"
+            value: "main"
+          - label: "Other Plan"
+            value: "other"
+          - label: "Discount"
+            value: "discount"
+        default: "main"
+      - label: "Weight"
+        name: "weight"
+        widget: "number"
+        valueType: "int"
+        default: 1
+        min: 1
+        max: 20
+      - label: "Icon"
+        name: "icon"
+        widget: "select"
+        options:
+          - 2_users
+          - announce
+          - clock
+        default: ""
+      - label: "Description"
+        name: "description"
+        widget: "text"
+      - label: "Price"
+        name: "price"
+        widget: "object"
+        required: false
+        fields:
+        - label: "Rate"
+          name: "rate"
+          widget: "string"
+        - label: "Per"
+          name: "per"
+          widget: "string"
+      - label: "Button label"
+        name: "button"
+        widget: "string"
+        required: false
+      - label: "Percs"
+        name: "percs"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Perc"
+            name: "perc"
+            widget: "string"
+
+  - name: "plan-pt"
+    label: "Plans 🇵🇹"
+    label_singular: "Plan 🇵🇹"
+    folder: "content/pricing"
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
+    slug: "{{name}}"
+    extension: "pt.md"
+    format: "yaml-frontmatter"
+    create: true
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt"
+      - label: "Name"
+        name: "name"
+        widget: "string"
+      - label: "Type"
+        name: "kind"
+        widget: "select"
+        options:
+          - label: "Main Plan"
+            value: "main"
+          - label: "Other Plan"
+            value: "other"
+          - label: "Discount"
+            value: "discount"
+        default: "main"
+      - label: "Weight"
+        name: "weight"
+        widget: "number"
+        valueType: "int"
+        default: 1
+        min: 1
+        max: 20
+      - label: "Icon"
+        name: "icon"
+        widget: "select"
+        options:
+          - 2_users
+          - announce
+          - clock
+        default: ""
+      - label: "Description"
+        name: "description"
+        widget: "text"
+      - label: "Price"
+        name: "price"
+        widget: "object"
+        required: false
+        fields:
+        - label: "Rate"
+          name: "rate"
+          widget: "string"
+        - label: "Per"
+          name: "per"
+          widget: "string"
+      - label: "Button label"
+        name: "button"
+        widget: "string"
+        required: false
+      - label: "Percs"
+        name: "percs"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Perc"
+            name: "perc"
+            widget: "string"
+
+  - name: "pages"
+    label: "Simple Pages 🇬🇧"
+    label_singular: "Simple Page 🇬🇧"
+    folder: "content/pages"
+    filter:
+      field: "i18nlanguage"
+      value: "en"
+    slug: "{{title}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
+    create: true
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Show in menus"
+        name: "promote"
+        widget: "boolean"
+      - label: "Path to Page (leave empty to use default path)"
+        name: "url"
+        widget: "string"
+        required: false
+      - label: "Subtitle"
+        name: "subtitle"
+        widget: "text"
+        required: false
+      - label: "Banner image"
+        name: "image"
+        widget: "image"
+        required: false
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+
+  - name: "pages-pt"
+    label: "Simple Pages 🇵🇹"
+    label_singular: "Simple Page 🇵🇹"
+    folder: "content/pages"
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
+    slug: "{{title}}"
+    extension: "pt.md"
+    format: "yaml-frontmatter"
+    create: true
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Show in menus"
+        name: "promote"
+        widget: "boolean"
+      - label: "Path to Page (leave empty to use default path)"
+        name: "url"
+        widget: "string"
+        required: false
+      - label: "Subtitle"
+        name: "subtitle"
+        widget: "text"
+        required: false
+      - label: "Banner image"
+        name: "image"
+        widget: "image"
+        required: false
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+
+  - name: "people_listing"
+    label: "People Listing 🇬🇧"
+    folder: "content/people"
+    filter:
+      field: "i18nlanguage"
+      value: "en-i"
+    slug: "{{name}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
+    create: false
+    editor:
+      preview: false
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en-i"
       - label: "[hidden]"
         name: "title"
         widget: "string"
         default: "Enter here to edit."
-      - label: "Copyright"
-        name: "copyright"
+      - label: "Page title"
+        name: "pagetitle"
         widget: "string"
-      - label: "Social Media"
-        name: "social"
-        widget: "object"
-        fields:
-        - label: "Link Facebook"
-          name: "facebook"
-          widget: "string"
-        - label: "Link Twitter"
-          name: "twitter"
-          widget: "string"
-        - label: "Link Instagram"
-          name: "instagram"
-          widget: "string"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+
+  - name: "people_listing-pt"
+    label: "People Listing 🇵🇹"
+    folder: "content/people"
+    filter:
+      field: "i18nlanguage"
+      value: "pt-i"
+    slug: "{{name}}"
+    extension: "pt.md"
+    format: "yaml-frontmatter"
+    create: false
+    editor:
+      preview: false
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt-i"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Enter here to edit."
+      - label: "Page title"
+        name: "pagetitle"
+        widget: "string"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+
+  - name: "blog_listing"
+    label: "Blog Listing 🇬🇧"
+    folder: "content/blog"
+    filter:
+      field: "i18nlanguage"
+      value: "en-i"
+    slug: "{{name}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
+    create: false
+    editor:
+      preview: false
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en-i"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Enter here to edit."
+      - label: "Page title"
+        name: "pagetitle"
+        widget: "string"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+
+  - name: "blog_listing-pt"
+    label: "Blog Listing 🇵🇹"
+    folder: "content/blog"
+    filter:
+      field: "i18nlanguage"
+      value: "pt-i"
+    slug: "{{name}}"
+    extension: "pt.md"
+    format: "yaml-frontmatter"
+    create: false
+    editor:
+      preview: false
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt-i"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Enter here to edit."
+      - label: "Page title"
+        name: "pagetitle"
+        widget: "string"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+
+  - name: "plan_listing"
+    label: "Pricing Page 🇬🇧"
+    folder: "content/pricing"
+    filter:
+      field: "i18nlanguage"
+      value: "en-i"
+    slug: "{{name}}"
+    extension: "en.md"
+    format: "yaml-frontmatter"
+    create: false
+    editor:
+      preview: false
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en-i"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Enter here to edit."
+      - label: "Page title"
+        name: "pagetitle"
+        widget: "string"
+      - label: "Page subtitle"
+        name: "pagesubtitle"
+        widget: "string"
+      - label: "Main Title"
+        name: "maintitle"
+        widget: "string"
+      - label: "Main Text"
+        name: "maintext"
+        widget: "text"
+      - label: "Other Title"
+        name: "othertitle"
+        widget: "string"
+      - label: "Other Text"
+        name: "othertext"
+        widget: "text"
+      - label: "Discounts Title"
+        name: "discountstitle"
+        widget: "string"
+      - label: "Discounts Text"
+        name: "discountstext"
+        widget: "text"
+
+  - name: "plan_listing-pt"
+    label: "Pricing Page 🇵🇹"
+    folder: "content/pricing"
+    filter:
+      field: "i18nlanguage"
+      value: "pt-i"
+    slug: "{{name}}"
+    extension: "pt.md"
+    format: "yaml-frontmatter"
+    create: false
+    editor:
+      preview: false
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt-i"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Enter here to edit."
+      - label: "Page title"
+        name: "pagetitle"
+        widget: "string"
+      - label: "Page subtitle"
+        name: "pagesubtitle"
+        widget: "string"
+      - label: "Main Title"
+        name: "maintitle"
+        widget: "string"
+      - label: "Main Text"
+        name: "maintext"
+        widget: "text"
+      - label: "Other Title"
+        name: "othertitle"
+        widget: "string"
+      - label: "Other Text"
+        name: "othertext"
+        widget: "text"
+      - label: "Discounts Title"
+        name: "discountstitle"
+        widget: "string"
+      - label: "Discounts Text"
+        name: "discountstext"
+        widget: "text"

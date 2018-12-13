@@ -33,7 +33,7 @@ export default class SocialIcons extends BesugoComponent {
       >
         <a href={link} target="_blank" rel="noopener noreferrer">
           <svg>
-            <use href={`#${icon}-icon`} />
+            <use xlinkHref={`#${icon.toLowerCase()}-icon`} />
           </svg>
         </a>
       </li>

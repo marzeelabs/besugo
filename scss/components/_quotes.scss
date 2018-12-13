@@ -1,0 +1,84 @@
+.quotes {
+  background: palette(grey, light);
+  text-align: center;
+  padding: 20px 0;
+
+  @include mq($from: break-medium) {
+    padding: 40px 20px;
+  }
+}
+
+.quotes__title {
+  color: palette(brand, light);
+  text-align: center;
+  margin: 0 auto;
+  font-size: $h5-font-size;
+}
+
+.quotes__slider {
+  max-width: 700px;
+  margin: 0 auto;
+
+  @include mq($from: break-big) {
+    max-width: 980px;
+  }
+
+  .slider__arrow-mz {
+    background: transparent;
+
+    svg {
+      fill: palette(grey);
+    }
+
+    &:hover {
+      background: rgba(palette(white), .55);
+    }
+  }
+}
+
+.quotes__wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.quotes__quote {
+  padding: 20px;
+
+  @include mq($from: break-medium) {
+    padding: 20px 40px;
+  }
+}
+
+.quotes__quote-text {
+  font-size: 14px;
+  max-width: 80%;
+  margin-left: 10%;
+
+  @include mq($from: break-medium) {
+    font-size: 16px;
+    max-width: 90%;
+    margin-left: 5%;
+  }
+}
+
+.quotes__quote-picture {
+  width: 60px;
+  height: 60px;
+  margin: 10px auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.quotes__quote-author {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.quotes__quote-occupation {
+  font-size: 14px;
+}

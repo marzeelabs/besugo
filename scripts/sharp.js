@@ -125,8 +125,13 @@ const runSharp = (inFile) => {
 
       tasks.push(new Promise((resolve, reject) => {
         img.clone()
-          .resize(width, null)
-          .withoutEnlargement(withoutEnlargement)[method]({ quality })
+          .resize({
+            width,
+            withoutEnlargement,
+            fit: 'inside',
+          })
+          // eslint-disable-next-line no-unexpected-multiline
+          [method]({ quality })
           .toFile(outFile, (err, data) => {
             if (err) {
               reject(err);

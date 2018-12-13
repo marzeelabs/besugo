@@ -1,0 +1,53 @@
+{{ define "main" }}
+
+<div class="page-main page-main--simple">
+  <div class="plans__content">
+    <div class="plans__titles">
+      <h1 class="plans__title">{{ .Params.pagetitle }}</h1>
+      <h2 class="plans__subtitle">{{ .Params.pagesubtitle }}</h2>
+    </div>
+
+    <section class="plans__main">
+      <h1 class="plans__header">{{ .Params.maintitle }}</h1>
+      <h2 class="plans__text">{{ .Params.maintext }}</h2>
+
+      <ul class="plans__list">
+        {{ range where .Pages.ByWeight "Params.kind" "main" }}
+          {{ .Render "li" }}
+        {{ end }}
+      </ul>
+    </section>
+
+    <section class="plans__other">
+      <h1 class="plans__header">{{ .Params.othertitle }}</h1>
+      <h2 class="plans__text">{{ .Params.othertext }}</h2>
+
+      <ul class="plans__list">
+        {{ range where .Pages.ByWeight "Params.kind" "other" }}
+          {{ .Render "li" }}
+        {{ end }}
+      </ul>
+    </section>
+  </div>
+
+  <section class="plans__discount">
+    <div class="plans__content">
+      <h1 class="plans__header">{{ .Params.discountstitle }}</h1>
+      <h2 class="plans__text">{{ .Params.discountstext }}</h2>
+
+      <ul class="plans__list">
+        {{ range  where .Pages.ByWeight "Params.kind" "discount" }}
+          {{ .Render "li" }}
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+
+  <section class="plans__reservation layout-container--inner" id="reservation">
+    <h1 class="plans__title">{{ i18n "BookASpot" }}</h1>
+
+    {{ partial "reservation.html" . }}
+  </section>
+</div>
+
+{{ end }}

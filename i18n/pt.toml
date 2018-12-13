@@ -1,20 +1,105 @@
-[Home]
-other = "Início"
+[PerString]
+other = "Por %s"
 
-[Pages]
-other = "Páginas"
+[Locations]
+other = "Localizações"
 
-[About]
-other = "Sobre nós"
-
-[People]
-other = "Pessoas"
-
-[Blog]
-other = "Blog"
+[Amenities]
+other = "Apetrechos"
 
 [ReadMore]
-other = "Ler Mais"
+other = "Lêr mais"
 
-[Author]
-other = "Autor"
+# For the contact page
+
+[GetInTouch]
+other = "Entra em contacto"
+
+[Name]
+other = "Nome"
+[NamePlaceholder]
+other = "Como te tratamos? Primeiro e último nome?"
+
+[Email]
+other = "Email"
+[EmailPlaceholder]
+other = "Para onde te podemos mandar coisas?"
+
+[MoreInfo]
+other = "Mais informações"
+[MoreInfoPlaceholder]
+other = "Mais alguma informaçãozinha que possa ser precisa?"
+
+[Send]
+other = "Enviar"
+
+# For the Reservations widget.
+
+[WantToVisit]
+other = "Queres visitar o Porto i/o?"
+[BookATour]
+other = "Marca uma visita"
+[BookASpot]
+other = "Reservar um lugar"
+
+[Previous]
+other = "Anterior"
+[Next]
+other = "Continuar"
+[Finish]
+other = "Concluir"
+
+[ModeVisit]
+other = "Marcar visita"
+[ModeBooking]
+other = "Reservar lugar"
+
+[OptionsTime]
+other = "A esta hora"
+[OptionsOfficeHours]
+other = "Horário de funcionamento: 10h às 18h"
+[OptionsHowManyPeople]
+other = "Reservar para quantas pessoas?"
+
+[InfoName]
+other = "O teu nome"
+[InfoEmail]
+other = "O teu endereço de e-mail para onde te responder"
+[InfoNotes]
+other = "Notas adicionais ou questões"
+
+[FinishedTitle]
+other = "Está feito!"
+[FinishedMessageVisit]
+other = "Vamos entrar em contacto assim que confirmarmos a tua visita."
+[FinishedMessageBooking]
+other = "Vamos entrar em contacto assim que confirmarmos a tua reserva."
+
+[GuideCalendar]
+other = "Escolhe um dia ou um intervalo de dias para começar."
+[GuideExtras]
+other = "Escolhe quais os extras que vais precisar."
+[GuideTime]
+other = "Escolhe uma hora para fazeres a visita."
+[GuideWeekend]
+other = "Se precisares de acesso ao fim-de-semana, tens de selecionar o acesso 24/7 no próximo passo."
+[GuideInfo]
+other = "Quase a terminar..."
+
+[StatusOptions]
+other = "Extras:"
+[StatusVisitDate]
+other = "Marcar visita para %date"
+[StatusVisitTime]
+other = "Marcar visita para %date às %time"
+[StatusBooking]
+other = "Reservar lugar para %date"
+[StatusBookingPeople]
+other = "Reservar lugar para %date para %people pessoas"
+
+[ExtrasScreen]
+other = "Ecrã de computador"
+[ExtrasChromebook]
+other = "Chrome book"
+[Extras247]
+other = "Acesso 24/7"

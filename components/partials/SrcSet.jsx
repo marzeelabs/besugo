@@ -2,7 +2,7 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 
 const buildSrcSet = (src) => {
-  const sharpConfig = require('../temp/sharpConfig');
+  const sharpConfig = require('../../temp/sharpConfig');
   const chunks = src.split('.');
   const ext = chunks.pop();
 

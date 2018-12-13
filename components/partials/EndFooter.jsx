@@ -1,19 +1,17 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 import SocialIcons from 'partials/SocialIcons';
-import SVGElements from 'partials/SVGElements';
 
 export default class EndFooter extends BesugoComponent {
   static config = {
     tag: 'EndFooter',
-    categories: [ 'footer', 'footer-pt' ],
   }
 
   static extraProps(props, xplaceholder) {
-    const params = xplaceholder.getChildren('param');
-    if (params.length > 0) {
+    const socials = xplaceholder.getChildren('Social');
+    if (socials.length > 0) {
       props.social = {};
-      params.forEach((child) => {
+      socials.forEach((child) => {
         const name = child.getAttribute('name');
         const value = child.getAttribute('value');
 
@@ -21,46 +19,33 @@ export default class EndFooter extends BesugoComponent {
         props.social[name] = value;
       });
     }
+
+    props.links = xplaceholder
+      .getChildren('Link')
+      .map(link => ({
+        label: link.getAttribute('label'),
+        url: link.getAttribute('url'),
+      }));
   }
 
   getData() {
-    if (this.isPreview()) {
-      const { entry } = this.props;
-
-      return {
-        home: {
-          url: '/',
+    return Object.assign({
+      copyright: '\xA9 2018 Marzee Labs.',
+      links: [
+        {
+          label: 'About us',
+          url: '#',
         },
-        about: {
-          url: '/pages/about',
+        {
+          label: 'Pricing',
+          url: '#',
         },
-        blog: {
-          url: '/blog',
+        {
+          label: 'Contact us',
+          url: '#',
         },
-        copyright: entry.getIn([ 'data', 'copyright' ]),
-        social: {
-          facebook: entry.getIn([ 'data', 'social', 'facebook' ]),
-          instagram: entry.getIn([ 'data', 'social', 'instagram' ]),
-          twitter: entry.getIn([ 'data', 'social', 'twitter' ]),
-        },
-      };
-    }
-
-    // Set some default props
-    const data = {
-      home: {
-        url: ('home-url' in this.props) ? this.props['home-url'] : '/',
-      },
-      about: {
-        url: ('about-url' in this.props) ? this.props['about-url'] : '/pages/about',
-      },
-      blog: {
-        url: ('blog-url' in this.props) ? this.props['blog-url'] : '/blog',
-      },
-      copyright: '\xA9 2017 Besugo',
-    };
-
-    return Object.assign(data, this.props);
+      ],
+    }, this.props);
   }
 
   renderBlock() {
@@ -69,29 +54,21 @@ export default class EndFooter extends BesugoComponent {
     return (
       <footer className="footer">
         <ul className="footer__menu">
-          <li className="footer__menu-item">
-            <a href={ data.home.url }>
-              home
-            </a>
-          </li>
-          <li className="footer__menu-item">
-            <a href={ data.about.url }>
-              About
-            </a>
-          </li>
-          <li className="footer__menu-item">
-            <a href={ data.blog.url }>
-              Blog
-            </a>
-          </li>
+          { data.links.map(link => (
+            <li className="footer__menu-item" key={ `link-${link.label}` }>
+              <a href={ link.url }>
+                { link.label }
+              </a>
+            </li>
+          )) }
         </ul>
 
         <SocialIcons section="footer" { ...data } />
 
         <div className="footer__copyright">
-          <a href="/" className="footer__copyright-logo">
+          <a href={ data.homelink } className="footer__copyright-logo">
             <svg>
-              <use href="#logo-main" />
+              <use xlinkHref="#logo-main" />
             </svg>
           </a>
           <p>
@@ -100,15 +77,6 @@ export default class EndFooter extends BesugoComponent {
         </div>
 
       </footer>
-    );
-  }
-
-  renderPreview() {
-    return (
-      <div id="cmsPreview">
-        <SVGElements />
-        { this.renderBlock() }
-      </div>
     );
   }
 }

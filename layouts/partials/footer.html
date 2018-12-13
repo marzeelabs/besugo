@@ -1,14 +1,28 @@
-{{ range where $.Site.RegularPages "Section" "footer" }}
-
 <EndFooter hidden="true"
-  home-url="{{ "/" | relLangURL }}"
-  about-url="{{ "/pages/about" | relLangURL }}"
-  blog-url="{{ "/blog" | relLangURL }}"
-  copyright={{ .Params.copyright }}
+  homelink="{{ .Site.BaseURL | relLangURL }}"
+  {{ if (eq $.Site.Language.Lang "pt") }}
+    copyright={{ $.Site.Data.settings.footer_pt }}
+  {{ else }}
+    copyright={{ $.Site.Data.settings.footer_en }}
+  {{ end }}
 >
-{{ range $icon, $link := .Params.social }}
-  <Param name="{{ $icon }}" value="{{ $link }}"></Param>
-{{ end }}
-</EndFooter>
 
-{{ end }}
+  {{ range sort .Site.Sections "Params.pagetitle" "asc" }}
+    {{ if (isset .Params "pagetitle") | and (ne .Params.pagetitle "") }}
+      <Link label="{{ .Params.pagetitle }}" url="{{ .URL }}"></Link>
+    {{ end }}
+  {{ end }}
+
+  {{ range where (where $.Site.RegularPages "Section" "pages") "Params.promote" true }}
+    <Link label="{{ .Title }}" url="{{ .URL }}"></Link>
+  {{ end }}
+
+  {{ range where $.Site.RegularPages "Section" "contact_page" }}
+    <Link label="{{ .Title }}" url="{{ .URL }}"></Link>
+  {{ end }}
+
+  {{ range $.Site.Data.settings.social }}
+    <Social name="{{ .name }}" value="{{ .link }}"></Social>
+  {{ end }}
+
+</EndFooter>

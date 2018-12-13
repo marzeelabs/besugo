@@ -193,7 +193,7 @@ export default class BesugoComponent extends React.Component {
   static extraProps() {}
 
   // What form should the component's container take; by default this returns a simple div.
-  // eslint-disable-next-line
+  // eslint-disable-next-line no-unused-vars
   static buildContainer(parserUtils, props) {
     return parserUtils.createNode('div');
   }

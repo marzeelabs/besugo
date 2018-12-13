@@ -1,5 +1,5 @@
-.link__button,
-%link__button {
+%link__button,
+.link__button {
   cursor: pointer;
   display: inline-block;
   transition: background 0.3s ease;
@@ -14,6 +14,7 @@
   }
 }
 
+%link__button-white,
 .link__button-white {
   @extend %link__button;
   color: palette(black);
@@ -25,6 +26,7 @@
   }
 }
 
+%link__button-white-secondary,
 .link__button-white-secondary {
   @extend %link__button;
   color: palette(white);
@@ -38,8 +40,8 @@
   }
 }
 
-.link__button-black-secondary,
-%link__button-black-secondary {
+%link__button-black-secondary,
+.link__button-black-secondary {
   @extend %link__button;
   color: palette(black);
   background: transparent;
@@ -52,6 +54,7 @@
   }
 }
 
+%link__button-black,
 .link__button-black {
   @extend %link__button;
   color: palette(white);
@@ -70,6 +73,10 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.link__paragraph-grey {
+  color: palette(grey);
 }
 
 .link__paragraph-black {

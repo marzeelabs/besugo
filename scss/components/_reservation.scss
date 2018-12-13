@@ -1,0 +1,21 @@
+.reservation__wrapper {
+  position: relative;
+}
+
+.reservation__top-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .tns-outer {
+    max-width: 100%;
+
+    @include mq($from: break-medium-large) {
+      max-width: 500px;
+    }
+  }
+}
+
+.reservation__panels {
+  display: flex;
+}

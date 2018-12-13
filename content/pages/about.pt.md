@@ -1,7 +1,10 @@
 ---
+i18nlanguage: pt
 title: Sobre nós
+promote: true
+url: "/pt/about-us"
 image: /media/uploads/example.jpg
-description: Integer iaculis tortor ut magna suscipit, in suscipit risus pharetra.
+subtitle: Integer iaculis tortor ut magna suscipit, in suscipit risus pharetra.
 
 ---
 

@@ -48,9 +48,15 @@ $palettes: (
     base: rgb(77, 77, 77), // #4D4D4D palette(grey)
   ),
 
-
   blue: (
     base: rgb(85, 188, 224), // #55BCE0 palette(blue)
+  ),
+
+  brand: (
+    complementary: rgb(251, 174, 49), // #fbae31 palette(brand, complementary)
+    dark: rgb(0, 115, 130), // #007382 palette(brand, dark)
+    base: rgb(77, 77, 77), // #4D4D4D palette(grey)
+    light: rgb(68, 193, 193) // #44c1c1 palette(brand, light)
   ),
 
   white: (
@@ -81,6 +87,7 @@ $mq-breakpoints: (
 // We are going to create a 1240px wide, 6 column grid with 20px gutters between
 // columns (applied as 10px of left/right padding on each column).
 $canvas-width: 1260px;
+$canvas-width-narrow: 1024px;
 
 $susy: (
   output: float,
