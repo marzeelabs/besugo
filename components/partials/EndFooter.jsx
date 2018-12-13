@@ -1,6 +1,10 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
+import ReactHtmlParser from 'react-html-parser';
+
 import SocialIcons from 'partials/SocialIcons';
+
+const cns = 'footer';
 
 export default class EndFooter extends BesugoComponent {
   static config = {
@@ -26,10 +30,13 @@ export default class EndFooter extends BesugoComponent {
         label: link.getAttribute('label'),
         url: link.getAttribute('url'),
       }));
+
+    const copyright = xplaceholder.getChildren('Copyright');
+    props.copyright = JSON.parse(copyright[0].text());
   }
 
   getData() {
-    return Object.assign({
+    const data = Object.assign({
       copyright: '\xA9 2018 Marzee Labs.',
       links: [
         {
@@ -46,16 +53,22 @@ export default class EndFooter extends BesugoComponent {
         },
       ],
     }, this.props);
+
+    // "Copyright" comes pre-built with HTML markup already.
+    // We need to parse it so that it doesn't show up as simple text
+    data.copyright = ReactHtmlParser(data.copyright);
+
+    return data;
   }
 
   renderBlock() {
     const data = this.getData();
 
     return (
-      <footer className="footer">
-        <ul className="footer__menu">
+      <footer className={ `${cns}` }>
+        <ul className={ `${cns}__menu` }>
           { data.links.map(link => (
-            <li className="footer__menu-item" key={ `link-${link.label}` }>
+            <li className={ `${cns}__menu-item` } key={ `link-${link.label}` }>
               <a href={ link.url }>
                 { link.label }
               </a>
@@ -65,15 +78,15 @@ export default class EndFooter extends BesugoComponent {
 
         <SocialIcons section="footer" { ...data } />
 
-        <div className="footer__copyright">
-          <a href={ data.homelink } className="footer__copyright-logo">
+        <div className={ `${cns}__copyright` }>
+          <a href={ data.homelink } className={ `${cns}__copyright-logo` }>
             <svg>
               <use xlinkHref="#logo-main" />
             </svg>
           </a>
-          <p>
+          <div className={ `${cns}__copyright-text` }>
             { data.copyright }
-          </p>
+          </div>
         </div>
 
       </footer>

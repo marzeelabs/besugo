@@ -48,7 +48,7 @@ export default class DatePicker extends Component {
     // important, it will be replaced when the page is loaded.
     if (isMounted) {
       const date = new Date();
-      const maxdate = (new Date());
+      const maxdate = new Date();
       maxdate.setFullYear(date.getFullYear() + 1);
 
       config.activeStartDate = date;

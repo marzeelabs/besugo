@@ -1,5 +1,5 @@
 backend:
-  name: git-gateway
+  name: github
   repo: marzeelabs/besugo # Path to your Github repository
   branch: <% CURRENT_BRANCH %> # Branch to update (current branch dynamically set by Gulp)
 

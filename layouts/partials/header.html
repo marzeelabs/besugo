@@ -1,8 +1,11 @@
 <TopHeader
+  locale="{{ .Site.Language.Lang }}"
   homelink="{{ .Site.BaseURL | relLangURL }}"
   activeurl="{{ .URL }}"
   locationslabel="{{ i18n "Locations" }}"
 >
+
+  {{ partial "locale_switcher" . }}
 
   {{ range sort .Site.Sections "Params.pagetitle" "asc" }}
     {{ if (isset .Params "pagetitle") | and (ne .Params.pagetitle "") }}

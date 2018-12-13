@@ -1,0 +1,40 @@
+.locale-switcher {
+  color: palette(white);
+
+  @include mq($from: break-medium-large) {
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.locale-switcher__list {
+  margin: 0 0 0 10px;
+  padding: 0 0 0 10px;
+  display: inline-flex;
+  position: relative;
+
+  &::before {
+    display: block;
+    height: 15px;
+    width: 2px;
+    background: rgba(palette(white), .35);
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+.locale-switcher__locale-link {
+  color: rgba(palette(white), .65);
+  transition: color ease .25s;
+
+  &:hover {
+    color: rgba(palette(white), 1);
+  }
+}

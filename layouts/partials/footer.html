@@ -1,11 +1,11 @@
 <EndFooter hidden="true"
   homelink="{{ .Site.BaseURL | relLangURL }}"
-  {{ if (eq $.Site.Language.Lang "pt") }}
-    copyright={{ $.Site.Data.settings.footer_pt }}
-  {{ else }}
-    copyright={{ $.Site.Data.settings.footer_en }}
-  {{ end }}
 >
+  {{ if (eq $.Site.Language.Lang "pt") }}
+    <Copyright>{{ jsonify (markdownify $.Site.Data.settings.footer_pt) }}</Copyright>
+  {{ else }}
+    <Copyright>{{ jsonify (markdownify $.Site.Data.settings.footer_en) }}</Copyright>
+  {{ end }}
 
   {{ range sort .Site.Sections "Params.pagetitle" "asc" }}
     {{ if (isset .Params "pagetitle") | and (ne .Params.pagetitle "") }}

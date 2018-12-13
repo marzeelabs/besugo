@@ -1,6 +1,7 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
+import LocaleSwitcher from 'partials/LocaleSwitcher';
 import SrcSet from 'partials/SrcSet';
 
 export default class TopHeader extends BesugoComponent {
@@ -9,6 +10,13 @@ export default class TopHeader extends BesugoComponent {
   }
 
   static extraProps(props, xplaceholder) {
+    props.localeSwitches = xplaceholder
+      .getChildren('LocaleSwitch')
+      .map(localeSwitch => ({
+        locale: localeSwitch.getAttribute('locale'),
+        url: localeSwitch.getAttribute('url'),
+      }));
+
     props.links = xplaceholder
       .getChildren('Link')
       .map(link => ({
@@ -45,6 +53,8 @@ export default class TopHeader extends BesugoComponent {
         },
       ],
 
+      locale: 'en',
+      localeSwitches: [],
       locations: [],
 
     }, this.props);
@@ -108,6 +118,8 @@ export default class TopHeader extends BesugoComponent {
                 </a>
               </li>
             )) }
+
+            <LocaleSwitcher { ...data } />
           </ul>
         </div>
       </header>

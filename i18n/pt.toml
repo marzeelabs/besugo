@@ -26,9 +26,9 @@ other = "Email"
 other = "Para onde te podemos mandar coisas?"
 
 [MoreInfo]
-other = "Mais informações"
+other = "Mensagem"
 [MoreInfoPlaceholder]
-other = "Mais alguma informaçãozinha que possa ser precisa?"
+other = "Como podemos ajudar?"
 
 [Send]
 other = "Enviar"
@@ -68,12 +68,18 @@ other = "O teu endereço de e-mail para onde te responder"
 [InfoNotes]
 other = "Notas adicionais ou questões"
 
+[FinishedSending]
+other = "A enviar..."
 [FinishedTitle]
 other = "Está feito!"
 [FinishedMessageVisit]
 other = "Vamos entrar em contacto assim que confirmarmos a tua visita."
 [FinishedMessageBooking]
 other = "Vamos entrar em contacto assim que confirmarmos a tua reserva."
+[FinishedFailed]
+other = "Oops!"
+[FinishedMessageFailed]
+other = "Algo falhou. Por favor entra em contato connosco por e-mail, vamos responder-te assim que conseguirmos:"
 
 [GuideCalendar]
 other = "Escolhe um dia ou um intervalo de dias para começar."
@@ -96,6 +102,8 @@ other = "Marcar visita para %date às %time"
 other = "Reservar lugar para %date"
 [StatusBookingPeople]
 other = "Reservar lugar para %date para %people pessoas"
+[StatusFries]
+other = "Queres umas batatinhas também?"
 
 [ExtrasScreen]
 other = "Ecrã de computador"

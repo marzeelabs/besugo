@@ -23,6 +23,7 @@
   "components/font_icon",
   "components/footer",
   "components/links",
+  "components/locale_switcher",
   "components/markdown",
   "components/more-arrow",
   "components/navigation",
@@ -32,10 +33,6 @@
   "components/table",
   "components/teaser",
   "components/tiny-slider";
-
-// Netlify components
-@import
-  "components/netlify_identity";
 
 // Reservation widget
 @import

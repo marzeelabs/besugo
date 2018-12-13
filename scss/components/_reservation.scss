@@ -1,5 +1,18 @@
 .reservation__wrapper {
   position: relative;
+
+  &:not(.isMounted) {
+    display: none;
+  }
+
+  // Hide all elements except for the final message when the user is finished.
+  &.lastSlide {
+    .reservation-location-buttons__container,
+    .reservation-guide__content,
+    .reservation__controls {
+      visibility: collapse;
+    }
+  }
 }
 
 .reservation__top-section {

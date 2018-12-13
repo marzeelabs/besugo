@@ -1,5 +1,6 @@
   <Locale value="{{ .Site.Params.locale }}"></Locale>
   <ActiveUrl value="{{ .URL }}"></ActiveUrl>
+  <Email value="{{ $.Site.Data.settings.email }}"></Email>
 
   <String category="label" name="previous" value="{{ i18n "Previous" }}"></String>
   <String category="label" name="next" value="{{ i18n "Next" }}"></String>
@@ -16,9 +17,12 @@
   <String category="info" name="email" value="{{ i18n "InfoEmail" }}"></String>
   <String category="info" name="notes" value="{{ i18n "InfoNotes" }}"></String>
 
+  <String category="finished" name="sending" value="{{ i18n "FinishedSending" }}"></String>
   <String category="finished" name="title" value="{{ i18n "FinishedTitle" }}"></String>
   <String category="finished" name="messageVisit" value="{{ i18n "FinishedMessageVisit" }}"></String>
   <String category="finished" name="messageBooking" value="{{ i18n "FinishedMessageBooking" }}"></String>
+  <String category="finished" name="failed" value="{{ i18n "FinishedFailed" }}"></String>
+  <String category="finished" name="messageFailed" value="{{ i18n "FinishedMessageFailed" }}"></String>
 
   <String category="guide" name="calendar" value="{{ i18n "GuideCalendar" }}"></String>
   <String category="guide" name="extras" value="{{ i18n "GuideExtras" }}"></String>
@@ -31,6 +35,7 @@
   <String category="status" name="visitTime" value="{{ i18n "StatusVisitTime" }}"></String>
   <String category="status" name="booking" value="{{ i18n "StatusBooking" }}"></String>
   <String category="status" name="bookingPeople" value="{{ i18n "StatusBookingPeople" }}"></String>
+  <String category="status" name="fries" value="{{ i18n "StatusFries" }}"></String>
 
   {{ range where $.Site.RegularPages "Section" "location" }}
     <Button label="{{ .Title }}" url="{{ .URL }}"></Button>

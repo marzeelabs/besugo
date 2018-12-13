@@ -169,12 +169,3 @@
 .reservation__description {
   padding: 0 20px 10px;
 }
-
-// Hide all elements except for the final message when the user is finished.
-.reservation__wrapper[index="3"] {
-  & .reservation-location-buttons__container,
-  & .reservation-guide__content,
-  & .reservation__controls {
-    visibility: collapse;
-  }
-}

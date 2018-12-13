@@ -116,10 +116,10 @@ module.exports = [
 
     // Here the application starts executing and webpack starts bundling
     entry: {
-      // js: [
-      //   './scripts/webpack/polyfills.js',
-      //   './scripts/webpack/site.js',
-      // ],
+      js: [
+        // './scripts/webpack/polyfills.js',
+        './scripts/webpack/site.js',
+      ],
       admin: [
         // './scripts/webpack/polyfills.js',
         './scripts/webpack/admin.js',

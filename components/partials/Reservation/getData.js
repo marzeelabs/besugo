@@ -1,6 +1,7 @@
 export default (props, xplaceholder) => {
   props.locale = xplaceholder.getChildren('Locale')[0].getAttribute('value');
   props.activeUrl = xplaceholder.getChildren('ActiveUrl')[0].getAttribute('value');
+  props.email = xplaceholder.getChildren('Email')[0].getAttribute('value');
 
   props.buttons = xplaceholder
     .getChildren('Button')

@@ -68,6 +68,53 @@ const isWeekend = (dates) => {
 const cns = 'reservation-guide';
 
 export default class ReservationGuide extends PureComponent {
+  isEverything() {
+    const { state } = this.props;
+
+    const {
+      dates,
+      mode,
+      options,
+      people,
+    } = state;
+
+    if (!dates) {
+      return false;
+    }
+
+    const days = [
+      dates[0].toLocaleDateString ? dates[0].toLocaleDateString() : dates[0].toString(),
+      dates[1].toLocaleDateString ? dates[1].toLocaleDateString() : dates[1].toString(),
+    ];
+
+    const today = new Date();
+    const apocalypse = new Date();
+    apocalypse.setFullYear(apocalypse.getFullYear() + 1);
+
+    const limits = [
+      today.toLocaleDateString ? today.toLocaleDateString() : today.toString(),
+      apocalypse.toLocaleDateString ? apocalypse.toLocaleDateString() : apocalypse.toString(),
+    ];
+
+    if (days[0] !== limits[0] || days[1] !== limits[1]) {
+      return false;
+    }
+
+    if (mode !== 'booking') {
+      return false;
+    }
+
+    if (Object.values(options).some(value => !value)) {
+      return false;
+    }
+
+    if (people !== 4 && people !== '4') {
+      return false;
+    }
+
+    return true;
+  }
+
   render() {
     const {
       strings,
@@ -163,7 +210,7 @@ export default class ReservationGuide extends PureComponent {
 
     return (
       <div className={ `${cns}__content` }>
-        { guide.length && (
+        { !guide.length ? null : (
           <div className={ `${cns}__guide` }>
             { guide.map(line => (
               <p className={ `${cns}__guide-line` } key={ `guide-line-${line.key}` }>
@@ -194,6 +241,12 @@ export default class ReservationGuide extends PureComponent {
                 ))
               }
             </ul>
+          </div>
+        ) }
+
+        { this.isEverything() && (
+          <div className={ `${cns}__fries` }>
+            { strings.status.fries }
           </div>
         ) }
       </div>

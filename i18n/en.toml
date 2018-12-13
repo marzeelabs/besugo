@@ -26,9 +26,9 @@ other = "Email"
 other = "Where can we send you stuff?"
 
 [MoreInfo]
-other = "More info"
+other = "Message"
 [MoreInfoPlaceholder]
-other = "Any more juicy info we should know?"
+other = "How can we help each other?"
 
 [Send]
 other = "Send"
@@ -68,12 +68,18 @@ other = "Your e-mail contact so we can reach you"
 [InfoNotes]
 other = "Any additional notes or questions"
 
+[FinishedSending]
+other = "Sending..."
 [FinishedTitle]
 other = "You're done!"
 [FinishedMessageVisit]
 other = "We'll get in touch as soon as we can to confirm your visit."
 [FinishedMessageBooking]
 other = "We'll get in touch as soon as we can to confirm your booking."
+[FinishedFailed]
+other = "Oops!"
+[FinishedMessageFailed]
+other = "Something went wrong. Please reach out to us by e-mail, we'll get back to you as soon as we can:"
 
 [GuideCalendar]
 other = "Pick a date or a range of days to start with."
@@ -96,6 +102,8 @@ other = "Schedule a visit for %date at %time"
 other = "Book a workplace for %date"
 [StatusBookingPeople]
 other = "Book a workplace for %date for %people people"
+[StatusFries]
+other = "Would you like fries with that?"
 
 [ExtrasScreen]
 other = "Computer screen"

@@ -57,7 +57,7 @@ export default class Info extends PureComponent {
             { strings.info.notes }
           </div>
           <textarea
-            name="notes"
+            name="message"
             className="reservation__info-notes__input"
             disabled={ slideIndex !== index }
             cols="44"

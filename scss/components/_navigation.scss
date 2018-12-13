@@ -9,7 +9,7 @@
   background-color: palette(grey);
   transition: background ease 0.3s;
 
-  @include mq($until: break-medium) {
+  @include mq($until: break-medium-large) {
     position: fixed;
     text-align: left;
     top: 0;
@@ -18,7 +18,7 @@
     padding: 0;
   }
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     position: fixed;
     top: 0;
     left: 0;
@@ -36,7 +36,7 @@
 
 .navigation__menu {
 
-  @include mq($until: break-medium) {
+  @include mq($until: break-medium-large) {
     background: palette(grey);
     max-height: 0;
     text-align: center;
@@ -52,7 +52,7 @@
     }
   }
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     margin-top: ritmo(5);
     position: relative;
   }
@@ -76,7 +76,7 @@
     top: 26px;
   }
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
 
     &::before {
       display: none;
@@ -91,7 +91,7 @@
   width: auto;
   font-weight: 700;
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     display: inline-block;
     margin: 0 0.15em;
     text-transform: uppercase;
@@ -107,7 +107,7 @@
   z-index: 10;
   background: palette(grey);
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     display: none;
     background: palette(black);
     position: absolute;
@@ -132,7 +132,7 @@
   display: block;
   color: palette(white);
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     padding: ritmo() 16px;
     transition: background 0.3s ease;
     @include ritmo-font-size(12px);
@@ -142,7 +142,7 @@
     background: palette(white);
     color: palette(grey);
 
-    @include mq($from: break-medium) {
+    @include mq($from: break-medium-large) {
       background: palette(white);
     }
   }
@@ -156,7 +156,7 @@
   &.is-hidden {
     display: none;
 
-    @include mq($from: break-medium) {
+    @include mq($from: break-medium-large) {
       display: inline-block;
     }
   }
@@ -224,7 +224,7 @@
   cursor: pointer;
   margin-left: 65px;
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     display: none;
   }
 }
@@ -237,7 +237,7 @@
     border-top: 1px solid palette(white);
   }
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
 
     .navigation__menu-item:hover & {
       flex-wrap: wrap;
@@ -270,7 +270,7 @@
 
 .navigation__submenu--locations__img__wrapper {
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     position: relative;
     width: 60px;
     height: 60px;
@@ -284,7 +284,7 @@
 .navigation__submenu--locations__img {
   display: none;
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     position: absolute;
     display: block;
     top: 50%;
@@ -305,7 +305,7 @@
   opacity: 1;
   transition: all 0.2s ease-in-out;
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     // opacity: 0;
     top: 20px;
     left: 10px;
