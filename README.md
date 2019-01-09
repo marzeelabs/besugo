@@ -19,7 +19,7 @@ Below are listed the versions used in Netlify to create the live, preview and br
     - If after running the above command it complains that *xcode alone is not sufficient on sierra*, try running `xcode-select --install`. Note that **macOS Sierra 10.12.6 or higher and XCode 9.2 are required.**
 
 
-1. [hugo](https://gohugo.io/) v0.52.0 - builds the structure of the website based on the content setup, although we're phasing it out in favor of a fully JS/React solution. Any version over 0.27.1 should still work though.
+1. [hugo](https://gohugo.io/) v0.53 - builds the structure of the website based on the content setup, although we're phasing it out in favor of a fully JS/React solution. Any version over 0.27.1 should still work though.
 
     - Install:
       ```sh
