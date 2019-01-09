@@ -11,34 +11,35 @@
  * Locale selector.
  */
 
-.nc-collectionPage {
-  &-localeSelector {
-    font-size: 16px;
-    height: 1.75em;
-    position: absolute;
-    right: -3px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3em;
+.custom-locale-selector {
+  font-size: 16px;
+  height: 1.75em;
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3em;
+}
+
+// .nc-collectionPage-sidebarHeading { Netlify-cms 1.9.2
+.el9l68m1 {
+  position: relative;
+}
+
+// .nc-collectionPage-sidebarLink { // Netlify-cms 1.9.2
+.el9l68m4 > li {
+  &.locale-hidden {
+    display: none;
   }
 
-  &-sidebarHeading {
-    position: relative;
+  &:first-of-type {
+    margin-top: 0;
   }
+}
 
-  &-sidebarLink {
-    &.locale-hidden {
-      display: none;
-    }
-
-    &:first-of-type {
-      margin-top: 0;
-    }
-  }
-
-  &-sidebarSearch {
-    margin-bottom: 16px;
-  }
+// .nc-collectionPage-sidebarSearch { // Netlify-cms 1.9.2
+.el9l68m2 {
+  margin-bottom: 16px;
 }
 
 /*
@@ -126,16 +127,27 @@
   }
 }
 
-.nc-githubAuthenticationPage-logo {
+// .nc-githubAuthenticationPage-logo { // Netlify-cms 1.9.2
+.e4hp3ji2 {
   display: none;
 }
 
-.nc-githubAuthenticationPage-button {
+// .nc-githubAuthenticationPage-button { // Netlify-cms 1.9.2
+.e4hp3ji4 {
   margin-top: 0;
 }
 
-.nc-entryEditor-containerOuter {
-  .logged-in & {
-    padding-bottom: 40px;
+.logged-in {
+  // .nc-entryEditor-containerOuter { // Netlify-cms 1.9.2
+  .e1pxf6c40 {
+    padding-bottom: 44px;
+  }
+
+  .el9l68m0 {
+    max-height: calc(100vh - 132px);
+  }
+
+  .e1yhfkro1 {
+    padding-bottom: 20px;
   }
 }

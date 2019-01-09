@@ -1,13 +1,20 @@
 import { ucs2 } from 'punycode';
 
 (() => {
+  const SELECTORS = {
+    // heading: 'h1.nc-collectionPage-sidebarHeading', // Netlify-cms 1.9.2
+    // link: '.nc-collectionPage-sidebarLink', // Netlify-cms 1.9.2
+    heading: '.el9l68m1',
+    link: '.el9l68m4 > li',
+  };
+
   const findH1 = (target) => {
-    const h1 = target && target.querySelectorAll('h1.nc-collectionPage-sidebarHeading')[0];
+    const h1 = target && target.querySelector(SELECTORS.heading);
     if (h1) {
       const locales = [];
       let select = null;
 
-      const items = document.querySelectorAll('.nc-collectionPage-sidebarLink');
+      const items = document.querySelectorAll(SELECTORS.link);
       items.forEach((item) => {
         const chunks = item.textContent.split(' ');
         chunks.forEach((chunk) => {
@@ -44,9 +51,9 @@ import { ucs2 } from 'punycode';
       });
 
       // Show the locale selector only when there are enough locales for it to be useful.
-      if (locales.length > 1 && !h1.querySelectorAll('.nc-collectionPage-localeSelector').length) {
+      if (locales.length > 1 && !h1.querySelectorAll('.custom-locale-selector').length) {
         select = document.createElement('select');
-        select.classList.add('nc-collectionPage-localeSelector');
+        select.classList.add('custom-locale-selector');
 
         locales.forEach((locale) => {
           const option = document.createElement('option');
@@ -60,7 +67,7 @@ import { ucs2 } from 'punycode';
         // Changing the selector should update the shown content types according to the selection.
         select._onChange = () => {
           const locale = select.value;
-          const links = document.querySelectorAll('.nc-collectionPage-sidebarLink');
+          const links = document.querySelectorAll(SELECTORS.link);
           links.forEach((link) => {
             if (link.classList.contains(`locale-${locale}`)) {
               link.classList.remove('locale-hidden');

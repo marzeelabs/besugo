@@ -1,6 +1,11 @@
 (() => {
+  const SELECTORS = {
+    // container: '.nc-app-container', // Netlify-cms 1.9.2
+    container: '.notif__container',
+  };
+
   const findAppContainer = () => {
-    const nodes = document.querySelectorAll('.nc-app-container');
+    const nodes = document.querySelectorAll(SELECTORS.container);
     if (nodes.length > 0) {
       document.body.classList.add('logged-in');
     }
