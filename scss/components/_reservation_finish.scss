@@ -1,0 +1,24 @@
+.reservation-finished__container {
+  text-align: center;
+  margin: auto 0;
+}
+
+.reservation-finished__title {
+  font-size: $h1-font-size;
+  margin: 10px auto 20px;
+  color: palette(brand, light);
+}
+
+.reservation-finished__message {
+  font-size: $h4-font-size;
+}
+
+.reservation-finished__icon {
+  height: 80px;
+
+  svg {
+    width: auto;
+    height: 100%;
+    fill: palette(brand, light);
+  }
+}

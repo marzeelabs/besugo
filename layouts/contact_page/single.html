@@ -1,0 +1,48 @@
+{{ define "main" }}
+
+  <div class="page-main--simple">
+    <section class="layout-container--inner">
+      <h1 class="contact-form__title">{{ i18n "GetInTouch" }}</h1>
+      <form class="contact-form" name="contact-form" netlify>
+        <input
+          type="hidden"
+          name="subject"
+          value="Besugo - message from {name}"
+        />
+
+        <span class="contact-form__label">{{ i18n "Name" }}</span>
+        <input
+          class="contact-form__input"
+          type="text"
+          name="name"
+          required
+          placeholder="{{ i18n "NamePlaceholder" }}"
+        />
+
+        <span class="contact-form__label">{{ i18n "Email" }}</span>
+        <input
+          class="contact-form__input"
+          type="email"
+          name="email"
+          required
+          placeholder="{{ i18n "EmailPlaceholder" }}"
+        />
+
+        <span class="contact-form__label">{{ i18n "MoreInfo" }}</span>
+        <textarea
+          class="contact-form__input contact-form__input--textarea"
+          name="message"
+          required
+          placeholder="{{ i18n "MoreInfoPlaceholder" }}"
+        ></textarea>
+
+        <input type="submit" value="{{ i18n "Send" }}" class="contact-form__submit">
+
+        <br /><br />
+        <div>
+          {{ i18n "Email" }}: <strong><a href="mailto:{{ $.Site.Data.settings.email }}" class="link__paragraph-grey">{{ $.Site.Data.settings.email }}</a></strong>
+        </div>
+      </form>
+    </section>
+  </div>
+{{ end }}

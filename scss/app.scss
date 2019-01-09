@@ -10,27 +10,48 @@
 // Base styles
 @import "base/base";
 
-// MZ Harp styles
-// Replace by yours
+// Vendor styles
 @import
-  "components/navigation",
-  "components/links",
-  "components/page",
-  "components/profiles-list",
-  "components/profile-page",
+  "tiny-slider/src/tiny-slider",
+  "react-calendar/dist/Calendar";
+
+// Base components
+@import
   "components/blog",
   "components/blog-post",
   "components/contact-form",
+  "components/font_icon",
+  "components/footer",
+  "components/links",
+  "components/locale_switcher",
   "components/markdown",
   "components/more-arrow",
-  "components/teaser",
+  "components/navigation",
+  "components/page",
+  "components/profile-page",
+  "components/profiles-list",
   "components/table",
-  "components/slider",
-  "components/footer",
+  "components/teaser",
+  "components/tiny-slider";
+
+// Reservation widget
+@import
+  "components/reservation",
+  "components/reservation_buttons",
+  "components/reservation_finish",
+  "components/reservation_guide",
+  "components/reservation_info",
+  "components/reservation_options",
+  "components/reservation_time",
+  "components/react-calendar-overrides";
+
+// Content type components
+@import
+  "components/quotes";
+
+// Content types and pages
+@import
+  "components/page-simple",
+  "components/location",
+  "components/plans",
   "components/styleguide";
-
-// Vendor styles
-
-// Slick Carousel Slider
-@import "slick-carousel/slick/slick.scss";
-@import "vendors/slick";

@@ -1,0 +1,137 @@
+@font-face {
+  font-family: 'porto-io-icons';
+  src:    url('/font_icon/porto-io-icons.eot');
+  src:    url('/font_icon/porto-io-icons.eot') format('embedded-opentype'),
+      url('/font_icon/porto-io-icons.ttf') format('truetype'),
+      url('/font_icon/porto-io-icons.woff') format('woff'),
+      url('/font_icon/porto-io-icons.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'porto-io-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering ===========
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;*/
+}
+
+.icon-view:before {
+  content: "\e924";
+}
+.icon-cleaning:before {
+  content: "\e90a";
+}
+.icon-announce:before {
+  content: "\e90b";
+}
+.icon-clock:before {
+  content: "\e90c";
+}
+.icon-arrow-right:before {
+  content: "\e90d";
+}
+.icon-arrow-left:before {
+  content: "\e90e";
+}
+.icon-arrow-right2:before {
+  content: "\e90f";
+}
+.icon-arrow-left2:before {
+  content: "\e910";
+}
+.icon-circle-right:before {
+  content: "\e911";
+}
+.icon-circle-left:before {
+  content: "\e912";
+}
+.icon-2_users:before {
+  content: "\e913";
+}
+.icon-coin-euro:before {
+  content: "\e914";
+}
+.icon-expand:before {
+  content: "\e915";
+}
+.icon-happy:before {
+  content: "\e916";
+}
+.icon-heart:before {
+  content: "\e917";
+}
+.icon-checkmark:before {
+  content: "\e918";
+}
+.icon-facebook:before {
+  content: "\e919";
+}
+.icon-instagram:before {
+  content: "\e91a";
+}
+.icon-twitter:before {
+  content: "\e91b";
+}
+.icon-headphones:before {
+  content: "\e91c";
+}
+.icon-mug:before {
+  content: "\e91d";
+}
+.icon-kitchen:before {
+  content: "\e91e";
+}
+.icon-user:before {
+  content: "\e91f";
+}
+.icon-books:before {
+  content: "\e920";
+}
+.icon-printer:before {
+  content: "\e921";
+}
+.icon-connection:before {
+  content: "\e922";
+}
+.icon-locker:before {
+  content: "\e900";
+}
+.icon-shower:before {
+  content: "\e901";
+}
+.icon-lamp:before {
+  content: "\e902";
+}
+.icon-meeting:before {
+  content: "\e903";
+}
+.icon-to_do_list:before {
+  content: "\e904";
+}
+.icon-community_manager:before {
+  content: "\e905";
+}
+.icon-day_calendar:before {
+  content: "\e906";
+}
+.icon-month_calendar:before {
+  content: "\e907";
+}
+.icon-week_calendar:before {
+  content: "\e908";
+}
+.icon-network:before {
+  content: "\e909";
+}
+.icon-open:before {
+  content: "\e923";
+}

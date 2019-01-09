@@ -1,0 +1,171 @@
+.reservation-location-buttons__container {
+  display: inline-flex;
+  justify-content: space-between;
+  flex: 0 0 100%;
+  flex-wrap: wrap;
+
+  @include mq($from: break-medium-large) {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex: 0 0 240px;
+    flex-direction: column;
+    margin-right: -20px; //to compensate arrows white space
+  }
+}
+
+.reservation-location-buttons__button-wrapper {
+  display: block;
+  width: calc(50% - 5px);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5px;
+
+  @include mq($from: break-medium-large) {
+    width: 100%;
+    padding-right: 25px;
+  }
+
+  &::after,
+  &::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: palette(white);
+    pointer-events: none;
+    display: none;
+
+    @include mq($from: break-medium-large) {
+      display: block;
+    }
+  }
+
+  &::after {
+    top: -25%;
+    right: -45%;
+    transform: rotate(55deg);
+  }
+
+  &::before {
+    top: 25%;
+    right: -45%;
+    transform: rotate(-55deg);
+  }
+}
+
+.reservation-location-buttons__button {
+  padding: 15px 15px 15px 50px;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-radius: 10px;
+  background: palette(grey, light);
+  text-transform: uppercase;
+  transition: all ease .35s, visibility linear 0s;
+  font-size: 14px;
+
+  @include mq($from: break-medium-small) {
+    font-size: 16px;
+  }
+
+  @include mq($from: break-medium-large) {
+    padding: 15px 45px 15px 50px;
+    border-radius: 0;
+  }
+
+  &:not([disabled]):hover {
+    cursor: pointer;
+    background: palette(grey);
+    color: palette(white);
+  }
+
+  &[disabled].reservation-location-buttons__button--previous {
+    visibility: collapse;
+  }
+
+  &--disabled {
+    pointer-events: none;
+    color: graytext;
+  }
+}
+
+
+.reservation__bottom-button--active,
+.reservation-location-buttons__button--active {
+  background: palette(grey);
+  color: palette(white);
+}
+
+
+.reservation-location-buttons__button-icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  svg {
+    width: 100%;
+    height: 100%;
+    transition: fill ease .35s;
+  }
+
+  .reservation-location-buttons__button:hover &,
+  .reservation-location-buttons__button--active & {
+
+    svg {
+      fill: palette(white);
+    }
+  }
+}
+
+/* bottom buttons */
+.reservation__controls {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  order: 3;
+
+  @include mq($from: break-medium-large) {
+    order: 4;
+    flex: 0 0 100%;
+  }
+}
+
+.reservation__bottom-button {
+  @extend %link__button-white;
+  margin: 0 5px;
+  border: 1px solid palette(grey);
+
+  &:not([disabled]):hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &[disabled].reservation__bottom-button--previous {
+    visibility: collapse;
+    width: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  &--disabled {
+    pointer-events: none;
+  }
+}
+
+.reservation__bottom-button--disabled {
+  // @extend %link__button-black-secondary;
+}
+
+.reservation__bottom-button--previous {
+  // @extend %link__button-white;
+}
+
+.reservation__description {
+  padding: 0 20px 10px;
+}

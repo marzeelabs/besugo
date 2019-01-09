@@ -48,8 +48,9 @@ require('./tasks/clean').then(() => {
         require('./tasks/sass'),
         require('./tasks/sharp'),
         require('./tasks/hugo'),
-      ]).then(() => {
-        require('./tasks/webpack');
-      });
+      ])
+        .then(() => {
+          require('./tasks/webpack');
+        });
     });
 });

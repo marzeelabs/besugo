@@ -1,4 +1,14 @@
 title: Enter here to edit.
 name: MarzeeLab's Besugo
-ga:
-fp:
+email: hello@marzeelabs.org
+footer_en: >-
+  © 2018 Marzee Labs
+footer_pt: >-
+  © 2018 Marzee Labs
+social:
+  - link: 'https://www.facebook.com/marzeelabs/'
+    name: Facebook
+  - link: "#instagram"
+    name: Instagram
+  - link: 'https://twitter.com/marzeelabs'
+    name: Twitter

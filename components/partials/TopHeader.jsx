@@ -1,42 +1,69 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
+import LocaleSwitcher from 'partials/LocaleSwitcher';
+import SrcSet from 'partials/SrcSet';
+
 export default class TopHeader extends BesugoComponent {
   static config = {
     tag: 'TopHeader',
   }
 
+  static extraProps(props, xplaceholder) {
+    props.localeSwitches = xplaceholder
+      .getChildren('LocaleSwitch')
+      .map(localeSwitch => ({
+        locale: localeSwitch.getAttribute('locale'),
+        url: localeSwitch.getAttribute('url'),
+      }));
+
+    props.links = xplaceholder
+      .getChildren('Link')
+      .map(link => ({
+        label: link.getAttribute('label'),
+        url: link.getAttribute('url'),
+        active: link.getAttribute('url') === props.activeurl,
+      }));
+
+    props.locations = xplaceholder
+      .getChildren('Location')
+      .map(location => ({
+        label: location.getAttribute('label'),
+        url: location.getAttribute('url'),
+        image: location.getAttribute('image'),
+        active: location.getAttribute('url') === props.activeurl,
+      }));
+  }
+
   getData() {
     // Set some default props
-    return {
-      home: {
-        active: ('home-active' in this.props && this.props['home-active'] === 'true') ? ' is-active' : '',
-        url: ('home-url' in this.props) ? this.props['home-url'] : '/',
-        label: ('home-label' in this.props) ? this.props['home-label'] : 'Home',
-      },
-      pages: {
-        label: ('pages-label' in this.props) ? this.props['pages-label'] : 'Pages',
-      },
-      about: {
-        active: ('about-active' in this.props && this.props['about-active'] === 'true') ? ' is-active' : '',
-        url: ('about-url' in this.props) ? this.props['about-url'] : '/pages/about',
-        label: ('about-label' in this.props) ? this.props['about-label'] : 'About',
-      },
-      people: {
-        active: ('people-active' in this.props && this.props['people-active'] === 'true') ? ' is-active' : '',
-        url: ('people-url' in this.props) ? this.props['people-url'] : '/people',
-        label: ('people-label' in this.props) ? this.props['people-label'] : 'People',
-      },
-      blog: {
-        active: ('blog-active' in this.props && this.props['blog-active'] === 'true') ? ' is-active' : '',
-        url: ('blog-url' in this.props) ? this.props['blog-url'] : '/blog',
-        label: ('blog-label' in this.props) ? this.props['blog-label'] : 'Blog',
-      },
-    };
+    return Object.assign({
+      links: [
+        {
+          label: 'About us',
+          url: '#',
+        },
+        {
+          label: 'Pricing',
+          url: '#',
+        },
+        {
+          label: 'Contact us',
+          url: '#',
+        },
+      ],
+
+      locale: 'en',
+      localeSwitches: [],
+      locations: [],
+
+    }, this.props);
   }
 
   render() {
     const data = this.getData();
+
+    const locationsActive = data.locations.some(location => location.active);
 
     return (
       <header>
@@ -48,47 +75,52 @@ export default class TopHeader extends BesugoComponent {
 
           <div className="navigation-logo" ref={(div) => { this.domLogo = div; }}>
             <a href="/" className="navigation-logo__svg">
-              <svg className="navigation-logo__svg-minified">
-                <use href="#logo-main" />
+              <svg className="navigation-logo__svg-element">
+                <use xlinkHref="#logo-main" />
               </svg>
             </a>
           </div>
 
           <ul className="navigation__menu">
-
-            <li className={ `navigation__menu-item${data.home.active}` }>
-              <a className="navigation__menu-link" href={ data.home.url }>
-                { data.home.label }
-              </a>
-            </li>
-
-            <li className="navigation__menu-item">
-              <div className="navigation__menu-link is-hidden">
-                { data.pages.label }
+            <li className={ `navigation__menu-item has-dropdown ${locationsActive ? 'is-active' : ''}` }>
+              <div className="navigation__menu-link">
+                { data.locationslabel }
               </div>
 
-              <ul className="navigation__submenu">
-                <li className={ `navigation__menu-item${data.about.active}` }>
-                  <a className="navigation__menu-link" href={ data.about.url }>
-                    { data.about.label }
-                  </a>
-                </li>
-                <li className={ `navigation__menu-item${data.people.active}` }>
-                  <a className="navigation__menu-link" href={ data.people.url }>
-                    { data.people.label }
-                  </a>
-                </li>
+              <ul className="navigation__submenu navigation__submenu--locations">
+                { data.locations.map(location => (
+                  <li
+                    className={ `navigation__menu-item ${location.active ? 'is-active' : ''}` }
+                    key={ `location-${location.label}` }
+                  >
+                    <a className="navigation__menu-link" href={ location.url }>
+                      <span className="navigation__submenu--locations__img__wrapper">
+                        <SrcSet
+                          className="navigation__submenu--locations__img"
+                          src={ location.image }
+                          sizes="60px"
+                        />
+                      </span>
+                      <span>{ location.label }</span>
+                    </a>
+                  </li>
+                )) }
               </ul>
             </li>
 
-            <li className={ `navigation__menu-item${data.blog.active}` }>
-              <a className="navigation__menu-link" href={ data.blog.url }>
-                { data.blog.label }
-              </a>
-            </li>
+            { data.links.map(link => (
+              <li
+                className={ `navigation__menu-item ${link.active ? 'is-active' : ''}` }
+                key={ `link-${link.label}` }
+              >
+                <a className="navigation__menu-link" href={ link.url }>
+                  { link.label }
+                </a>
+              </li>
+            )) }
 
+            <LocaleSwitcher { ...data } />
           </ul>
-
         </div>
       </header>
     );
@@ -137,7 +169,7 @@ export default class TopHeader extends BesugoComponent {
           this.toggleClass(this.domNavigation, 'navigation--fixed-top', scrollTop > 1);
 
           // show logo
-          this.toggleClass(this.domLogo, 'visible-logo', scrollTop > 150);
+          // this.toggleClass(this.domLogo, 'visible-logo', scrollTop > 150);
         });
         break;
       }

@@ -2,6 +2,7 @@
   "extends": "airbnb",
 
   "globals": {
+    "netlifyIdentity": true,
     "CMS": true,
     "MutationObserver": true,
     "document": true,

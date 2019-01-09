@@ -1,0 +1,14 @@
+<Plan
+  name="{{ .Params.name }}"
+  kind="{{ .Params.kind }}"
+  icon="{{ .Params.icon }}"
+  description="{{ .Params.description }}"
+  rate="{{ .Params.price.rate }}"
+  per="{{ .Params.price.per }}"
+  perstring="{{ i18n "PerString" }}"
+  button="{{ .Params.button }}"
+>
+  {{ range .Params.percs }}
+    <Perc>{{ .perc }}</Perc>
+  {{ end }}
+</Plan>

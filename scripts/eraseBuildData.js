@@ -8,7 +8,7 @@ const Spinner = require('./libs/Spinner');
 
 const error = err => (Spinner.initialized() ? Spinner.error('buildData', err) : Logger.error(err));
 
-glob('scripts/buildData/**/*.js', {}, (err, files) => {
+glob('scripts/buildData/**/!(_)*.js', {}, (err, files) => {
   if (err) {
     error(err);
     return;

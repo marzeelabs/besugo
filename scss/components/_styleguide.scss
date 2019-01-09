@@ -93,3 +93,23 @@
   color: palette(black);
   border: 1px solid palette(black);
 }
+
+.styleguide__colour-block--brand {
+  background-color: palette(brand);
+  color: palette(white);
+}
+
+.styleguide__colour-block--brand-dark {
+  background-color: palette(brand, dark);
+  color: palette(white);
+}
+
+.styleguide__colour-block--brand-light {
+  background-color: palette(brand, light);
+  color: palette(white);
+}
+
+.styleguide__colour-block--brand-complementary {
+  background-color: palette(brand, complementary);
+  color: palette(white);
+}

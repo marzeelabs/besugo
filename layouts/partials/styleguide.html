@@ -50,17 +50,12 @@
 
     <h1 class="styleguide__section-component__title">Main</h1>
 
+    <span class="styleguide__colour-block styleguide__colour-block--brand">#0098a6</span>
+    <span class="styleguide__colour-block styleguide__colour-block--brand-light">#44c1c1</span>
+    <span class="styleguide__colour-block styleguide__colour-block--brand-dark">#007382</span>
+    <span class="styleguide__colour-block styleguide__colour-block--brand-complementary">#fbae31</span>
     <span class="styleguide__colour-block styleguide__colour-block--black">#000000</span>
     <span class="styleguide__colour-block styleguide__colour-block--white">#FFFFFF</span>
-
-  </section>
-
-  <h2 class="section-component__subtitle">Header</h2>
-
-  <!-- Header -->
-  <section class="styleguide__section-component">
-
-    {{ partial "header.html" . }}
 
   </section>
 
@@ -75,6 +70,13 @@
 
   </section>
 
+  <!-- DatePicker -->
+  <h2 class="section-component__subtitle">DatePicker</h2>
+
+  <section class="styleguide__section-component">
+    {{ partial "reservation.html" . }}
+  </section>
+
   <!-- TEASERS -->
   <h2 class="section-component__subtitle">Teasers</h2>
 
@@ -85,7 +87,7 @@
 
       <div class="teaser__text">
         <p class="teaser__text-content">Some text over the image</p>
-        <p class="teaser__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
+        <p class="teaser__text-content teaser__text-content__link"><a href="#" class="link__button-white-secondary">Link</a></p>
       </div>
 
       <SrcSet
@@ -104,7 +106,13 @@
 
   <section class="styleguide__section-component">
 
-    <SlideShow>
+    <SlideShow
+      autoplay="true"
+      speed="1200"
+      sizes="
+        (max-width: 1024px) 100vw,
+        1024px"
+    >
       <SlideShowSlide
         title="First Slide"
         image="/media/uploads/example.jpg"
@@ -136,7 +144,7 @@
 
         <div class="teaser__text">
           <p class="teaser__text-content">Some text over the image</p>
-          <p class="teaser__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
+          <p class="teaser__text-content teaser__text-content__link"><a href="#" class="link__button-white-secondary">Link</a></p>
         </div>
 
         <SrcSet
@@ -153,7 +161,7 @@
 
         <div class="teaser__text">
           <p class="teaser__text-content">Some text over the image</p>
-          <p class="teaser__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
+          <p class="teaser__text-content teaser__text-content__link"><a href="#" class="link__button-white-secondary">Link</a></p>
         </div>
 
         <SrcSet
@@ -170,7 +178,7 @@
 
         <div class="teaser__text">
           <p class="teaser__text-content">Some text over the image</p>
-          <p class="teaser__text-content"><a href="#" class="link__button-white-secondary">Link</a></p>
+          <p class="teaser__text-content teaser__text-content__link"><a href="#" class="link__button-white-secondary">Link</a></p>
         </div>
 
         <SrcSet
@@ -190,146 +198,89 @@
   <section class="styleguide__section-component">
     <h1 class="styleguide__section-component__title">Teaser with image and text side-by-side</h1>
 
-    <div class="teaser-text-side__wrapper">
+    <BlogTeaser
+      title="Some text next to the image"
+      image="/media/uploads/example.jpg"
+      more="Link"
+      url="#"
+    ></BlogTeaser>
+    <BlogTeaser
+      title="Some text next to the image"
+      image="/media/uploads/example.jpg"
+      more="Link"
+      url="#"
+    ></BlogTeaser>
+    <BlogTeaser
+      title="Some text next to the image"
+      image="/media/uploads/example.jpg"
+      more="Link"
+      url="#"
+    ></BlogTeaser>
+    <BlogTeaser
+      title="Some text next to the image"
+      image="/media/uploads/example.jpg"
+      more="Link"
+      url="#"
+    ></BlogTeaser>
 
-      <div class="teaser-text-side__image__wrapper">
-        <SrcSet
-          className="teaser-text-side__image"
-          src="/media/uploads/example.jpg"
-          sizes="
-            (max-width: 729px) 100vw,
-            (max-width: 1024px) 60vw,
-            705px" ></SrcSet>
-      </div>
+  </section>
 
-      <div class="teaser-text-side__text__wrapper">
-        <p class="teaser-text-side__text">Some text next to the image</p>
+  <!-- Quotes Slider -->
+  <h2 class="section-component__subtitle">Quotes Slider</h2>
 
-        <span class="teaser-text-side__text__link">
-          <a href="#" class="link__button-black-secondary">Link</a>
-        </span>
-      </div>
-    </div>
-
-
-    <div class="teaser-text-side__wrapper">
-
-      <div class="teaser-text-side__image__wrapper">
-        <SrcSet
-          className="teaser-text-side__image"
-          src="/media/uploads/example.jpg"
-          sizes="
-            (max-width: 729px) 100vw,
-            (max-width: 1024px) 60vw,
-            705px" ></SrcSet>
-      </div>
-
-      <div class="teaser-text-side__text__wrapper">
-        <p class="teaser-text-side__text">Some text next to the image</p>
-
-        <span class="teaser-text-side__text__link">
-          <a href="#" class="link__button-black-secondary">Link</a>
-        </span>
-      </div>
-    </div>
-
-
-    <div class="teaser-text-side__wrapper">
-
-      <div class="teaser-text-side__image__wrapper">
-        <SrcSet
-          className="teaser-text-side__image"
-          src="/media/uploads/example.jpg"
-          sizes="
-            (max-width: 729px) 100vw,
-            (max-width: 1024px) 60vw,
-            705px" ></SrcSet>
-      </div>
-
-      <div class="teaser-text-side__text__wrapper">
-        <p class="teaser-text-side__text">Some text next to the image</p>
-
-        <span class="teaser-text-side__text__link">
-          <a href="#" class="link__button-black-secondary">Link</a>
-        </span>
-      </div>
-    </div>
-
-
-    <div class="teaser-text-side__wrapper">
-
-      <div class="teaser-text-side__image__wrapper">
-        <SrcSet
-          className="teaser-text-side__image"
-          src="/media/uploads/example.jpg"
-          sizes="
-            (max-width: 729px) 100vw,
-            (max-width: 1024px) 60vw,
-            705px" ></SrcSet>
-      </div>
-
-      <div class="teaser-text-side__text__wrapper">
-        <p class="teaser-text-side__text">Some text next to the image</p>
-
-        <span class="teaser-text-side__text__link">
-          <a href="#" class="link__button-black-secondary">Link</a>
-        </span>
-      </div>
-    </div>
-
+  <section class="styleguide__section-component">
+    <Quotes>
+      <Quote
+        author="Author Rothua"
+        occupation="Great quoter"
+        picture="/media/uploads/example_profile.jpg"
+        text="Lorem ipsum dolor sit amet, dicit alienum et vim, ut vel option persecuti maiestatis! Choro malorum argumentum no sea! Convenire tincidunt no his, labitur tibique sententiae cum ex. Duo meis scaevola accusamus cu, pri et dolor melius minimum. Cu ius nostrud urbanitas, feugiat graecis convenire nec an."
+      ></Quote>
+      <Quote
+        author="Rothua Author"
+        occupation="Sayer of things"
+        picture="/media/uploads/lady.jpg"
+        text="Lorem ipsum dolor sit amet, sea nonumy noster labitur ea, pro ut commodo conclusionemque, ne nulla forensibus pro. Debet tollit integre et est. Option alienum."
+      ></Quote>
+    </Quotes>
   </section>
 
   <!-- Profiles -->
   <h2 class="section-component__subtitle">Profile</h2>
 
   <section class="styleguide__section-component">
-
     <div class="profile">
-
-      <div class="profile__image__wrapper">
-        <SrcSet
-          className="profile__image"
-          src="/media/uploads/example_profile.jpg"
-          sizes="
-            (max-width: 730px) 100vw,
-            730px"></SrcSet>
-      </div>
-
-
-      <div class="profile__text__wrapper">
-        <h3 class="profile__text">Name of the person</h3>
-        <p class="profile__text">Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et.</p>
-        <span class="profile__text">
-
-          <ul class="profile__social-icons">
-            <li class="profile__social-icons__item">
-              <a href="#" target="_blank">
-                <svg>
-                  <use xlink:href="#facebook-icon"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="profile__social-icons__item">
-              <a href="#" target="_blank">
-                <svg>
-                  <use xlink:href="#instagram-icon"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="profile__social-icons__item">
-              <a href="#" target="_blank">
-                <svg>
-                  <use xlink:href="#twitter-icon"></use>
-                </svg>
-              </a>
-            </li>
-          </ul>
-
-        </span>
-      </div>
-
+      <PersonCard
+        link="#"
+        image="/media/uploads/example_profile.jpg"
+        name="Person"
+        fullname="Name of the person"
+        summary="Nullam varius tellus non velit euismod, vel commodo quam dapibus. Proin dictum est augue, sit amet pretium lacus accumsan et.">
+      </PersonCard>
     </div>
+  </section>
 
+  <!-- Amenities -->
+  <h2 class="section-component__subtitle">Amenities</h2>
+
+  <section class="styleguide__section-component">
+    <ul class="location__amenities">
+      <Amenity icon="connection" title="High Speed Internet"></Amenity>
+      <Amenity icon="printer" title="Printer"></Amenity>
+      <Amenity icon="mug" title="Water, Coffee, Fruits"></Amenity>
+      <Amenity icon="shower" title="Shower"></Amenity>
+      <Amenity icon="month_calendar" title="Events"></Amenity>
+      <Amenity icon="headphones" title="Lounge"></Amenity>
+      <Amenity icon="kitchen" title="Kitchenette"></Amenity>
+      <Amenity icon="locker" title="Locker"></Amenity>
+      <Amenity icon="books" title="Community library"></Amenity>
+      <Amenity icon="cleaning" title="Cleaning"></Amenity>
+      <Amenity icon="community_manager" title="Community Manager"></Amenity>
+      <Amenity icon="2_users" title="Multiple Users"></Amenity>
+      <Amenity icon="announce" title="Announce"></Amenity>
+      <Amenity icon="clock" title="Clock"></Amenity>
+      <Amenity icon="view" title="Panoramic view"></Amenity>
+    </ul>
   </section>
 
   <!-- Form -->
@@ -344,16 +295,31 @@
       <input class="contact-form__input" type="text" name="email" value="Your Email">
 
 
-      <div class="contact-form__input_roundedbox">
-        <input type="checkbox" value="None" id="roundbox1" name="check" />
-        <label for="roundbox1"></label>
+      <div class="contact-form__input__radio__wrapper">
+        <label class="contact-form__input__radio">
+          Option
+          <input type="radio" class="contact-form__input__radio__input" name="option_name1">
+          <span class="contact-form__input__radio__checkmark"></span>
+        </label>
       </div>
 
 
-      <div class="contact-form__input_checkbox">
-        <input type="checkbox" value="None" id="checkbox1" name="check" />
-        <label for="checkbox1"></label>
+      <div class="contact-form__input__radio__wrapper">
+        <label class="contact-form__input__radio">
+          Option
+          <input type="radio" class="contact-form__input__radio__input" name="option_name1">
+          <span class="contact-form__input__radio__checkmark"></span>
+        </label>
       </div>
+
+      <div class="contact-form__input__checkbox__wrapper">
+        <label class="contact-form__input__checkbox" for="option_name1">
+          Option
+          <input type="checkbox" id="option_name1" class="contact-form__input__checkbox__input" name="option_name1">
+          <span class="contact-form__input__checkbox__checkmark"></span>
+        </label>
+      </div>
+
 
       <div class="contact-form__submit-wrapper">
         <input class="contact-form__submit"  type="submit" value="Submit">

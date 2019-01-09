@@ -1,15 +1,16 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
-import SrcSet from 'SrcSet';
+import SrcSet from 'partials/SrcSet';
+
+// Extra options can be passed mapped to the config prop when referencing the
+// react component, or mapped as individual attributes within hugo templates.
+// Ref for all available options: https://github.com/ganlanyuan/tiny-slider
 
 const config = {
-  autoplay: true,
-  autoplaySpeed: 5000,
-  fade: true,
-  speed: 1200,
-  prevArrow: '<a href="#" class="slick-prev"><span class="slick-arrow-mz slick-arrow-mz--left"><svg><use xlink:href="#slider_arrow_left"></use></svg></span></a>',
-  nextArrow: '<a href="#" class="slick-next"><span class="slick-arrow-mz slick-arrow-mz--right"><svg><use xlink:href="#slider_arrow_right"></use></svg></span></a>',
+  mode: 'gallery',
+  nav: false,
+  autoplayButtonOutput: false,
 };
 
 export default class SlideShow extends BesugoComponent {
@@ -18,69 +19,138 @@ export default class SlideShow extends BesugoComponent {
   }
 
   static extraProps(props, xplaceholder) {
-    const slides = xplaceholder.getChildren('SlideShowSlide');
-    props.slides = slides.map(slide => ({
-      title: slide.getAttribute('title'),
-      image: slide.getAttribute('image'),
-      link: {
-        label: slide.getAttribute('link-label'),
-        url: slide.getAttribute('link-url'),
-      },
-    }));
-  }
+    props.slides = xplaceholder
+      .getChildren('SlideShowSlide')
+      .map(slide => ({
+        title: slide.getAttribute('title'),
+        image: slide.getAttribute('image'),
+        caption: slide.getAttribute('caption') || null,
+        link: !slide.hasAttribute('link-label') ? null : {
+          label: slide.getAttribute('link-label'),
+          url: slide.getAttribute('link-url') || '#',
+        },
+      }));
 
-  getData() {
-    return this.props;
+    props.settings = xplaceholder.attributesOf();
   }
 
   componentDidMount() {
-    // It would be SO MUCH BETTER if we could use react-slick (https://github.com/akiran/react-slick),
-    // but that has trouble in the CMS preview page, likely because we're running in the parent
-    // frame but building in an inner frame (fails to find the DOM node: "unable to find node on an
-    // unmounted component").
-    // And simply injecting the main.min.js file won't work because the component keeps rebuilding,
-    // so we have to constantly reinitialize it. Hence this "hybrid" approach.
-    // PS. Couldn't find other react-based carousel modules that supported a fade animation like
-    // slick does.
-    const $ = require('jquery');
-    require('slick-carousel');
-    $(this.wrapper).slick(config);
+    const { tns } = require('tiny-slider/src/tiny-slider');
+    const settings = {
+      ...config,
+      ...this.props.settings,
+      container: this.props.prebuilt ? this.props.getContainer() : this.container,
+    };
+
+    if (settings.navAsThumbnails && !settings.navContainer) {
+      settings.navContainer = this.thumbnails;
+    }
+
+    if (settings.prevButton === undefined) {
+      settings.prevButton = this.prevButton;
+    }
+
+    if (settings.nextButton === undefined) {
+      settings.nextButton = this.nextButton;
+    }
+
+    tns(settings);
   }
 
   buildSlides(data) {
     let i = 0;
-    return data.slides && data.slides.map(slide => (
+    return data.slides.map(slide => (
       <div className="teaser__wrapper" key={ `slide-${i++}` }>
         <div className="teaser__text">
-          <p className="teaser__text-content">
-            { slide.title }
-          </p>
-          <p className="teaser__text-content">
-            <a href={ slide.link.url } className="link__button-white-secondary">
-              { slide.link.label }
-            </a>
-          </p>
+          { slide.title && (
+            <p className="teaser__text-content">
+              { slide.title }
+            </p>
+          ) }
+          { (slide.caption) && (
+            <p className="teaser__text-content teaser__text-content--bg">
+              { slide.caption }
+            </p>
+          ) }
+          { (slide.link) && (
+            <p className="teaser__text-content teaser__text-content__link">
+              <a href={ slide.link.url } className="link__button-white-secondary">
+                { slide.link.label }
+              </a>
+            </p>
+          ) }
         </div>
         <SrcSet
           className="teaser__element"
           src={ slide.image }
-          sizes="
-            (max-width: 1024px) 100vw,
-            1024px"
+          sizes={ data.sizes }
+        />
+      </div>
+    ));
+  }
+
+  buildThumbnails(data) {
+    let i = 0;
+    return data.slides && data.slides.map(slide => (
+      <div className="slider__thumbnail-item" key={ `slide-thumbnail-${i++}` }>
+        <SrcSet
+          className="slider__thumbnail"
+          src={ slide.image }
+          sizes="140px"
         />
       </div>
     ));
   }
 
   render() {
-    const data = this.getData();
+    const data = this.props;
+    const thumbnails = data.settings && data.settings.navAsThumbnails;
+    const classes = [
+      'slider__wrapper',
+    ];
+
+    if (data.className || data.classname) {
+      classes.push(data.className || data.classname);
+    }
 
     return (
-      <div
-        className="slider__wrapper"
-        ref={ (wrapper) => { this.wrapper = wrapper; } }
-      >
-        { this.buildSlides(data) }
+      <div className={ classes.join(' ') }>
+        <div className="slider__overlay">
+          { data.prebuilt ? data.prebuilt : (
+            <div
+              className="slider__container"
+              ref={ (div) => { this.container = div; } }
+            >
+              { this.buildSlides(data) }
+            </div>
+          ) }
+
+          <div
+            className="slider__arrow-mz slider__arrow-mz--left"
+            ref={ (div) => { this.prevButton = div; } }
+          >
+            <svg>
+              <use xlinkHref="#slider_arrow_left" />
+            </svg>
+          </div>
+          <div
+            className="slider__arrow-mz slider__arrow-mz--right"
+            ref={ (div) => { this.nextButton = div; } }
+          >
+            <svg>
+              <use xlinkHref="#slider_arrow_right" />
+            </svg>
+          </div>
+        </div>
+
+        { thumbnails && (
+          <div
+            className="slider__thumbnail--wrapper"
+            ref={ (div) => { this.thumbnails = div; } }
+          >
+            { this.buildThumbnails(data) }
+          </div>
+        ) }
       </div>
     );
   }
