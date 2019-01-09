@@ -1,0 +1,30 @@
+.custom-locale-selector {
+  font-size: 16px;
+  height: 1.75em;
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3em;
+}
+
+// .nc-collectionPage-sidebarHeading { Netlify-cms 1.9.2
+.el9l68m1 {
+  position: relative;
+}
+
+// .nc-collectionPage-sidebarLink { // Netlify-cms 1.9.2
+.el9l68m4 > li {
+  &.locale-hidden {
+    display: none;
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+// .nc-collectionPage-sidebarSearch { // Netlify-cms 1.9.2
+.el9l68m2 {
+  margin-bottom: 16px;
+}
