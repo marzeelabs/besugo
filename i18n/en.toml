@@ -1,0 +1,113 @@
+[PerString]
+other = "Per %s"
+
+[Locations]
+other = "Locations"
+
+[Amenities]
+other = "Amenities"
+
+[ReadMore]
+other = "Read more"
+
+# For the contact page
+
+[GetInTouch]
+other = "Get In Touch"
+
+[Name]
+other = "Name"
+[NamePlaceholder]
+other = "How shall we call you? First and last name?"
+
+[Email]
+other = "Email"
+[EmailPlaceholder]
+other = "Where can we send you stuff?"
+
+[MoreInfo]
+other = "Message"
+[MoreInfoPlaceholder]
+other = "How can we help each other?"
+
+[Send]
+other = "Send"
+
+# For the Reservations widget.
+
+[WantToVisit]
+other = "Do you want to visit Porto i/o?"
+[BookATour]
+other = "Book a tour"
+[BookASpot]
+other = "Book a spot"
+
+[Previous]
+other = "Previous"
+[Next]
+other = "Continue"
+[Finish]
+other = "Finish"
+
+[ModeVisit]
+other = "Schedule a visit"
+[ModeBooking]
+other = "Book a workplace"
+
+[OptionsTime]
+other = "At this time"
+[OptionsOfficeHours]
+other = "Office hours: 10h to 18h"
+[OptionsHowManyPeople]
+other = "Book for how many people?"
+
+[InfoName]
+other = "Your name"
+[InfoEmail]
+other = "Your e-mail contact so we can reach you"
+[InfoNotes]
+other = "Any additional notes or questions"
+
+[FinishedSending]
+other = "Sending..."
+[FinishedTitle]
+other = "You're done!"
+[FinishedMessageVisit]
+other = "We'll get in touch as soon as we can to confirm your visit."
+[FinishedMessageBooking]
+other = "We'll get in touch as soon as we can to confirm your booking."
+[FinishedFailed]
+other = "Oops!"
+[FinishedMessageFailed]
+other = "Something went wrong. Please reach out to us by e-mail, we'll get back to you as soon as we can:"
+
+[GuideCalendar]
+other = "Pick a date or a range of days to start with."
+[GuideExtras]
+other = "Pick any extras you'd like or need."
+[GuideTime]
+other = "Choose a time you prefer to do the visit."
+[GuideWeekend]
+other = "If you need access over the weekend, you'll need to select 24/7 access in the next step."
+[GuideInfo]
+other = "Nearly finished..."
+
+[StatusOptions]
+other = "Extras:"
+[StatusVisitDate]
+other = "Schedule a visit for %date"
+[StatusVisitTime]
+other = "Schedule a visit for %date at %time"
+[StatusBooking]
+other = "Book a workplace for %date"
+[StatusBookingPeople]
+other = "Book a workplace for %date for %people people"
+[StatusFries]
+other = "Would you like fries with that?"
+
+[ExtrasScreen]
+other = "Computer screen"
+[ExtrasChromebook]
+other = "Chrome book"
+[Extras247]
+other = "24/7 access"

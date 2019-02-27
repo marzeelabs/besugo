@@ -1,0 +1,24 @@
+.page-simple__header {
+  @extend %page__header;
+}
+
+.page-simple__header-title-wrapper {
+  @extend %page__header-title-wrapper;
+}
+
+.page-simple__header-title,
+.page-simple__header-subtitle {
+  @extend %page__header-title;
+}
+
+.page-simple__header-subtitle {
+  @extend %page__header-subtitle;
+}
+
+.page-simple__title {
+  @extend %page__title;
+}
+
+.page-simple__text-intro {
+  @extend %page__text-intro;
+}

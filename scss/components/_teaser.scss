@@ -8,13 +8,17 @@
   }
 }
 
-.teaser__wrapper {
+%teaser__wrapper {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
   overflow: hidden;
   display: flex;
   flex: 0 0 100%;
+}
+
+.teaser__wrapper {
+  @extend %teaser__wrapper;
 
   .teaser__grid & {
     flex: 1 1 33%;
@@ -27,6 +31,7 @@
   }
 
   .slider__wrapper & {
+
     @include mq($from: break-medium) {
       height: 500px;
       padding: 0;
@@ -34,6 +39,7 @@
   }
 }
 
+%teaser__text,
 .teaser__text {
   position: absolute;
   top: 0;
@@ -47,6 +53,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0;
+  cursor: default;
 }
 
 .teaser__text-content {
@@ -54,7 +61,7 @@
   margin: 0 auto ritmo(2) auto;
 }
 
-.teaser__element {
+%teaser__element {
   position: absolute;
   display: block;
   top: 50%;
@@ -64,6 +71,10 @@
   height: 100%;
   z-index: 1;
   filter: grayscale(.35) brightness(.75);
+}
+
+.teaser__element {
+  @extend %teaser__element;
 
   .teaser__grid & {
 
@@ -74,12 +85,15 @@
 }
 
 .teaser-text-side__wrapper {
-  display: flex;
-  flex-wrap: wrap;
 
-  @include mq($from: break-medium) {
-    flex-wrap: nowrap;
-    align-items: stretch;
+  .teaser-text-side__container {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include mq($from: break-medium) {
+      flex-wrap: nowrap;
+      align-items: stretch;
+    }
   }
 
   &:nth-child(2n+1) {

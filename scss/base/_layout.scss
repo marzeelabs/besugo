@@ -14,7 +14,7 @@ footer {
 
 .layout-container,
 %layout-container {
-  max-width: $canvas-width;
+  max-width: $canvas-width-narrow;
   margin: ritmo(12) auto 0 auto;
   padding: ritmo(3) 10px;
   @include pie-clearfix();
@@ -24,7 +24,9 @@ footer {
   }
 }
 
+%layout-container--inner,
 .layout-container--inner {
   @extend %layout-container;
   margin-top: ritmo(4);
 }
+

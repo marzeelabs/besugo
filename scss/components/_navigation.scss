@@ -9,7 +9,7 @@
   background-color: palette(grey);
   transition: background ease 0.3s;
 
-  @include mq($until: break-medium) {
+  @include mq($until: break-medium-large) {
     position: fixed;
     text-align: left;
     top: 0;
@@ -18,7 +18,7 @@
     padding: 0;
   }
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     position: fixed;
     top: 0;
     left: 0;
@@ -36,7 +36,7 @@
 
 .navigation__menu {
 
-  @include mq($until: break-medium) {
+  @include mq($until: break-medium-large) {
     background: palette(grey);
     max-height: 0;
     text-align: center;
@@ -52,9 +52,35 @@
     }
   }
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     margin-top: ritmo(5);
     position: relative;
+  }
+}
+
+.has-dropdown {
+  position: relative;
+  cursor: default;
+
+  &::before {
+    content: '';
+    position: absolute;
+    border: solid palette(brand);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    z-index: 5;
+    pointer-events: none;
+    transform: rotate(45deg);
+    right: 20px;
+    top: 26px;
+  }
+
+  @include mq($from: break-medium-large) {
+
+    &::before {
+      display: none;
+    }
   }
 }
 
@@ -65,7 +91,7 @@
   width: auto;
   font-weight: 700;
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     display: inline-block;
     margin: 0 0.15em;
     text-transform: uppercase;
@@ -78,8 +104,10 @@
   min-width: 100%;
   text-align: center;
   padding: 0;
+  z-index: 10;
+  background: palette(grey);
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     display: none;
     background: palette(black);
     position: absolute;
@@ -104,7 +132,7 @@
   display: block;
   color: palette(white);
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     padding: ritmo() 16px;
     transition: background 0.3s ease;
     @include ritmo-font-size(12px);
@@ -114,12 +142,12 @@
     background: palette(white);
     color: palette(grey);
 
-    @include mq($from: break-medium) {
+    @include mq($from: break-medium-large) {
       background: palette(white);
     }
   }
 
-  .navigation__menu-item.is-active & {
+  .navigation__menu-item.is-active > & {
     font-weight: 700;
     color: palette(grey);
     background: palette(white);
@@ -128,8 +156,17 @@
   &.is-hidden {
     display: none;
 
-    @include mq($from: break-medium) {
+    @include mq($from: break-medium-large) {
       display: inline-block;
+    }
+  }
+
+  .navigation__submenu & {
+    color: palette(white);
+
+    &:hover {
+      background: palette(white);
+      color: palette(grey);
     }
   }
 }
@@ -187,8 +224,75 @@
   cursor: pointer;
   margin-left: 65px;
 
-  @include mq($from: break-medium) {
+  @include mq($from: break-medium-large) {
     display: none;
+  }
+}
+
+/* Locations submenu */
+
+.navigation__submenu--locations {
+
+  .navigation__menu-item.is-active a.navigation__menu-link {
+    border-top: 1px solid palette(white);
+  }
+
+  @include mq($from: break-medium-large) {
+
+    .navigation__menu-item:hover & {
+      flex-wrap: wrap;
+      display: flex;
+      left: 50%;
+      transform: translate3d(-50%, 0, 0);
+    }
+
+    .navigation__menu-item {
+      display: inline-flex;
+      align-items: center;
+      margin: 0 auto;
+      width: 100%;
+      border-top: 1px solid palette(grey);
+
+      &.is-active a.navigation__menu-link {
+        background: palette(white);
+        color: palette(grey);
+        font-weight: 700;
+      }
+    }
+
+    .navigation__menu-link {
+      display: flex;
+      width: 100%;
+      align-items: center;
+    }
+  }
+}
+
+.navigation__submenu--locations__img__wrapper {
+
+  @include mq($from: break-medium-large) {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 100%;
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.navigation__submenu--locations__img {
+  display: none;
+
+  @include mq($from: break-medium-large) {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 105%;
+    max-width: none;
+    transform: translate3d(-50%, -50%, 0);
   }
 }
 
@@ -201,14 +305,14 @@
   opacity: 1;
   transition: all 0.2s ease-in-out;
 
-  @include mq($from: break-medium) {
-    opacity: 0;
+  @include mq($from: break-medium-large) {
+    // opacity: 0;
     top: 20px;
     left: 10px;
 
-    &.visible-logo {
-      opacity: 1;
-    }
+    // &.visible-logo {
+    //   opacity: 1;
+    // }
   }
 
   .navigation-logo__svg {
@@ -239,12 +343,9 @@
   }
 }
 
-.navigation-logo__svg-minified {
+.navigation-logo__svg-element {
   display: block;
   width: 45px;
   height: 100%;
   fill: palette(white);
-  position: absolute;
-  top: 0;
-  left: 0;
 }

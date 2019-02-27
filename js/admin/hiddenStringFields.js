@@ -1,7 +1,14 @@
 (() => {
+  const SELECTORS = {
+    // control: '.nc-controlPane-control', // Netlify-cms 1.9.2
+    // label: '.nc-controlPane-label', // Netlify-cms 1.9.2
+    control: '.ei073ck0',
+    label: '.css-1skqem4',
+  };
+
   const findHiddenStrings = () => {
-    document.querySelectorAll('.nc-controlPane-control').forEach((field) => {
-      field.querySelectorAll('.nc-controlPane-label').forEach((label) => {
+    document.querySelectorAll(SELECTORS.control).forEach((field) => {
+      field.querySelectorAll(SELECTORS.label).forEach((label) => {
         if (label.textContent === '[hidden]') {
           field.hidden = true;
         }

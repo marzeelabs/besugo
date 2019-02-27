@@ -1,0 +1,65 @@
+.reservation-options__container {
+  padding: 10px;
+
+  @include mq($from: break-medium-large) {
+    padding: 10px 20px;
+  }
+}
+
+/* radiobtns */
+
+.reservation-mode__wrapper {
+  display: flex;
+  margin: 0 auto 10px;
+}
+
+.reservation-mode__radiobtn {
+  @extend %custom__radiobtn;
+  display: inline-block;
+
+  &:last-of-type {
+    margin-left: 30px;
+  }
+
+  @include mq($until: break-medium-large) {
+
+    &:last-of-type {
+      margin-left: 20px;
+      font-size: 14px;
+    }
+  }
+}
+
+.reservation-mode__radiobtn-checkmark {
+  @extend %custom__radiobtn__checkmark;
+}
+
+/* checkbox */
+.reservation-options__wrapper {
+  @extend %custom__checkbox__wrapper;
+}
+
+.reservation-options__option {
+  @extend %custom__checkbox;
+}
+
+/* Create a custom checkbox */
+.reservation-options__checkmark {
+  @extend %custom__checkbox__checkmark;
+}
+
+
+/* people number*/
+.reservation-options__people-label {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.reservation-options__people-number {
+  width: 50%;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border: 0;
+  border: 1px solid palette(grey, mid-light);
+  border-radius: 10px;
+}

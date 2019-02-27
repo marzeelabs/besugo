@@ -71,7 +71,7 @@ export default class BlogPost extends BesugoComponent {
     return (
       <div>
         <div className="blog-post__header" style={{ backgroundImage: `url(${data.image})` }}>
-          <div className="blog-post__header-title__wrapper">
+          <div className="blog-post__header-title-wrapper">
             <h1 className="blog-post__header-title">
               { data.title }
             </h1>

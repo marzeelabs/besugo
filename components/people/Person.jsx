@@ -4,7 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import EndFooter from 'partials/EndFooter';
 import SocialIcons from 'partials/SocialIcons';
-import SrcSet from 'SrcSet';
+import SrcSet from 'partials/SrcSet';
 import SVGElements from 'partials/SVGElements';
 import TopHeader from 'partials/TopHeader';
 

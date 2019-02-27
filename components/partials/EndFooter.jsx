@@ -1,19 +1,21 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
+import ReactHtmlParser from 'react-html-parser';
+
 import SocialIcons from 'partials/SocialIcons';
-import SVGElements from 'partials/SVGElements';
+
+const cns = 'footer';
 
 export default class EndFooter extends BesugoComponent {
   static config = {
     tag: 'EndFooter',
-    categories: [ 'footer', 'footer-pt' ],
   }
 
   static extraProps(props, xplaceholder) {
-    const params = xplaceholder.getChildren('param');
-    if (params.length > 0) {
+    const socials = xplaceholder.getChildren('Social');
+    if (socials.length > 0) {
       props.social = {};
-      params.forEach((child) => {
+      socials.forEach((child) => {
         const name = child.getAttribute('name');
         const value = child.getAttribute('value');
 
@@ -21,94 +23,73 @@ export default class EndFooter extends BesugoComponent {
         props.social[name] = value;
       });
     }
+
+    props.links = xplaceholder
+      .getChildren('Link')
+      .map(link => ({
+        label: link.getAttribute('label'),
+        url: link.getAttribute('url'),
+      }));
+
+    const copyright = xplaceholder.getChildren('Copyright');
+    props.copyright = JSON.parse(copyright[0].text());
   }
 
   getData() {
-    if (this.isPreview()) {
-      const { entry } = this.props;
+    const data = Object.assign({
+      copyright: '\xA9 2018 Marzee Labs.',
+      links: [
+        {
+          label: 'About us',
+          url: '#',
+        },
+        {
+          label: 'Pricing',
+          url: '#',
+        },
+        {
+          label: 'Contact us',
+          url: '#',
+        },
+      ],
+    }, this.props);
 
-      return {
-        home: {
-          url: '/',
-        },
-        about: {
-          url: '/pages/about',
-        },
-        blog: {
-          url: '/blog',
-        },
-        copyright: entry.getIn([ 'data', 'copyright' ]),
-        social: {
-          facebook: entry.getIn([ 'data', 'social', 'facebook' ]),
-          instagram: entry.getIn([ 'data', 'social', 'instagram' ]),
-          twitter: entry.getIn([ 'data', 'social', 'twitter' ]),
-        },
-      };
-    }
+    // "Copyright" comes pre-built with HTML markup already.
+    // We need to parse it so that it doesn't show up as simple text
+    data.copyright = ReactHtmlParser(data.copyright);
 
-    // Set some default props
-    const data = {
-      home: {
-        url: ('home-url' in this.props) ? this.props['home-url'] : '/',
-      },
-      about: {
-        url: ('about-url' in this.props) ? this.props['about-url'] : '/pages/about',
-      },
-      blog: {
-        url: ('blog-url' in this.props) ? this.props['blog-url'] : '/blog',
-      },
-      copyright: '\xA9 2017 Besugo',
-    };
-
-    return Object.assign(data, this.props);
+    return data;
   }
 
   renderBlock() {
     const data = this.getData();
 
     return (
-      <footer className="footer">
-        <ul className="footer__menu">
-          <li className="footer__menu-item">
-            <a href={ data.home.url }>
-              home
-            </a>
-          </li>
-          <li className="footer__menu-item">
-            <a href={ data.about.url }>
-              About
-            </a>
-          </li>
-          <li className="footer__menu-item">
-            <a href={ data.blog.url }>
-              Blog
-            </a>
-          </li>
+      <footer className={ `${cns}` }>
+        <ul className={ `${cns}__menu` }>
+          { data.links.map(link => (
+            <li className={ `${cns}__menu-item` } key={ `link-${link.label}` }>
+              <a href={ link.url }>
+                { link.label }
+              </a>
+            </li>
+          )) }
         </ul>
 
         <SocialIcons section="footer" { ...data } />
 
-        <div className="footer__copyright">
-          <a href="/" className="footer__copyright-logo">
+        <div className={ `${cns}__copyright` }>
+          <a href={ data.homelink } className={ `${cns}__copyright-logo` }>
             <svg>
-              <use href="#logo-main" />
+              <use xlinkHref="#logo-main" />
             </svg>
           </a>
-          <p>
+          <div className={ `${cns}__copyright-text` }>
             { data.copyright }
-          </p>
+          </div>
         </div>
 
       </footer>
-    );
-  }
-
-  renderPreview() {
-    return (
-      <div id="cmsPreview">
-        <SVGElements />
-        { this.renderBlock() }
-      </div>
     );
   }
 }

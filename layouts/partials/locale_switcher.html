@@ -1,0 +1,19 @@
+{{ if .Site.IsMultiLingual }}
+  {{ $page := . }}
+
+  {{ range .Site.Languages }}
+    {{ if ne .Lang $.Site.Language.Lang }}
+      {{ $url := $.Site.BaseURL }}
+
+      {{ if $page.IsHome }}
+        {{ $url = (printf "/%s" .Lang) }}
+      {{ else if $page.IsTranslated }}
+        {{ range where $page.Translations "Lang" .Lang }}
+          {{ $url = .Permalink }}
+        {{ end }}
+      {{ end }}
+
+      <LocaleSwitch locale="{{ .Lang }}" url="{{ $url }}"></LocaleSwitch>
+    {{ end }}
+  {{ end }}
+{{ end }}

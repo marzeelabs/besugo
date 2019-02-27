@@ -4,7 +4,7 @@ const path = require('path');
 // webpack config reference:
 //  https://webpack.js.org/configuration/
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin'); // eslint-disable-line
+const TerserPlugin = require('terser-webpack-plugin'); // eslint-disable-line
 const StaticSiteGeneratorPlugin = require('./scripts/libs/StaticSiteGeneratorWebpack4Plugin.js'); // eslint-disable-line
 
 // Utils needed for building the static webpages, instead of requiring them in each
@@ -39,7 +39,7 @@ const allExports = {
 
 const allPlugins = [];
 if (process.env.NODE_ENV !== 'development') {
-  allPlugins.push(new UglifyJSPlugin());
+  allPlugins.push(new TerserPlugin());
 }
 
 // A small custom plugin to instruct webpack to (recursively) watch for changes within a directory.
@@ -118,10 +118,12 @@ module.exports = [
     entry: {
       js: [
         // './scripts/webpack/polyfills.js',
+        './scripts/webpack/identity.js',
         './scripts/webpack/site.js',
       ],
       admin: [
         // './scripts/webpack/polyfills.js',
+        './scripts/webpack/identity.js',
         './scripts/webpack/admin.js',
       ],
     },
@@ -193,7 +195,7 @@ module.exports = [
     ...allExports,
 
     entry: [
-      // './scripts/webpack/polyfills.js',
+      './scripts/webpack/polyfills.js',
       './components/App.jsx',
     ],
 
@@ -223,6 +225,12 @@ module.exports = [
                 '@babel/plugin-proposal-class-properties',
               ],
             },
+          },
+        },
+        {
+          test: /\.css$/,
+          use: {
+            loader: 'ignore-loader',
           },
         },
       ],

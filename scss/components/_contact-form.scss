@@ -1,17 +1,38 @@
 .contact-form {
-  @include container(600px);
+  @include container(700px);
+}
+
+.contact-form__title {
+  color: palette(brand);
+  @include container(700px);
+  margin-bottom: 5px;
+}
+
+.contact-form__subtitle {
+  @extend %page__header-subtitle;
+  color: palette(brand);
+  @include container(700px);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.contact-form__label {
+  margin-bottom: 5px;
+  display: block;
+  color: palette(grey, mid-light);
 }
 
 .contact-form__input {
   padding: 10px;
   border: none;
-  border: 1px solid palette(grey, light);
+  border: 1px solid palette(grey, mid-light);
+  border-radius: 10px;
   margin-bottom: ritmo(4);
-  height: 40px;
+  min-height: 40px;
   width: 100%;
 
   &.contact-form__input--textarea {
-    height: auto;
+    min-height: 120px;
     max-width: 100%;
   }
 }
@@ -19,7 +40,6 @@
 .contact-form__submit {
   border: none;
   @extend %link__button-black-secondary;
-  border: 1px solid palette(black);
   margin-top: 0;
 }
 
@@ -56,7 +76,7 @@
       top: 50%;
       left: 50%;
       transform: translate3d(-50%, -50%, 0);
-      background: palette(black);
+      background: palette(brand, light);
       opacity: 0;
       border-radius: 50px;
     }
@@ -71,51 +91,156 @@
   }
 }
 
-/*
-**.contact-form__input_checkbox
-*/
+/* Custom checkboxs and radio buttons*/
 
-.contact-form__input_checkbox {
-  width: 24px;
+%custom__radiobtn__wrapper,
+%custom__checkbox__wrapper {
+  display: block;
+  width: 100%;
+}
+
+%custom__checkbox {
+  display: block;
   position: relative;
-  margin: 20px auto;
-  display: inline-block;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  user-select: none;
 
-  label {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
+  /* On mouse-over, add a grey background color */
+  &:not([disabled]):hover input ~ %custom__checkbox__checkmark {
+    background-color: palette(grey, mid-light);
+  }
+
+  /* Hide the browser's default checkbox */
+  input {
     position: absolute;
-    top: 0;
-    left: 0;
-    background: white;
-    border: 1px solid palette(grey, light);
-
-    &:after {
-      content: '';
-      width: 12px;
-      height: 5px;
-      position: absolute;
-      top: 5px;
-      left: 4px;
-      border: 3px solid palette(white);
-      border-top: none;
-      border-right: none;
-      background: transparent;
-      opacity: 0;
-      transform: rotate(-45deg);
-    }
+    opacity: 0;
+    cursor: pointer;
   }
 
-  input[type=checkbox] {
-    visibility: hidden;
-
-    &:checked + label {
-      background: palette(black);
-    }
-
-    &:checked + label:after {
-      opacity: 1;
-    }
+  /* When the checkbox is checked, add a blue background */
+  input:checked ~ %custom__checkbox__checkmark {
+    background-color: palette(grey, mid-light);
   }
+
+  /* Show the checkmark when checked */
+  input:checked ~ %custom__checkbox__checkmark::after {
+    display: block;
+  }
+}
+
+/* Create the custom checkbox */
+%custom__checkbox__checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  height: 25px;
+  width: 25px;
+  background-color: palette(grey, light);
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  &::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+}
+
+/* create custom radio btn */
+%custom__radiobtn {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  user-select: none;
+
+  /* Disabled inputs shouldn't look clickable. */
+  &[disabled] {
+    cursor: default;
+    opacity: 0.6;
+  }
+
+  /* On mouse-over, add a different grey background color */
+  &:not([disabled]):hover input ~ %custom__radiobtn__checkmark {
+    background-color: palette(grey, mid-light);
+  }
+
+  /* Hide the browser's default radio button */
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  /* Show the indicator (dot/circle) when checked */
+  input:checked ~ %custom__radiobtn__checkmark::after {
+    display: block;
+  }
+
+  /* When the radio button is checked, add a blue background */
+  input:checked ~ %custom__radiobtn__checkmark {
+    background-color: palette(grey, mid-light);
+  }
+}
+
+/* Create the custom radio button */
+%custom__radiobtn__checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: palette(grey, light);
+  border-radius: 50%;
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: palette(white);
+  }
+}
+
+/* checkbox */
+.contact-form__input__checkbox__wrapper {
+  @extend %custom__checkbox__wrapper;
+}
+
+.contact-form__input__checkbox {
+  @extend %custom__checkbox;
+}
+
+/* Create a custom checkbox */
+.contact-form__input__checkbox__checkmark {
+  @extend  %custom__checkbox__checkmark;
+}
+
+
+/* radio */
+.contact-form__input__radio__wrapper {
+  @extend %custom__radiobtn__wrapper;
+}
+
+.contact-form__input__radio {
+  @extend %custom__radiobtn;
+}
+
+/* Create a custom checkbox */
+.contact-form__input__radio__checkmark {
+  @extend  %custom__radiobtn__checkmark;
 }

@@ -1,0 +1,164 @@
+.plans__content {
+  @include container(1280px);
+  padding: ritmo(4) 20px ritmo(8);
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+
+  .icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+}
+
+.plans__title {
+  color: palette(brand, light);
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.plans__subtitle {
+  color: palette(brand, light);
+  @include ritmo-font-size($h4-font-size);
+  text-align: center;
+  font-weight: 400;
+}
+
+.plans__main {
+  margin: 60px auto;
+}
+
+.plans__other {
+  margin: 60px auto;
+}
+
+.plans__reservation {
+  .reservation__wrapper {
+    margin: 40px 0;
+  }
+}
+
+.plans__header {
+  @include ritmo-font-size($h4-font-size);
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 0;
+
+  .plans__discount & {
+    @include ritmo-font-size($h2-font-size);
+    color: palette(white);
+    margin-bottom: 20px;
+  }
+}
+
+.plans__text {
+  @include ritmo-font-size($h5-font-size);
+  text-align: center;
+  font-weight: 400;
+  @include container(750px);
+
+  .plans__discount & {
+    color: palette(white);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+}
+
+.plans__list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.plan {
+  text-align: center;
+  padding: 20px;
+  background: palette(grey, light);
+  flex: 0 0 100%;
+  margin: 10px 0;
+
+  @include mq($from: break-medium) {
+    flex: 0 0 calc(50% - 20px);
+    margin: 0 10px 20px;
+    min-height: 200px;
+  }
+
+  @include mq($from: break-large) {
+    flex: 0 0 calc(33.3% - 20px);
+  }
+
+  .plans__discount & {
+    color: palette(white);
+    background: rgba(palette(black), .5);
+
+    &:last-child {
+
+      @include mq($from: break-large) {
+        flex: 0 0 calc(100% - 20px);
+        min-height: 0;
+      }
+    }
+  }
+}
+
+.plan__name {
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.plan__price-rate {
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: 300;
+
+  @include mq($from: break-medium-large) {
+    font-size: 80px;
+    line-height: 80px;
+  }
+}
+
+.plan__price-rate__euro {
+  font-size: 48px;
+
+  @include mq($from: break-medium-large) {
+    font-size: 65px;
+  }
+}
+
+.plan__price-per {
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.plan__button {
+  @extend %link__button-black-secondary;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.plan__perc {
+  font-weight: 400;
+  line-height: 1.2rem;
+  font-size: 12px;
+}
+
+/* discounts */
+.plans__discount {
+  background: url('http://porto.io/img/content/pricing.jpg') no-repeat center center;
+  background-attachment: fixed; // creates visual effect
+  position: relative;
+  padding: 60px 20px;
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(palette(black), .5);
+    z-index: 2;
+  }
+}

@@ -1,0 +1,47 @@
+/* date picker calendar overrides */
+.react-calendar {
+  border: 0;
+  font-family: $base-font-family;
+  width: 100%;
+  margin: 20px auto;
+
+  @include mq($from: break-medium-large) {
+    margin-top: 0;
+    margin: 0 auto;
+    max-width: 400px;
+  }
+}
+
+.react-calendar__navigation {
+  background: palette(grey, light);
+  border-radius: 10px;
+  height: 60px;
+}
+
+.react-calendar__navigation__next-button,
+.react-calendar__navigation__prev-button {
+  border-radius: 10px;
+}
+
+.react-calendar__navigation button[disabled] {
+  background: palette(grey, light);
+}
+
+button.react-calendar__tile:disabled {
+  background-color: palette(white);
+  opacity: 0.6;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: palette(brand, dark);
+}
+
+.react-calendar__tile {
+  border-radius: 10px;
+}
+
+.react-calendar__tile--active,
+button.react-calendar__tile--active:enabled:focus {
+  background: palette(grey, mid-light);
+  color: white;
+}

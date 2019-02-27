@@ -70,15 +70,16 @@
 
 .footer__copyright {
   text-align: center;
+}
 
-  p {
-    text-transform: uppercase;
-    font-weight: 300;
-    @include ritmo-font-size(12px);
+.footer__copyright-text{
+  text-transform: uppercase;
+  font-weight: 300;
+  @include ritmo-font-size(12px);
+  margin: 0 auto 20px;
 
-    @include mq($from: break-medium-small) {
-      @include ritmo-font-size(14px);
-    }
+  a {
+    font-weight: 600;
   }
 }
 

@@ -1,0 +1,80 @@
+.location__header {
+  @extend %page__header;
+}
+
+.location__header-title-wrapper {
+  @extend %page__header-title-wrapper;
+}
+
+.location__header-title {
+  @extend %page__header-title;
+}
+
+.location__content--contained {
+  @include container(1280px);
+  padding: ritmo(8) 20px;
+  margin: 0 auto;
+}
+
+.location__amenities {
+  margin: 20px auto;
+  display: flex;
+  padding: 20px;
+  flex-wrap: wrap;
+
+  li {
+    margin-bottom: 10px;
+    width: 100%;
+
+    @include mq($from: break-medium) {
+      width: 50%;
+    }
+
+    @include mq($from: break-large) {
+      width: 33.333%;
+    }
+
+    .icon {
+      margin-right: 10px;
+      color: palette(grey);
+    }
+  }
+}
+
+.location__reservation {
+  @extend %layout-container--inner;
+
+  .reservation__wrapper {
+    margin: 40px 0;
+  }
+}
+
+.location__amenities-title,
+.location__reservation-title {
+  @extend %page__title;
+  color: palette(brand, light);
+}
+
+.location__map {
+  margin-bottom: -8px;
+}
+
+.location__catchphrase {
+  @include container(800px);
+  text-align: center;
+  color: palette(grey);
+  font-size: $h5-font-size;
+  font-weight: 300;
+  line-height: 1.6rem;
+  margin: 20px auto;
+  padding: 20px 0;
+  border-top: 1px solid palette(grey);
+  border-bottom: 1px solid palette(grey);
+
+  @include mq($from: break-large) {
+    margin: 40px auto;
+    padding: 40px 0;
+    font-size: $h3-font-size;
+    line-height: 2rem;
+  }
+}

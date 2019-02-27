@@ -1,0 +1,33 @@
+{{ define "main" }}
+
+<Location
+  name="{{ .Title }}"
+  header="{{ .Params.header }}"
+  catchphrase="{{ .Params.catchphrase }}"
+  map="{{ .Params.map }}"
+  reservationtitle="{{ i18n "BookATour" }}"
+  amenitiestitle="{{ i18n "Amenities" }}"
+>
+  {{ range .Params.features }}
+    <Feature
+      title="{{ .title }}"
+      icon="{{ .icon }}"
+    > </Feature>
+  {{ end }}
+
+  {{ range .Params.images }}
+    <GalleryImage
+      image="{{ .image }}"
+      caption="{{ .caption }}"
+    ></GalleryImage>
+  {{ end }}
+
+  <Content>
+    {{ jsonify .Content }}
+  </Content>
+
+  {{ partial "reservation-data.html" . }}
+</Location>
+
+
+{{ end }}
