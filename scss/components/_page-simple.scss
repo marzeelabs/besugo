@@ -2,6 +2,10 @@
   @extend %page__header;
 }
 
+.page-simple__header--no-bg {
+  @extend %page__header--no-bg;
+}
+
 .page-simple__header-title-wrapper {
   @extend %page__header-title-wrapper;
 }

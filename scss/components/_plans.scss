@@ -75,7 +75,7 @@
 .plan {
   text-align: center;
   padding: 20px;
-  background: palette(grey, light);
+  background: rgba(palette(grey, light), .5);
   flex: 0 0 100%;
   margin: 10px 0;
 

@@ -6,13 +6,11 @@ import EndFooter from 'partials/EndFooter';
 import getData from 'partials/Reservation/getData';
 import ReservationSlider from 'partials/Reservation/Slider';
 import SlideShow from 'partials/SlideShow';
-import SrcSet, { SrcSetBg } from 'partials/SrcSet';
+import { SrcSetBg } from 'partials/SrcSet';
 import SVGElements from 'partials/SVGElements';
 import TopHeader from 'partials/TopHeader';
 
 import Amenity from 'location/Amenity';
-
-const cns = 'location';
 
 export default class Location extends BesugoComponent {
   static config = {
@@ -98,7 +96,7 @@ export default class Location extends BesugoComponent {
           nav: true,
           navAsThumbnails: true,
         } }
-        className={ `${cns}__gallery` }
+        className="location__gallery"
         sizes="100vw"
       />
     );
@@ -106,12 +104,12 @@ export default class Location extends BesugoComponent {
 
   renderFeatures(data) {
     return !data.features.length && !data.features.size ? null : (
-      <div className={ `${cns}__amenities-wrapper` }>
-        <h1 className={ `${cns}__amenities-title` }>
+      <div className="location__amenities-wrapper">
+        <h1 className="location__amenities-title">
           { data.amenitiestitle }
         </h1>
 
-        <ul className={ `${cns}__amenities` }>
+        <ul className="location__amenities">
           { data.features.map(feature => (
             <li
               className="location-amenity__wrapper"
@@ -130,21 +128,21 @@ export default class Location extends BesugoComponent {
 
     return (
       <div className="page-main">
-        <div className={ `${cns}__header` }>
+        <div className="location__header">
           <SrcSetBg
-            className={ `${cns}__header-image` }
+            className="location__header-image"
             src={ data.header }
             sizes="120vw"
           />
-          <div className={ `${cns}__header-title-wrapper` }>
-            <h1 className={ `${cns}__header-title` }>
+          <div className="location__header-title-wrapper">
+            <h1 className="location__header-title">
               { data.name }
             </h1>
           </div>
         </div>
 
-        <div className={ `${cns}__content ${cns}__content--contained` }>
-          <div className={ `${cns}__description` }>
+        <div className="location__content location__content--contained">
+          <div className="location__description">
             { data.content }
           </div>
 
@@ -153,7 +151,7 @@ export default class Location extends BesugoComponent {
           { this.renderFeatures(data) }
 
           { data.map && (
-            <div className={ `${cns}__map` }>
+            <div className="location__map">
               <iframe
                 src={ data.map }
                 title="location-map"
@@ -165,17 +163,17 @@ export default class Location extends BesugoComponent {
           ) }
         </div>
 
-        <div className={ `${cns}__content ${cns}__content--contained` }>
+        <div className="location__content location__content--contained">
           { this.isPreview() ? null : (
-            <div className={ `${cns}__reservation` }>
-              <h1 className={ `${cns}__reservation-title` }>
+            <div className="location__reservation">
+              <h1 className="location__reservation-title">
                 { data.reservationtitle }
               </h1>
               <ReservationSlider { ...data } />
             </div>
           ) }
 
-          <div className={ `${cns}__catchphrase` }>
+          <div className="location__catchphrase">
             { data.catchphrase }
           </div>
         </div>

@@ -1,6 +1,6 @@
 {
   "name": "MZ_Boilerplate",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "author": "Marzee Labs <info@marzeelabs.org>",
   "license": "GPL-3.0",
   "config": {
@@ -90,7 +90,7 @@
     "chokidar-cli": "^1.2.0",
     "classnames": "^2.2.6",
     "cli-spinners": "^1.1.0",
-    "copy-webpack-plugin": "^4.5.1",
+    "copy-webpack-plugin": "^5.0.0",
     "cssnano": "^4.0.0",
     "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.0.0",

@@ -1,8 +1,11 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
+import Link from 'partials/Link';
 import LocaleSwitcher from 'partials/LocaleSwitcher';
 import SrcSet from 'partials/SrcSet';
+
+import trimPath from '../utils/trimPath';
 
 export default class TopHeader extends BesugoComponent {
   static config = {
@@ -10,6 +13,8 @@ export default class TopHeader extends BesugoComponent {
   }
 
   static extraProps(props, xplaceholder) {
+    const activeurl = trimPath(props.activeurl);
+
     props.localeSwitches = xplaceholder
       .getChildren('LocaleSwitch')
       .map(localeSwitch => ({
@@ -22,16 +27,17 @@ export default class TopHeader extends BesugoComponent {
       .map(link => ({
         label: link.getAttribute('label'),
         url: link.getAttribute('url'),
-        active: link.getAttribute('url') === props.activeurl,
+        external: link.getAttribute('external') === 'true',
+        active: trimPath(link.getAttribute('url')) === activeurl,
       }));
-
+    console.log(props.links);
     props.locations = xplaceholder
       .getChildren('Location')
       .map(location => ({
         label: location.getAttribute('label'),
         url: location.getAttribute('url'),
         image: location.getAttribute('image'),
-        active: location.getAttribute('url') === props.activeurl,
+        active: trimPath(location.getAttribute('url')) === activeurl,
       }));
   }
 
@@ -82,42 +88,48 @@ export default class TopHeader extends BesugoComponent {
           </div>
 
           <ul className="navigation__menu">
-            <li className={ `navigation__menu-item has-dropdown ${locationsActive ? 'is-active' : ''}` }>
-              <div className="navigation__menu-link">
-                { data.locationslabel }
-              </div>
+            { data.links.map(link => (link.url === '[locations]'
+              ? (
+                <li
+                  className={ `navigation__menu-item has-dropdown ${locationsActive ? 'is-active' : ''}` }
+                  key={ `link-${link.label}` }
+                >
+                  <div className="navigation__menu-link">
+                    { link.label }
+                  </div>
 
-              <ul className="navigation__submenu navigation__submenu--locations">
-                { data.locations.map(location => (
-                  <li
-                    className={ `navigation__menu-item ${location.active ? 'is-active' : ''}` }
-                    key={ `location-${location.label}` }
-                  >
-                    <a className="navigation__menu-link" href={ location.url }>
-                      <span className="navigation__submenu--locations__img__wrapper">
-                        <SrcSet
-                          className="navigation__submenu--locations__img"
-                          src={ location.image }
-                          sizes="60px"
-                        />
-                      </span>
-                      <span>{ location.label }</span>
-                    </a>
-                  </li>
-                )) }
-              </ul>
-            </li>
-
-            { data.links.map(link => (
-              <li
-                className={ `navigation__menu-item ${link.active ? 'is-active' : ''}` }
-                key={ `link-${link.label}` }
-              >
-                <a className="navigation__menu-link" href={ link.url }>
-                  { link.label }
-                </a>
-              </li>
-            )) }
+                  <ul className="navigation__submenu navigation__submenu--locations">
+                    { data.locations.map(location => (
+                      <li
+                        className={ `navigation__menu-item ${location.active ? 'is-active' : ''}` }
+                        key={ `location-${location.label}` }
+                      >
+                        <a className="navigation__menu-link" href={ location.url }>
+                          <span className="navigation__submenu--locations__img__wrapper">
+                            <SrcSet
+                              className="navigation__submenu--locations__img"
+                              src={ location.image }
+                              sizes="60px"
+                            />
+                          </span>
+                          <span>{ location.label }</span>
+                        </a>
+                      </li>
+                    )) }
+                  </ul>
+                </li>
+              )
+              : (
+                <li
+                  className={ `navigation__menu-item ${link.active ? 'is-active' : ''}` }
+                  key={ `link-${link.label}` }
+                >
+                  <Link
+                    className="navigation__menu-link"
+                    { ...link }
+                  />
+                </li>
+              ))) }
 
             <LocaleSwitcher { ...data } />
           </ul>

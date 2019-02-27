@@ -22,30 +22,3 @@
     color: palette(brand);
   }
 }
-
-.reservation-guide__options {
-
-  ul {
-    padding: 0 0 0 15px;
-    margin: 0;
-    display: inline-block;
-  }
-  
-  li {
-    position: relative;
-    text-align: left;
-
-    &::before {
-      position: absolute;
-      left: -15px;
-      top: 50%;
-      width: 8px;
-      height: 8px;
-      display: block;
-      content: '';
-      background: palette(brand, light);
-      transform: translateY(-50%);
-      border-radius: 50%;
-    }
-  }
-}

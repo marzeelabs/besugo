@@ -3,17 +3,17 @@
 }
 
 .contact-form__title {
-  color: palette(brand);
   @include container(700px);
   margin-bottom: 5px;
+  color: palette(brand);
 }
 
 .contact-form__subtitle {
-  @extend %page__header-subtitle;
-  color: palette(brand);
+  @include ritmo-font-size($h4-font-size);
   @include container(700px);
   margin-bottom: 20px;
   font-weight: 400;
+  color: palette(brand);
 }
 
 .contact-form__label {
