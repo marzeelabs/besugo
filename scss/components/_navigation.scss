@@ -14,7 +14,7 @@
     text-align: left;
     top: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 99; // to be below netfly modal
     padding: 0;
   }
 
@@ -22,7 +22,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 99; // to be below netfly modal
     max-height: ritmo(16);
     padding-bottom: ritmo(15);
     text-align: center;

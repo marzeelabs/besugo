@@ -65,8 +65,6 @@ const isWeekend = (dates) => {
   return false;
 };
 
-const cns = 'reservation-guide';
-
 export default class ReservationGuide extends PureComponent {
   isEverything() {
     const { state } = this.props;
@@ -209,11 +207,11 @@ export default class ReservationGuide extends PureComponent {
     }
 
     return (
-      <div className={ `${cns}__content` }>
+      <div className="reservation-guide__content">
         { !guide.length ? null : (
-          <div className={ `${cns}__guide` }>
+          <div className="reservation-guide__guide">
             { guide.map(line => (
-              <p className={ `${cns}__guide-line` } key={ `guide-line-${line.key}` }>
+              <p className="reservation-guide__guide-line" key={ `guide-line-${line.key}` }>
                 { line.text }
               </p>
             )) }
@@ -221,13 +219,13 @@ export default class ReservationGuide extends PureComponent {
         ) }
 
         { status && (
-          <div className={ `${cns}__dates` }>
+          <div className="reservation-guide__dates">
             { status }
           </div>
         ) }
 
         { hasOptions && (
-          <div className={ `${cns}__options` }>
+          <div className="reservation-guide__options">
             <div>
               { strings.status.options }
             </div>
@@ -245,7 +243,7 @@ export default class ReservationGuide extends PureComponent {
         ) }
 
         { this.isEverything() && (
-          <div className={ `${cns}__fries` }>
+          <div className="reservation-guide__fries">
             { strings.status.fries }
           </div>
         ) }

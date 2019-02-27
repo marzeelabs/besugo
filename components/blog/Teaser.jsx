@@ -3,8 +3,6 @@ import BesugoComponent from 'Besugo';
 
 import SrcSet from 'partials/SrcSet';
 
-const cns = 'teaser-text-side';
-
 export default class BlogTeaser extends BesugoComponent {
   static config = {
     tag: 'BlogTeaser',
@@ -12,7 +10,7 @@ export default class BlogTeaser extends BesugoComponent {
 
   static buildContainer(parserUtils) {
     const li = parserUtils.createNode('li');
-    parserUtils.setAttribute(li, 'class', `${cns}__wrapper`);
+    parserUtils.setAttribute(li, 'class', 'teaser-text-side__wrapper');
 
     return li;
   }
@@ -21,11 +19,11 @@ export default class BlogTeaser extends BesugoComponent {
     const data = this.props;
 
     return (
-      <div className={ `${cns}__container` }>
-        <div className={ `${cns}__image__wrapper` }>
+      <div className="teaser-text-side__container">
+        <div className="teaser-text-side__image__wrapper">
           <a href={ data.url }>
             <SrcSet
-              classname={ `${cns}__image` }
+              classname="teaser-text-side__image"
               src={ data.image }
               sizes="
                 (max-width: 729px) 100vw,
@@ -35,12 +33,12 @@ export default class BlogTeaser extends BesugoComponent {
           </a>
         </div>
 
-        <div className={ `${cns}__text__wrapper` }>
-          <p className={ `${cns}__text` }>
+        <div className="teaser-text-side__text__wrapper">
+          <p className="teaser-text-side__text">
             { data.title }
           </p>
 
-          <span className={ `${cns}__text__link` }>
+          <span className="teaser-text-side__text__link">
             <a href={ data.url } className="link__button-black-secondary">{ data.more }</a>
           </span>
         </div>

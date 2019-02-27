@@ -63,6 +63,76 @@ collections: # A list of collections the CMS should be able to edit
             name: "event"
             widget: "string"
 
+  - name: "navigation"
+    label: "Navigation 🇬🇧"
+    description: What pages should be listed in the header and footer menus.
+    folder: "data/navigation"
+    format: "yaml"
+    create: false
+    editor:
+      preview: false
+    filter:
+      field: "i18nlanguage"
+      value: "en"
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "en"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Header"
+      - label: "Links"
+        name: "links"
+        widget: "list"
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "relation"
+            collection: "pages"
+            searchFields: ["title"]
+            valueField: "title"
+          - label: "Path"
+            name: "path"
+            widget: "string"
+            required: false
+
+  - name: "navigation-pt"
+    label: "Navigation 🇵🇹"
+    description: What pages should be listed in the header and footer menus.
+    folder: "data/navigation"
+    format: "yaml"
+    create: false
+    editor:
+      preview: false
+    filter:
+      field: "i18nlanguage"
+      value: "pt"
+    fields:
+      - label: "Content language"
+        name: "i18nlanguage"
+        widget: "hidden"
+        default: "pt"
+      - label: "[hidden]"
+        name: "title"
+        widget: "string"
+        default: "Header"
+      - label: "Links"
+        name: "links"
+        widget: "list"
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "relation"
+            collection: "pages-pt"
+            searchFields: ["title"]
+            valueField: "title"
+          - label: "Path"
+            name: "path"
+            widget: "string"
+            required: false
+
   - name: "blog_post" # Used in routes, ie.: /admin/collections/:slug/edit
     label: "Blog Posts 🇬🇧" # Used in the UI, ie.: "New Post"
     label_singular: "Blog Post 🇬🇧"
@@ -503,9 +573,6 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Title"
         name: "title"
         widget: "string"
-      - label: "Show in menus"
-        name: "promote"
-        widget: "boolean"
       - label: "Path to Page (leave empty to use default path)"
         name: "url"
         widget: "string"
@@ -514,9 +581,9 @@ collections: # A list of collections the CMS should be able to edit
         name: "subtitle"
         widget: "text"
         required: false
-      - label: "Banner image"
+      - label: "Banner"
         name: "image"
-        widget: "image"
+        widget: "file"
         required: false
       - label: "Body"
         name: "body"
@@ -541,9 +608,6 @@ collections: # A list of collections the CMS should be able to edit
       - label: "Title"
         name: "title"
         widget: "string"
-      - label: "Show in menus"
-        name: "promote"
-        widget: "boolean"
       - label: "Path to Page (leave empty to use default path)"
         name: "url"
         widget: "string"
@@ -552,9 +616,9 @@ collections: # A list of collections the CMS should be able to edit
         name: "subtitle"
         widget: "text"
         required: false
-      - label: "Banner image"
+      - label: "Banner"
         name: "image"
-        widget: "image"
+        widget: "file"
         required: false
       - label: "Body"
         name: "body"

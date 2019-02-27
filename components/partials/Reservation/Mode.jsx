@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-const cns = 'reservation-mode';
-
 export default class ReservationMode extends Component {
   handleToggleMode = (e) => {
     const mode = e.target.value;
@@ -30,15 +28,15 @@ export default class ReservationMode extends Component {
     const singleDay = !dates || dates[0].toLocaleDateString() === dates[1].toLocaleDateString();
 
     return (
-      <div className={ `${cns}__wrapper` }>
+      <div className="reservation-mode__wrapper">
         { [ 'visit', 'booking' ].map(name => (
           <label
-            className={ `${cns}__radiobtn` }
+            className="reservation-mode__radiobtn"
             htmlFor={ name }
             key={ `name-${name}` }
             disabled={ (name === 'visit' && !singleDay) || (slideIndex !== index) }
           >
-            <span className={ `${cns}__label` }>
+            <span className="reservation-mode__label">
               { strings.mode[name] }
             </span>
             <input
@@ -50,7 +48,7 @@ export default class ReservationMode extends Component {
               onChange={ this.handleToggleMode }
               disabled={ (name === 'visit' && !singleDay) || (slideIndex !== index) }
             />
-            <span className={ `${cns}__radiobtn-checkmark` } />
+            <span className="reservation-mode__radiobtn-checkmark" />
           </label>
         )) }
       </div>

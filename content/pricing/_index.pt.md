@@ -1,5 +1,5 @@
 ---
 i18nlanguage: pt-i
-title: Entrar aqui para editar.
+title: Enter here to edit.
 pagetitle: "Planos"
 ---

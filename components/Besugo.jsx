@@ -1,6 +1,11 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 
+const SELECTORS = {
+  // iframe: 'iframe.nc-previewPane-frame', // Netlify-cms 1.9.2
+  iframe: '.css-1hcqc8j',
+};
+
 const Components = [];
 
 export default class BesugoComponent extends React.Component {
@@ -241,8 +246,7 @@ export default class BesugoComponent extends React.Component {
     });
 
     if (typeof CMS !== 'undefined') {
-      const selector = 'iframe.nc-previewPane-frame';
-      const iframe = document.querySelectorAll(selector)[0];
+      const iframe = document.querySelector(SELECTORS.iframe);
 
       if (iframe) {
         return fakePromise(iframe.contentWindow);
@@ -254,7 +258,7 @@ export default class BesugoComponent extends React.Component {
           // so we need to keep reapplying our listener.
           const observer = new MutationObserver((mutations) => {
             mutations.forEach((m) => {
-              const subframe = m.target.querySelectorAll(selector)[0];
+              const subframe = m.target.querySelector(SELECTORS.iframe);
               if (subframe) {
                 resolve(subframe.contentWindow);
               }

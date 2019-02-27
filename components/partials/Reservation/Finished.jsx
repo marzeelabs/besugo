@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 
-const cns = 'reservation-finished';
-
 export default class ReservationFinished extends PureComponent {
   render() {
     const {
@@ -40,18 +38,18 @@ export default class ReservationFinished extends PureComponent {
     }
 
     return (
-      <div className={ `${cns}__container reservation__panel` }>
-        <div className={ `${cns}__icon` }>
+      <div className="reservation-finished__container reservation__panel">
+        <div className="reservation-finished__icon">
           <svg>
             <use xlinkHref="#submit_baloon" />
           </svg>
         </div>
-        <div className={ `${cns}__title` }>
+        <div className="reservation-finished__title">
           { title }
         </div>
 
         { !message.length ? null : (
-          <div className={ `${cns}__message` }>
+          <div className="reservation-finished__message">
             { message.map((text, i) => (
               /* eslint-disable-next-line react/no-array-index-key */
               <p key={ `text-${i}` }>

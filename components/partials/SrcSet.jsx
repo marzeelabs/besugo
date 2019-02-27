@@ -1,6 +1,8 @@
 import React from 'react';
 import BesugoComponent from 'Besugo';
 
+import classnames from 'classnames';
+
 const buildSrcSet = (src) => {
   const sharpConfig = require('../../temp/sharpConfig');
   const chunks = src.split('.');
@@ -59,13 +61,19 @@ export default class SrcSet extends BesugoComponent {
   }
 
   renderBlock() {
+    const data = this.getData();
+
+    if (data.src.endsWith('.mp4')) {
+      return (
+        <SrcVideo { ...data } />
+      );
+    }
+
     // We always show the original image in the CMS pages, so that we're not dependent
     // on the build process as we edit the content.
     if (typeof CMS !== 'undefined') {
       return this.renderDefault();
     }
-
-    const data = this.getData();
 
     // We can't build a srcset if we don't have an image path to use,
     // or if it won't have any sizes to calculate from.
@@ -104,19 +112,32 @@ export class SrcSetBg extends BesugoComponent {
       <img
         { ...data }
         ref={ (img) => { this.domImg = img; } }
-        style={ { display: 'none' }}
+        style={ { display: 'none' } }
       />
     );
   }
 
   renderBlock() {
+    const data = this.props;
+
+    if (data.src.endsWith('.mp4')) {
+      const wrapperClassName = classnames([
+        'video-bg__wrapper',
+        { [`${data.className}__wrapper`]: data.className },
+      ]);
+
+      return (
+        <div className={ wrapperClassName }>
+          <SrcVideo { ...data } />
+        </div>
+      );
+    }
+
     // We always show the original image in the CMS pages, so that we're not dependent
     // on the build process as we edit the content.
     if (typeof CMS !== 'undefined') {
       return this.renderDefault();
     }
-
-    const data = this.props;
 
     // We can't build a srcset if we don't have an image path to use,
     // or if it won't have any sizes to calculate from.
@@ -141,6 +162,10 @@ export class SrcSetBg extends BesugoComponent {
 
   componentDidMount() {
     const data = this.props;
+
+    if (data.src.endsWith('.mp4')) {
+      return;
+    }
 
     this.view().then((win) => {
       // We're applying the background to the parent element where this is appended by default,
@@ -181,9 +206,34 @@ export class SrcSetBg extends BesugoComponent {
   }
 
   componentWillUnmount() {
+    const data = this.props;
+
+    if (data.src.endsWith('.mp4')) {
+      return;
+    }
+
     this.domImg.removeEventListener('load', this._onLoad);
     this.view().then((win) => {
       win.removeEventListener('resize', this._onResize);
     });
+  }
+}
+
+export class SrcVideo extends BesugoComponent {
+  static config = {
+    tag: 'SrcVideo',
+  }
+
+  renderBlock() {
+    const data = this.props;
+
+    return (
+      <video
+        { ...data }
+        autoPlay
+        loop
+        muted
+      />
+    );
   }
 }

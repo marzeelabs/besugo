@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 
-const cns = 'locale-switcher';
-
 export default class LocaleSwitcher extends PureComponent {
   render() {
     const {
@@ -10,18 +8,18 @@ export default class LocaleSwitcher extends PureComponent {
     } = this.props;
 
     return !localeSwitches.length ? null : (
-      <li className={ `${cns}` }>
+      <li className="locale-switcher">
         { /* eslint-disable-next-line jsx-a11y/anchor-is-valid */ }
         <a>{ locale.toUpperCase() }</a>
 
-        <ul className={ `${cns}__list` }>
+        <ul className="locale-switcher__list">
           { localeSwitches.map(localeSwitch => (
             <li
-              className={ `${cns}__locale` }
+              className="locale-switcher__locale"
               key={ `locale-switcher-${localeSwitch.locale}` }
             >
               <a
-                className={ `${cns}__locale-link` }
+                className="locale-switcher__locale-link"
                 href={ localeSwitch.url }
               >
                 { localeSwitch.locale.toUpperCase() }

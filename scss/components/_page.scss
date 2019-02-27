@@ -24,7 +24,7 @@
   margin: ritmo(16) auto 0;
 
    @include mq($from: break-large) {
-    margin: ritmo(35) auto 0;
+    margin: ritmo(29) auto 0;
   }
 }
 
@@ -46,11 +46,20 @@
   }
 }
 
+%page-home__header--video-bg {
+
+  @include mq($from: break-big) {
+    height: 75vh;
+  }
+}
+
 %page__header-title-wrapper {
   flex: 0 0 100%;
   align-content: center;
   text-align: center;
   padding: ritmo(5) 10px;
+  position: relative;
+  z-index: 5;
 }
 
 %page__header-title {
@@ -60,6 +69,56 @@
 
 %page__header-subtitle {
   @include ritmo-font-size($h4-font-size);
+}
+
+%page__header--no-bg {
+  height: auto;
+  min-height: 120px;
+  padding: 20px 0;
+  overflow: visible;
+  background: palette(brand);
+  margin-bottom: 40px;
+  // background-image: url("/media/header_bg.jpg");
+  background-size: cover;
+  background-position: left top;
+  background-repeat: no-repeat;
+  position: relative;
+
+  @include mq($from: break-medium-large) {
+    height: auto;
+    padding: 40px 0;
+    min-height: 250px;
+  }
+
+  @include mq($from: break-big) {
+    background-position: center center;
+    padding: 80px 0;
+    height: auto;
+  }
+
+  %page__header-title-wrapper {
+    @extend %layout-container--inner;
+    align-content: flex-start;
+    text-align: left;
+    padding: ritmo(5) 10px;
+  }
+
+  %page__header-title {
+    //color: palette(brand, light);
+    margin-top: 50px;
+
+    @include mq($from: break-medium-large) {
+      @include ritmo-font-size(48px);
+    }
+  }
+
+  %page__header-subtitle {
+    margin-top: 0;
+
+    @include mq($from: break-medium-large) {
+      @include ritmo-font-size($h4-font-size);
+    }
+  }
 }
 
 /*
