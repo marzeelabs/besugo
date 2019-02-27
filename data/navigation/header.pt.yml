@@ -1,0 +1,13 @@
+i18nlanguage: pt
+title: Header
+links:
+  - title: Localizações
+  - title: Blog
+    path: /blog
+  - title: Planos
+    path: /pricing
+  - title: Equipa
+    path: /people
+  - title: Sobre nós
+  - title: Contacta-nos
+    path: /contact-us

@@ -1,0 +1,13 @@
+i18nlanguage: en
+title: Header
+links:
+  - title: Locations
+  - title: Blog
+    path: /blog
+  - title: Pricing
+    path: /pricing
+  - title: Team
+    path: /people
+  - title: About us
+  - title: Contact us
+    path: /contact-us

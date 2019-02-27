@@ -1,0 +1,12 @@
+i18nlanguage: pt
+title: Footer
+links:
+  - title: Blog
+    path: /blog
+  - title: Planos
+    path: /pricing
+  - title: Equipa
+    path: /people
+  - title: Sobre nós
+  - title: Contacta-nos
+    path: /contact-us

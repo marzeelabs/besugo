@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import makeSafeForCSS from 'utils/makeSafeForCSS';
 import Mode from './Mode';
 
-const cns = 'reservation-options';
-
 export default class ReservationOptions extends Component {
   state = {
     reached: false,
@@ -69,19 +67,19 @@ export default class ReservationOptions extends Component {
     } = state;
 
     return (
-      <div className={ `${cns}__time-wrapper` }>
-        <div className={ `${cns}__time-label` }>
+      <div className="reservation-options__time-wrapper">
+        <div className="reservation-options__time-label">
           { strings.options.time }
         </div>
         <input
           type="time"
-          className={ `${cns}__time-input` }
+          className="reservation-options__time-input"
           min="10:00"
           max="18:00"
           onChange={ this.handleChangeTime }
           value={ time }
         />
-        <div className={ `${cns}__time-office-hours` }>
+        <div className="reservation-options__time-office-hours">
           { strings.options.officeHours }
         </div>
       </div>
@@ -102,13 +100,13 @@ export default class ReservationOptions extends Component {
     } = state;
 
     return (
-      <div className={ `${cns}__outer-wrapper` }>
-        <div className={ `${cns}__people-label` }>
+      <div className="reservation-options__outer-wrapper">
+        <div className="reservation-options__people-label">
           { strings.options.howManyPeople }
         </div>
         <input
           type="number"
-          className={ `${cns}__people-number` }
+          className="reservation-options__people-number"
           disabled={ slideIndex !== index }
           min="1"
           max="4"
@@ -121,27 +119,27 @@ export default class ReservationOptions extends Component {
 
           return (
             <div
-              className={ `${cns}__wrapper` }
+              className="reservation-options__wrapper"
               key={ `reservation-options__${option.label}` }
             >
               <label
-                className={ `${cns}__option` }
+                className="reservation-options__option"
                 disabled={ slideIndex !== index }
                 htmlFor={ optionId }
               >
-                <span className={ `${cns}__label` }>
+                <span className="reservation-options__label">
                   { option.label }
                 </span>
                 <input
                   type="checkbox"
                   id={ optionId }
-                  className={ `${cns}__input` }
+                  className="reservation-options__input"
                   disabled={ slideIndex !== index }
                   name={ optionName }
                   label={ option.label }
                   onClick={ this.handleToggleOption }
                 />
-                <span className={ `${cns}__checkmark` } />
+                <span className="reservation-options__checkmark" />
               </label>
             </div>
           );
@@ -158,7 +156,7 @@ export default class ReservationOptions extends Component {
     } = this.props;
 
     return (
-      <div className={ `${cns}__container reservation__panel` }>
+      <div className="reservation-options__container reservation__panel">
         <Mode
           slideIndex={ slideIndex }
           strings={ strings }

@@ -16,6 +16,13 @@
   margin: 0 auto;
 }
 
+.location__description {
+  ul,
+  ol {
+    margin-bottom: 20px;
+  }
+}
+
 .location__amenities {
   margin: 20px auto;
   display: flex;
@@ -23,7 +30,7 @@
   flex-wrap: wrap;
 
   li {
-    margin-bottom: 10px;
+    margin: 0 0 10px;
     width: 100%;
 
     @include mq($from: break-medium) {

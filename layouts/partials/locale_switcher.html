@@ -1,14 +1,12 @@
 {{ if .Site.IsMultiLingual }}
   {{ $page := . }}
 
-  {{ range .Site.Languages }}
-    {{ if ne .Lang $.Site.Language.Lang }}
-      {{ $url := $.Site.BaseURL }}
+  {{ range $.Site.Home.AllTranslations }}
+    {{ if ne .Language.Lang $.Site.Language.Lang }}
+      {{ $url := .Permalink }}
 
-      {{ if $page.IsHome }}
-        {{ $url = (printf "/%s" .Lang) }}
-      {{ else if $page.IsTranslated }}
-        {{ range where $page.Translations "Lang" .Lang }}
+      {{ if and (not $page.IsHome) ($page.IsTranslated) }}
+        {{ range where $page.Translations "Lang" .Language.Lang }}
           {{ $url = .Permalink }}
         {{ end }}
       {{ end }}

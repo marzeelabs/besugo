@@ -3,8 +3,6 @@ import classnames from 'classnames';
 
 import makeSafeForCSS from 'utils/makeSafeForCSS';
 
-const cns = 'reservation-location-buttons';
-
 export default class ReservationLocationButtons extends Component {
   handleChangeLocation = (e) => {
     const { target } = e;
@@ -28,18 +26,18 @@ export default class ReservationLocationButtons extends Component {
     } = this.props;
 
     return !buttons.length ? null : (
-      <div className={ `${cns}__container` }>
+      <div className="reservation-location-buttons__container">
         { buttons.map((button) => {
           const className = classnames([
-            `${cns}__button`,
+            'reservation-location-buttons__button',
             `button-${makeSafeForCSS(button.label)}`,
-            { [`${cns}__button--active`]: button.label === state.location },
+            { 'reservation-location-buttons__button--active': button.label === state.location },
           ]);
 
           return (
             <span
-              className={ `${cns}__button-wrapper` }
-              key={ `${cns}__button-${button.label}` }
+              className="reservation-location-buttons__button-wrapper"
+              key={ `reservation-location-buttons__button-${button.label}` }
             >
               <button
                 type="button"
@@ -49,7 +47,7 @@ export default class ReservationLocationButtons extends Component {
               >
                 { button.label }
 
-                <span className={ `${cns}__button-icon` }>
+                <span className="reservation-location-buttons__button-icon">
                   <svg>
                     <use xlinkHref="#location_icon" />
                   </svg>

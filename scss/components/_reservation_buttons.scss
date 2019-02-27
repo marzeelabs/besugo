@@ -63,6 +63,7 @@
   text-transform: uppercase;
   transition: all ease .35s, visibility linear 0s;
   font-size: 14px;
+  white-space: nowrap;
 
   @include mq($from: break-medium-small) {
     font-size: 16px;

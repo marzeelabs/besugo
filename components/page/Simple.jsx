@@ -7,7 +7,7 @@ import { SrcSetBg } from 'partials/SrcSet';
 import SVGElements from 'partials/SVGElements';
 import TopHeader from 'partials/TopHeader';
 
-const cns = 'page-simple';
+import classnames from 'classnames';
 
 export default class PageSimple extends BesugoComponent {
   static config = {
@@ -45,23 +45,28 @@ export default class PageSimple extends BesugoComponent {
   renderBlock() {
     const data = this.getData();
 
+    const headerClassName = classnames([
+      'page-simple__header',
+      { 'page-simple__header--no-bg': !data.image },
+    ]);
+
     return (
-      <div className="page-main">
-        <div className={ `${cns}__header` }>
+      <div className={ headerClassName }>
+        <div className="page-simple__header">
           { data.image && (
             <SrcSetBg
-              className={ `${cns}__header-image` }
+              className="page-simple__header-image"
               src={ data.image }
               sizes="120vw"
             />
           ) }
 
-          <div className={ `${cns}__header-title-wrapper` }>
-            <h1 className={ `${cns}__header-title` }>
+          <div className="page-simple__header-title-wrapper">
+            <h1 className="page-simple__header-title">
               { data.title }
             </h1>
             { data.subtitle && (
-              <h2 className={ `${cns}__header-subtitle` }>{ data.subtitle }</h2>
+              <h2 className="page-simple__header-subtitle">{ data.subtitle }</h2>
             ) }
           </div>
         </div>

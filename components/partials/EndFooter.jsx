@@ -2,9 +2,8 @@ import React from 'react';
 import BesugoComponent from 'Besugo';
 import ReactHtmlParser from 'react-html-parser';
 
+import Link from 'partials/Link';
 import SocialIcons from 'partials/SocialIcons';
-
-const cns = 'footer';
 
 export default class EndFooter extends BesugoComponent {
   static config = {
@@ -29,6 +28,7 @@ export default class EndFooter extends BesugoComponent {
       .map(link => ({
         label: link.getAttribute('label'),
         url: link.getAttribute('url'),
+        external: link.getAttribute('external') === 'true',
       }));
 
     const copyright = xplaceholder.getChildren('Copyright');
@@ -37,7 +37,7 @@ export default class EndFooter extends BesugoComponent {
 
   getData() {
     const data = Object.assign({
-      copyright: '\xA9 2018 Marzee Labs.',
+      copyright: '\xA9 2019 Marzee Labs.',
       links: [
         {
           label: 'About us',
@@ -65,26 +65,24 @@ export default class EndFooter extends BesugoComponent {
     const data = this.getData();
 
     return (
-      <footer className={ `${cns}` }>
-        <ul className={ `${cns}__menu` }>
+      <footer className="footer">
+        <ul className="footer__menu">
           { data.links.map(link => (
-            <li className={ `${cns}__menu-item` } key={ `link-${link.label}` }>
-              <a href={ link.url }>
-                { link.label }
-              </a>
+            <li className="footer__menu-item" key={ `link-${link.label}` }>
+              <Link { ...link } />
             </li>
           )) }
         </ul>
 
         <SocialIcons section="footer" { ...data } />
 
-        <div className={ `${cns}__copyright` }>
-          <a href={ data.homelink } className={ `${cns}__copyright-logo` }>
+        <div className="footer__copyright">
+          <a href={ data.homelink } className="footer__copyright-logo">
             <svg>
               <use xlinkHref="#logo-main" />
             </svg>
           </a>
-          <div className={ `${cns}__copyright-text` }>
+          <div className="footer__copyright-text">
             { data.copyright }
           </div>
         </div>

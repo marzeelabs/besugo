@@ -25,8 +25,6 @@ const encode = data => Object.keys(data)
   .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
   .join('&');
 
-const cns = 'reservation';
-
 export default class ReservationSlider extends BesugoComponent {
   static config = {
     tag: 'ReservationSlider',
@@ -240,7 +238,7 @@ export default class ReservationSlider extends BesugoComponent {
     const { state } = this;
 
     const className = classnames([
-      `${cns}__wrapper`,
+      'reservation__wrapper',
       data.className || data.classname,
       { isMounted: state.isMounted },
       { lastSlide: state.index > state.lastIndex },
@@ -254,9 +252,9 @@ export default class ReservationSlider extends BesugoComponent {
     }
 
     const nextClasses = classnames([
-      `${cns}__bottom-button`,
-      `${cns}__bottom-button--next`,
-      { [`${cns}__bottom-button--disabled`]: nextDisabled },
+      'reservation__bottom-button',
+      'reservation__bottom-button--next',
+      { 'reservation__bottom-button--disabled': nextDisabled },
     ]);
 
     return (
@@ -269,13 +267,13 @@ export default class ReservationSlider extends BesugoComponent {
         >
           { this.buildHiddenFields() }
 
-          <div className={ `${cns}__top-section` }>
+          <div className="reservation__top-section">
             <LocationButtons
               buttons={ data.buttons }
               state={ state }
             />
 
-            <div className={ `${cns}__panels` } ref={(div) => { this.container = div; }}>
+            <div className="reservation__panels" ref={(div) => { this.container = div; }}>
               <DatePicker
                 slideIndex={ 0 }
                 locale={ data.locale }
@@ -309,10 +307,10 @@ export default class ReservationSlider extends BesugoComponent {
               state={ state }
             />
 
-            <div className={ `${cns}__controls` }>
+            <div className="reservation__controls">
               <button
                 type="button"
-                className={ `${cns}__bottom-button ${cns}__bottom-button--previous` }
+                className="reservation__bottom-button reservation__bottom-button--previous"
                 ref={(btn) => { this.btnPrevious = btn; }}
               >
                 { data.strings.label.previous }

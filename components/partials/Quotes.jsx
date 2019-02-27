@@ -4,8 +4,6 @@ import BesugoComponent from 'Besugo';
 import SlideShow from 'partials/SlideShow';
 import { SrcSetBg } from 'partials/SrcSet';
 
-const cns = 'quotes';
-
 const settings = {
   autoplay: true,
   mode: 'carousel',
@@ -42,30 +40,30 @@ export default class Quotes extends BesugoComponent {
     }
 
     const classes = [
-      `${cns}__wrapper`,
+      'quotes__wrapper',
       className || classname,
     ];
 
     const prebuilt = (
       <div className={ classes.join(' ') } ref={(div) => { this.container = div; }}>
         { quotes.map(quote => (
-          <div className={ `${cns}__quote` } key={ `quote-${quote.author}` }>
-            <div className={ `${cns}__quote-text` }>
+          <div className="quotes__quote" key={ `quote-${quote.author}` }>
+            <div className="quotes__quote-text">
               { quote.text }
             </div>
 
-            <div className={ `${cns}__quote-picture` }>
+            <div className="quotes__quote-picture">
               <SrcSetBg
                 src={ quote.picture }
                 sizes="60px"
               />
             </div>
 
-            <div className={ `${cns}__quote-author` }>
+            <div className="quotes__quote-author">
               { quote.author }
             </div>
 
-            <div className={ `${cns}__quote-occupation` }>
+            <div className="quotes__quote-occupation">
               { quote.occupation }
             </div>
           </div>
@@ -76,13 +74,13 @@ export default class Quotes extends BesugoComponent {
     const getContainer = () => this.container;
 
     return (
-      <div className={ `${cns}` }>
-        <div className={ `${cns}__title` }>
+      <div className="quotes">
+        <div className="quotes__title">
           { quotestitle }
         </div>
 
         <SlideShow
-          className={ `${cns}__slider` }
+          className="quotes__slider"
           prebuilt={ prebuilt }
           getContainer={ getContainer }
           settings={ settings }

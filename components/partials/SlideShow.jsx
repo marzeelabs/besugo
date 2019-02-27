@@ -54,6 +54,11 @@ export default class SlideShow extends BesugoComponent {
       settings.nextButton = this.nextButton;
     }
 
+    // Carousel mode doesn't work in the admin preview screen.
+    if (typeof CMS !== 'undefined') {
+      settings.mode = 'gallery';
+    }
+
     tns(settings);
   }
 

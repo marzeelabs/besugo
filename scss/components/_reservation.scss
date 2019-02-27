@@ -1,5 +1,6 @@
 .reservation__wrapper {
   position: relative;
+  margin-bottom: 40px;
 
   &:not(.isMounted) {
     display: none;

@@ -25,6 +25,8 @@ const packageJson = require('./package.json');
 const allExports = {
   mode: process.env.NODE_ENV,
 
+  devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
+
   performance: {
     // maxEntrypointSize: 1048576,
     // maxAssetSize: 1048576,
@@ -118,12 +120,12 @@ module.exports = [
     entry: {
       js: [
         // './scripts/webpack/polyfills.js',
-        './scripts/webpack/identity.js',
+        // './scripts/webpack/identity.js',
         './scripts/webpack/site.js',
       ],
       admin: [
         // './scripts/webpack/polyfills.js',
-        './scripts/webpack/identity.js',
+        // './scripts/webpack/identity.js',
         './scripts/webpack/admin.js',
       ],
     },
