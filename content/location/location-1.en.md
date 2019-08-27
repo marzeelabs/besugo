@@ -3,13 +3,15 @@ i18nlanguage: en
 title: Location 1
 header: /media/uploads/example.jpg
 teaser: >-
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+  incididunt ut labore et dolore magna aliqua.
 features:
   - icon: connection
     title: Wi-Fi
   - icon: shower
     title: Shower
+  - icon: headphones
+    title: INL
 images:
   - caption: Photo 1
     image: /media/uploads/example.jpg
