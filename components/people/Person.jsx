@@ -46,7 +46,7 @@ export default class Person extends BesugoComponent {
       <div>
         <div className="profile__header">
           <SrcSet
-            className="profile__header__image-bg"
+            className="profile__header-image-bg"
             src={ data.image }
             sizes="120vw"
           />
