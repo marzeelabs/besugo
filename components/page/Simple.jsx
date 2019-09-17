@@ -51,8 +51,8 @@ export default class PageSimple extends BesugoComponent {
     ]);
 
     return (
-      <div className={ headerClassName }>
-        <div className="page-simple__header">
+      <div className="page-main">
+        <div className={ headerClassName }>
           { data.image && (
             <SrcSetBg
               className="page-simple__header-image"
